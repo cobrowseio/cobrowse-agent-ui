@@ -1,11 +1,7 @@
 import React from 'react';
 import parser from 'ua-parser-js';
 import moment from 'moment';
-import IconWeb from './icons/web.svg';
-import IconApple from './icons/apple.svg';
-import IconAndroid from './icons/android.svg';
-import IconWindows from './icons/windows.svg';
-import IconDefault from './icons/default.svg';
+import PlatformIcon from './PlatformIcon.js';
 import './Device.css'
 
 export default function Device(props) {
@@ -24,32 +20,19 @@ export default function Device(props) {
         }
     }
 
-    function deviceIcon(platform) {
-        switch (platform) {
-            case 'web': return IconWeb
-            case 'ios': return IconApple;
-            case 'macos': return IconApple;
-            case 'android': return IconAndroid;
-            case 'windows': return IconWindows;
-            default: return IconDefault;
-        }
-    }
-
     function renderLastSeen() {
         if (props.device.online) return <div className={'last-seen'}>Online</div>;
         else return <div className={'last-seen'}>Last seen {moment(props.device.last_active).fromNow()}</div>
     }
 
-    const Icon = deviceIcon(props.device.device.platform);
-
     return (
-        <div className={`Device ${props.device.online?'online':''} ${props.device.connectable?'connectable':''}`}>
-            <Icon className={'platform-icon'} />
+        <div style={props.style} className={`Device ${props.device.online?'online':''} ${props.device.connectable?'connectable':''}`}>
+            <PlatformIcon platform={props.device.device.platform} className={'platform-icon'} />
             <div className={'details'}>
                 { deviceType(props.device.device) }
                 { renderLastSeen() }
             </div>
             { props.children }
         </div>
-  );
+    );
 }

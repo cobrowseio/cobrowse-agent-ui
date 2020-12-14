@@ -11,6 +11,6 @@ export default function SmartConnectButton(props) {
         <div
             className={`SmartConnectButton ${props.device.online?'online':''} ${props.device.connectable?'connectable':''}`}
             onClick={onClick}
-        >Connect</div>
+        >{ props.label || 'Connect' }</div>
   );
 }
