@@ -1,7 +1,6 @@
 import React from 'react';
 import parser from 'ua-parser-js';
 import moment from 'moment';
-import SmartConnectButton from './SmartConnectButton';
 import IconWeb from './icons/web.svg';
 import IconApple from './icons/apple.svg';
 import IconAndroid from './icons/android.svg';
@@ -50,7 +49,7 @@ export default function Device(props) {
                 { deviceType(props.device.device) }
                 { renderLastSeen() }
             </div>
-            <SmartConnectButton device={props.device} onClick={props.connect} />
+            { props.children }
         </div>
   );
 }
