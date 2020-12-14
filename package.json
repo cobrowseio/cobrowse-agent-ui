@@ -1,0 +1,31 @@
+{
+  "name": "cobrowse-agent-ui",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && babel src --out-dir dist && cp src/*.css dist",
+    "prepublish": "npm run build"
+  },
+  "main": "dist/index.js",
+  "dependencies": {
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "ua-parser-js": "^0.7.23"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-inline-react-svg": "^1.1.2",
+    "eslint": "^7.15.0",
+    "eslint-plugin-react": "^7.21.5"
+  }
+}
