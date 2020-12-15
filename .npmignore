@@ -1,2 +1,5 @@
-src
+src/
 .*
+*.log
+*.conf.js
+*.spec.js
