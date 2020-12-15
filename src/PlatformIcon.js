@@ -1,9 +1,9 @@
 import React from 'react';
-import IconWeb from './icons/web.svg';
-import IconApple from './icons/apple.svg';
-import IconAndroid from './icons/android.svg';
-import IconWindows from './icons/windows.svg';
-import IconDefault from './icons/default.svg';
+import IconWeb from '../icons/web.svg';
+import IconApple from '../icons/apple.svg';
+import IconAndroid from '../icons/android.svg';
+import IconWindows from '../icons/windows.svg';
+import IconDefault from '../icons/default.svg';
 import './PlatformIcon.css';
 
 function icon(platform) {
