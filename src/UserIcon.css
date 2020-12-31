@@ -1,0 +1,16 @@
+
+.UserIcon {
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    padding: 6px;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    border: 2px solid #ddd;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}

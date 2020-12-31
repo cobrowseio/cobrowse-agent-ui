@@ -19,7 +19,7 @@
 }
 
 .Device .platform-icon {
-    width: 25px;
+    font-size: 30px;
     max-height: 30px;
     margin: 0px 4px;
     pointer-events: none;
