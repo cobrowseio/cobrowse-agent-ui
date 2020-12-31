@@ -16,7 +16,10 @@ export default function Session(props) {
                 <div className={'activated'}>{ moment(props.session.activated).fromNow() }</div>
             </div>
             { props.session.state === 'ended' && props.session.recorded ? <div className={'recorded'}>Recorded</div> : null }
-            <Stopwatch className={'duration'} start={props.session.activated} end={props.session.ended} />
+            { props.session.state === 'ended' ?
+                <Stopwatch className={'duration'} start={props.session.activated} end={props.session.ended || new Date()} /> :
+                <div className={'active'}>Active</div>
+            }
             { props.children }
         </div>
     );
