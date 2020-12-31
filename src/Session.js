@@ -13,7 +13,7 @@ export default function Session(props) {
     }
 
     return (
-        <div style={props.style} className={`Session ${props.className||''}`}>
+        <div style={props.style} onClick={props.onClick} className={`Session ${props.className||''}`}>
             <UserIcon className={'agent'} user={props.session.agent} />
             <div className={'details'}>
                 <div>Connected to <PlatformIcon platform={props.session.device.platform}/> <b>{deviceType(props.session.device)}</b></div>
