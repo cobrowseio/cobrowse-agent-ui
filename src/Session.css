@@ -6,17 +6,26 @@
     flex-wrap: wrap;
 }
 
+.Session .agent {
+    font-size: 0.8em;
+    margin-right: 7px;
+}
+
 .Session .details {
     flex:1;
-    margin-left: 7px;
+}
+
+.Session .subdetails {
+    display: flex;
+    margin-top: 4px;
+    align-items: baseline;
+    color: #777;
 }
 
 .Session .recorded {
     text-transform: uppercase;
     font-size: 10px;
-    color: #333;
-    padding: 0px 10px;
-    border-radius: 10px;
+    margin-left: 15px;
 }
 
 .Session .active {
@@ -24,7 +33,7 @@
     font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: #9ed56b;
+    background-color: #3cc56e;
     padding: 1px 3px 1px 3px;
     border-radius: 3px;
     display: inline-block;
@@ -32,8 +41,6 @@
 
 .Session .activated {
     font-size: 0.8em;
-    color: #777;
-    margin-top: 3px;
     white-space: nowrap;
 }
 
