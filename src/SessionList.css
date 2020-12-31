@@ -1,4 +1,0 @@
-
-.SessionList>.row:not(:last-of-type) {
-    border-bottom: 1px dashed #eee;
-}

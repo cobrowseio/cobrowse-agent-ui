@@ -8,6 +8,10 @@ import './Session.css'
 
 export default function Session(props) {
 
+    function openRecording() {
+        if (props.openRecording) props.openRecording(props.session);
+    }
+
     return (
         <div style={props.style} className={`Session ${props.className||''}`}>
             <UserIcon className={'agent'} user={props.session.agent} />
@@ -15,7 +19,7 @@ export default function Session(props) {
                 <div>Connected to <PlatformIcon platform={props.session.device.platform}/> <b>{deviceType(props.session.device)}</b></div>
                 <div className={'subdetails'}>
                     <div className={'activated'}>{ moment(props.session.activated).fromNow() }</div>
-                    { props.session.state === 'ended' && props.session.recorded ? <div className={'recorded'}>Recorded</div> : null }
+                    { props.session.state === 'ended' && props.session.recorded ? <div className={'recorded'} onClick={openRecording}>Recorded</div> : null }
                 </div>
             </div>
             { props.session.state === 'ended' ?
