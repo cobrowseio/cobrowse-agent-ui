@@ -6,6 +6,7 @@
 }
 
 .CodeEntry input[type=number] {
+    font-size: 1em;
     width: 1.6em;
     height: 2em;
     margin: 0.2em;
