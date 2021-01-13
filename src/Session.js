@@ -13,7 +13,7 @@ export default function Session(props) {
     return (
         <div style={props.style} onClick={props.onClick} className={`Session ${props.className||''}`}>
             <div className={'details'}>
-                <div>Connected to {deviceType(props.session.device)}</div>
+                <div><span className={'device-prefix'}>Connected to </span>{deviceType(props.session.device)}</div>
                 <div className={'subdetails'}>
                     <div className={'activated'}>{ moment(props.session.activated).fromNow() }</div>
                     { props.session.state === 'ended' && props.session.recorded ? <div className={'recorded'} onClick={openRecording}>Recorded</div> : null }

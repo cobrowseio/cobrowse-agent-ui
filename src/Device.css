@@ -4,7 +4,6 @@
     border-left: 5px solid transparent;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .Device.online {
