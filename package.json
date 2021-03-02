@@ -11,7 +11,7 @@
   "dependencies": {
     "moment": "^2.29.1",
     "react": "^17.0.1",
-    "ua-parser-js": "^0.7.23"
+    "ua-parser-js": "^0.7.24"
   },
   "browserslist": [
     ">0.2%",
@@ -19,14 +19,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/preset-env": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-react": "^7.12.13",
     "babel-eslint": "^10.1.0",
-    "babel-plugin-inline-react-svg": "^1.1.2",
-    "eslint": "^7.15.0",
-    "eslint-plugin-react": "^7.21.5"
+    "babel-plugin-inline-react-svg": "^2.0.1",
+    "eslint": "^7.21.0",
+    "eslint-plugin-react": "^7.22.0"
   }
 }
