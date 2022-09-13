@@ -5,7 +5,6 @@ import './Session.css';
 import { dateFromNow } from './utils';
 
 export default function Session(props) {
-  console.log(props);
   function openRecording() {
     if (props.openRecording) props.openRecording(props.session);
   }
