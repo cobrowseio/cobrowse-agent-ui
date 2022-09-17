@@ -11,7 +11,7 @@ achieve this from an app that's also using `i18next` to handle localization.
 // i18n.js
 
 import i18n from 'i18next';
-import i18nAgentUI from 'cobrowse-agent-ui/dist/i18n';
+import { i18n as i18nAgentUI } from 'cobrowse-agent-ui';
 
 i18n.init({
   // ...
