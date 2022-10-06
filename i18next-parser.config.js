@@ -1,5 +1,5 @@
 module.exports = {
-  locales: ['en-us', 'es'],
+  locales: ['en-us', 'es', 'fr'],
   namespaceSeparator: false,
   keySeparator: false,
   useKeysAsDefaultValue: true,
