@@ -4,10 +4,12 @@ import moment from 'moment';
 import 'moment/locale/es';
 import localeEnUS from './locales/en-us/translation.json';
 import localeEs from './locales/es/translation.json';
+import localeFr from './locales/fr/translation.json';
 
 const englishUS = 'en-us';
 const spanish = 'es';
-const SUPPORTED_LOCALES = [englishUS, spanish];
+const french = 'fr';
+const SUPPORTED_LOCALES = [englishUS, spanish, french];
 
 const i18n = createInstance({
   fallbackLng: englishUS,
@@ -29,6 +31,9 @@ const i18n = createInstance({
     es: {
       translation: localeEs,
     },
+    'fr': {
+      translation: localeFr,
+    }
   },
 });
 
