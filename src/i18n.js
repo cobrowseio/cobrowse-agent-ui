@@ -2,6 +2,7 @@ import { createInstance } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import moment from 'moment';
 import 'moment/locale/es';
+import 'moment/locale/fr';
 import localeEnUS from './locales/en-us/translation.json';
 import localeEs from './locales/es/translation.json';
 import localeFr from './locales/fr/translation.json';
@@ -31,7 +32,7 @@ const i18n = createInstance({
     es: {
       translation: localeEs,
     },
-    'fr': {
+    fr: {
       translation: localeFr,
     }
   },
