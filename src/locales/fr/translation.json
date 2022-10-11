@@ -1,6 +1,6 @@
 {
   "Online": "En ligne",
-  "Last seen {{date, dateRelative}}": "Vu pour la dernière fois {{date, dateRelative}}",
+  "Last seen {{date, dateRelative}}": "Vu {{date, dateRelative}}",
   "{{device}} Device": "Appareil {{device}}",
   "{{browser}} on {{os}}": "{{browser}} sur {{os}}",
   "<0>Connected to </0>{{deviceType}}": "<0>Connecté à </0>{{deviceType}}",
