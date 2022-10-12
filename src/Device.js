@@ -1,21 +1,20 @@
-import React from 'react';
-import i18n from './i18n';
-import PlatformIcon from './PlatformIcon.js';
-import deviceType from './deviceType.js';
-import './Device.css';
+import React from 'react'
+import i18n from './i18n'
+import PlatformIcon from './PlatformIcon.js'
+import deviceType from './deviceType.js'
+import './Device.css'
 
-export default function Device(props) {
-  function renderLastSeen() {
-    if (props.device.online)
-      return <div className={'last-seen'}>{i18n.t('Online')}</div>;
-    else
+export default function Device (props) {
+  function renderLastSeen () {
+    if (props.device.online) { return <div className='last-seen'>{i18n.t('Online')}</div> } else {
       return (
-        <div className={'last-seen'}>
+        <div className='last-seen'>
           {i18n.t('Last seen {{date, dateRelative}}', {
-            date: props.device.last_active,
+            date: props.device.last_active
           })}
         </div>
-      );
+      )
+    }
   }
 
   return (
@@ -27,13 +26,13 @@ export default function Device(props) {
     >
       <PlatformIcon
         platform={props.device.device.platform}
-        className={'platform-icon'}
+        className='platform-icon'
       />
-      <div className={'details'}>
+      <div className='details'>
         {deviceType(props.device.device)}
         {renderLastSeen()}
       </div>
       {props.children}
     </div>
-  );
+  )
 }

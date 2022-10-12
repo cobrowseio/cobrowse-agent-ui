@@ -6,6 +6,6 @@ module.exports = {
   verbose: true,
   output: 'src/locales/$LOCALE/$NAMESPACE.json',
   lexers: {
-    js: ['JsxLexer'],
-  },
-};
+    js: ['JsxLexer']
+  }
+}

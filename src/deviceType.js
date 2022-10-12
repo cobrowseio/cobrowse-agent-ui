@@ -1,26 +1,26 @@
-import parser from 'ua-parser-js';
-import i18n from './i18n';
+import parser from 'ua-parser-js'
+import i18n from './i18n'
 
-export default function deviceType({ platform, device }) {
-  const translateDevice = (device) => i18n.t('{{device}} Device', { device });
+export default function deviceType ({ platform, device }) {
+  const translateDevice = (device) => i18n.t('{{device}} Device', { device })
 
   switch (platform) {
     case 'web': {
-      const ua = parser(device);
+      const ua = parser(device)
       return i18n.t('{{browser}} on {{os}}', {
         browser: ua.browser.name,
-        os: ua.os.name,
-      });
+        os: ua.os.name
+      })
     }
     case 'ios':
-      return translateDevice('iOS');
+      return translateDevice('iOS')
     case 'android':
-      return translateDevice('Android');
+      return translateDevice('Android')
     case 'windows':
-      return translateDevice('Windows');
+      return translateDevice('Windows')
     case 'macos':
-      return translateDevice('Mac OS');
+      return translateDevice('Mac OS')
     default:
-      return platform;
+      return platform
   }
 }
