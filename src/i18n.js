@@ -41,15 +41,15 @@ const i18n = createInstance({
 i18n
   .use(initReactI18next)
   .init()
-  .then(async () => {
-    const locale = i18n.language.toLowerCase()
 
-    // Return early when the locale is not supported or when it's US English (it comes built in)
-    if (SUPPORTED_LOCALES.indexOf(locale) === -1 || locale === englishUS) {
-      return
-    }
+i18n.on('languageChanged', (language) => {
+  // Fall back to US English if we don't currently support the selected language
+  if (SUPPORTED_LOCALES.indexOf(language) === -1) {
+    moment.locale(englishUS)
+    return
+  }
 
-    moment.locale(locale)
-  })
+  moment.locale(language)
+})
 
 export default i18n
