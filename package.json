@@ -1,12 +1,12 @@
 {
   "name": "cobrowse-agent-ui",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "start": "babel src --out-dir dist --watch --copy-files",
     "build": "rm -rf dist && babel src --out-dir dist --copy-files",
     "prepare": "npm run build",
-    "i18n": "i18next 'src/**/*{.js,.jsx}'"
+    "i18n": "i18next 'src/**/*{.js,.jsx}'",
+    "lint": "standard"
   },
   "main": "dist/index.js",
   "dependencies": {
