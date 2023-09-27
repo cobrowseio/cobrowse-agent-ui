@@ -42,6 +42,9 @@ i18n
   .use(initReactI18next)
   .init()
 
+// Default to English on load
+moment.locale(englishUS)
+
 i18n.on('languageChanged', (language) => {
   // Fall back to US English if we don't currently support the selected language
   if (SUPPORTED_LOCALES.indexOf(language) === -1) {
