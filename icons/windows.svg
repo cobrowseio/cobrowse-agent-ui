@@ -1,24 +1,5 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" xml:space="preserve">
-<g>
-	<g>
-		<polygon points="0,80 0,240 224,240 224,52"/>
-	</g>
-</g>
-<g>
-	<g>
-		<polygon points="256,48 256,240 512,240 512,16"/>
-	</g>
-</g>
-<g>
-	<g>
-		<polygon points="256,272 256,464 512,496 512,272"/>
-	</g>
-</g>
-<g>
-	<g>
-		<polygon points="0,272 0,432 224,460 224,272"/>
-	</g>
+<svg viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Device Icon">
+<path id="Vector" d="M5.21561 8.2185L16.2811 6.6945V17.385H5.21411V8.22L5.21561 8.2185ZM5.21561 27.7815L16.2811 29.307V18.747H5.21411L5.21561 27.7815ZM17.4976 29.469L32.2156 31.5V18.747H17.4976V29.469ZM17.4976 6.531V17.385H32.2156V4.5L17.4976 6.531Z" fill="currentColor"/>
 </g>
 </svg>

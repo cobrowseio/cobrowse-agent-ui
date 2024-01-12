@@ -24,10 +24,12 @@ export default function Device (props) {
         props.device.connectable ? 'connectable' : ''
       }`}
     >
-      <PlatformIcon
-        platform={props.device.device.platform}
-        className='platform-icon'
-      />
+      <div className='device-status'>
+        <PlatformIcon
+          platform={props.device.device.platform}
+          className='platform-icon'
+        />
+      </div>
       <div className='details'>
         {deviceType(props.device.device)}
         {renderLastSeen()}

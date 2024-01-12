@@ -1,5 +1,5 @@
 import React from 'react'
-import IconWeb from '../icons/web.svg'
+import IconGlobe from '../icons/globe.svg'
 import IconApple from '../icons/apple.svg'
 import IconAndroid from '../icons/android.svg'
 import IconWindows from '../icons/windows.svg'
@@ -8,7 +8,7 @@ import './PlatformIcon.css'
 
 function icon (platform) {
   switch (platform) {
-    case 'web': return IconWeb
+    case 'web': return IconGlobe
     case 'ios': return IconApple
     case 'macos': return IconApple
     case 'android': return IconAndroid
