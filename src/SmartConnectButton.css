@@ -2,19 +2,18 @@
 .SmartConnectButton {
     margin: 3px;
     display: inline-block;
-    border: 1px solid #ddd;
-    background: #f3f3f3;
-    padding: 7px 14px;
+    background: #F6F4F8;
+    padding: 12px 16px;
     cursor: not-allowed;
-    border-radius: 100px;
+    border-radius: 4px;
     font-weight: 600;
-    color: #aaa;
-    font-size: 0.9em;
+    font-size: 1rem;
+    opacity: 0.6;
 }
 
 .SmartConnectButton.connectable {
-    border: 1px solid #3cc56e;
-    background: #3cc56e;
-    color: white;
+    background: #040D3C;
+    color: #ffffff;
     cursor: pointer;
+    opacity: 1;
 }
