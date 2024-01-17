@@ -4,10 +4,11 @@
     border-left: 5px solid transparent;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
-.Device.online {
-    border-left: 5px solid #3cc56e;
+.Device.online .device-status {
+    outline: 2px solid #C7EA30;
 }
 
 .Device .last-seen {
@@ -17,12 +18,27 @@
     white-space: nowrap;
 }
 
+.Device .device-status {
+    height: 36px;
+    width: 36px;
+    padding: 4px;
+    outline: 2px solid rgb(4 13 60 / 0.25);
+    border-radius: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .Device .platform-icon {
-    font-size: 30px;
-    max-height: 30px;
-    margin: 0px 4px;
+    /*font-size: 24px;*/
+    /*max-height: 24px;*/
+    height: 100%;
+    width: auto;
     pointer-events: none;
-    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Device .details {

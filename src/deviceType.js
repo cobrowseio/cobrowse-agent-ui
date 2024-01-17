@@ -19,7 +19,7 @@ export default function deviceType ({ platform, device }) {
     case 'windows':
       return translateDevice('Windows')
     case 'macos':
-      return translateDevice('Mac OS')
+      return translateDevice('macOS')
     default:
       return platform
   }
