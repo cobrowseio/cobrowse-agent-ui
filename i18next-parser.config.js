@@ -2,7 +2,9 @@ module.exports = {
   locales: ['en-us', 'es', 'fr'],
   namespaceSeparator: false,
   keySeparator: false,
-  useKeysAsDefaultValue: true,
+  defaultValue: function (locale, namespace, key, value) {
+    return key
+  },
   verbose: true,
   output: 'src/locales/$LOCALE/$NAMESPACE.json',
   lexers: {
