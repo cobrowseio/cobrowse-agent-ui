@@ -36,4 +36,4 @@ To add a new locale follow these steps:
 - Add a new entry to the `SUPPORTED_LOCALES` constant inside `src/i18n.js`.
 
 **Note:** ensure the locale code matches the ones provided by the
-[moment library](https://github.com/moment/moment/tree/develop/locale) as these are used to localize dates as well.
+[date-fns library](https://github.com/date-fns/date-fns/tree/main/src/locale) as these are used to localize dates as well.

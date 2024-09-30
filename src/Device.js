@@ -6,11 +6,13 @@ import './Device.css'
 
 export default function Device (props) {
   function renderLastSeen () {
-    if (props.device.online) { return <div className='last-seen'>{i18n.t('Online')}</div> } else {
+    if (props.device.online) {
+      return <div className='last-seen'>{i18n.t('Online')}</div>
+    } else {
       return (
         <div className='last-seen'>
           {i18n.t('Last seen {{date, dateRelative}}', {
-            date: props.device.last_active
+            date: new Date(props.device.last_active)
           })}
         </div>
       )

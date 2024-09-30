@@ -1,15 +1,16 @@
 import React from 'react'
-import moment from 'moment'
+import { differenceInMilliseconds, intervalToDuration, format } from 'date-fns'
 
 export default function Stopwatch (props) {
-  const start = moment(props.start || 0)
-  const end = moment(props.end || Date.now())
-  const ms = moment(end).diff(start)
-  const delta = moment.duration(ms)
+  const start = props.start || new Date(0)
+  const end = props.end || new Date()
+  const ms = differenceInMilliseconds(end, start)
+  const duration = intervalToDuration({ start, end })
+
   return (
     <div style={props.style} className={`Stopwatch ${props.className || ''}`}>
-      {delta.hours() > 0 ? <span>{delta.hours()}<span>:</span></span> : null}
-      <span>{moment.utc(ms).format('mm:ss')}</span>
+      {duration.hours > 0 ? <span>{duration.hours}<span>:</span></span> : null}
+      <span>{format(new Date(ms), 'mm:ss')}</span>
     </div>
   )
 }

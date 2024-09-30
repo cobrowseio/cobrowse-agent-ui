@@ -26,7 +26,7 @@ export default function Session (props) {
         <div className='subdetails'>
           <div className='activated'>
             {i18n.t('{{date, dateRelative}}', {
-              date: props.session.activated
+              date: new Date(props.session.activated)
             })}
           </div>
           {props.session.state === 'ended' && props.session.recorded
@@ -42,8 +42,8 @@ export default function Session (props) {
         ? (
           <Stopwatch
             className='duration'
-            start={props.session.activated}
-            end={props.session.ended || new Date()}
+            start={new Date(props.session.activated)}
+            end={new Date(props.session.ended || Date.now())}
           />
           )
         : (
