@@ -34,7 +34,7 @@
     "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
-    "i18next-parser": "^9.0.0",
+    "i18next-parser": "^9.3.0",
     "standard": "^17.0.0"
   }
 }
