@@ -1,0 +1,10 @@
+{
+  "Online": "Prisijungęs",
+  "Last seen {{date, dateRelative}}": "Paskutinį kartą matytas {{date, dateRelative}}",
+  "{{device}} Device": "{{device}} įrenginys",
+  "{{browser}} on {{os}}": "{{browser}} sistemoje {{os}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Prisijungta prie </0>{{deviceType}}",
+  "{{date, dateRelative}}": "{{date, dateRelative}}",
+  "Recorded": "Įrašyta",
+  "Active": "Aktyvus"
+} 

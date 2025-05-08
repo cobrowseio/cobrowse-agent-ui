@@ -1,0 +1,10 @@
+{
+  "Online": "Online",
+  "Last seen {{date, dateRelative}}": "Laatst gezien {{date, dateRelative}}",
+  "{{device}} Device": "{{device}}-apparaat",
+  "{{browser}} on {{os}}": "{{browser}} op {{os}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Verbonden met </0>{{deviceType}}",
+  "{{date, dateRelative}}": "{{date, dateRelative}}",
+  "Recorded": "Opgenomen",
+  "Active": "Actief"
+} 

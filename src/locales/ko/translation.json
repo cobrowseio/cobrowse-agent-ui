@@ -1,0 +1,10 @@
+{
+  "Online": "온라인",
+  "Last seen {{date, dateRelative}}": "마지막 온라인 {{date, dateRelative}}",
+  "{{device}} Device": "{{device}} 기기",
+  "{{browser}} on {{os}}": "{{os}}의 {{browser}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>연결됨: </0>{{deviceType}}",
+  "{{date, dateRelative}}": "{{date, dateRelative}}",
+  "Recorded": "기록됨",
+  "Active": "세션 진행 중"
+} 

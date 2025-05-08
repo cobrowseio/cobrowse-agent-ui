@@ -1,0 +1,10 @@
+{
+  "Online": "Online",
+  "Last seen {{date, dateRelative}}": "Sidst set {{date, dateRelative}}",
+  "{{device}} Device": "{{device}}-enhed",
+  "{{browser}} on {{os}}": "{{browser}} på {{os}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Forbundet til </0>{{deviceType}}",
+  "{{date, dateRelative}}": "{{date, dateRelative}}",
+  "Recorded": "Optaget",
+  "Active": "Aktiv"
+} 
