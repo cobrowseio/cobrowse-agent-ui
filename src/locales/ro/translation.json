@@ -1,0 +1,10 @@
+{
+  "Online": "Online",
+  "Last seen {{date, dateRelative}}": "Văzut ultima dată {{date, dateRelative}}",
+  "{{device}} Device": "Dispozitiv {{device}}",
+  "{{browser}} on {{os}}": "{{browser}} pe {{os}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Conectat la </0>{{deviceType}}",
+  "{{date, dateRelative}}": "{{date, dateRelative}}",
+  "Recorded": "Înregistrat",
+  "Active": "Activ"
+} 

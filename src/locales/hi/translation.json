@@ -1,0 +1,10 @@
+{
+  "Online": "ऑनलाइन",
+  "Last seen {{date, dateRelative}}": "आखिरी बार देखा गया {{date, dateRelative}}",
+  "{{device}} Device": "{{device}} उपकरण",
+  "{{browser}} on {{os}}": "{{os}} पर {{browser}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>से जुड़ा </0>{{deviceType}}",
+  "{{date, dateRelative}}": "{{date, dateRelative}}",
+  "Recorded": "रिकॉर्ड किया गया",
+  "Active": "सक्रिय"
+} 

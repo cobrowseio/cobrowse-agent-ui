@@ -12,7 +12,6 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "i18next": "^24.2.2",
-    "i18next-resources-to-backend": "^1.2.1",
     "react-i18next": "^15.4.0",
     "ua-parser-js": "^1.0.33"
   },
