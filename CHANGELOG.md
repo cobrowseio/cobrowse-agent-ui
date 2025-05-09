@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.1.1...v1.2.0) (2025-05-09)
+
+
+### Features
+
+* add new locales ([#23](https://github.com/cobrowseio/cobrowse-agent-ui/issues/23)) ([7bb63b8](https://github.com/cobrowseio/cobrowse-agent-ui/commit/7bb63b8e98b053635488217d040c123b32033b3c))
+
 ### [1.1.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.1.0...v1.1.1) (2025-02-03)
 
 ## [1.1.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.0.0...v1.1.0) (2024-01-17)
