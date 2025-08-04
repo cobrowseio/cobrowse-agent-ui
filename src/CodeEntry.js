@@ -39,14 +39,14 @@ export default class CodeEntry extends Component {
       if (await this.props.onCode(code)) {
         this.setState({ validating: false })
         this.setState({ code: ['', '', '', '', '', ''] })
-        if (this.firstDigit) this.firstDigit.focus()
+        if (this.firstDigit) setTimeout(() => this.firstDigit.focus(), 0)
       } else {
         this.setState({ validating: false })
-        if (this.lastDigit) this.lastDigit.focus()
+        if (this.lastDigit) setTimeout(() => this.lastDigit.focus(), 0)
       }
     } catch (e) {
       this.setState({ validating: false })
-      if (this.lastDigit) this.lastDigit.focus()
+      if (this.lastDigit) setTimeout(() => this.lastDigit.focus(), 0)
       throw e
     }
   }
