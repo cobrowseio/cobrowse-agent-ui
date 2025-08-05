@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.2.0...v1.2.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* retain focus when code entry is invalid ([#26](https://github.com/cobrowseio/cobrowse-agent-ui/issues/26)) ([505a429](https://github.com/cobrowseio/cobrowse-agent-ui/commit/505a429e9c297a0d162c9e1c7af6d2cd464a18f3))
+
 ## [1.2.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.1.1...v1.2.0) (2025-05-09)
 
 
