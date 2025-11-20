@@ -1,0 +1,206 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f4f6fb;
+  color: #0b1220;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+.page-header p {
+  margin: 0 0 24px;
+  color: #4c5367;
+  max-width: 640px;
+}
+
+.demo-section {
+  background: #fff;
+  border: 1px solid #e1e4ec;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(11, 18, 32, 0.06);
+}
+
+.demo-section h2 {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+}
+
+.demo-section p {
+  margin: 0 0 20px;
+  color: #616b83;
+}
+
+.demo-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.panel {
+  border: 1px solid #edf0f7;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fafbff;
+}
+
+.panel h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  color: #414a63;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.panel small {
+  display: block;
+  margin-top: 12px;
+  color: #6f7895;
+}
+
+.platform-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.platform-card {
+  border: 1px dashed #d6dbea;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #293047;
+  background: #fff;
+}
+
+.device-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.device-card {
+  border: 1px solid #edf0f7;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+}
+
+.device-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.device-name {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.device-location {
+  color: #6b7594;
+  font-size: 0.9rem;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: #eef2ff;
+  color: #36406c;
+}
+
+.log {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #11172b;
+  color: #e5e9fb;
+  font-family: 'SFMono-Regular', 'Fira Code', monospace;
+  font-size: 0.85rem;
+}
+
+.code-entry-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.code-hint {
+  font-family: 'SFMono-Regular', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: #575f7a;
+}
+
+.language-picker {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 16px;
+  background: #0b1220;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.language-picker select {
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.language-picker select:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .device-card header {
+    align-items: flex-start;
+  }
+}

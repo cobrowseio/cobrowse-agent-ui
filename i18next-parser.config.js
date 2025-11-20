@@ -36,7 +36,7 @@ module.exports = {
     return key
   },
   verbose: true,
-  output: 'src/locales/$LOCALE/$NAMESPACE.json',
+  output: 'lib/locales/$LOCALE/$NAMESPACE.json',
   lexers: {
     js: ['JsxLexer']
   }
