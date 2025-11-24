@@ -1,0 +1,32 @@
+
+.root {
+  margin: var(--cb-button-margin, 3px);
+  display: inline-block;
+  background: var(--cb-button-bg, #f6f4f8);
+  color: var(--cb-button-text, inherit);
+  padding: var(--cb-button-padding, 12px 16px);
+  cursor: not-allowed;
+  border-radius: var(--cb-radius-sm, 4px);
+  font-weight: var(--cb-button-weight, 600);
+  font-size: var(--cb-button-size, 1rem);
+  opacity: var(--cb-button-disabled-opacity, 0.6);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease, opacity 0.12s ease;
+  user-select: none;
+  outline: none;
+}
+
+.connectable {
+  background: var(--cb-button-connectable-bg, #040d3c);
+  color: var(--cb-button-connectable-text, #ffffff);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--cb-color-accent, #040d3c);
+  outline-offset: 2px;
+}
+
+.root:active.connectable {
+  transform: translateY(1px);
+}

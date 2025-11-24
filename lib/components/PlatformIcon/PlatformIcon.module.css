@@ -1,0 +1,6 @@
+
+.root {
+  width: var(--cb-icon-size, 0.9em);
+  height: var(--cb-icon-size, 0.9em);
+  vertical-align: middle;
+}
