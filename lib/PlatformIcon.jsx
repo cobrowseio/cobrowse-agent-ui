@@ -17,7 +17,7 @@ function icon (platform) {
   }
 }
 
-export default function PlatformIcon (props) {
-  const Icon = icon(props.platform)
-  return <Icon fill='currentColor' {...props} className={`PlatformIcon ${props.className || ''}`} />
+export default function PlatformIcon ({ platform, className, ...props }) {
+  const Icon = icon(platform)
+  return <Icon fill='currentColor' {...props} className={`PlatformIcon ${className || ''}`} />
 }
