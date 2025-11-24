@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import i18n from '../../i18n'
 import PlatformIcon from '../PlatformIcon'
 import deviceType from '../../deviceType.js'
@@ -20,12 +21,12 @@ const Device = ({ style, className, device, children }) => (
     data-online={device.online ? 'true' : 'false'}
     data-connectable={device.connectable ? 'true' : 'false'}
     style={style}
-    className={[
+    className={clsx(
       styles.root,
-      device.online ? styles.online : '',
-      device.connectable ? styles.connectable : '',
+      device.online && styles.online,
+      device.connectable && styles.connectable,
       className
-    ].filter(Boolean).join(' ')}
+    )}
   >
     <div className={styles.deviceStatus}>
       <PlatformIcon

@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import styles from './UserIcon.module.css'
 
 const UserIcon = ({ user, className }) => {
@@ -15,7 +16,7 @@ const UserIcon = ({ user, className }) => {
   return (
     <div
       data-component='UserIcon'
-      className={[styles.root, className].filter(Boolean).join(' ')}
+      className={clsx(styles.root, className)}
       title={user.name || null}
       style={{
         backgroundImage: user.picture ? `url(${user.picture || ''})` : undefined,

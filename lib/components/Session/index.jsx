@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import deviceType from '../../deviceType.js'
 import Stopwatch from '../Stopwatch'
 import i18n from '../../i18n'
@@ -17,7 +18,7 @@ const Session = ({ style, onClick, className, session, openRecording: openRecord
       data-recorded={session.recorded ? 'true' : 'false'}
       style={style}
       onClick={onClick}
-      className={[styles.root, className].filter(Boolean).join(' ')}
+      className={clsx(styles.root, className)}
     >
       <div className={styles.details}>
         <div>

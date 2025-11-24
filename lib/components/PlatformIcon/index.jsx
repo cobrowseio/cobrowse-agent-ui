@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import IconGlobe from '../../icons/globe.svg?react'
 import IconApple from '../../icons/apple.svg?react'
 import IconAndroid from '../../icons/android.svg?react'
@@ -26,7 +27,7 @@ const PlatformIcon = ({ platform, className, ...props }) => {
       data-component='PlatformIcon'
       data-platform={platform}
       {...props}
-      className={[styles.root, className].filter(Boolean).join(' ')}
+      className={clsx(styles.root, className)}
     />
   )
 }
