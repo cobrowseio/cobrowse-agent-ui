@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import clsx from 'clsx'
 import styles from './CodeEntry.module.css'
 
 const CODE_LENGTH = 6
@@ -165,13 +166,13 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
       data-component='CodeEntry'
       data-validating={validating ? 'true' : 'false'}
       data-invalid={invalid ? 'true' : 'false'}
-      className={`${styles.root}${className ? ` ${className}` : ''}`}
+      className={clsx(styles.root, className)}
     >
-      <div className={`${styles.digits}${invalid ? ` ${styles.invalid}` : ''}`}>
+      <div className={clsx(styles.digits, invalid && styles.invalid)}>
         {code.map((value, index) => (
           <input
             key={index}
-            className={`${styles.input}${inputClassName ? ` ${inputClassName}` : ''}`}
+            className={clsx(styles.input, inputClassName)}
             type='number'
             {...keyHandlers}
             value={value}

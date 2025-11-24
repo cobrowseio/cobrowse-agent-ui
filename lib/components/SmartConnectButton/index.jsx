@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import styles from './SmartConnectButton.module.css'
 
 const SmartConnectButton = ({ device, onClick: onClickCallback, label, className, style }) => {
@@ -15,12 +16,12 @@ const SmartConnectButton = ({ device, onClick: onClickCallback, label, className
       data-online={device.online ? 'true' : 'false'}
       data-connectable={device.connectable ? 'true' : 'false'}
       style={style}
-      className={[
+      className={clsx(
         styles.root,
-        device.online ? styles.online : '',
-        device.connectable ? styles.connectable : '',
+        device.online && styles.online,
+        device.connectable && styles.connectable,
         className
-      ].filter(Boolean).join(' ')}
+      )}
       onClick={onClick}
     >{label || 'Connect'}
     </div>
