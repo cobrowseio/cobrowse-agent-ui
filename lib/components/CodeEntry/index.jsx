@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import './CodeEntry.css'
+import styles from './CodeEntry.module.css'
 
 const CODE_LENGTH = 6
 const EMTPY_STATE = Array(CODE_LENGTH).fill('')
@@ -161,12 +161,17 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
   const invalid = !validating && getCode().length === CODE_LENGTH
 
   return (
-    <div className={`CodeEntry${className ? ` ${className}` : ''}`}>
-      <div className={invalid ? 'invalid' : ''}>
+    <div
+      data-component='CodeEntry'
+      data-validating={validating ? 'true' : 'false'}
+      data-invalid={invalid ? 'true' : 'false'}
+      className={`${styles.root}${className ? ` ${className}` : ''}`}
+    >
+      <div className={`${styles.digits}${invalid ? ` ${styles.invalid}` : ''}`}>
         {code.map((value, index) => (
           <input
             key={index}
-            className={`bordered${inputClassName ? ` ${inputClassName}` : ''}`}
+            className={`${styles.input}${inputClassName ? ` ${inputClassName}` : ''}`}
             type='number'
             {...keyHandlers}
             value={value}

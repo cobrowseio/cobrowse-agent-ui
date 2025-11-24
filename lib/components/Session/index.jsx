@@ -3,7 +3,7 @@ import deviceType from '../../deviceType.js'
 import Stopwatch from '../Stopwatch'
 import i18n from '../../i18n'
 import { Trans } from 'react-i18next'
-import './Session.css'
+import styles from './Session.module.css'
 
 const Session = ({ style, onClick, className, session, openRecording: openRecordingCallback, children }) => {
   const openRecording = () => {
@@ -12,26 +12,29 @@ const Session = ({ style, onClick, className, session, openRecording: openRecord
 
   return (
     <div
+      data-component='Session'
+      data-state={session.state}
+      data-recorded={session.recorded ? 'true' : 'false'}
       style={style}
       onClick={onClick}
-      className={`Session ${className || ''}`}
+      className={[styles.root, className].filter(Boolean).join(' ')}
     >
-      <div className='details'>
+      <div className={styles.details}>
         <div>
           <Trans i18n={i18n}>
             <span className='device-prefix'>Connected to </span>
             {{ deviceType: deviceType(session.device) }}
           </Trans>
         </div>
-        <div className='subdetails'>
-          <div className='activated'>
+        <div className={styles.subdetails}>
+          <div className={styles.activated}>
             {i18n.t('{{date, dateRelative}}', {
               date: new Date(session.activated)
             })}
           </div>
           {session.state === 'ended' && session.recorded
             ? (
-              <div className='recorded' onClick={openRecording}>
+              <div className={styles.recorded} onClick={openRecording}>
                 {i18n.t('Recorded')}
               </div>
               )
@@ -41,13 +44,13 @@ const Session = ({ style, onClick, className, session, openRecording: openRecord
       {session.state === 'ended'
         ? (
           <Stopwatch
-            className='duration'
+            className={styles.duration}
             start={new Date(session.activated)}
             end={new Date(session.ended || Date.now())}
           />
           )
         : (
-          <div className='active'>{i18n.t('Active')}</div>
+          <div className={styles.active}>{i18n.t('Active')}</div>
           )}
       {children}
     </div>

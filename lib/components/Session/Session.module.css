@@ -1,0 +1,66 @@
+
+.root {
+  padding: var(--cb-session-padding, 7px);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--cb-session-gap, 8px);
+}
+
+.agent {
+  font-size: 0.8em;
+  margin-right: 7px;
+}
+
+.details {
+  flex: 1;
+}
+
+.subdetails {
+  display: flex;
+  margin-top: 4px;
+  align-items: baseline;
+  color: var(--cb-color-subtext, #777);
+  gap: 12px;
+}
+
+.recorded {
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-left: 3px;
+  letter-spacing: 0.05em;
+  color: var(--cb-session-recorded-color, var(--cb-color-text, #0b1220));
+  cursor: pointer;
+}
+
+.active {
+  color: var(--cb-session-active-text, #fff);
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: var(--cb-session-active-bg, #3cc56e);
+  padding: 1px 6px;
+  border-radius: var(--cb-radius-sm, 4px);
+  display: inline-block;
+}
+
+.activated {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.recorded:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  background: var(--cb-session-recorded-dot, red);
+  border-radius: 100%;
+  display: inline-block;
+}
+
+.duration {
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--cb-color-text, inherit);
+}
