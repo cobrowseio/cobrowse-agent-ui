@@ -1,7 +1,7 @@
 import React from 'react'
-import deviceType from './deviceType.js'
-import Stopwatch from './Stopwatch.jsx'
-import i18n from './i18n'
+import deviceType from '../../deviceType.js'
+import Stopwatch from '../Stopwatch'
+import i18n from '../../i18n'
 import { Trans } from 'react-i18next'
 import './Session.css'
 

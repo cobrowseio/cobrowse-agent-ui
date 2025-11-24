@@ -1,7 +1,7 @@
 import React from 'react'
-import i18n from './i18n'
-import PlatformIcon from './PlatformIcon.jsx'
-import deviceType from './deviceType.js'
+import i18n from '../../i18n'
+import PlatformIcon from '../PlatformIcon'
+import deviceType from '../../deviceType.js'
 import './Device.css'
 
 const Device = ({ style, device, children }) => {
