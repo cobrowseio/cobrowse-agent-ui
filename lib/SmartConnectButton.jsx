@@ -1,16 +1,16 @@
 import React from 'react'
 import './SmartConnectButton.css'
 
-export default function SmartConnectButton (props) {
+export default function SmartConnectButton ({ device, onClick: onClickCallback, label }) {
   function onClick () {
-    if (props.device.connectable && props.onClick) props.onClick(props.device)
+    if (device.connectable && onClickCallback) onClickCallback(device)
   }
 
   return (
     <div
-      className={`SmartConnectButton ${props.device.online ? 'online' : ''} ${props.device.connectable ? 'connectable' : ''}`}
+      className={`SmartConnectButton ${device.online ? 'online' : ''} ${device.connectable ? 'connectable' : ''}`}
       onClick={onClick}
-    >{props.label || 'Connect'}
+    >{label || 'Connect'}
     </div>
   )
 }
