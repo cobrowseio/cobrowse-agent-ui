@@ -2,8 +2,8 @@ import React from 'react'
 
 import './UserIcon.css'
 
-export default function UserIcon ({ user, className }) {
-  function initials () {
+const UserIcon = ({ user, className }) => {
+  const initials = () => {
     if (!user) return ''
     if (!user.name) return ''
     if (user.picture) return ''
@@ -26,3 +26,5 @@ export default function UserIcon ({ user, className }) {
     </div>
   )
 }
+
+export default UserIcon

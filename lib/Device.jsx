@@ -4,8 +4,8 @@ import PlatformIcon from './PlatformIcon.jsx'
 import deviceType from './deviceType.js'
 import './Device.css'
 
-export default function Device ({ style, device, children }) {
-  function renderLastSeen () {
+const Device = ({ style, device, children }) => {
+  const renderLastSeen = () => {
     if (device.online) {
       return <div className='last-seen'>{i18n.t('Online')}</div>
     } else {
@@ -40,3 +40,5 @@ export default function Device ({ style, device, children }) {
     </div>
   )
 }
+
+export default Device
