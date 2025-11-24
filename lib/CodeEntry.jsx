@@ -1,97 +1,145 @@
-import React, { Component } from 'react'
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import './CodeEntry.css'
 
-export default class CodeEntry extends Component {
-  constructor () {
-    super()
-    this.state = { validating: false, code: ['', '', '', '', '', ''] }
-  }
+const CODE_LENGTH = 6
+const EMTPY_STATE = Array(CODE_LENGTH).fill('')
 
-  getCode = () => {
-    return this.state.code.join('').substr(0, 6)
-  }
+const getElementIndex = (refsArr, elem) => refsArr.findIndex((el) => el === elem)
 
-  setDigit = (digit, value) => {
-    if (digit > 5) return
-    const code = this.state.code
-    code[digit] = value
-    this.setState({
-      code: [...code]
-    })
-    this.tryComplete()
-  }
+const focusPreviousInput = (refsArr, elem) => {
+  refsArr[Math.max(getElementIndex(refsArr, elem) - 1, 0)]?.focus()
+}
 
-  focus = () => {
-    this.firstDigit.focus()
-  }
+const focusNextInput = (refsArr, elem) => {
+  refsArr[Math.min(getElementIndex(refsArr, elem) + 1, CODE_LENGTH - 1)]?.focus()
+}
 
-  isEditable = () => {
-    return (!this.state.validating)
-  }
+const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCode, children }) => {
+  const [validating, setValidating] = useState(false)
+  const [code, setCode] = useState(EMTPY_STATE)
+  const refs = useRef([])
 
-  tryComplete = async () => {
-    if (!this.isEditable()) return
-    const code = this.getCode()
-    if (code.length !== 6) return
+  useImperativeHandle(ref, () => ({
+    clear () {
+      setCode(EMTPY_STATE)
+    },
+    focus (index) {
+      refs.current[index]?.focus()
+    }
+  }), [])
 
-    this.setState({ validating: true })
+  const getCode = useCallback(() => code.join('').substring(0, CODE_LENGTH), [code])
+
+  const tryComplete = useCallback(async (codeValue) => {
+    setValidating(true)
+
     try {
-      if (await this.props.onCode(code)) {
-        this.setState({ validating: false })
-        this.setState({ code: ['', '', '', '', '', ''] })
-        if (this.firstDigit) setTimeout(() => this.firstDigit.focus(), 0)
+      const isValid = await onCode?.(codeValue)
+
+      if (isValid) {
+        setCode(EMTPY_STATE)
+
+        if (refs.current[0]) {
+          setTimeout(() => refs.current[0]?.focus(), 0)
+        }
       } else {
-        this.setState({ validating: false })
-        if (this.lastDigit) setTimeout(() => this.lastDigit.focus(), 0)
+        setTimeout(() => refs.current[CODE_LENGTH - 1]?.focus(), 0)
       }
     } catch (e) {
-      this.setState({ validating: false })
-      if (this.lastDigit) setTimeout(() => this.lastDigit.focus(), 0)
-      throw e
-    }
-  }
+      if (refs.current[CODE_LENGTH - 1]) {
+        setTimeout(() => refs.current[CODE_LENGTH - 1]?.focus(), 0)
+      }
 
-  handlePaste = (event) => {
-    if (!this.isEditable()) return false
+      throw e
+    } finally {
+      setValidating(false)
+    }
+  }, [onCode])
+
+  // Run the tryComplete function when the code state changes
+  useEffect(() => {
+    const code = getCode()
+
+    if (code.length !== CODE_LENGTH) {
+      return
+    }
+
+    tryComplete(code)
+  }, [getCode, tryComplete])
+
+  const setDigit = useCallback((digit, value) => {
+    if (digit > (CODE_LENGTH - 1)) {
+      return
+    }
+
+    setCode((code) => {
+      const updatedCode = [...code]
+
+      updatedCode[digit] = value
+
+      return updatedCode
+    })
+  }, [])
+
+  const handlePaste = useCallback((event) => {
+    if (validating) {
+      return false
+    }
+
     const clipboardData = event.clipboardData || window.clipboardData
     const pastedData = clipboardData.getData('Text').toString()
-    if (!parseInt(pastedData, 10)) return event.preventDefault()
-    const digits = pastedData.split('')
-    let digit = parseInt(event.target.getAttribute('data-digit'), 10)
-    let target = event.target
-    digits.forEach((value) => {
-      this.setDigit(digit, value)
-      digit += 1
-      if (target) target = target.nextSibling
-    })
-    if (target) target.focus()
-    return event.preventDefault()
-  }
 
-  handleOnChange = (event) => {
-    const value = event.target.value.substr(-1)
+    // Exit early if the pasted data contains anything other than just digits
+    if (!/^[0-9]+$/.test(pastedData)) {
+      return event.preventDefault()
+    }
+
+    const digits = pastedData.split('')
+    // Start pasting from the first digit if the clipboard holds a full code,
+    // otherwise just paste from the currently selected input onwards
+    let digit = pastedData.length === CODE_LENGTH
+      ? 0
+      : parseInt(event.target.getAttribute('data-digit'), 10)
+
+    digits.forEach((value) => {
+      setDigit(digit, value)
+
+      digit += 1
+    })
+
+    refs.current[Math.min(digit, CODE_LENGTH - 1)]?.focus()
+
+    return event.preventDefault()
+  }, [setDigit, validating])
+
+  const handleOnChange = useCallback((event) => {
+    const value = event.target.value.slice(-1)
     // validate text on any change
     const digit = parseInt(event.target.getAttribute('data-digit'), 10)
-    this.setDigit(digit, value)
+
+    // Only allow digits and deleting the current value
+    if (/[0-9]/.test(value) || value === '') {
+      setDigit(digit, value)
+    }
 
     if (!event.repeat && /[0-9]/.test(value)) {
       event.target.value = ''
-      const nextSibling = event.target.nextSibling
-      if (nextSibling) nextSibling.focus()
-    }
-  }
 
-  handleKeyDown = (event) => {
+      focusNextInput(refs.current, event.target)
+    }
+  }, [setDigit])
+
+  const handleKeyDown = useCallback((event) => {
     // on backspace on empty node go back to previous
-    if ((event.target.value.length === 0) && (event.keyCode === 8)) {
-      if (event.target.previousSibling) event.target.previousSibling.focus()
+    if (event.target.value.length === 0 && event.keyCode === 8) {
+      focusPreviousInput(refs.current, event.target)
       // left arrow moves to previous
     } else if (event.keyCode === 37) {
-      if (event.target.previousSibling) event.target.previousSibling.focus()
+      focusPreviousInput(refs.current, event.target)
       return event.preventDefault()
       // right arrow moves to next
     } else if (event.keyCode === 39) {
-      if (event.target.nextSibling) event.target.nextSibling.focus()
+      focusNextInput(refs.current, event.target)
       return event.preventDefault()
       // prevent non-numeric characters that might appear in numbers (e.g 'e')
       // but allow backspaces too
@@ -99,28 +147,38 @@ export default class CodeEntry extends Component {
             (event.keyCode !== 8) && (event.keyCode !== 9) && (!/^[0-9]{1}$/.test(event.key))) {
       return event.preventDefault()
     }
+
     return null
+  }, [])
+
+  const keyHandlers = {
+    onKeyDown: handleKeyDown,
+    onChange: handleOnChange,
+    onPaste: handlePaste,
+    disabled: validating
   }
 
-  render () {
-    const keyHandlers = {
-      onKeyDown: this.handleKeyDown,
-      onChange: this.handleOnChange,
-      onPaste: this.handlePaste,
-      disabled: !this.isEditable()
-    }
-    const invalid = (!this.state.validating) && (this.getCode().length === 6)
-    return (
-      <div className='CodeEntry'>
-        <div className={invalid ? 'invalid' : ''}>
-          <input className='bordered' type='number' {...keyHandlers} value={this.state.code[0]} data-digit={0} ref={(c) => { this.firstDigit = c }} />
-          <input className='bordered' type='number' {...keyHandlers} value={this.state.code[1]} data-digit={1} />
-          <input className='bordered' type='number' {...keyHandlers} value={this.state.code[2]} data-digit={2} />
-          <input className='bordered' type='number' {...keyHandlers} value={this.state.code[3]} data-digit={3} />
-          <input className='bordered' type='number' {...keyHandlers} value={this.state.code[4]} data-digit={4} />
-          <input className='bordered' type='number' {...keyHandlers} value={this.state.code[5]} data-digit={5} ref={(c) => { this.lastDigit = c }} />
-        </div>
+  const invalid = !validating && getCode().length === CODE_LENGTH
+
+  return (
+    <div className={`CodeEntry${className ? ` ${className}` : ''}`}>
+      <div className={invalid ? 'invalid' : ''}>
+        {code.map((value, index) => (
+          <input
+            key={index}
+            className={`bordered${inputClassName ? ` ${inputClassName}` : ''}`}
+            type='number'
+            {...keyHandlers}
+            value={value}
+            data-digit={index}
+            ref={(el) => { refs.current[index] = el }}
+            autoFocus={focusOnRender && index === 0}
+          />
+        ))}
+        {children}
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default CodeEntry
