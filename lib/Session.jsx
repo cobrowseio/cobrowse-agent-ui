@@ -5,8 +5,8 @@ import i18n from './i18n'
 import { Trans } from 'react-i18next'
 import './Session.css'
 
-export default function Session ({ style, onClick, className, session, openRecording: openRecordingCallback, children }) {
-  function openRecording () {
+const Session = ({ style, onClick, className, session, openRecording: openRecordingCallback, children }) => {
+  const openRecording = () => {
     if (openRecordingCallback) openRecordingCallback(session)
   }
 
@@ -53,3 +53,5 @@ export default function Session ({ style, onClick, className, session, openRecor
     </div>
   )
 }
+
+export default Session

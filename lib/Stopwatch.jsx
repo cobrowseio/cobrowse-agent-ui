@@ -1,7 +1,7 @@
 import React from 'react'
 import { differenceInMilliseconds, intervalToDuration, format } from 'date-fns'
 
-export default function Stopwatch ({ start: startProp, end: endProp, style, className }) {
+const Stopwatch = ({ start: startProp, end: endProp, style, className }) => {
   const start = startProp || new Date(0)
   const end = endProp || new Date()
   const ms = differenceInMilliseconds(end, start)
@@ -14,3 +14,5 @@ export default function Stopwatch ({ start: startProp, end: endProp, style, clas
     </div>
   )
 }
+
+export default Stopwatch

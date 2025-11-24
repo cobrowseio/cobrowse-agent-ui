@@ -1,8 +1,8 @@
 import React from 'react'
 import './SmartConnectButton.css'
 
-export default function SmartConnectButton ({ device, onClick: onClickCallback, label }) {
-  function onClick () {
+const SmartConnectButton = ({ device, onClick: onClickCallback, label }) => {
+  const onClick = () => {
     if (device.connectable && onClickCallback) onClickCallback(device)
   }
 
@@ -14,3 +14,5 @@ export default function SmartConnectButton ({ device, onClick: onClickCallback, 
     </div>
   )
 }
+
+export default SmartConnectButton
