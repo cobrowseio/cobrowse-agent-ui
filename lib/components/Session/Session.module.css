@@ -1,14 +1,14 @@
 
 .root {
-  padding: var(--cb-session-padding, 7px);
+  padding: var(--cbio-session-padding, 7px);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--cb-session-gap, 8px);
+  gap: var(--cbio-session-gap, 8px);
 }
 
 .agent {
-  font-size: 0.8em;
+  font-size: 0.8rem;
   margin-right: 7px;
 }
 
@@ -20,7 +20,7 @@
   display: flex;
   margin-top: 4px;
   align-items: baseline;
-  color: var(--cb-color-subtext, #777);
+  color: var(--cbio-color-subtext, #777);
   gap: 12px;
 }
 
@@ -28,24 +28,24 @@
   text-transform: uppercase;
   font-size: 10px;
   margin-left: 3px;
-  letter-spacing: 0.05em;
-  color: var(--cb-session-recorded-color, var(--cb-color-text, #0b1220));
+  letter-spacing: 0.05rem;
+  color: var(--cbio-session-recorded-color, var(--cbio-color-text, #0b1220));
   cursor: pointer;
 }
 
 .active {
-  color: var(--cb-session-active-text, #fff);
+  color: var(--cbio-session-active-text, #fff);
   font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
-  background-color: var(--cb-session-active-bg, #3cc56e);
+  background-color: var(--cbio-session-active-bg, #3cc56e);
   padding: 1px 6px;
-  border-radius: var(--cb-radius-sm, 4px);
+  border-radius: var(--cbio-radius-sm, 4px);
   display: inline-block;
 }
 
 .activated {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   white-space: nowrap;
 }
 
@@ -54,7 +54,7 @@
   width: 8px;
   height: 8px;
   margin-right: 4px;
-  background: var(--cb-session-recorded-dot, red);
+  background: var(--cbio-session-recorded-dot, red);
   border-radius: 100%;
   display: inline-block;
 }
@@ -62,5 +62,5 @@
 .duration {
   font-weight: bold;
   font-size: 12px;
-  color: var(--cb-color-text, inherit);
+  color: var(--cbio-color-text, inherit);
 }
