@@ -6,7 +6,7 @@ import i18n from '../../i18n'
 import { Trans } from 'react-i18next'
 import styles from './Session.module.css'
 
-const Session = ({ style, onClick, className, session, openRecording: openRecordingCallback, children }) => {
+const Session = ({ onClick, className, session, openRecording: openRecordingCallback, children }) => {
   const openRecording = () => {
     if (openRecordingCallback) openRecordingCallback(session)
   }
@@ -16,7 +16,6 @@ const Session = ({ style, onClick, className, session, openRecording: openRecord
       data-component='Session'
       data-state={session.state}
       data-recorded={session.recorded ? 'true' : 'false'}
-      style={style}
       onClick={onClick}
       className={clsx(styles.root, className)}
     >

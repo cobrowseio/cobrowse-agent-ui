@@ -11,21 +11,21 @@
 }
 
 .input {
-  font-size: var(--cbio-codeentry-font-size, 1rem);
-  width: var(--cbio-codeentry-width, 1.6rem);
-  height: var(--cbio-codeentry-height, 2rem);
-  margin: var(--cbio-codeentry-gap, 0.2rem);
+  font-size: 1rem;
+  width: 1.6rem;
+  height: 2rem;
+  margin: 0.2rem;
   text-align: center;
-  border-radius: var(--cbio-radius-sm, 4px);
-  border: 1px solid var(--cbio-color-border, #dfe3f0);
-  background: var(--cbio-color-surface, #fff);
-  color: var(--cbio-color-text, #0b1220);
+  border-radius: 4px;
+  border: 1px solid #dfe3f0;
+  background: #ffffff;
+  color: #0b1220;
   transition: border-color 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
   appearance: textfield;
 }
 
 .input:nth-of-type(3) {
-  margin-inline-end: calc(var(--cbio-codeentry-gap, 0.2rem) * 3);
+  margin-inline-end: 0.6rem;
 }
 
 .input[type=number]::-webkit-outer-spin-button,
@@ -36,8 +36,8 @@
 }
 
 .input:focus {
-  border-color: var(--cbio-color-accent, #040d3c);
-  box-shadow: 0 0 0 3px var(--cbio-color-accent-focus, rgba(4, 13, 60, 0.16));
+  border-color: #040d3c;
+  box-shadow: 0 0 0 3px rgba(4, 13, 60, 0.16);
   outline: none;
 }
 
