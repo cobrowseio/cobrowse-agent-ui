@@ -21,7 +21,7 @@
   background: var(--cbio-color-surface, #fff);
   color: var(--cbio-color-text, #0b1220);
   transition: border-color 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
-  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .input:nth-of-type(3) {
@@ -31,7 +31,7 @@
 .input[type=number]::-webkit-outer-spin-button,
 .input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
