@@ -11,21 +11,21 @@
 }
 
 .input {
-  font-size: var(--cb-codeentry-font-size, 1em);
-  width: var(--cb-codeentry-width, 1.6em);
-  height: var(--cb-codeentry-height, 2em);
-  margin: var(--cb-codeentry-gap, 0.2em);
+  font-size: var(--cbio-codeentry-font-size, 1rem);
+  width: var(--cbio-codeentry-width, 1.6rem);
+  height: var(--cbio-codeentry-height, 2rem);
+  margin: var(--cbio-codeentry-gap, 0.2rem);
   text-align: center;
-  border-radius: var(--cb-radius-sm, 4px);
-  border: 1px solid var(--cb-color-border, #dfe3f0);
-  background: var(--cb-color-surface, #fff);
-  color: var(--cb-color-text, #0b1220);
+  border-radius: var(--cbio-radius-sm, 4px);
+  border: 1px solid var(--cbio-color-border, #dfe3f0);
+  background: var(--cbio-color-surface, #fff);
+  color: var(--cbio-color-text, #0b1220);
   transition: border-color 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
   -moz-appearance: textfield;
 }
 
 .input:nth-of-type(3) {
-  margin-right: calc(var(--cb-codeentry-gap, 0.2em) * 3);
+  margin-right: calc(var(--cbio-codeentry-gap, 0.2rem) * 3);
 }
 
 .input[type=number]::-webkit-outer-spin-button,
@@ -36,8 +36,8 @@
 }
 
 .input:focus {
-  border-color: var(--cb-color-accent, #040d3c);
-  box-shadow: 0 0 0 3px var(--cb-color-accent-focus, rgba(4, 13, 60, 0.16));
+  border-color: var(--cbio-color-accent, #040d3c);
+  box-shadow: 0 0 0 3px var(--cbio-color-accent-focus, rgba(4, 13, 60, 0.16));
   outline: none;
 }
 

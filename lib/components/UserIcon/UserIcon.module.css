@@ -1,17 +1,17 @@
 
 .root {
-  color: var(--cb-usericon-text, #fff);
+  color: var(--cbio-usericon-text, #fff);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-size: cover;
   background-position: center;
-  padding: var(--cb-usericon-padding, 6px);
+  padding: var(--cbio-usericon-padding, 6px);
   border-radius: 50%;
-  width: var(--cb-usericon-size, 1.5em);
-  height: var(--cb-usericon-size, 1.5em);
-  border: 2px solid var(--cb-usericon-border, #ddd);
+  width: var(--cbio-usericon-size, 1.5em);
+  height: var(--cbio-usericon-size, 1.5em);
+  border: 2px solid var(--cbio-usericon-border, #ddd);
   flex: 0 0 auto;
   white-space: nowrap;
 }
