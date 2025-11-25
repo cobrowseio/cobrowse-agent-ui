@@ -137,7 +137,7 @@ export default function KitchenSink () {
   }, [])
 
   return (
-    <div dir={direction}>
+    <>
       <header className='page-header'>
         <h1>Cobrowse Agent UI components</h1>
       </header>
@@ -251,6 +251,6 @@ export default function KitchenSink () {
         </div>
         {recordingInfo ? <div className='log'>{recordingInfo}</div> : null}
       </Section>
-    </div>
+    </>
   )
 }
