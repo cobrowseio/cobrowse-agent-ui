@@ -89,6 +89,7 @@ export default function KitchenSink () {
   const [lastConnection, setLastConnection] = useState('')
   const [recordingInfo, setRecordingInfo] = useState('')
   const [language, setLanguage] = useState(i18n.language || 'en-us')
+  const [direction, setDirection] = useState('ltr')
 
   const languages = useMemo(() => {
     const resources = (i18n.options && i18n.options.resources) || {}
@@ -100,6 +101,12 @@ export default function KitchenSink () {
     i18n.on('languageChanged', handleLanguageChanged)
     return () => i18n.off('languageChanged', handleLanguageChanged)
   }, [])
+
+  useEffect(() => {
+    const previousDir = document.documentElement.getAttribute('dir') || 'ltr'
+    document.documentElement.setAttribute('dir', direction)
+    return () => document.documentElement.setAttribute('dir', previousDir)
+  }, [direction])
 
   const handleCode = useCallback(async (code) => {
     setCodeStatus(`Checking ${code}...`)
@@ -125,20 +132,36 @@ export default function KitchenSink () {
     setLanguage(next)
   }, [])
 
+  const toggleDirection = useCallback(() => {
+    setDirection((prev) => (prev === 'ltr' ? 'rtl' : 'ltr'))
+  }, [])
+
   return (
-    <>
+    <div dir={direction}>
       <header className='page-header'>
         <h1>Cobrowse Agent UI components</h1>
       </header>
 
       <section className='demo-section'>
-        <div className='language-picker'>
-          <strong>Active language</strong>
-          <select value={language} onChange={handleLanguageChange}>
-            {languages.map((lng) => (
-              <option key={lng} value={lng}>{lng}</option>
-            ))}
-          </select>
+        <div className='control-row'>
+          <div className='language-picker'>
+            <strong>Active language</strong>
+            <select value={language} onChange={handleLanguageChange}>
+              {languages.map((lng) => (
+                <option key={lng} value={lng}>{lng}</option>
+              ))}
+            </select>
+          </div>
+
+          <button
+            type='button'
+            className='rtl-toggle'
+            onClick={toggleDirection}
+            aria-pressed={direction === 'rtl'}
+          >
+            <span className='rtl-toggle-dot' aria-hidden='true' />
+            {direction === 'rtl' ? 'RTL layout on' : 'RTL layout off'}
+          </button>
         </div>
         <p style={{ marginTop: '12px', color: '#616b83' }}>
           Relative timestamps inside the components update to match the selected locale.
@@ -228,6 +251,6 @@ export default function KitchenSink () {
         </div>
         {recordingInfo ? <div className='log'>{recordingInfo}</div> : null}
       </Section>
-    </>
+    </div>
   )
 }
