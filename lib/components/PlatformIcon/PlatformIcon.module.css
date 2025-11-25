@@ -1,6 +1,5 @@
-
 .root {
-  width: var(--cbio-icon-size, 0.9rem);
-  height: var(--cbio-icon-size, 0.9rem);
+  width: 0.9rem;
+  height: 0.9rem;
   vertical-align: middle;
 }

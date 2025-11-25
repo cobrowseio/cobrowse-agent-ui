@@ -1,26 +1,22 @@
-
 .root {
-  padding: var(--cbio-session-padding, 7px);
+  padding: 6px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--cbio-session-gap, 8px);
-}
-
-.agent {
-  font-size: 0.8rem;
-  margin-inline-end: 7px;
+  gap: 12px;
 }
 
 .details {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .subdetails {
   display: flex;
-  margin-top: 4px;
   align-items: baseline;
-  color: var(--cbio-color-subtext, #777);
+  color: #777;
   gap: 12px;
 }
 
@@ -29,18 +25,18 @@
   font-size: 10px;
   margin-inline-start: 3px;
   letter-spacing: 0.05rem;
-  color: var(--cbio-session-recorded-color, var(--cbio-color-text, #0b1220));
+  color: #0b1220;
   cursor: pointer;
 }
 
 .active {
-  color: var(--cbio-session-active-text, #fff);
+  color: #fff;
   font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
-  background-color: var(--cbio-session-active-bg, #3cc56e);
+  background-color: #3cc56e;
   padding: 1px 6px;
-  border-radius: var(--cbio-radius-sm, 4px);
+  border-radius: 4px;
   display: inline-block;
 }
 
@@ -54,7 +50,7 @@
   width: 8px;
   height: 8px;
   margin-inline-end: 4px;
-  background: var(--cbio-session-recorded-dot, red);
+  background: red;
   border-radius: 100%;
   display: inline-block;
 }
@@ -62,5 +58,5 @@
 .duration {
   font-weight: bold;
   font-size: 12px;
-  color: var(--cbio-color-text, inherit);
+  color: inherit;
 }

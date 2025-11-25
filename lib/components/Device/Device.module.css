@@ -1,36 +1,32 @@
-
 .root {
-  padding: var(--cbio-device-padding, 7px);
-  border-inline-start: var(--cbio-device-border-width, 5px) solid var(--cbio-device-border-color, transparent);
+  padding: 6px;
   display: flex;
   align-items: center;
   position: relative;
-  background: var(--cbio-device-bg, transparent);
-  gap: var(--cbio-device-gap, 7px);
+  gap: 12px;
 }
 
 .online .deviceStatus {
-  outline: 2px solid var(--cbio-device-online-outline, #c7ea30);
+  outline: 2px solid #c7ea30;
 }
 
 .lastSeen {
-  font-size: var(--cbio-device-meta-size, 0.85rem);
-  color: var(--cbio-color-subtext, #777);
-  margin-top: 3px;
+  font-size: 0.85rem;
+  color: #777;
   white-space: nowrap;
 }
 
 .deviceStatus {
-  height: var(--cbio-device-status-size, 36px);
-  width: var(--cbio-device-status-size, 36px);
-  padding: var(--cbio-device-status-padding, 4px);
-  outline: 2px solid var(--cbio-device-outline, rgba(4, 13, 60, 0.25));
+  height: 36px;
+  width: 36px;
+  padding: 4px;
+  outline: 2px solid rgba(4, 13, 60, 0.25);
   border-radius: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--cbio-device-status-bg, transparent);
+  background: transparent;
 }
 
 .platformIcon {
@@ -40,11 +36,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--cbio-device-icon-color, inherit);
+  color: inherit;
 }
 
 .details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   flex: 1;
-  margin-inline-start: var(--cbio-device-gap, 7px);
-  color: var(--cbio-color-text, inherit);
+  color: inherit;
 }

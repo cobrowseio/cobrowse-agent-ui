@@ -1,17 +1,16 @@
-
 .root {
-  color: var(--cbio-usericon-text, #fff);
+  color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-size: cover;
   background-position: center;
-  padding: var(--cbio-usericon-padding, 6px);
+  padding: 6px;
   border-radius: 50%;
-  width: var(--cbio-usericon-size, 1.5em);
-  height: var(--cbio-usericon-size, 1.5em);
-  border: 2px solid var(--cbio-usericon-border, #ddd);
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #ddd;
   flex: 0 0 auto;
   white-space: nowrap;
 }
