@@ -163,9 +163,6 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
 
   return (
     <div
-      data-component='CodeEntry'
-      data-validating={validating ? 'true' : 'false'}
-      data-invalid={invalid ? 'true' : 'false'}
       className={clsx(styles.root, className)}
     >
       <div className={clsx(styles.digits, invalid && styles.invalid)}>

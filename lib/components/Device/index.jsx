@@ -17,9 +17,6 @@ const LastSeen = ({ device }) => (
 
 const Device = ({ style, className, device, children }) => (
   <div
-    data-component='Device'
-    data-online={device.online ? 'true' : 'false'}
-    data-connectable={device.connectable ? 'true' : 'false'}
     style={style}
     className={clsx(
       styles.root,

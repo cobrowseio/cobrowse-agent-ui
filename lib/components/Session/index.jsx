@@ -13,9 +13,6 @@ const Session = ({ onClick, className, session, openRecording: openRecordingCall
 
   return (
     <div
-      data-component='Session'
-      data-state={session.state}
-      data-recorded={session.recorded ? 'true' : 'false'}
       onClick={onClick}
       className={clsx(styles.root, className)}
     >

@@ -12,9 +12,6 @@ const SmartConnectButton = ({ device, onClick: onClickCallback, label, className
       role='button'
       tabIndex={device.connectable ? 0 : -1}
       aria-disabled={!device.connectable}
-      data-component='SmartConnectButton'
-      data-online={device.online ? 'true' : 'false'}
-      data-connectable={device.connectable ? 'true' : 'false'}
       style={style}
       className={clsx(
         styles.root,
