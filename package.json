@@ -4,16 +4,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && npm run build:types",
     "preview": "vite preview",
     "prepare": "npm run build",
     "i18n": "i18next 'lib/**/*{.js,.jsx}'",
-    "lint": "standard"
+    "lint": "standard",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build:types": "tsc -p tsconfig.json"
   },
   "main": "./dist/cobrowse-agent-ui.umd.js",
   "module": "./dist/cobrowse-agent-ui.es.js",
+  "types": "./dist/types/lib/main.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/lib/main.d.ts",
       "import": "./dist/cobrowse-agent-ui.es.js",
       "require": "./dist/cobrowse-agent-ui.umd.js"
     },
@@ -38,6 +42,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
@@ -45,6 +51,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "standard": "^17.0.0",
+    "typescript": "^5.9.3",
     "vite": "^7.2.4",
     "vite-plugin-svgr": "^4.5.0"
   }
