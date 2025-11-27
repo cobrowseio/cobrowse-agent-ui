@@ -30,10 +30,10 @@ To add a new locale follow these steps:
 
 - Add a new entry to the `locales` array inside `i18next-parser.config.js`.
 - Run the `npm run i18n` command to generate a new locale file.
-- Import the new locale JSON file inside `src/i18n.js` and add it to the `resources` object (in the i18n instance
+- Import the new locale JSON file inside `lib/i18n.js` and add it to the `resources` object (in the i18n instance
   configuration) keyed by the locale key.
-- Import the relevant `moment` locale inside `src/i18n.js`.
-- Add a new entry to the `SUPPORTED_LOCALES` constant inside `src/i18n.js`.
+- Import the relevant `date-fns` locale inside `lib/i18n.js`.
+- Add a new entry to the `SUPPORTED_LOCALES` constant inside `lib/i18n.js`.
 
 **Note:** ensure the locale code matches the ones provided by the
 [date-fns library](https://github.com/date-fns/date-fns/tree/main/src/locale) as these are used to localize dates as well.
