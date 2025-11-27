@@ -15,7 +15,6 @@ const UserIcon = ({ user, className }) => {
   if (!user) return null
   return (
     <div
-      data-component='UserIcon'
       className={clsx(styles.root, className)}
       title={user.name || null}
       style={{

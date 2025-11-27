@@ -24,8 +24,6 @@ const PlatformIcon = ({ platform, className, ...props }) => {
   return (
     <Icon
       fill='currentColor'
-      data-component='PlatformIcon'
-      data-platform={platform}
       {...props}
       className={clsx(styles.root, className)}
     />
