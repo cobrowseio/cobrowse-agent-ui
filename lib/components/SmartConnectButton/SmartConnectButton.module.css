@@ -1,0 +1,29 @@
+.root {
+  display: inline-block;
+  background: #f6f4f8;
+  color: inherit;
+  padding: 12px 16px;
+  cursor: not-allowed;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease, opacity 0.12s ease;
+  outline: none;
+}
+
+.connectable {
+  background: #040d3c;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.root:focus-visible {
+  outline: 2px solid #040d3c;
+  outline-offset: 2px;
+}
+
+.root:active.connectable {
+  transform: translateY(1px);
+}
