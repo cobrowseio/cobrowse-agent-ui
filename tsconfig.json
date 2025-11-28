@@ -37,7 +37,7 @@
     /* Skip Library Check for faster builds */
     "skipLibCheck": true
   },
-  "include": ["lib/**/*", "src/**/*"],
+  "include": ["lib/**/*", "src/**/*", "types/**/*"],
   "exclude": [
     "node_modules",
     "dist",
