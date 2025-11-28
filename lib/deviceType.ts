@@ -1,8 +1,21 @@
 import parser from 'ua-parser-js'
 import i18n from './i18n'
 
-export default function deviceType ({ platform, device }) {
-  const translateDevice = (device) => i18n.t('{{device}} Device', { device })
+export type Platform =
+  | 'web'
+  | 'ios'
+  | 'android'
+  | 'windows'
+  | 'macos'
+  | (string & {})
+
+export interface DeviceTypeParams {
+  platform: Platform
+  device: string
+}
+
+export default function deviceType ({ platform, device }: DeviceTypeParams): string {
+  const translateDevice = (label: string) => i18n.t('{{device}} Device', { device: label })
 
   switch (platform) {
     case 'web': {

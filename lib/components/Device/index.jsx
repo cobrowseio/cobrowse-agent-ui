@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import i18n from '../../i18n'
 import PlatformIcon from '../PlatformIcon'
-import deviceType from '../../deviceType.js'
+import deviceType from '../../deviceType'
 import styles from './Device.module.css'
 
 const LastSeen = ({ device }) => (

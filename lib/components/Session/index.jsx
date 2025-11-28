@@ -1,6 +1,6 @@
 import React from 'react'
 import clsx from 'clsx'
-import deviceType from '../../deviceType.js'
+import deviceType from '../../deviceType'
 import Stopwatch from '../Stopwatch'
 import i18n from '../../i18n'
 import { Trans } from 'react-i18next'
