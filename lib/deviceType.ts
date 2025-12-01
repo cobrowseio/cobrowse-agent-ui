@@ -1,3 +1,4 @@
+import type { DeviceInfo } from 'cobrowse-agent-sdk'
 import parser from 'ua-parser-js'
 import i18n from './i18n'
 
@@ -9,12 +10,7 @@ export type Platform =
   | 'macos'
   | (string & {})
 
-export interface DeviceTypeParams {
-  platform: Platform
-  device: string
-}
-
-export default function deviceType ({ platform, device }: DeviceTypeParams): string {
+export default function deviceType ({ platform, device }: DeviceInfo): string {
   const translateDevice = (label: string) => i18n.t('{{device}} Device', { device: label })
 
   switch (platform) {

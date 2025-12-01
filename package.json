@@ -46,6 +46,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/ua-parser-js": "^0.7.39",
     "@vitejs/plugin-react": "^5.1.1",
+    "cobrowse-agent-sdk": "^2.11.0",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
     "i18next-parser": "^9.3.0",
