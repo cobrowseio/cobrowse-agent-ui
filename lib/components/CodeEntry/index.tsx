@@ -1,24 +1,50 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+  type ForwardedRef,
+  type ReactNode,
+  type ClipboardEvent,
+  type ChangeEvent,
+  type KeyboardEvent
+} from 'react'
 import clsx from 'clsx'
 import styles from './CodeEntry.module.css'
+
+export interface CodeEntryHandle {
+  clear: () => void
+  focus: (index: number) => void
+}
+
+export interface CodeEntryProps {
+  ref?: ForwardedRef<CodeEntryHandle>
+  className?: string
+  inputClassName?: string
+  focusOnRender?: boolean
+  onCode?: (code: string) => Promise<boolean> | boolean
+  children?: ReactNode
+}
 
 const CODE_LENGTH = 6
 const EMTPY_STATE = Array(CODE_LENGTH).fill('')
 
-const getElementIndex = (refsArr, elem) => refsArr.findIndex((el) => el === elem)
+const getElementIndex = (refsArr: Array<HTMLInputElement | null>, elem: HTMLInputElement) =>
+  refsArr.findIndex((el) => el === elem)
 
-const focusPreviousInput = (refsArr, elem) => {
+const focusPreviousInput = (refsArr: Array<HTMLInputElement | null>, elem: HTMLInputElement) => {
   refsArr[Math.max(getElementIndex(refsArr, elem) - 1, 0)]?.focus()
 }
 
-const focusNextInput = (refsArr, elem) => {
+const focusNextInput = (refsArr: Array<HTMLInputElement | null>, elem: HTMLInputElement) => {
   refsArr[Math.min(getElementIndex(refsArr, elem) + 1, CODE_LENGTH - 1)]?.focus()
 }
 
-const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCode, children }) => {
+const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCode, children }: CodeEntryProps) => {
   const [validating, setValidating] = useState(false)
   const [code, setCode] = useState(EMTPY_STATE)
-  const refs = useRef([])
+  const refs = useRef<Array<HTMLInputElement | null>>([])
 
   useImperativeHandle(ref, () => ({
     clear () {
@@ -31,7 +57,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
 
   const getCode = useCallback(() => code.join('').substring(0, CODE_LENGTH), [code])
 
-  const tryComplete = useCallback(async (codeValue) => {
+  const tryComplete = useCallback(async (codeValue: string) => {
     setValidating(true)
 
     try {
@@ -68,7 +94,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     tryComplete(code)
   }, [getCode, tryComplete])
 
-  const setDigit = useCallback((digit, value) => {
+  const setDigit = useCallback((digit: number, value: string) => {
     if (digit > (CODE_LENGTH - 1)) {
       return
     }
@@ -82,12 +108,12 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     })
   }, [])
 
-  const handlePaste = useCallback((event) => {
+  const handlePaste = useCallback((event: ClipboardEvent<HTMLInputElement>) => {
     if (validating) {
       return false
     }
 
-    const clipboardData = event.clipboardData || window.clipboardData
+    const clipboardData = event.clipboardData
     const pastedData = clipboardData.getData('Text').toString()
 
     // Exit early if the pasted data contains anything other than just digits
@@ -100,7 +126,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     // otherwise just paste from the currently selected input onwards
     let digit = pastedData.length === CODE_LENGTH
       ? 0
-      : parseInt(event.target.getAttribute('data-digit'), 10)
+      : parseInt(event.currentTarget.getAttribute('data-digit') ?? '0', 10)
 
     digits.forEach((value) => {
       setDigit(digit, value)
@@ -113,51 +139,45 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     return event.preventDefault()
   }, [setDigit, validating])
 
-  const handleOnChange = useCallback((event) => {
+  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.slice(-1)
-    // validate text on any change
-    const digit = parseInt(event.target.getAttribute('data-digit'), 10)
+    // Validate text on any change
+    const digit = parseInt(event.target.getAttribute('data-digit') ?? '0', 10)
 
     // Only allow digits and deleting the current value
     if (/[0-9]/.test(value) || value === '') {
       setDigit(digit, value)
     }
 
-    if (!event.repeat && /[0-9]/.test(value)) {
+    const isRepeat = (event.nativeEvent as unknown as KeyboardEvent).repeat
+
+    if (!isRepeat && /[0-9]/.test(value)) {
       event.target.value = ''
 
       focusNextInput(refs.current, event.target)
     }
   }, [setDigit])
 
-  const handleKeyDown = useCallback((event) => {
-    // on backspace on empty node go back to previous
-    if (event.target.value.length === 0 && event.keyCode === 8) {
-      focusPreviousInput(refs.current, event.target)
-      // left arrow moves to previous
-    } else if (event.keyCode === 37) {
-      focusPreviousInput(refs.current, event.target)
-      return event.preventDefault()
-      // right arrow moves to next
-    } else if (event.keyCode === 39) {
-      focusNextInput(refs.current, event.target)
-      return event.preventDefault()
-      // prevent non-numeric characters that might appear in numbers (e.g 'e')
+  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
+    const { key, currentTarget, metaKey, ctrlKey } = event
+
+    // On backspace on empty node go back to previous
+    if (currentTarget.value.length === 0 && key === 'Backspace') {
+      focusPreviousInput(refs.current, currentTarget)
+    } else if (key === 'ArrowLeft') {
+      // Left arrow moves to previous
+      focusPreviousInput(refs.current, currentTarget)
+      event.preventDefault()
+    } else if (key === 'ArrowRight') {
+      // Right arrow moves to next
+      focusNextInput(refs.current, currentTarget)
+      event.preventDefault()
+    } else if (!metaKey && !ctrlKey && key.length === 1 && !/^[0-9]$/.test(key)) {
+      // Prevent non-numeric characters that might appear in numbers (e.g 'e')
       // but allow backspaces too
-    } else if ((!event.metaKey) && (!event.ctrlKey) &&
-            (event.keyCode !== 8) && (event.keyCode !== 9) && (!/^[0-9]{1}$/.test(event.key))) {
-      return event.preventDefault()
+      event.preventDefault()
     }
-
-    return null
   }, [])
-
-  const keyHandlers = {
-    onKeyDown: handleKeyDown,
-    onChange: handleOnChange,
-    onPaste: handlePaste,
-    disabled: validating
-  }
 
   const invalid = !validating && getCode().length === CODE_LENGTH
 
@@ -171,7 +191,10 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
             key={index}
             className={clsx(styles.input, inputClassName)}
             type='number'
-            {...keyHandlers}
+            disabled={validating}
+            onKeyDown={handleKeyDown}
+            onChange={handleOnChange}
+            onPaste={handlePaste}
             value={value}
             data-digit={index}
             ref={(el) => { refs.current[index] = el }}
