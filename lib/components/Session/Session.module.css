@@ -1,16 +1,22 @@
 .root {
+  appearance: none;
+  border: none;
+  background: none;
   padding: 6px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .details {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .subdetails {

@@ -1,4 +1,5 @@
-import React from 'react'
+import type { MouseEventHandler, ReactNode } from 'react'
+import type { Session } from 'cobrowse-agent-sdk'
 import clsx from 'clsx'
 import deviceType from '../../deviceType'
 import Stopwatch from '../Stopwatch'
@@ -6,51 +7,55 @@ import i18n from '../../i18n'
 import { Trans } from 'react-i18next'
 import styles from './Session.module.css'
 
-const Session = ({ onClick, className, session, openRecording: openRecordingCallback, children }) => {
-  const openRecording = () => {
-    if (openRecordingCallback) openRecordingCallback(session)
-  }
+export interface SessionProps {
+  session: Session
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  className?: string
+  children?: ReactNode
+}
 
+const Session = ({ session, onClick, className, children }: SessionProps) => {
   return (
-    <div
+    <button
+      type='button'
       onClick={onClick}
       className={clsx(styles.root, className)}
     >
-      <div className={styles.details}>
-        <div>
+      <span className={styles.details}>
+        <span>
           <Trans i18n={i18n}>
             <span className='device-prefix'>Connected to </span>
             {{ deviceType: deviceType(session.device) }}
           </Trans>
-        </div>
-        <div className={styles.subdetails}>
-          <div className={styles.activated}>
+        </span>
+        <span className={styles.subdetails}>
+          <span className={styles.activated}>
             {i18n.t('{{date, dateRelative}}', {
               date: new Date(session.activated)
             })}
-          </div>
+          </span>
           {session.state === 'ended' && session.recorded
             ? (
-              <div className={styles.recorded} onClick={openRecording}>
+              <span className={styles.recorded}>
                 {i18n.t('Recorded')}
-              </div>
+              </span>
               )
             : null}
-        </div>
-      </div>
+        </span>
+      </span>
       {session.state === 'ended'
         ? (
           <Stopwatch
             className={styles.duration}
             start={new Date(session.activated)}
-            end={new Date(session.ended || Date.now())}
+            end={session.ended ? new Date(session.ended) : undefined}
           />
           )
         : (
-          <div className={styles.active}>{i18n.t('Active')}</div>
+          <span className={styles.active}>{i18n.t('Active')}</span>
           )}
       {children}
-    </div>
+    </button>
   )
 }
 
