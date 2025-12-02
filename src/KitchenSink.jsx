@@ -243,6 +243,7 @@ export default function KitchenSink () {
           {sessionSamples.map((session) => (
             <Session
               key={session.id}
+              as={session.recorded ? 'button' : 'div'}
               session={session}
               className='panel'
               onClick={session.recorded ? handleRecording : undefined}
