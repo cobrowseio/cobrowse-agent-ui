@@ -1,4 +1,4 @@
-import type { MouseEventHandler, ReactNode } from 'react'
+import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react'
 import type { Session } from 'cobrowse-agent-sdk'
 import clsx from 'clsx'
 import deviceType from '../../deviceType'
@@ -7,19 +7,30 @@ import i18n from '../../i18n'
 import { Trans } from 'react-i18next'
 import styles from './Session.module.css'
 
-export interface SessionProps {
+const DEFAULT_TAG = 'div' as const
+
+type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
+
+interface BaseSessionProps {
   session: Session
-  onClick?: MouseEventHandler<HTMLButtonElement>
   className?: string
   children?: ReactNode
 }
 
-const Session = ({ session, onClick, className, children }: SessionProps) => {
+export type SessionProps<T extends ElementType = typeof DEFAULT_TAG> =
+  BaseSessionProps &
+  PropsOf<T> & {
+    as?: T
+  }
+
+const Session = <T extends ElementType = typeof DEFAULT_TAG>({ as, session, onClick, className, children, ...props }: SessionProps<T>) => {
+  const Tag = as ?? DEFAULT_TAG
+
   return (
-    <button
-      type='button'
+    <Tag
       onClick={onClick}
       className={clsx(styles.root, className)}
+      {...props}
     >
       <span className={styles.details}>
         <span>
@@ -55,7 +66,7 @@ const Session = ({ session, onClick, className, children }: SessionProps) => {
           <span className={styles.active}>{i18n.t('Active')}</span>
           )}
       {children}
-    </button>
+    </Tag>
   )
 }
 
