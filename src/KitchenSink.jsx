@@ -5,6 +5,7 @@ import {
   PlatformIcon,
   Session,
   SmartConnectButton,
+  UserIcon,
   i18n
 } from '../lib/main.js'
 
@@ -75,6 +76,13 @@ const sessionSamples = [
 ]
 
 const platformList = ['web', 'ios', 'macos', 'android', 'windows', 'unknown']
+const users = [
+  { id: 'u1', name: 'Alex Johnson', colour: '#d3e4ff' },
+  { id: 'u2', name: 'Priya Patel', colour: '#ffe5b4' },
+  { id: 'u3', name: '李秀英', colour: '#f0d9ff' },
+  { id: 'u4', name: 'Chris', picture: 'https://avatars.githubusercontent.com/u/1?v=4' },
+  { id: 'u5', name: 'A B C D', colour: '#e0f7e9' }
+]
 
 const Section = ({ title, subtitle, children }) => (
   <section className='demo-section'>
@@ -251,6 +259,25 @@ export default function KitchenSink () {
           ))}
         </div>
         {recordingInfo ? <div className='log'>{recordingInfo}</div> : null}
+      </Section>
+
+      <Section
+        title='UserIcon'
+        subtitle='Initials fallback, custom colours, and pictures.'
+      >
+        <div className='user-grid'>
+          {users.map((user) => (
+            <div key={user.id} className='user-card'>
+              <UserIcon user={user} />
+              <div className='user-label'>
+                <div className='user-name'>{user.name || 'Unnamed'}</div>
+                <div className='user-meta'>
+                  {user.picture ? 'Picture' : 'Initials'}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </Section>
     </>
   )

@@ -239,3 +239,29 @@ main {
     align-items: flex-start;
   }
 }
+.user-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.user-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e5e8f0;
+  border-radius: 8px;
+  background: #fff;
+  min-width: 180px;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-meta {
+  color: #6b7280;
+  font-size: 12px;
+}
