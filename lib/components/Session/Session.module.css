@@ -11,10 +11,16 @@
   font-size: 1rem;
   font-family: inherit;
   line-height: inherit;
+  outline: none;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.root:focus-visible {
+  outline: 2px solid #040d3c;
+  outline-offset: 2px;
 }
 
 .details {
