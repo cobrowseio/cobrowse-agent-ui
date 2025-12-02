@@ -245,7 +245,7 @@ export default function KitchenSink () {
               key={session.id}
               session={session}
               className='panel'
-              openRecording={session.recorded ? handleRecording : undefined}
+              onClick={session.recorded ? handleRecording : undefined}
             />
           ))}
         </div>

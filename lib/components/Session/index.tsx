@@ -25,11 +25,10 @@ export type SessionProps<T extends ElementType = typeof DEFAULT_TAG> =
 
 const Session = <T extends ElementType = typeof DEFAULT_TAG>({ as, session, onClick, className, children, ...props }: SessionProps<T>) => {
   const Tag = as ?? DEFAULT_TAG
-
   return (
     <Tag
       onClick={onClick}
-      className={clsx(styles.root, className)}
+      className={clsx(styles.root, onClick && styles.clickable, className)}
       {...props}
     >
       <span className={styles.details}>
