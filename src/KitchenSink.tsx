@@ -1,13 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   CodeEntry,
   Device,
+  type DeviceData,
   PlatformIcon,
   Session,
+  type SessionData,
   SmartConnectButton,
   UserIcon,
   i18n
-} from '../lib/main.js'
+} from '../lib/main'
+import type { ReactNode } from 'react'
 
 const deviceSamples = [
   {
@@ -84,13 +87,35 @@ const users = [
   { id: 'u5', name: 'A B C D', colour: '#e0f7e9' }
 ]
 
-const Section = ({ title, subtitle, children }) => (
+const Section = ({ title, subtitle, children }: { title: string, subtitle?: string, children: ReactNode }) => (
   <section className='demo-section'>
     <h2>{title}</h2>
     {subtitle ? <p>{subtitle}</p> : null}
     <div className='demo-grid'>{children}</div>
   </section>
 )
+
+const asDevice = (sample: typeof deviceSamples[number]): DeviceData => ({
+  online: sample.online,
+  connectable: sample.connectable,
+  last_active: new Date(sample.last_active),
+  device: {
+    platform: sample.device.platform,
+    device: sample.device.device
+  }
+})
+
+const asSession = (sample: typeof sessionSamples[number]): SessionData => ({
+  id: sample.id,
+  state: sample.state as SessionData['state'],
+  recorded: sample.recorded,
+  activated: new Date(sample.activated),
+  ended: sample.ended ? new Date(sample.ended) : undefined,
+  device: {
+    platform: sample.device.platform,
+    device: sample.device.device
+  }
+})
 
 export default function KitchenSink () {
   const [codeStatus, setCodeStatus] = useState('Enter 654321 to simulate a successful validation.')
@@ -105,7 +130,7 @@ export default function KitchenSink () {
   }, [])
 
   useEffect(() => {
-    const handleLanguageChanged = (lng) => setLanguage(lng)
+    const handleLanguageChanged = (lng: string) => setLanguage(lng)
     i18n.on('languageChanged', handleLanguageChanged)
     return () => i18n.off('languageChanged', handleLanguageChanged)
   }, [])
@@ -116,7 +141,7 @@ export default function KitchenSink () {
     return () => document.documentElement.setAttribute('dir', previousDir)
   }, [direction])
 
-  const handleCode = useCallback(async (code) => {
+  const handleCode = useCallback(async (code: string) => {
     setCodeStatus(`Checking ${code}...`)
     await new Promise((resolve) => setTimeout(resolve, 700))
     const success = code === '654321'
@@ -124,17 +149,17 @@ export default function KitchenSink () {
     return success
   }, [])
 
-  const handleConnect = useCallback((device) => {
+  const handleConnect = useCallback((device: DeviceData) => {
     const timestamp = new Date().toLocaleTimeString()
-    setLastConnection(`${timestamp} • Triggered connect(${device.name || device.device.platform})`)
+    setLastConnection(`${timestamp} • Triggered connect(${device.device.platform})`)
   }, [])
 
-  const handleRecording = useCallback((session) => {
+  const handleRecording = useCallback((session: SessionData) => {
     const timestamp = new Date().toLocaleTimeString()
     setRecordingInfo(`${timestamp} • Open recording for session ${session.id}`)
   }, [])
 
-  const handleLanguageChange = useCallback((event) => {
+  const handleLanguageChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const next = event.target.value
     i18n.changeLanguage(next)
     setLanguage(next)
@@ -205,24 +230,27 @@ export default function KitchenSink () {
         subtitle='Devices highlight their online status and accept arbitrary children, such as SmartConnectButton.'
       >
         <div className='device-list'>
-          {deviceSamples.map((device) => (
-            <div key={device.id} className='device-card'>
+          {deviceSamples.map((sample) => {
+            const device = asDevice(sample)
+            return (
+            <div key={sample.id} className='device-card'>
               <header>
                 <div>
-                  <h3 className='device-name'>{device.name}</h3>
-                  <div className='device-location'>{device.location}</div>
+                  <h3 className='device-name'>{sample.name}</h3>
+                  <div className='device-location'>{sample.location}</div>
                 </div>
-                <span className='status-pill'>{device.online ? 'Online' : 'Offline'}</span>
+                <span className='status-pill'>{sample.online ? 'Online' : 'Offline'}</span>
               </header>
               <Device device={device}>
                 <SmartConnectButton
                   device={device}
-                  label={device.connectable ? 'Connect' : 'Unavailable'}
                   onClick={handleConnect}
-                />
+                >
+                  {device.connectable ? 'Connect' : 'Unavailable'}
+                </SmartConnectButton>
               </Device>
             </div>
-          ))}
+          )})}
         </div>
         {lastConnection ? <div className='log'>{lastConnection}</div> : null}
       </Section>
@@ -232,14 +260,18 @@ export default function KitchenSink () {
         subtitle='Demonstrates disabled vs. connectable styling outside of Device.'
       >
         <div className='button-row'>
-          {deviceSamples.map((device) => (
-            <SmartConnectButton
-              key={`standalone-${device.id}`}
-              device={device}
-              label={device.connectable ? `Connect ${device.device.platform}` : 'Not connectable'}
-              onClick={handleConnect}
-            />
-          ))}
+          {deviceSamples.map((sample) => {
+            const device = asDevice(sample)
+            return (
+              <SmartConnectButton
+                key={`standalone-${sample.id}`}
+                device={device}
+                onClick={handleConnect}
+              >
+                {device.connectable ? `Connect ${device.device.platform}` : 'Not connectable'}
+              </SmartConnectButton>
+            )
+          })}
         </div>
       </Section>
 
@@ -248,15 +280,18 @@ export default function KitchenSink () {
         subtitle='Shows active vs. recorded/ended sessions with Stopwatch durations.'
       >
         <div className='sessions'>
-          {sessionSamples.map((session) => (
-            <Session
-              key={session.id}
-              as={session.recorded ? 'button' : 'div'}
-              session={session}
-              className='panel'
-              onClick={session.recorded ? handleRecording : undefined}
-            />
-          ))}
+          {sessionSamples.map((sample) => {
+            const session = asSession(sample)
+            return (
+              <Session
+                key={sample.id}
+                as={sample.recorded ? 'button' : 'div'}
+                session={session}
+                className='panel'
+                onClick={sample.recorded ? () => handleRecording(session) : undefined}
+              />
+            )
+          })}
         </div>
         {recordingInfo ? <div className='log'>{recordingInfo}</div> : null}
       </Section>
