@@ -8,6 +8,10 @@
     /* Modules */
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["lib/*"]
+    },
     "resolveJsonModule": true,
 
     /* Emit */

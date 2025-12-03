@@ -11,6 +11,11 @@ export default defineConfig({
     react(),
     svgr()
   ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'lib')
+    }
+  },
   css: {
     modules: {
       // Include the source file name in the scoped class to avoid collisions across modules.

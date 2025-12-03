@@ -1,6 +1,6 @@
 import type { DeviceInfo as FullDeviceInfo } from 'cobrowse-agent-sdk'
 import parser from 'ua-parser-js'
-import i18n from './i18n'
+import i18n from '@/i18n'
 
 export type Platform =
   | 'web'

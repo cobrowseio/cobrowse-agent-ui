@@ -1,10 +1,9 @@
 import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react'
 import type { Session } from 'cobrowse-agent-sdk'
-import type { DeviceInfo } from '../../deviceType'
+import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
-import deviceType from '../../deviceType'
-import Stopwatch from '../Stopwatch'
-import i18n from '../../i18n'
+import Stopwatch from '@/components/Stopwatch'
+import i18n from '@/i18n'
 import { Trans } from 'react-i18next'
 import styles from './Session.module.css'
 

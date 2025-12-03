@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
-import i18n from '../../i18n'
+import i18n from '@/i18n'
 import clsx from 'clsx'
 import styles from './SmartConnectButton.module.css'
-import type { DeviceData } from '../Device'
+import type { DeviceData } from '@/components/Device'
 
 export type SmartConnectButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> & {
   device: DeviceData
