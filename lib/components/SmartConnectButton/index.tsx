@@ -1,12 +1,12 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
-import type { Device } from 'cobrowse-agent-sdk'
 import i18n from '../../i18n'
 import clsx from 'clsx'
 import styles from './SmartConnectButton.module.css'
+import type { DeviceData } from '../Device'
 
 export type SmartConnectButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> & {
-  device: Device
-  onClick?: (device: Device) => void
+  device: DeviceData
+  onClick?: (device: DeviceData) => void
   children?: ReactNode
 }
 

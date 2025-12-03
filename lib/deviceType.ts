@@ -1,4 +1,4 @@
-import type { DeviceInfo } from 'cobrowse-agent-sdk'
+import type { DeviceInfo as FullDeviceInfo } from 'cobrowse-agent-sdk'
 import parser from 'ua-parser-js'
 import i18n from './i18n'
 
@@ -9,6 +9,8 @@ export type Platform =
   | 'windows'
   | 'macos'
   | (string & {})
+
+export type DeviceInfo = Pick<FullDeviceInfo, 'platform' | 'device'> & { platform: Platform }
 
 export default function deviceType ({ platform, device }: DeviceInfo): string {
   const translateDevice = (label: string) => i18n.t('{{device}} Device', { device: label })
