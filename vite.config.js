@@ -11,6 +11,12 @@ export default defineConfig({
     react(),
     svgr()
   ],
+  css: {
+    modules: {
+      // Include the source file name in the scoped class to avoid collisions across modules.
+      generateScopedName: '[name]__[local]__[hash:base64:5]'
+    }
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
