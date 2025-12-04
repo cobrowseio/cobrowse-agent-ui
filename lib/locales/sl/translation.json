@@ -1,10 +1,11 @@
 {
   "Online": "Na spletu",
   "Last seen {{date, dateRelative}}": "Nazadnje viden {{date, dateRelative}}",
-  "{{device}} Device": "Naprava {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} na {{os}}",
   "<0>Connected to </0>{{deviceType}}": "<0>Povezan z </0>{{deviceType}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "Recorded": "Posneto",
-  "Active": "Aktivno"
-} 
+  "Active": "Aktivno",
+  "Connect": "Poveži se",
+  "{{device}} Device": "Naprava {{device}}",
+  "{{browser}} on {{os}}": "{{browser}} na {{os}}"
+}

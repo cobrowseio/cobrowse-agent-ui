@@ -1,10 +1,11 @@
 {
   "Online": "ऑनलाइन",
   "Last seen {{date, dateRelative}}": "शेवटचे पाहिले {{date, dateRelative}}",
-  "{{device}} Device": "{{device}} डिव्हाइस",
-  "{{browser}} on {{os}}": "{{os}} वर {{browser}}",
   "<0>Connected to </0>{{deviceType}}": "<0>जोडलेले आहे </0>{{deviceType}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "Recorded": "रेकॉर्ड केलेले",
-  "Active": "सक्रिय"
-} 
+  "Active": "सक्रिय",
+  "Connect": "जोडा",
+  "{{device}} Device": "{{device}} डिव्हाइस",
+  "{{browser}} on {{os}}": "{{os}} वर {{browser}}"
+}

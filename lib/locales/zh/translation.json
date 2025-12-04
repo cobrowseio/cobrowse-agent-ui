@@ -1,10 +1,11 @@
 {
   "Online": "在线",
   "Last seen {{date, dateRelative}}": "最后在线时间 {{date, dateRelative}}",
-  "{{device}} Device": "{{device}}设备",
-  "{{browser}} on {{os}}": "{{os}}上的{{browser}}",
   "<0>Connected to </0>{{deviceType}}": "<0>已连接到</0>{{deviceType}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "Recorded": "已记录",
-  "Active": "共享中"
-} 
+  "Active": "共享中",
+  "Connect": "连接",
+  "{{device}} Device": "{{device}}设备",
+  "{{browser}} on {{os}}": "{{os}}上的{{browser}}"
+}
