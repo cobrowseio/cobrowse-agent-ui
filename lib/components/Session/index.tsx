@@ -1,4 +1,4 @@
-import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { ElementType, ComponentPropsWithoutRef, ReactNode, MouseEventHandler } from 'react'
 import type { Session as FullSession } from 'cobrowse-agent-sdk'
 import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
@@ -23,16 +23,18 @@ interface BaseSessionProps {
 
 export type SessionProps<T extends ElementType = typeof DEFAULT_TAG> =
   BaseSessionProps &
-  PropsOf<T> & {
+  Omit<PropsOf<T>, 'onClick'> & {
     as?: T
+    onClick?: MouseEventHandler
   }
 
 const Session = <T extends ElementType = typeof DEFAULT_TAG>({ as, session, onClick, className, children, ...props }: SessionProps<T>) => {
   const Tag = as ?? DEFAULT_TAG
+  const isClickable = typeof onClick === 'function'
   return (
     <Tag
-      onClick={onClick}
-      className={clsx(styles.root, onClick && styles.clickable, className)}
+      onClick={isClickable ? onClick : undefined}
+      className={clsx(styles.root, isClickable && styles.clickable, className)}
       {...props}
     >
       <span className={styles.details}>

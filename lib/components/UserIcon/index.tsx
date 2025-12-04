@@ -14,7 +14,7 @@ export interface UserIconProps {
 
 const UserIcon = ({ user, className }: UserIconProps) => {
   const initials = (): string => {
-    if (!user?.name || user?.picture) return ''
+    if (!user?.name || user.picture) return ''
 
     return user.name
       .trim()

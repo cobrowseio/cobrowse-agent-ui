@@ -20,7 +20,7 @@ const LastSeen = ({ device }: { device: DeviceData }) => (
     {device.online
       ? i18n.t('Online')
       : i18n.t('Last seen {{date, dateRelative}}', {
-        date: device.last_active ? new Date(device.last_active) : undefined
+        date: new Date(device.last_active)
       })}
   </div>
 )

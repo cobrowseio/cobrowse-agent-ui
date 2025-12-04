@@ -28,7 +28,7 @@ export interface CodeEntryProps {
 }
 
 const CODE_LENGTH = 6
-const EMTPY_STATE = Array(CODE_LENGTH).fill('')
+const EMTPY_STATE = Array<string>(CODE_LENGTH).fill('')
 
 const getElementIndex = (refsArr: Array<HTMLInputElement | null>, elem: HTMLInputElement) =>
   refsArr.findIndex((el) => el === elem)
@@ -110,15 +110,17 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
 
   const handlePaste = useCallback((event: ClipboardEvent<HTMLInputElement>) => {
     if (validating) {
-      return false
+      return
     }
 
-    const clipboardData = event.clipboardData
-    const pastedData = clipboardData.getData('Text').toString()
+    const { clipboardData } = event
+    const pastedData = clipboardData.getData('Text')
 
     // Exit early if the pasted data contains anything other than just digits
     if (!/^[0-9]+$/.test(pastedData)) {
-      return event.preventDefault()
+      event.preventDefault()
+
+      return
     }
 
     const digits = pastedData.split('')
@@ -136,7 +138,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
 
     refs.current[Math.min(digit, CODE_LENGTH - 1)]?.focus()
 
-    return event.preventDefault()
+    event.preventDefault()
   }, [setDigit, validating])
 
   const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -147,14 +149,6 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     // Only allow digits and deleting the current value
     if (/[0-9]/.test(value) || value === '') {
       setDigit(digit, value)
-    }
-
-    const isRepeat = (event.nativeEvent as unknown as KeyboardEvent).repeat
-
-    if (!isRepeat && /[0-9]/.test(value)) {
-      event.target.value = ''
-
-      focusNextInput(refs.current, event.target)
     }
   }, [setDigit])
 
@@ -179,6 +173,15 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     }
   }, [])
 
+  const handleKeyUp = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
+    const { currentTarget, repeat } = event
+    const { value } = currentTarget
+
+    if (!repeat && /[0-9]/.test(value)) {
+      focusNextInput(refs.current, currentTarget)
+    }
+  }, [])
+
   const invalid = !validating && getCode().length === CODE_LENGTH
 
   return (
@@ -193,6 +196,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
             type='number'
             disabled={validating}
             onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
             onChange={handleOnChange}
             onPaste={handlePaste}
             value={value}

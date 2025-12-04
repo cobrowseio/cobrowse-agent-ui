@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { differenceInMilliseconds, intervalToDuration, format } from 'date-fns'
-import { type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 
 export interface StopwatchProps {
   start?: Date | number | string | null
