@@ -1,13 +1,22 @@
 {
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true
-    },
-    "rules": {
-        "react/prop-types": 0
+  "extends": [
+    "./node_modules/ts-standard/eslintrc.json",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
+  }
 }

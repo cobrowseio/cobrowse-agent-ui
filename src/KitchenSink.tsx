@@ -125,7 +125,7 @@ export default function KitchenSink () {
   const [direction, setDirection] = useState('ltr')
 
   const languages = useMemo(() => {
-    const resources = (i18n.options && i18n.options.resources) || {}
+    const resources = i18n.options?.resources ?? {}
     return Object.keys(resources)
   }, [])
 
@@ -136,7 +136,7 @@ export default function KitchenSink () {
   }, [])
 
   useEffect(() => {
-    const previousDir = document.documentElement.getAttribute('dir') || 'ltr'
+    const previousDir = document.documentElement.getAttribute('dir') ?? 'ltr'
     document.documentElement.setAttribute('dir', direction)
     return () => document.documentElement.setAttribute('dir', previousDir)
   }, [direction])
@@ -161,7 +161,7 @@ export default function KitchenSink () {
 
   const handleLanguageChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const next = event.target.value
-    i18n.changeLanguage(next)
+    void i18n.changeLanguage(next)
     setLanguage(next)
   }, [])
 
@@ -233,24 +233,25 @@ export default function KitchenSink () {
           {deviceSamples.map((sample) => {
             const device = asDevice(sample)
             return (
-            <div key={sample.id} className='device-card'>
-              <header>
-                <div>
-                  <h3 className='device-name'>{sample.name}</h3>
-                  <div className='device-location'>{sample.location}</div>
-                </div>
-                <span className='status-pill'>{sample.online ? 'Online' : 'Offline'}</span>
-              </header>
-              <Device device={device}>
-                <SmartConnectButton
-                  device={device}
-                  onClick={handleConnect}
-                >
-                  {device.connectable ? 'Connect' : 'Unavailable'}
-                </SmartConnectButton>
-              </Device>
-            </div>
-          )})}
+              <div key={sample.id} className='device-card'>
+                <header>
+                  <div>
+                    <h3 className='device-name'>{sample.name}</h3>
+                    <div className='device-location'>{sample.location}</div>
+                  </div>
+                  <span className='status-pill'>{sample.online ? 'Online' : 'Offline'}</span>
+                </header>
+                <Device device={device}>
+                  <SmartConnectButton
+                    device={device}
+                    onClick={handleConnect}
+                  >
+                    {device.connectable ? 'Connect' : 'Unavailable'}
+                  </SmartConnectButton>
+                </Device>
+              </div>
+            )
+          })}
         </div>
         {lastConnection ? <div className='log'>{lastConnection}</div> : null}
       </Section>

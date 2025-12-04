@@ -30,7 +30,7 @@ const SmartConnectButton = ({ device, onClick: onClickCallback, className, child
       onClick={handleClick}
       {...props}
     >
-      {children || i18n.t('Connect')}
+      {children ?? i18n.t('Connect')}
     </button>
   )
 }

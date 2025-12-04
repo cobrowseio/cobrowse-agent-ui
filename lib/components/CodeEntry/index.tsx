@@ -91,7 +91,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
       return
     }
 
-    tryComplete(code)
+    void tryComplete(code)
   }, [getCode, tryComplete])
 
   const setDigit = useCallback((digit: number, value: string) => {

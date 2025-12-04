@@ -1,5 +1,5 @@
 import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react'
-import type { Session } from 'cobrowse-agent-sdk'
+import type { Session as FullSession } from 'cobrowse-agent-sdk'
 import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
@@ -12,8 +12,8 @@ const DEFAULT_TAG = 'div' as const
 type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
 
 export type SessionData =
-  Pick<Session, 'id' | 'state' | 'recorded' | 'activated'> &
-  { ended?: Session['ended'], device: DeviceInfo }
+  Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated'> &
+  { ended?: FullSession['ended'], device: DeviceInfo }
 
 interface BaseSessionProps {
   session: SessionData

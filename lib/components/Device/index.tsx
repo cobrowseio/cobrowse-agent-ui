@@ -1,12 +1,12 @@
 import type { CSSProperties, ReactNode } from 'react'
-import type { Device } from 'cobrowse-agent-sdk'
+import type { Device as FullDevice } from 'cobrowse-agent-sdk'
 import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
 import i18n from '@/i18n'
 import PlatformIcon from '@/components/PlatformIcon'
 import styles from './Device.module.css'
 
-export type DeviceData = Pick<Device, 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
+export type DeviceData = Pick<FullDevice, 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
 
 export interface DeviceProps {
   style?: CSSProperties

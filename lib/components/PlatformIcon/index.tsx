@@ -10,16 +10,12 @@ import type { Platform } from '@/deviceType'
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
-const ICONS: Partial<Record<Platform, IconComponent>> = {
+const ICONS: Record<Platform, IconComponent> = {
   web: IconGlobe,
   ios: IconApple,
   macos: IconApple,
   android: IconAndroid,
   windows: IconWindows
-}
-
-const icon = (platform: Platform): IconComponent => {
-  return ICONS[platform] || IconDefault
 }
 
 export interface PlatformIconProps extends SVGProps<SVGSVGElement> {
@@ -28,7 +24,8 @@ export interface PlatformIconProps extends SVGProps<SVGSVGElement> {
 }
 
 const PlatformIcon = ({ platform, className, ...props }: PlatformIconProps) => {
-  const Icon = icon(platform)
+  const Icon = ICONS[platform] ?? IconDefault
+
   return (
     <Icon
       fill='currentColor'
