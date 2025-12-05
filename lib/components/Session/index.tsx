@@ -11,9 +11,7 @@ const DEFAULT_TAG = 'div' as const
 
 type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
 
-export type SessionData =
-  Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated'> &
-  { ended?: FullSession['ended'], device: DeviceInfo }
+export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended'> & { device: DeviceInfo }
 
 interface BaseSessionProps {
   session: SessionData
@@ -31,6 +29,7 @@ export type SessionProps<T extends ElementType = typeof DEFAULT_TAG> =
 const Session = <T extends ElementType = typeof DEFAULT_TAG>({ as, session, onClick, className, children, ...props }: SessionProps<T>) => {
   const Tag = as ?? DEFAULT_TAG
   const isClickable = typeof onClick === 'function'
+
   return (
     <Tag
       onClick={isClickable ? onClick : undefined}

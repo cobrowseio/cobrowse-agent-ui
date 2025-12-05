@@ -60,6 +60,7 @@ const sessionSamples = [
     state: 'active',
     recorded: false,
     activated: Date.now() - 8 * 60 * 1000,
+    ended: null,
     device: {
       platform: 'ios',
       device: deviceSamples[0].device.device
@@ -110,7 +111,7 @@ const asSession = (sample: typeof sessionSamples[number]): SessionData => ({
   state: sample.state as SessionData['state'],
   recorded: sample.recorded,
   activated: new Date(sample.activated),
-  ended: sample.ended ? new Date(sample.ended) : undefined,
+  ended: sample.ended ? new Date(sample.ended) : null,
   device: {
     platform: sample.device.platform,
     device: sample.device.device
