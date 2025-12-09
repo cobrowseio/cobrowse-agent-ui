@@ -1,14 +1,27 @@
 {
   "name": "cobrowse-agent-ui",
   "version": "1.2.1",
+  "type": "module",
   "scripts": {
-    "start": "babel src --out-dir dist --watch --copy-files",
-    "build": "rm -rf dist && babel src --out-dir dist --copy-files",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
     "prepare": "npm run build",
-    "i18n": "i18next 'src/**/*{.js,.jsx}'",
+    "i18n": "i18next 'lib/**/*{.js,.jsx}'",
     "lint": "standard"
   },
-  "main": "dist/index.js",
+  "main": "./dist/cobrowse-agent-ui.umd.js",
+  "module": "./dist/cobrowse-agent-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/cobrowse-agent-ui.es.js",
+      "require": "./dist/cobrowse-agent-ui.umd.js"
+    },
+    "./style.css": "./dist/cobrowse-agent-ui.css"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "date-fns": "^4.1.0",
     "i18next": "^24.2.2",
@@ -24,16 +37,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.19.1",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/preset-env": "^7.19.1",
-    "@babel/preset-react": "^7.18.6",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-inline-react-svg": "^2.0.1",
+    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
     "i18next-parser": "^9.3.0",
-    "standard": "^17.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "standard": "^17.0.0",
+    "vite": "^7.2.4",
+    "vite-plugin-svgr": "^4.5.0"
   }
 }
