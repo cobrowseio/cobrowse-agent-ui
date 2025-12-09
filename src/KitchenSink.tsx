@@ -7,6 +7,7 @@ import {
   Session,
   type SessionData,
   SmartConnectButton,
+  Tabs,
   UserIcon,
   i18n
 } from '../lib/main'
@@ -146,6 +147,8 @@ export default function KitchenSink () {
   const [recordingInfo, setRecordingInfo] = useState('')
   const [language, setLanguage] = useState(i18n.language || 'en-us')
   const [direction, setDirection] = useState('ltr')
+  const [tabsDevices, setTabsDevices] = useState<DeviceData[] | null>(deviceSamples.map(asDevice))
+  const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(sessionSamples.map(asSession))
 
   const languages = useMemo(() => {
     const resources = i18n.options?.resources ?? {}
@@ -190,6 +193,15 @@ export default function KitchenSink () {
 
   const toggleDirection = useCallback(() => {
     setDirection((prev) => (prev === 'ltr' ? 'rtl' : 'ltr'))
+  }, [])
+
+  const handleTabsRefresh = useCallback(() => {
+    setTabsDevices(null)
+    setTabsSessions(null)
+    setTimeout(() => {
+      setTabsDevices(deviceSamples.map(asDevice))
+      setTabsSessions(sessionSamples.map(asSession))
+    }, 1000)
   }, [])
 
   return (
@@ -336,6 +348,35 @@ export default function KitchenSink () {
               </div>
             </div>
           ))}
+        </div>
+      </Section>
+
+      <Section
+        title='Tabs'
+        subtitle='Tab navigation using Headless UI with Devices and Sessions panels.'
+      >
+        <div className='panel'>
+          <Tabs
+            devices={tabsDevices}
+            sessions={tabsSessions}
+            onSessionClick={() => alert('Session clicked')}
+            onRefreshClick={handleTabsRefresh}
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={deviceSamples.map(asDevice)}
+            sessions={sessionSamples.map(asSession)}
+            onSessionClick={() => alert('Session clicked')}
+            smartConnectButtonClassName='custom-connect-button'
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={null}
+            sessions={null}
+            loader={<div className='custom-loader'>Loading data...</div>}
+          />
         </div>
       </Section>
     </>
