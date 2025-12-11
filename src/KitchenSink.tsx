@@ -353,7 +353,7 @@ export default function KitchenSink () {
 
       <Section
         title='Tabs'
-        subtitle='Tab navigation using Headless UI with Devices and Sessions panels.'
+        subtitle='Tab navigation using Headless UI with Devices and Sessions panels. Supports custom styling via className props.'
       >
         <div className='panel'>
           <Tabs
@@ -376,6 +376,32 @@ export default function KitchenSink () {
             devices={null}
             sessions={null}
             loader={<div className='custom-loader'>Loading data...</div>}
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={deviceSamples.map(asDevice)}
+            sessions={sessionSamples.map(asSession)}
+            onSessionClick={() => alert('Session clicked')}
+            onRefreshClick={handleTabsRefresh}
+            tabClassName='custom-tab'
+            tabHoverClassName='custom-tab-hover'
+            tabActiveClassName='custom-tab-active'
+            refreshButtonClassName='custom-refresh-button'
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={deviceSamples.map(asDevice)}
+            sessions={sessionSamples.map(asSession)}
+            onSessionClick={() => alert('Session clicked')}
+            onRefreshClick={handleTabsRefresh}
+            headerClassName='custom-header'
+            tabListClassName='custom-tab-list'
+            tabClassName='custom-tab-pill'
+            tabActiveClassName='custom-tab-pill-active'
+            refreshButtonClassName='custom-refresh-icon'
+            refresh={<span>↻</span>}
           />
         </div>
       </Section>
