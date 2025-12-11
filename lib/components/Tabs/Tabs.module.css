@@ -1,0 +1,68 @@
+.root {
+  --tab-text-color: #6f7780;
+  --tab-active-color: #040d3c;
+  --tab-border-color: #d7dce2;
+  --tab-focus-outline-color: #040d3c;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--tab-border-color);
+  gap: 12px;
+}
+
+.tabList {
+  display: flex;
+  margin: 0;
+}
+
+.tab {
+  position: relative;
+  margin-bottom: -1px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: var(--tab-text-color);
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 300ms, border 300ms;
+}
+
+.tabHover {
+  color: var(--tab-active-color);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--tab-focus-outline-color);
+  outline-offset: 2px;
+}
+
+.tabActive {
+  color: var(--tab-active-color);
+  border-bottom: 2px solid var(--tab-active-color);
+}
+
+.refreshButton {
+  margin-inline-start: auto;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tab-text-color);
+  cursor: pointer;
+}
+
+.refreshButton svg {
+  width: 18px;
+  height: 18px;
+}
