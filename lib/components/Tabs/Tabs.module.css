@@ -50,19 +50,6 @@
   border-bottom: 2px solid var(--tab-active-color);
 }
 
-.refreshButton {
+.refresh {
   margin-inline-start: auto;
-  padding: 4px;
-  border: none;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--tab-text-color);
-  cursor: pointer;
-}
-
-.refreshButton svg {
-  width: 18px;
-  height: 18px;
 }

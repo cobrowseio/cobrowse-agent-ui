@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import styles from './SmartConnectButton.module.css'
 import type { DeviceData } from '@/components/Device'
 
-export type SmartConnectButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> & {
+export interface SmartConnectButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
   device: DeviceData
   onClick?: (device: DeviceData) => void
   children?: ReactNode

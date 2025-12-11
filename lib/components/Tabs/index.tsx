@@ -12,7 +12,7 @@ import DevicesPanel from '@/components/Tabs/DevicesPanel'
 import SessionsPanel from '@/components/Tabs/SessionsPanel'
 import type { DeviceData } from '@/components/Device'
 import type { SessionData } from '@/components/Session'
-import RefreshIcon from '@/icons/refresh.svg?react'
+import RefreshButton from '@/components/RefreshButton'
 import styles from './Tabs.module.css'
 
 export interface TabsProps {
@@ -22,6 +22,7 @@ export interface TabsProps {
   onRefreshClick?: MouseEventHandler
   smartConnectButtonClassName?: string
   loader?: ReactNode
+  refresh?: ReactNode
   className?: string
   headerClassName?: string
   tabListClassName?: string
@@ -39,6 +40,7 @@ const Tabs = ({
   onRefreshClick,
   smartConnectButtonClassName,
   loader,
+  refresh,
   className,
   headerClassName,
   tabListClassName,
@@ -84,13 +86,7 @@ const Tabs = ({
           </HeadlessTab>
         </HeadlessTabList>
         {onRefreshClick && (
-          <button
-            type='button'
-            className={clsx(styles.refreshButton, refreshButtonClassName)}
-            onClick={onRefreshClick}
-          >
-            <RefreshIcon />
-          </button>
+          <RefreshButton className={clsx(styles.refresh, refreshButtonClassName)} onClick={onRefreshClick}>{refresh}</RefreshButton>
         )}
       </div>
       <HeadlessTabPanels className={tabPanelsClassName}>
