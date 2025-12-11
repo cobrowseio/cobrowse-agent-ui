@@ -29,6 +29,9 @@ export interface CodeEntryProps {
 
 const CODE_LENGTH = 6
 const EMTPY_STATE = Array<string>(CODE_LENGTH).fill('')
+const KEY_BACKSPACE = 'Backspace'
+const KEY_ARROW_LEFT = 'ArrowLeft'
+const KEY_ARROW_RIGHT = 'ArrowRight'
 
 const getElementIndex = (refsArr: Array<HTMLInputElement | null>, elem: HTMLInputElement) =>
   refsArr.findIndex((el) => el === elem)
@@ -39,6 +42,21 @@ const focusPreviousInput = (refsArr: Array<HTMLInputElement | null>, elem: HTMLI
 
 const focusNextInput = (refsArr: Array<HTMLInputElement | null>, elem: HTMLInputElement) => {
   refsArr[Math.min(getElementIndex(refsArr, elem) + 1, CODE_LENGTH - 1)]?.focus()
+}
+
+const moveFocusForArrowKey = (
+  refsArr: Array<HTMLInputElement | null>,
+  elem: HTMLInputElement,
+  key: typeof KEY_ARROW_LEFT | typeof KEY_ARROW_RIGHT
+) => {
+  const isRTL = getComputedStyle(elem).direction === 'rtl'
+  const movesToPrevious = key === KEY_ARROW_LEFT ? !isRTL : isRTL
+
+  if (movesToPrevious) {
+    focusPreviousInput(refsArr, elem)
+  } else {
+    focusNextInput(refsArr, elem)
+  }
 }
 
 const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCode, children }: CodeEntryProps) => {
@@ -156,15 +174,11 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     const { key, currentTarget, metaKey, ctrlKey } = event
 
     // On backspace on empty node go back to previous
-    if (currentTarget.value.length === 0 && key === 'Backspace') {
+    if (currentTarget.value.length === 0 && key === KEY_BACKSPACE) {
       focusPreviousInput(refs.current, currentTarget)
-    } else if (key === 'ArrowLeft') {
-      // Left arrow moves to previous
-      focusPreviousInput(refs.current, currentTarget)
-      event.preventDefault()
-    } else if (key === 'ArrowRight') {
-      // Right arrow moves to next
-      focusNextInput(refs.current, currentTarget)
+    } else if (key === KEY_ARROW_LEFT || key === KEY_ARROW_RIGHT) {
+      // Move focus according to visual direction
+      moveFocusForArrowKey(refs.current, currentTarget, key)
       event.preventDefault()
     } else if (!metaKey && !ctrlKey && key.length === 1 && !/^[0-9]$/.test(key)) {
       // Prevent non-numeric characters that might appear in numbers (e.g 'e')
