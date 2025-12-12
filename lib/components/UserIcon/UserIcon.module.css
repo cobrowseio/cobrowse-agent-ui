@@ -1,0 +1,16 @@
+.root {
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  padding: 6px;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #ddd;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}

@@ -1,14 +1,24 @@
 import React from 'react'
-import './SmartConnectButton.css'
+import clsx from 'clsx'
+import styles from './SmartConnectButton.module.css'
 
-const SmartConnectButton = ({ device, onClick: onClickCallback, label }) => {
+const SmartConnectButton = ({ device, onClick: onClickCallback, label, className, style }) => {
   const onClick = () => {
     if (device.connectable && onClickCallback) onClickCallback(device)
   }
 
   return (
     <div
-      className={`SmartConnectButton ${device.online ? 'online' : ''} ${device.connectable ? 'connectable' : ''}`}
+      role='button'
+      tabIndex={device.connectable ? 0 : -1}
+      aria-disabled={!device.connectable}
+      style={style}
+      className={clsx(
+        styles.root,
+        device.online && styles.online,
+        device.connectable && styles.connectable,
+        className
+      )}
       onClick={onClick}
     >{label || 'Connect'}
     </div>

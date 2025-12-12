@@ -1,11 +1,12 @@
 import React from 'react'
+import clsx from 'clsx'
 import i18n from '../../i18n'
 import PlatformIcon from '../PlatformIcon'
 import deviceType from '../../deviceType.js'
-import './Device.css'
+import styles from './Device.module.css'
 
 const LastSeen = ({ device }) => (
-  <div className='last-seen'>
+  <div className={styles.lastSeen}>
     {device.online
       ? i18n.t('Online')
       : i18n.t('Last seen {{date, dateRelative}}', {
@@ -14,20 +15,23 @@ const LastSeen = ({ device }) => (
   </div>
 )
 
-const Device = ({ style, device, children }) => (
+const Device = ({ style, className, device, children }) => (
   <div
     style={style}
-    className={`Device ${device.online ? 'online' : ''} ${
-      device.connectable ? 'connectable' : ''
-    }`}
+    className={clsx(
+      styles.root,
+      device.online && styles.online,
+      device.connectable && styles.connectable,
+      className
+    )}
   >
-    <div className='device-status'>
+    <div className={styles.deviceStatus}>
       <PlatformIcon
         platform={device.device.platform}
-        className='platform-icon'
+        className={styles.platformIcon}
       />
     </div>
-    <div className='details'>
+    <div className={styles.details}>
       {deviceType(device.device)}
       <LastSeen device={device} />
     </div>

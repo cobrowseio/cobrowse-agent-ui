@@ -1,0 +1,48 @@
+.root {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 12px;
+}
+
+.online .deviceStatus {
+  outline: 2px solid #c7ea30;
+}
+
+.lastSeen {
+  font-size: 0.85rem;
+  color: #777;
+  white-space: nowrap;
+}
+
+.deviceStatus {
+  height: 36px;
+  width: 36px;
+  padding: 4px;
+  outline: 2px solid rgba(4, 13, 60, 0.25);
+  border-radius: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.platformIcon {
+  height: 100%;
+  width: auto;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  color: inherit;
+}

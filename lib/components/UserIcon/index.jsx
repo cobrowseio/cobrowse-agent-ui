@@ -1,6 +1,6 @@
 import React from 'react'
-
-import './UserIcon.css'
+import clsx from 'clsx'
+import styles from './UserIcon.module.css'
 
 const UserIcon = ({ user, className }) => {
   const initials = () => {
@@ -15,7 +15,7 @@ const UserIcon = ({ user, className }) => {
   if (!user) return null
   return (
     <div
-      className={`UserIcon ${className || ''}`}
+      className={clsx(styles.root, className)}
       title={user.name || null}
       style={{
         backgroundImage: user.picture ? `url(${user.picture || ''})` : undefined,

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import './CodeEntry.css'
+import clsx from 'clsx'
+import styles from './CodeEntry.module.css'
 
 const CODE_LENGTH = 6
 const EMTPY_STATE = Array(CODE_LENGTH).fill('')
@@ -161,12 +162,14 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
   const invalid = !validating && getCode().length === CODE_LENGTH
 
   return (
-    <div className={`CodeEntry${className ? ` ${className}` : ''}`}>
-      <div className={invalid ? 'invalid' : ''}>
+    <div
+      className={clsx(styles.root, className)}
+    >
+      <div className={clsx(styles.digits, invalid && styles.invalid)}>
         {code.map((value, index) => (
           <input
             key={index}
-            className={`bordered${inputClassName ? ` ${inputClassName}` : ''}`}
+            className={clsx(styles.input, inputClassName)}
             type='number'
             {...keyHandlers}
             value={value}

@@ -1,10 +1,11 @@
 import React from 'react'
+import clsx from 'clsx'
 import IconGlobe from '../../icons/globe.svg?react'
 import IconApple from '../../icons/apple.svg?react'
 import IconAndroid from '../../icons/android.svg?react'
 import IconWindows from '../../icons/windows.svg?react'
 import IconDefault from '../../icons/default.svg?react'
-import './PlatformIcon.css'
+import styles from './PlatformIcon.module.css'
 
 const ICONS = {
   web: IconGlobe,
@@ -20,7 +21,13 @@ const icon = (platform) => {
 
 const PlatformIcon = ({ platform, className, ...props }) => {
   const Icon = icon(platform)
-  return <Icon fill='currentColor' {...props} className={`PlatformIcon ${className || ''}`} />
+  return (
+    <Icon
+      fill='currentColor'
+      {...props}
+      className={clsx(styles.root, className)}
+    />
+  )
 }
 
 export default PlatformIcon
