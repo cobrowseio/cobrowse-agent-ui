@@ -11,8 +11,31 @@ import {
   i18n
 } from '../lib/main'
 import type { ReactNode } from 'react'
+import type { DeviceInfo } from 'cobrowse-agent-sdk'
 
-const deviceSamples = [
+interface SampleDeviceInfo {
+  platform: DeviceInfo['platform'],
+  device: string
+}
+interface SampleDevice {
+  id: string
+  name: string
+  location: string
+  online: boolean
+  connectable: boolean
+  last_active: number
+  device: SampleDeviceInfo
+}
+interface SampleSession {
+  id: string
+  state: SessionData['state']
+  recorded: boolean
+  activated: number
+  ended?: number
+  device: SampleDeviceInfo
+}
+
+const deviceSamples: SampleDevice[] = [
   {
     id: 'ios-1',
     name: 'Avery’s iPad Pro',
@@ -54,13 +77,12 @@ const deviceSamples = [
   }
 ]
 
-const sessionSamples = [
+const sessionSamples: SampleSession[] = [
   {
     id: 'session-1',
     state: 'active',
     recorded: false,
     activated: Date.now() - 8 * 60 * 1000,
-    ended: null,
     device: {
       platform: 'ios',
       device: deviceSamples[0].device.device
@@ -79,7 +101,7 @@ const sessionSamples = [
   }
 ]
 
-const platformList = ['web', 'ios', 'macos', 'android', 'windows', 'unknown']
+const platformList: DeviceInfo['platform'][] = ['web', 'ios', 'macos', 'android', 'windows']
 const users = [
   { id: 'u1', name: 'Alex Johnson', colour: '#d3e4ff' },
   { id: 'u2', name: 'Priya Patel', colour: '#ffe5b4' },

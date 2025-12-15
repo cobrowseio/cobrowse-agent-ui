@@ -6,11 +6,11 @@ import IconWindows from '@/icons/windows.svg?react'
 import IconDefault from '@/icons/default.svg?react'
 import styles from './PlatformIcon.module.css'
 import type { ComponentType, SVGProps } from 'react'
-import type { Platform } from '@/deviceType'
+import type { DeviceInfo } from 'cobrowse-agent-sdk'
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
-const ICONS: Record<Platform, IconComponent> = {
+const ICONS: Record<DeviceInfo['platform'], IconComponent> = {
   web: IconGlobe,
   ios: IconApple,
   macos: IconApple,
@@ -19,7 +19,7 @@ const ICONS: Record<Platform, IconComponent> = {
 }
 
 export interface PlatformIconProps extends SVGProps<SVGSVGElement> {
-  platform: Platform
+  platform: DeviceInfo['platform']
   className?: string
 }
 

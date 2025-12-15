@@ -3,14 +3,14 @@ import { differenceInMilliseconds, intervalToDuration, format } from 'date-fns'
 import type { CSSProperties } from 'react'
 
 export interface StopwatchProps {
-  start?: Date | number | string | null
-  end?: Date | number | string | null
+  start: Date | number | string
+  end?: Date | number | string
   style?: CSSProperties
   className?: string
 }
 
 const Stopwatch = ({ start: startProp, end: endProp, style, className }: StopwatchProps) => {
-  const start = startProp ? new Date(startProp) : new Date(0)
+  const start = new Date(startProp)
   const end = endProp ? new Date(endProp) : new Date()
   const ms = differenceInMilliseconds(end, start)
   const duration = intervalToDuration({ start, end })
