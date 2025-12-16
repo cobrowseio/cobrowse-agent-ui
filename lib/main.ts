@@ -7,6 +7,7 @@ import UserIconComponent from '@/components/UserIcon'
 import TabsComponent from '@/components/Tabs'
 import i18nInstance from '@/i18n'
 
+export type { CodeEntryProps } from '@/components/CodeEntry'
 export type { DeviceData, DeviceProps } from '@/components/Device'
 export type { SessionData, SessionProps } from '@/components/Session'
 export type { SmartConnectButtonProps } from '@/components/SmartConnectButton'

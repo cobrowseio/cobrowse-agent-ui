@@ -1,15 +1,14 @@
-import type { MouseEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'
-import Session, { type SessionData } from '@/components/Session'
+import Session, { type SessionProps, type SessionData } from '@/components/Session'
 import Loader from '@/components/Loader'
 import type { BasePanelProps } from './BasePanel'
 
-interface SessionsPanelProps extends BasePanelProps {
+export interface SessionsPanelProps extends BasePanelProps {
   sessions: SessionData[] | null
-  onClick?: MouseEventHandler
+  onSessionClick?: SessionProps['onClick']
 }
 
-const SessionsPanel = ({ sessions, onClick, loader }: SessionsPanelProps) => {
+const SessionsPanel = ({ sessions, onSessionClick, loader }: SessionsPanelProps) => {
   const { t } = useTranslation()
 
   if (sessions === null) {
@@ -25,7 +24,7 @@ const SessionsPanel = ({ sessions, onClick, loader }: SessionsPanelProps) => {
   return (
     <>
       {sessions.map((session, index) => (
-        <Session key={index} session={session} onClick={onClick} />
+        <Session key={index} session={session} onClick={onSessionClick} />
       ))}
     </>
   )

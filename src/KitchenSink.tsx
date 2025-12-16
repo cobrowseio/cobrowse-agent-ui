@@ -120,6 +120,7 @@ const Section = ({ title, subtitle, children }: { title: string, subtitle?: stri
 )
 
 const asDevice = (sample: typeof deviceSamples[number]): DeviceData => ({
+  id: sample.id,
   online: sample.online,
   connectable: sample.connectable,
   last_active: new Date(sample.last_active),
@@ -359,7 +360,8 @@ export default function KitchenSink () {
           <Tabs
             devices={tabsDevices}
             sessions={tabsSessions}
-            onSessionClick={() => alert('Session clicked')}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
             onRefreshClick={handleTabsRefresh}
           />
         </div>
@@ -367,7 +369,8 @@ export default function KitchenSink () {
           <Tabs
             devices={deviceSamples.map(asDevice)}
             sessions={sessionSamples.map(asSession)}
-            onSessionClick={() => alert('Session clicked')}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
             smartConnectButtonClassName='custom-connect-button'
           />
         </div>
@@ -382,7 +385,8 @@ export default function KitchenSink () {
           <Tabs
             devices={deviceSamples.map(asDevice)}
             sessions={sessionSamples.map(asSession)}
-            onSessionClick={() => alert('Session clicked')}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
             onRefreshClick={handleTabsRefresh}
             tabClassName='custom-tab'
             tabHoverClassName='custom-tab-hover'
@@ -394,7 +398,8 @@ export default function KitchenSink () {
           <Tabs
             devices={deviceSamples.map(asDevice)}
             sessions={sessionSamples.map(asSession)}
-            onSessionClick={() => alert('Session clicked')}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
             onRefreshClick={handleTabsRefresh}
             headerClassName='custom-header'
             tabListClassName='custom-tab-list'

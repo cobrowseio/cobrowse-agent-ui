@@ -8,8 +8,8 @@ import {
   TabPanel as HeadlessTabPanel
 } from '@headlessui/react'
 import { useTranslation } from 'react-i18next'
-import DevicesPanel from '@/components/Tabs/DevicesPanel'
-import SessionsPanel from '@/components/Tabs/SessionsPanel'
+import DevicesPanel, { type DevicesPanelProps } from '@/components/Tabs/DevicesPanel'
+import SessionsPanel, { type SessionsPanelProps } from '@/components/Tabs/SessionsPanel'
 import type { DeviceData } from '@/components/Device'
 import type { SessionData } from '@/components/Session'
 import RefreshButton from '@/components/RefreshButton'
@@ -18,7 +18,8 @@ import styles from './Tabs.module.css'
 export interface TabsProps {
   devices: DeviceData[] | null
   sessions: SessionData[] | null
-  onSessionClick?: MouseEventHandler
+  onConnectClick?: DevicesPanelProps['onConnectClick']
+  onSessionClick?: SessionsPanelProps['onSessionClick']
   onRefreshClick?: MouseEventHandler
   smartConnectButtonClassName?: string
   loader?: ReactNode
@@ -36,6 +37,7 @@ export interface TabsProps {
 const Tabs = ({
   devices,
   sessions,
+  onConnectClick,
   onSessionClick,
   onRefreshClick,
   smartConnectButtonClassName,
@@ -91,10 +93,10 @@ const Tabs = ({
       </div>
       <HeadlessTabPanels className={tabPanelsClassName}>
         <HeadlessTabPanel>
-          <DevicesPanel devices={devices} smartConnectButtonClassName={smartConnectButtonClassName} loader={loader} />
+          <DevicesPanel devices={devices} onConnectClick={onConnectClick} smartConnectButtonClassName={smartConnectButtonClassName} loader={loader} />
         </HeadlessTabPanel>
         <HeadlessTabPanel>
-          <SessionsPanel sessions={sessions} onClick={onSessionClick} loader={loader} />
+          <SessionsPanel sessions={sessions} onSessionClick={onSessionClick} loader={loader} />
         </HeadlessTabPanel>
       </HeadlessTabPanels>
     </HeadlessTabGroup>

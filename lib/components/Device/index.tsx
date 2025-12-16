@@ -6,7 +6,7 @@ import i18n from '@/i18n'
 import PlatformIcon from '@/components/PlatformIcon'
 import styles from './Device.module.css'
 
-export type DeviceData = Pick<FullDevice, 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
+export type DeviceData = Pick<FullDevice, 'id' | 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
 
 export interface DeviceProps {
   style?: CSSProperties

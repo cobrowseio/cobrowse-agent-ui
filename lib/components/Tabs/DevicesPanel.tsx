@@ -1,15 +1,16 @@
 import { useTranslation } from 'react-i18next'
 import Device, { type DeviceData } from '@/components/Device'
-import SmartConnectButton from '@/components/SmartConnectButton'
+import SmartConnectButton, { type SmartConnectButtonProps } from '@/components/SmartConnectButton'
 import Loader from '@/components/Loader'
 import type { BasePanelProps } from './BasePanel'
 
-interface DevicesPanelProps extends BasePanelProps {
+export interface DevicesPanelProps extends BasePanelProps {
   devices: DeviceData[] | null
+  onConnectClick: SmartConnectButtonProps['onClick']
   smartConnectButtonClassName?: string
 }
 
-const DevicesPanel = ({ devices, smartConnectButtonClassName, loader }: DevicesPanelProps) => {
+const DevicesPanel = ({ devices, onConnectClick, smartConnectButtonClassName, loader }: DevicesPanelProps) => {
   const { t } = useTranslation()
 
   if (devices === null) {
@@ -29,6 +30,7 @@ const DevicesPanel = ({ devices, smartConnectButtonClassName, loader }: DevicesP
           <SmartConnectButton
             device={device}
             className={smartConnectButtonClassName}
+            onClick={onConnectClick}
           >
             {t('Connect')}
           </SmartConnectButton>
