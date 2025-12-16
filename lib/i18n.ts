@@ -1,6 +1,7 @@
 import { createInstance } from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { formatDistanceToNow } from 'date-fns'
+import type { Locale } from 'date-fns'
 import {
   enUS, ar, cs, da, de, es, et, fi, fr, hi, it, ja, ko, lt, ms, nl, pl, pt, ro, ru, sk, sl, sv, th, uk, vi, zhCN
 } from 'date-fns/locale'
@@ -36,7 +37,7 @@ import localeZh from './locales/zh/translation.json'
 
 const englishUS = 'en-us'
 
-const dateLocales = {
+const dateLocales: Record<string, Locale> = {
   [englishUS]: enUS,
   ar,
   cs,
@@ -68,15 +69,17 @@ const dateLocales = {
 
 const i18n = createInstance({
   fallbackLng: englishUS,
-  debug: process.env.NODE_ENV === 'development',
+  debug: import.meta.env.DEV,
   lowerCaseLng: true,
   interpolation: {
     escapeValue: false, // not needed for react as it escapes by default
-    format: (value, format, lng) => {
+    format: (value: unknown, format?: string, lng?: string) => {
       if (format === 'dateRelative' && value instanceof Date) {
-        const locale = dateLocales[lng] || enUS
+        const { [lng ?? englishUS]: locale } = dateLocales
         return formatDistanceToNow(value, { addSuffix: true, locale })
       }
+
+      return String(value)
     }
   },
   detection: {
@@ -174,7 +177,7 @@ const i18n = createInstance({
   }
 })
 
-i18n
+void i18n
   .use(initReactI18next)
   .init()
 

@@ -1,10 +1,11 @@
 {
   "Online": "Желіде",
   "Last seen {{date, dateRelative}}": "Соңғы рет көрінген {{date, dateRelative}}",
-  "{{device}} Device": "{{device}} құрылғысы",
-  "{{browser}} on {{os}}": "{{os}} жүйесіндегі {{browser}}",
   "<0>Connected to </0>{{deviceType}}": "<0>Қосылған: </0>{{deviceType}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "Recorded": "Жазылған",
-  "Active": "Белсенді"
-} 
+  "Active": "Белсенді",
+  "Connect": "Қосылу",
+  "{{device}} Device": "{{device}} құрылғысы",
+  "{{browser}} on {{os}}": "{{os}} жүйесіндегі {{browser}}"
+}

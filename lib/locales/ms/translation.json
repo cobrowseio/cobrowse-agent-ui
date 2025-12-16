@@ -1,10 +1,11 @@
 {
   "Online": "Dalam talian",
   "Last seen {{date, dateRelative}}": "Terakhir dilihat {{date, dateRelative}}",
-  "{{device}} Device": "Peranti {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} pada {{os}}",
   "<0>Connected to </0>{{deviceType}}": "<0>Disambungkan ke </0>{{deviceType}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "Recorded": "Direkodkan",
-  "Active": "Aktif"
-} 
+  "Active": "Aktif",
+  "Connect": "Sambung",
+  "{{device}} Device": "Peranti {{device}}",
+  "{{browser}} on {{os}}": "{{browser}} pada {{os}}"
+}

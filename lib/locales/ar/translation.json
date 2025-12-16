@@ -1,10 +1,11 @@
 {
   "Online": "متصل",
   "Last seen {{date, dateRelative}}": "آخر ظهور {{date, dateRelative}}",
-  "{{device}} Device": "جهاز {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} على {{os}}",
   "<0>Connected to </0>{{deviceType}}": "<0>متصل بـ </0>{{deviceType}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "Recorded": "مسجل",
-  "Active": "نشط"
-} 
+  "Active": "نشط",
+  "Connect": "اتصال",
+  "{{device}} Device": "جهاز {{device}}",
+  "{{browser}} on {{os}}": "{{browser}} على {{os}}"
+}

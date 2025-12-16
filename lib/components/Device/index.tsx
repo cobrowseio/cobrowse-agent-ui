@@ -1,11 +1,21 @@
-import React from 'react'
+import type { CSSProperties, ReactNode } from 'react'
+import type { Device as FullDevice } from 'cobrowse-agent-sdk'
+import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
-import i18n from '../../i18n'
-import PlatformIcon from '../PlatformIcon'
-import deviceType from '../../deviceType.js'
+import i18n from '@/i18n'
+import PlatformIcon from '@/components/PlatformIcon'
 import styles from './Device.module.css'
 
-const LastSeen = ({ device }) => (
+export type DeviceData = Pick<FullDevice, 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
+
+export interface DeviceProps {
+  style?: CSSProperties
+  className?: string
+  device: DeviceData
+  children?: ReactNode
+}
+
+const LastSeen = ({ device }: { device: DeviceData }) => (
   <div className={styles.lastSeen}>
     {device.online
       ? i18n.t('Online')
@@ -15,7 +25,7 @@ const LastSeen = ({ device }) => (
   </div>
 )
 
-const Device = ({ style, className, device, children }) => (
+const Device = ({ style, className, device, children }: DeviceProps) => (
   <div
     style={style}
     className={clsx(

@@ -1,16 +1,33 @@
 .root {
+  appearance: none;
+  border: none;
+  background: none;
   padding: 6px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
+  text-align: left;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: inherit;
+  outline: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.root:focus-visible {
+  outline: 2px solid #040d3c;
+  outline-offset: 2px;
 }
 
 .details {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .subdetails {
