@@ -1,16 +1,16 @@
 import { useTranslation } from 'react-i18next'
 import Device, { type DeviceData } from '@/components/Device'
-import SmartConnectButton, { type SmartConnectButtonProps } from '@/components/SmartConnectButton'
+import SmartConnectButton from '@/components/SmartConnectButton'
 import Loader from '@/components/Loader'
 import type { BasePanelProps } from './BasePanel'
 
-export interface DevicesPanelProps extends BasePanelProps {
-  devices: DeviceData[] | null
-  onConnectClick: SmartConnectButtonProps['onClick']
+export interface DevicesPanelProps<T extends DeviceData = DeviceData> extends BasePanelProps {
+  devices: T[] | null
+  onConnectClick: ((device: T) => void) | undefined
   smartConnectButtonClassName?: string
 }
 
-const DevicesPanel = ({ devices, onConnectClick, smartConnectButtonClassName, loader }: DevicesPanelProps) => {
+const DevicesPanel = <T extends DeviceData = DeviceData>({ devices, onConnectClick, smartConnectButtonClassName, loader }: DevicesPanelProps<T>) => {
   const { t } = useTranslation()
 
   if (devices === null) {

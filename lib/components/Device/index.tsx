@@ -8,10 +8,10 @@ import styles from './Device.module.css'
 
 export type DeviceData = Pick<FullDevice, 'id' | 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
 
-export interface DeviceProps {
+export interface DeviceProps<T extends DeviceData = DeviceData> {
   style?: CSSProperties
   className?: string
-  device: DeviceData
+  device: T
   children?: ReactNode
 }
 
@@ -25,7 +25,7 @@ const LastSeen = ({ device }: { device: DeviceData }) => (
   </div>
 )
 
-const Device = ({ style, className, device, children }: DeviceProps) => (
+const Device = <T extends DeviceData = DeviceData>({ style, className, device, children }: DeviceProps<T>) => (
   <div
     style={style}
     className={clsx(

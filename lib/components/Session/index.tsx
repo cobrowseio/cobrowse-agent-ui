@@ -13,20 +13,27 @@ type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
 
 export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended'> & { device: DeviceInfo }
 
-interface BaseSessionProps {
-  session: SessionData
+interface BaseSessionProps<TSession extends SessionData = SessionData> {
+  session: TSession
   className?: string
   children?: ReactNode
 }
 
-export type SessionProps<T extends ElementType = typeof DEFAULT_TAG> =
-  BaseSessionProps &
-  Omit<PropsOf<T>, 'onClick'> & {
-    as?: T
-    onClick?: (session: SessionData) => void
+export type SessionProps<TSession extends SessionData = SessionData, TElement extends ElementType = typeof DEFAULT_TAG> =
+  BaseSessionProps<TSession> &
+  Omit<PropsOf<TElement>, 'onClick'> & {
+    as?: TElement
+    onClick?: (session: TSession) => void
   }
 
-const Session = <T extends ElementType = typeof DEFAULT_TAG>({ as, session, onClick, className, children, ...props }: SessionProps<T>) => {
+const Session = <TSession extends SessionData = SessionData, TElement extends ElementType = typeof DEFAULT_TAG>({
+  as,
+  session,
+  onClick,
+  className,
+  children,
+  ...props
+}: SessionProps<TSession, TElement>) => {
   const Tag = as ?? DEFAULT_TAG
   const isClickable = typeof onClick === 'function'
 

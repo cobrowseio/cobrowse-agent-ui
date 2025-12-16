@@ -4,13 +4,13 @@ import clsx from 'clsx'
 import styles from './SmartConnectButton.module.css'
 import type { DeviceData } from '@/components/Device'
 
-export interface SmartConnectButtonProps extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
-  device: DeviceData
-  onClick?: (device: DeviceData) => void
+export interface SmartConnectButtonProps<T extends DeviceData = DeviceData> extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
+  device: T
+  onClick?: (device: T) => void
   children?: ReactNode
 }
 
-const SmartConnectButton = ({ device, onClick: onClickCallback, className, children, ...props }: SmartConnectButtonProps) => {
+const SmartConnectButton = <T extends DeviceData = DeviceData>({ device, onClick: onClickCallback, className, children, ...props }: SmartConnectButtonProps<T>) => {
   const handleClick = () => {
     if (device.connectable) onClickCallback?.(device)
   }
