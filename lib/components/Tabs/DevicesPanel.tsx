@@ -6,7 +6,7 @@ import type { BasePanelProps } from './BasePanel'
 
 export interface DevicesPanelProps<T extends DeviceData = DeviceData> extends BasePanelProps {
   devices: T[] | null
-  onConnectClick: ((device: T) => void) | undefined
+  onConnectClick?: ((device: T) => void)
   smartConnectButtonClassName?: string
 }
 

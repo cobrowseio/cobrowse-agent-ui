@@ -12,7 +12,7 @@ import DevicesPanel from '@/components/Tabs/DevicesPanel'
 import SessionsPanel from '@/components/Tabs/SessionsPanel'
 import type { DeviceData } from '@/components/Device'
 import type { SessionData } from '@/components/Session'
-import RefreshButton from '@/components/RefreshButton'
+import RefreshButton, { type RefreshButtonProps } from '@/components/RefreshButton'
 import styles from './Tabs.module.css'
 
 export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData> {
@@ -20,7 +20,7 @@ export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession ext
   sessions: TSession[] | null
   onConnectClick?: (device: TDevice) => void
   onSessionClick?: (session: TSession) => void
-  onRefreshClick?: MouseEventHandler
+  onRefreshClick?: RefreshButtonProps['onClick']
   smartConnectButtonClassName?: string
   loader?: ReactNode
   refresh?: ReactNode
