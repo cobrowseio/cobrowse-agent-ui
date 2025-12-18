@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { MouseEventHandler, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import {
   Tab as HeadlessTab,
   TabGroup as HeadlessTabGroup,
