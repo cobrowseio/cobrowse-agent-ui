@@ -16,6 +16,7 @@
 
 .clickable {
   cursor: pointer;
+  width: 100%;
 }
 
 .root:focus-visible {

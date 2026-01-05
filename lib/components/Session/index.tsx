@@ -34,8 +34,8 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
   children,
   ...props
 }: SessionProps<TSession, TElement>) => {
-  const Tag = as ?? DEFAULT_TAG
   const isClickable = typeof onClick === 'function'
+  const Tag = as ?? isClickable ? 'button' : DEFAULT_TAG
 
   return (
     <Tag
