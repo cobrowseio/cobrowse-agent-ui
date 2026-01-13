@@ -36,6 +36,7 @@ export default [
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/strict-boolean-expressions': 'off',
       '@typescript-eslint/no-magic-numbers': 'off',
+      '@typescript-eslint/prefer-destructuring': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
     },

@@ -3,7 +3,6 @@ import IconGlobe from '@/icons/globe.svg?react'
 import IconApple from '@/icons/apple.svg?react'
 import IconAndroid from '@/icons/android.svg?react'
 import IconWindows from '@/icons/windows.svg?react'
-import IconDefault from '@/icons/default.svg?react'
 import styles from './PlatformIcon.module.css'
 import type { ComponentType, SVGProps } from 'react'
 import type { DeviceInfo } from 'cobrowse-agent-sdk'
@@ -24,7 +23,7 @@ export interface PlatformIconProps extends SVGProps<SVGSVGElement> {
 }
 
 const PlatformIcon = ({ platform, className, ...props }: PlatformIconProps) => {
-  const Icon = ICONS[platform] ?? IconDefault
+  const Icon = ICONS[platform]
 
   return (
     <Icon
