@@ -13,7 +13,23 @@ export default defineConfig({
     react(),
     svgr(),
     dts({
-      rollupTypes: true
+      rollupTypes: true,
+      // Annoyingly, the dts bundler sometimes emits imports like `node_modules/i18next`,
+      // which are invalid package specifiers for consumers. We rewrite to `i18next` so
+      // the generated .d.ts resolves correctly in downstream projects.
+      beforeWriteFile: (filePath, content) => {
+        if (!content.includes("from 'node_modules/i18next'")) {
+          return
+        }
+
+        return {
+          filePath,
+          content: content.replace(
+            "from 'node_modules/i18next'",
+            "from 'i18next'"
+          )
+        }
+      }
     })
   ],
   resolve: {

@@ -41,7 +41,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.55.1",
+    "@microsoft/api-extractor": "^7.55.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/ua-parser-js": "^0.7.39",
