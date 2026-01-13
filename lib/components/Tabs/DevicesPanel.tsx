@@ -25,8 +25,8 @@ const DevicesPanel = <T extends DeviceData = DeviceData>({ devices, onConnectCli
 
   return (
     <>
-      {devices.map((device, index) => (
-        <Device key={index} device={device}>
+      {devices.map((device) => (
+        <Device key={device.id} device={device}>
           <SmartConnectButton
             device={device}
             className={smartConnectButtonClassName}
