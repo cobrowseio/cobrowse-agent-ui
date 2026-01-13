@@ -8,21 +8,20 @@ import {
   TabPanel as HeadlessTabPanel
 } from '@headlessui/react'
 import { useTranslation } from 'react-i18next'
-import DevicesPanel from '@/components/Tabs/DevicesPanel'
-import SessionsPanel from '@/components/Tabs/SessionsPanel'
+import DevicesPanel, { type DevicesPanelProps } from '@/components/Tabs/DevicesPanel'
+import SessionsPanel, { type SessionsPanelProps } from '@/components/Tabs/SessionsPanel'
 import type { DeviceData } from '@/components/Device'
 import type { SessionData } from '@/components/Session'
 import RefreshButton, { type RefreshButtonProps } from '@/components/RefreshButton'
 import styles from './Tabs.module.css'
 
-export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData> {
-  devices: TDevice[] | null
-  sessions: TSession[] | null
-  onConnectClick?: (device: TDevice) => void
-  onSessionClick?: (session: TSession) => void
+interface TabsPanelProps<TDevice extends DeviceData, TSession extends SessionData>
+  extends Pick<DevicesPanelProps<TDevice>, 'devices' | 'onConnectClick' | 'smartConnectButtonClassName' | 'loader'>,
+    Pick<SessionsPanelProps<TSession>, 'sessions' | 'onSessionClick' | 'loader'> {}
+
+export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData>
+  extends TabsPanelProps<TDevice, TSession> {
   onRefreshClick?: RefreshButtonProps['onClick']
-  smartConnectButtonClassName?: string
-  loader?: ReactNode
   refresh?: ReactNode
   className?: string
   headerClassName?: string
