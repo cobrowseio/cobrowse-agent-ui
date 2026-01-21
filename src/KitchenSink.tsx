@@ -7,10 +7,10 @@ import {
   Session,
   type SessionData,
   SmartConnectButton,
-  Tabs,
   UserIcon,
   i18n
 } from '../lib/main'
+import { Tabs } from '../lib/integrations'
 import type { ReactNode } from 'react'
 import type { DeviceInfo } from 'cobrowse-agent-sdk'
 

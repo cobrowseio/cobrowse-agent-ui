@@ -8,8 +8,8 @@ import {
   TabPanel as HeadlessTabPanel
 } from '@headlessui/react'
 import { useTranslation } from 'react-i18next'
-import DevicesPanel, { type DevicesPanelProps } from '@/components/Tabs/DevicesPanel'
-import SessionsPanel, { type SessionsPanelProps } from '@/components/Tabs/SessionsPanel'
+import DevicesPanel, { type DevicesPanelProps } from './DevicesPanel'
+import SessionsPanel, { type SessionsPanelProps } from './SessionsPanel'
 import type { DeviceData } from '@/components/Device'
 import type { SessionData } from '@/components/Session'
 import RefreshButton, { type RefreshButtonProps } from '@/components/RefreshButton'

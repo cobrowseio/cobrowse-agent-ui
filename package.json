@@ -19,6 +19,10 @@
       "types": "./dist/cobrowse-agent-ui.d.ts",
       "import": "./dist/cobrowse-agent-ui.js"
     },
+    "./integrations": {
+      "types": "./dist/integrations.d.ts",
+      "import": "./dist/integrations.js"
+    },
     "./style.css": "./dist/cobrowse-agent-ui.css"
   },
   "files": [

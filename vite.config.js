@@ -44,9 +44,14 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.ts'),
+      entry: {
+        'cobrowse-agent-ui': resolve(__dirname, 'lib/main.ts'),
+        integrations: resolve(__dirname, 'lib/integrations/index.ts')
+      },
       name: 'CobrowseAgentUI',
-      formats: ['es']
+      formats: ['es'],
+      fileName: (format, entryName) =>
+        format === 'es' ? `${entryName}.js` : `${entryName}.${format}.js`
     },
     rollupOptions: {
       external: [
