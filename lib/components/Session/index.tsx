@@ -1,4 +1,4 @@
-import type { ElementType, ComponentPropsWithoutRef, ReactNode, MouseEventHandler } from 'react'
+import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react'
 import type { Session as FullSession } from 'cobrowse-agent-sdk'
 import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
@@ -13,26 +13,33 @@ type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
 
 export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended'> & { device: DeviceInfo }
 
-interface BaseSessionProps {
-  session: SessionData
+interface BaseSessionProps<TSession extends SessionData = SessionData> {
+  session: TSession
   className?: string
   children?: ReactNode
 }
 
-export type SessionProps<T extends ElementType = typeof DEFAULT_TAG> =
-  BaseSessionProps &
-  Omit<PropsOf<T>, 'onClick'> & {
-    as?: T
-    onClick?: MouseEventHandler
+export type SessionProps<TSession extends SessionData = SessionData, TElement extends ElementType = typeof DEFAULT_TAG> =
+  BaseSessionProps<TSession> &
+  Omit<PropsOf<TElement>, 'onClick'> & {
+    as?: TElement
+    onClick?: (session: TSession) => void
   }
 
-const Session = <T extends ElementType = typeof DEFAULT_TAG>({ as, session, onClick, className, children, ...props }: SessionProps<T>) => {
-  const Tag = as ?? DEFAULT_TAG
+const Session = <TSession extends SessionData = SessionData, TElement extends ElementType = typeof DEFAULT_TAG>({
+  as,
+  session,
+  onClick,
+  className,
+  children,
+  ...props
+}: SessionProps<TSession, TElement>) => {
   const isClickable = typeof onClick === 'function'
+  const Tag = as ?? isClickable ? 'button' : DEFAULT_TAG
 
   return (
     <Tag
-      onClick={isClickable ? onClick : undefined}
+      onClick={isClickable ? () => { onClick(session) } : undefined}
       className={clsx(styles.root, isClickable && styles.clickable, className)}
       {...props}
     >

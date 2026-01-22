@@ -1,0 +1,18 @@
+.root {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--text-color-base);
+}
+
+.root:hover {
+  text-decoration: underline;
+}
+
+.root:visited {
+  color: #0E0C26;
+  color: var(--text-color-base);
+}

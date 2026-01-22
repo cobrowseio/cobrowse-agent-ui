@@ -7,7 +7,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  text-align: left;
+  text-align: start;
   font-size: 1rem;
   font-family: inherit;
   line-height: inherit;
@@ -16,6 +16,7 @@
 
 .clickable {
   cursor: pointer;
+  width: 100%;
 }
 
 .root:focus-visible {

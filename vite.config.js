@@ -13,7 +13,23 @@ export default defineConfig({
     react(),
     svgr(),
     dts({
-      rollupTypes: true
+      rollupTypes: true,
+      // Annoyingly, the dts bundler sometimes emits imports like `node_modules/i18next`,
+      // which are invalid package specifiers for consumers. We rewrite to `i18next` so
+      // the generated .d.ts resolves correctly in downstream projects.
+      beforeWriteFile: (filePath, content) => {
+        if (!content.includes("from 'node_modules/i18next'")) {
+          return
+        }
+
+        return {
+          filePath,
+          content: content.replace(
+            "from 'node_modules/i18next'",
+            "from 'i18next'"
+          )
+        }
+      }
     })
   ],
   resolve: {
@@ -28,9 +44,14 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.ts'),
+      entry: {
+        'cobrowse-agent-ui': resolve(__dirname, 'lib/main.ts'),
+        integrations: resolve(__dirname, 'lib/integrations/index.ts')
+      },
       name: 'CobrowseAgentUI',
-      formats: ['es']
+      formats: ['es'],
+      fileName: (format, entryName) =>
+        format === 'es' ? `${entryName}.js` : `${entryName}.${format}.js`
     },
     rollupOptions: {
       external: [

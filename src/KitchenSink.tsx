@@ -10,6 +10,7 @@ import {
   UserIcon,
   i18n
 } from '../lib/main'
+import { Tabs } from '../lib/integrations'
 import type { ReactNode } from 'react'
 import type { DeviceInfo } from 'cobrowse-agent-sdk'
 
@@ -119,6 +120,7 @@ const Section = ({ title, subtitle, children }: { title: string, subtitle?: stri
 )
 
 const asDevice = (sample: typeof deviceSamples[number]): DeviceData => ({
+  id: sample.id,
   online: sample.online,
   connectable: sample.connectable,
   last_active: new Date(sample.last_active),
@@ -146,6 +148,8 @@ export default function KitchenSink () {
   const [recordingInfo, setRecordingInfo] = useState('')
   const [language, setLanguage] = useState(i18n.language || 'en-us')
   const [direction, setDirection] = useState('ltr')
+  const [tabsDevices, setTabsDevices] = useState<DeviceData[] | null>(deviceSamples.map(asDevice))
+  const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(sessionSamples.map(asSession))
 
   const languages = useMemo(() => {
     const resources = i18n.options?.resources ?? {}
@@ -190,6 +194,15 @@ export default function KitchenSink () {
 
   const toggleDirection = useCallback(() => {
     setDirection((prev) => (prev === 'ltr' ? 'rtl' : 'ltr'))
+  }, [])
+
+  const handleTabsRefresh = useCallback(() => {
+    setTabsDevices(null)
+    setTabsSessions(null)
+    setTimeout(() => {
+      setTabsDevices(deviceSamples.map(asDevice))
+      setTabsSessions(sessionSamples.map(asSession))
+    }, 1000)
   }, [])
 
   return (
@@ -336,6 +349,65 @@ export default function KitchenSink () {
               </div>
             </div>
           ))}
+        </div>
+      </Section>
+
+      <Section
+        title='Tabs'
+        subtitle='Tab navigation using Headless UI with Devices and Sessions panels. Supports custom styling via className props.'
+      >
+        <div className='panel'>
+          <Tabs
+            devices={tabsDevices}
+            sessions={tabsSessions}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
+            onRefreshClick={handleTabsRefresh}
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={deviceSamples.map(asDevice)}
+            sessions={sessionSamples.map(asSession)}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
+            smartConnectButtonClassName='custom-connect-button'
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={null}
+            sessions={null}
+            loader={<div className='custom-loader'>Loading data...</div>}
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={deviceSamples.map(asDevice)}
+            sessions={sessionSamples.map(asSession)}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
+            onRefreshClick={handleTabsRefresh}
+            tabClassName='custom-tab'
+            tabHoverClassName='custom-tab-hover'
+            tabActiveClassName='custom-tab-active'
+            refreshButtonClassName='custom-refresh-button'
+          />
+        </div>
+        <div className='panel'>
+          <Tabs
+            devices={deviceSamples.map(asDevice)}
+            sessions={sessionSamples.map(asSession)}
+            onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
+            onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
+            onRefreshClick={handleTabsRefresh}
+            headerClassName='custom-header'
+            tabListClassName='custom-tab-list'
+            tabClassName='custom-tab-pill'
+            tabActiveClassName='custom-tab-pill-active'
+            refreshButtonClassName='custom-refresh-icon'
+            refresh={<span>↻</span>}
+          />
         </div>
       </Section>
     </>
