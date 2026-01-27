@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.2.1...v1.3.0) (2026-01-27)
+
+
+### Features
+
+* add a Tabs component ([#34](https://github.com/cobrowseio/cobrowse-agent-ui/issues/34)) ([9daed82](https://github.com/cobrowseio/cobrowse-agent-ui/commit/9daed821d839326a17c7e4af0445521cc9f184a2))
+* add TypeScript ([#31](https://github.com/cobrowseio/cobrowse-agent-ui/issues/31)) ([3c53c4d](https://github.com/cobrowseio/cobrowse-agent-ui/commit/3c53c4d96c028f36e5069ca9585dd2b3647a7268))
+* use CSS modules ([#30](https://github.com/cobrowseio/cobrowse-agent-ui/issues/30)) ([4632175](https://github.com/cobrowseio/cobrowse-agent-ui/commit/4632175d997723f41933a0ef0c97777a17c8aab0))
+
 ### [1.2.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.2.0...v1.2.1) (2025-08-05)
 
 
