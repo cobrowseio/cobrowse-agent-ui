@@ -25,6 +25,10 @@
     },
     "./style.css": "./dist/cobrowse-agent-ui.css"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cobrowseio/cobrowse-agent-ui.git"
+  },
   "files": [
     "dist"
   ],
