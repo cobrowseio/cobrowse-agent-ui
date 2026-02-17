@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.3.1...v1.4.0) (2026-02-17)
+
+
+### Features
+
+* add a BlockingError component ([#38](https://github.com/cobrowseio/cobrowse-agent-ui/issues/38)) ([0b98ecd](https://github.com/cobrowseio/cobrowse-agent-ui/commit/0b98ecda4109096ac054ab331061104d23610394))
+
+
+### Bug Fixes
+
+* update base styles ([#39](https://github.com/cobrowseio/cobrowse-agent-ui/issues/39)) ([48e0820](https://github.com/cobrowseio/cobrowse-agent-ui/commit/48e0820bbb6cf05629b3236aaddb6a68d069823b))
+
 ### [1.3.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.3.0...v1.3.1) (2026-01-27)
 
 ## [1.3.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.2.1...v1.3.0) (2026-01-27)
