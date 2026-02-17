@@ -8,6 +8,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 0;
+  flex: 1 1;
 }
 
 .header {
@@ -48,6 +50,13 @@
 .tabActive {
   color: var(--tab-active-color);
   border-bottom: 2px solid var(--tab-active-color);
+}
+
+.tabPanels {
+  overflow-y: auto;
+  flex: 1 1;
+  min-height: 0;
+  width: 100%;
 }
 
 .refresh {
