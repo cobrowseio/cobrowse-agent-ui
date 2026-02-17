@@ -90,7 +90,7 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
           <RefreshButton className={clsx(styles.refresh, refreshButtonClassName)} onClick={onRefreshClick}>{refresh}</RefreshButton>
         )}
       </div>
-      <HeadlessTabPanels className={tabPanelsClassName}>
+      <HeadlessTabPanels className={clsx(styles.tabPanels, tabPanelsClassName)}>
         <HeadlessTabPanel>
           <DevicesPanel devices={devices} onConnectClick={onConnectClick} smartConnectButtonClassName={smartConnectButtonClassName} loader={loader} />
         </HeadlessTabPanel>
