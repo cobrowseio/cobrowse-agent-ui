@@ -1,11 +1,19 @@
 {
-  "Online": "在线",
-  "Last seen {{date, dateRelative}}": "最后在线时间 {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>已连接到</0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{os}}上的{{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "已记录",
+  "{{device}} Device": "{{device}}设备",
+  "<0>Connected to </0>{{deviceType}}": "<0>已连接到</0>{{deviceType}}",
   "Active": "共享中",
   "Connect": "连接",
-  "{{device}} Device": "{{device}}设备",
-  "{{browser}} on {{os}}": "{{os}}上的{{browser}}"
+  "Devices": "设备",
+  "Digit {{digit}}": "数字 {{digit}}",
+  "Last seen {{date, dateRelative}}": "最后在线时间 {{date, dateRelative}}",
+  "Loading...": "加载中...",
+  "No devices": "无设备",
+  "No sessions": "无会话",
+  "Online": "在线",
+  "Recorded": "已记录",
+  "Sessions": "会话",
+  "Sorry, something went wrong.": "抱歉，出现了问题。",
+  "Support code": "支持代码"
 }

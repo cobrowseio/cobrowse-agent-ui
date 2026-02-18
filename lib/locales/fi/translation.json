@@ -1,11 +1,19 @@
 {
-  "Online": "Paikalla",
-  "Last seen {{date, dateRelative}}": "Nähty viimeksi {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Yhdistetty laitteeseen </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} käyttöjärjestelmässä {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Tallennettu",
+  "{{device}} Device": "{{device}}-laite",
+  "<0>Connected to </0>{{deviceType}}": "<0>Yhdistetty laitteeseen </0>{{deviceType}}",
   "Active": "Aktiivinen",
   "Connect": "Yhdistä",
-  "{{device}} Device": "{{device}}-laite",
-  "{{browser}} on {{os}}": "{{browser}} käyttöjärjestelmässä {{os}}"
+  "Devices": "Laitteet",
+  "Digit {{digit}}": "Numero {{digit}}",
+  "Last seen {{date, dateRelative}}": "Nähty viimeksi {{date, dateRelative}}",
+  "Loading...": "Ladataan...",
+  "No devices": "Ei laitteita",
+  "No sessions": "Ei istuntoja",
+  "Online": "Paikalla",
+  "Recorded": "Tallennettu",
+  "Sessions": "Istunnot",
+  "Sorry, something went wrong.": "Pahoittelemme, jokin meni vikaan.",
+  "Support code": "Tukikoodi"
 }

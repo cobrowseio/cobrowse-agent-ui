@@ -1,11 +1,19 @@
 {
-  "Online": "ออนไลน์",
-  "Last seen {{date, dateRelative}}": "เห็นครั้งล่าสุด {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>เชื่อมต่อกับ </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} บน {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "บันทึกแล้ว",
+  "{{device}} Device": "อุปกรณ์ {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>เชื่อมต่อกับ </0>{{deviceType}}",
   "Active": "กำลังดำเนินการ",
   "Connect": "เชื่อมต่อ",
-  "{{device}} Device": "อุปกรณ์ {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} บน {{os}}"
+  "Devices": "อุปกรณ์",
+  "Digit {{digit}}": "หลัก {{digit}}",
+  "Last seen {{date, dateRelative}}": "เห็นครั้งล่าสุด {{date, dateRelative}}",
+  "Loading...": "กำลังโหลด...",
+  "No devices": "ไม่มีอุปกรณ์",
+  "No sessions": "ไม่มีเซสชัน",
+  "Online": "ออนไลน์",
+  "Recorded": "บันทึกแล้ว",
+  "Sessions": "เซสชัน",
+  "Sorry, something went wrong.": "ขออภัย เกิดข้อผิดพลาดบางอย่าง",
+  "Support code": "รหัสสนับสนุน"
 }

@@ -7,9 +7,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "npm run build",
-    "i18n": "i18next 'lib/**/*{.js,.jsx,.ts,.tsx}'",
+    "i18n": "i18next-cli extract",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && i18next-cli lint --quiet"
   },
   "main": "./dist/cobrowse-agent-ui.js",
   "module": "./dist/cobrowse-agent-ui.js",
@@ -59,7 +59,7 @@
     "eslint-config-love": "^136.0.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "i18next-parser": "^9.3.0",
+    "i18next-cli": "^1.42.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "^5.9.3",

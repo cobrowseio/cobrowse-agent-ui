@@ -1,11 +1,19 @@
 {
-  "Online": "En ligne",
-  "Last seen {{date, dateRelative}}": "Dernière connexion {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Connecté à </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} sur {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Enregistré",
+  "{{device}} Device": "Appareil {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Connecté à </0>{{deviceType}}",
   "Active": "Actif",
   "Connect": "Se connecter",
-  "{{device}} Device": "Appareil {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} sur {{os}}"
+  "Devices": "Appareils",
+  "Digit {{digit}}": "Chiffre {{digit}}",
+  "Last seen {{date, dateRelative}}": "Dernière connexion {{date, dateRelative}}",
+  "Loading...": "Chargement...",
+  "No devices": "Aucun appareil",
+  "No sessions": "Aucune session",
+  "Online": "En ligne",
+  "Recorded": "Enregistré",
+  "Sessions": "Sessions",
+  "Sorry, something went wrong.": "Désolé, une erreur s'est produite.",
+  "Support code": "Code d'assistance"
 }

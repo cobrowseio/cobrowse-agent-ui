@@ -1,11 +1,19 @@
 {
-  "Online": "متصل",
-  "Last seen {{date, dateRelative}}": "آخر ظهور {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>متصل بـ </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} على {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "مسجل",
+  "{{device}} Device": "جهاز {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>متصل بـ </0>{{deviceType}}",
   "Active": "نشط",
   "Connect": "اتصال",
-  "{{device}} Device": "جهاز {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} على {{os}}"
+  "Devices": "الأجهزة",
+  "Digit {{digit}}": "الرقم {{digit}}",
+  "Last seen {{date, dateRelative}}": "آخر ظهور {{date, dateRelative}}",
+  "Loading...": "جارٍ التحميل...",
+  "No devices": "لا توجد أجهزة",
+  "No sessions": "لا توجد جلسات",
+  "Online": "متصل",
+  "Recorded": "مسجل",
+  "Sessions": "الجلسات",
+  "Sorry, something went wrong.": "عذرًا، حدث خطأ ما.",
+  "Support code": "رمز الدعم"
 }

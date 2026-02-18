@@ -1,11 +1,19 @@
 {
-  "Online": "В сети",
-  "Last seen {{date, dateRelative}}": "Последний раз был в сети {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Подключено к </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} на {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Записано",
+  "{{device}} Device": "Устройство {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Подключено к </0>{{deviceType}}",
   "Active": "Активно",
   "Connect": "Подключиться",
-  "{{device}} Device": "Устройство {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} на {{os}}"
+  "Devices": "Устройства",
+  "Digit {{digit}}": "Цифра {{digit}}",
+  "Last seen {{date, dateRelative}}": "Последний раз был в сети {{date, dateRelative}}",
+  "Loading...": "Загрузка...",
+  "No devices": "Нет устройств",
+  "No sessions": "Нет сеансов",
+  "Online": "В сети",
+  "Recorded": "Записано",
+  "Sessions": "Сеансы",
+  "Sorry, something went wrong.": "Извините, произошла ошибка.",
+  "Support code": "Код поддержки"
 }

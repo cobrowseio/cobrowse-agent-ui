@@ -1,11 +1,19 @@
 {
-  "Online": "Online",
-  "Last seen {{date, dateRelative}}": "Naposledy viděn {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Připojeno k </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} na {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Zaznamenáno",
+  "{{device}} Device": "Zařízení {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Připojeno k </0>{{deviceType}}",
   "Active": "Aktivní",
   "Connect": "Připojit",
-  "{{device}} Device": "Zařízení {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} na {{os}}"
+  "Devices": "Zařízení",
+  "Digit {{digit}}": "Číslice {{digit}}",
+  "Last seen {{date, dateRelative}}": "Naposledy viděn {{date, dateRelative}}",
+  "Loading...": "Načítání...",
+  "No devices": "Žádná zařízení",
+  "No sessions": "Žádné relace",
+  "Online": "Online",
+  "Recorded": "Zaznamenáno",
+  "Sessions": "Relace",
+  "Sorry, something went wrong.": "Omlouváme se, něco se pokazilo.",
+  "Support code": "Kód podpory"
 }

@@ -1,11 +1,19 @@
 {
-  "Online": "ऑनलाइन",
-  "Last seen {{date, dateRelative}}": "शेवटचे पाहिले {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>जोडलेले आहे </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{os}} वर {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "रेकॉर्ड केलेले",
+  "{{device}} Device": "{{device}} डिव्हाइस",
+  "<0>Connected to </0>{{deviceType}}": "<0>जोडलेले आहे </0>{{deviceType}}",
   "Active": "सक्रिय",
   "Connect": "जोडा",
-  "{{device}} Device": "{{device}} डिव्हाइस",
-  "{{browser}} on {{os}}": "{{os}} वर {{browser}}"
+  "Devices": "डिव्हाइसेस",
+  "Digit {{digit}}": "अंक {{digit}}",
+  "Last seen {{date, dateRelative}}": "शेवटचे पाहिले {{date, dateRelative}}",
+  "Loading...": "लोड होत आहे...",
+  "No devices": "कोणतेही डिव्हाइस नाहीत",
+  "No sessions": "कोणतेही सत्र नाहीत",
+  "Online": "ऑनलाइन",
+  "Recorded": "रेकॉर्ड केलेले",
+  "Sessions": "सत्रे",
+  "Sorry, something went wrong.": "क्षमस्व, काहीतरी चूक झाली.",
+  "Support code": "सहाय्यता कोड"
 }

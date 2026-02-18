@@ -1,11 +1,19 @@
 {
-  "Online": "Online",
-  "Last seen {{date, dateRelative}}": "Sidst set {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Forbundet til </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} på {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Optaget",
+  "{{device}} Device": "{{device}}-enhed",
+  "<0>Connected to </0>{{deviceType}}": "<0>Forbundet til </0>{{deviceType}}",
   "Active": "Aktiv",
   "Connect": "Forbind",
-  "{{device}} Device": "{{device}}-enhed",
-  "{{browser}} on {{os}}": "{{browser}} på {{os}}"
+  "Devices": "Enheder",
+  "Digit {{digit}}": "Ciffer {{digit}}",
+  "Last seen {{date, dateRelative}}": "Sidst set {{date, dateRelative}}",
+  "Loading...": "Indlæser...",
+  "No devices": "Ingen enheder",
+  "No sessions": "Ingen sessioner",
+  "Online": "Online",
+  "Recorded": "Optaget",
+  "Sessions": "Sessioner",
+  "Sorry, something went wrong.": "Beklager, noget gik galt.",
+  "Support code": "Supportkode"
 }

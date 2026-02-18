@@ -1,11 +1,19 @@
 {
-  "Online": "オンライン",
-  "Last seen {{date, dateRelative}}": "最後のオンライン {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>接続先：</0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{os}}上の{{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "記録済み",
+  "{{device}} Device": "{{device}}デバイス",
+  "<0>Connected to </0>{{deviceType}}": "<0>接続先：</0>{{deviceType}}",
   "Active": "セッション中",
   "Connect": "接続",
-  "{{device}} Device": "{{device}}デバイス",
-  "{{browser}} on {{os}}": "{{os}}上の{{browser}}"
+  "Devices": "デバイス",
+  "Digit {{digit}}": "数字 {{digit}}",
+  "Last seen {{date, dateRelative}}": "最後のオンライン {{date, dateRelative}}",
+  "Loading...": "読み込み中...",
+  "No devices": "デバイスなし",
+  "No sessions": "セッションなし",
+  "Online": "オンライン",
+  "Recorded": "記録済み",
+  "Sessions": "セッション",
+  "Sorry, something went wrong.": "申し訳ございません。エラーが発生しました。",
+  "Support code": "サポートコード"
 }

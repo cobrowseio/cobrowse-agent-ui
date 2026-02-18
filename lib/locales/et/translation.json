@@ -1,11 +1,19 @@
 {
-  "Online": "Võrgus",
-  "Last seen {{date, dateRelative}}": "Viimati nähtud {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Ühendatud </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} operatsioonisüsteemil {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Salvestatud",
+  "{{device}} Device": "{{device}} seade",
+  "<0>Connected to </0>{{deviceType}}": "<0>Ühendatud </0>{{deviceType}}",
   "Active": "Aktiivne",
   "Connect": "Ühenda",
-  "{{device}} Device": "{{device}} seade",
-  "{{browser}} on {{os}}": "{{browser}} operatsioonisüsteemil {{os}}"
+  "Devices": "Seadmed",
+  "Digit {{digit}}": "Number {{digit}}",
+  "Last seen {{date, dateRelative}}": "Viimati nähtud {{date, dateRelative}}",
+  "Loading...": "Laadimine...",
+  "No devices": "Seadmeid pole",
+  "No sessions": "Seansse pole",
+  "Online": "Võrgus",
+  "Recorded": "Salvestatud",
+  "Sessions": "Seansid",
+  "Sorry, something went wrong.": "Vabandust, midagi läks valesti.",
+  "Support code": "Tugikood"
 }
