@@ -1,11 +1,19 @@
 {
-  "Online": "Желіде",
-  "Last seen {{date, dateRelative}}": "Соңғы рет көрінген {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Қосылған: </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{os}} жүйесіндегі {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Жазылған",
+  "{{device}} Device": "{{device}} құрылғысы",
+  "<0>Connected to </0>{{deviceType}}": "<0>Қосылған: </0>{{deviceType}}",
   "Active": "Белсенді",
   "Connect": "Қосылу",
-  "{{device}} Device": "{{device}} құрылғысы",
-  "{{browser}} on {{os}}": "{{os}} жүйесіндегі {{browser}}"
+  "Devices": "Құрылғылар",
+  "Digit {{digit}}": "Сан {{digit}}",
+  "Last seen {{date, dateRelative}}": "Соңғы рет көрінген {{date, dateRelative}}",
+  "Loading...": "Жүктелуде...",
+  "No devices": "Құрылғылар жоқ",
+  "No sessions": "Сеанстар жоқ",
+  "Online": "Желіде",
+  "Recorded": "Жазылған",
+  "Sessions": "Сеанстар",
+  "Sorry, something went wrong.": "Кешіріңіз, бірдеңе дұрыс болмады.",
+  "Support code": "Қолдау коды"
 }

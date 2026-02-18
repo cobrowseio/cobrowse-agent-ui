@@ -1,11 +1,19 @@
 {
-  "Online": "Online",
-  "Last seen {{date, dateRelative}}": "Senast sedd {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Ansluten till </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} på {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Inspelad",
+  "{{device}} Device": "{{device}}-enhet",
+  "<0>Connected to </0>{{deviceType}}": "<0>Ansluten till </0>{{deviceType}}",
   "Active": "Aktiv",
   "Connect": "Anslut",
-  "{{device}} Device": "{{device}}-enhet",
-  "{{browser}} on {{os}}": "{{browser}} på {{os}}"
+  "Devices": "Enheter",
+  "Digit {{digit}}": "Siffra {{digit}}",
+  "Last seen {{date, dateRelative}}": "Senast sedd {{date, dateRelative}}",
+  "Loading...": "Laddar...",
+  "No devices": "Inga enheter",
+  "No sessions": "Inga sessioner",
+  "Online": "Online",
+  "Recorded": "Inspelad",
+  "Sessions": "Sessioner",
+  "Sorry, something went wrong.": "Tyvärr, något gick fel.",
+  "Support code": "Supportkod"
 }

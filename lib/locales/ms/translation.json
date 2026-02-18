@@ -1,11 +1,19 @@
 {
-  "Online": "Dalam talian",
-  "Last seen {{date, dateRelative}}": "Terakhir dilihat {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Disambungkan ke </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} pada {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Direkodkan",
+  "{{device}} Device": "Peranti {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Disambungkan ke </0>{{deviceType}}",
   "Active": "Aktif",
   "Connect": "Sambung",
-  "{{device}} Device": "Peranti {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} pada {{os}}"
+  "Devices": "Peranti",
+  "Digit {{digit}}": "Digit {{digit}}",
+  "Last seen {{date, dateRelative}}": "Terakhir dilihat {{date, dateRelative}}",
+  "Loading...": "Memuatkan...",
+  "No devices": "Tiada peranti",
+  "No sessions": "Tiada sesi",
+  "Online": "Dalam talian",
+  "Recorded": "Direkodkan",
+  "Sessions": "Sesi",
+  "Sorry, something went wrong.": "Maaf, sesuatu telah berlaku.",
+  "Support code": "Kod sokongan"
 }

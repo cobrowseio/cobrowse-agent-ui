@@ -1,11 +1,19 @@
 {
-  "Online": "Online",
-  "Last seen {{date, dateRelative}}": "Laatst gezien {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Verbonden met </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} op {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Opgenomen",
+  "{{device}} Device": "{{device}}-apparaat",
+  "<0>Connected to </0>{{deviceType}}": "<0>Verbonden met </0>{{deviceType}}",
   "Active": "Actief",
   "Connect": "Verbinden",
-  "{{device}} Device": "{{device}}-apparaat",
-  "{{browser}} on {{os}}": "{{browser}} op {{os}}"
+  "Devices": "Apparaten",
+  "Digit {{digit}}": "Cijfer {{digit}}",
+  "Last seen {{date, dateRelative}}": "Laatst gezien {{date, dateRelative}}",
+  "Loading...": "Laden...",
+  "No devices": "Geen apparaten",
+  "No sessions": "Geen sessies",
+  "Online": "Online",
+  "Recorded": "Opgenomen",
+  "Sessions": "Sessies",
+  "Sorry, something went wrong.": "Sorry, er is iets misgegaan.",
+  "Support code": "Ondersteuningscode"
 }

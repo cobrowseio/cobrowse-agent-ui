@@ -1,11 +1,19 @@
 {
-  "Online": "Prisijungęs",
-  "Last seen {{date, dateRelative}}": "Paskutinį kartą matytas {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Prisijungta prie </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} sistemoje {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Įrašyta",
+  "{{device}} Device": "{{device}} įrenginys",
+  "<0>Connected to </0>{{deviceType}}": "<0>Prisijungta prie </0>{{deviceType}}",
   "Active": "Aktyvus",
   "Connect": "Prisijungti",
-  "{{device}} Device": "{{device}} įrenginys",
-  "{{browser}} on {{os}}": "{{browser}} sistemoje {{os}}"
+  "Devices": "Įrenginiai",
+  "Digit {{digit}}": "Skaitmuo {{digit}}",
+  "Last seen {{date, dateRelative}}": "Paskutinį kartą matytas {{date, dateRelative}}",
+  "Loading...": "Kraunama...",
+  "No devices": "Nėra įrenginių",
+  "No sessions": "Nėra seansų",
+  "Online": "Prisijungęs",
+  "Recorded": "Įrašyta",
+  "Sessions": "Seansai",
+  "Sorry, something went wrong.": "Atsiprašome, įvyko klaida.",
+  "Support code": "Palaikymo kodas"
 }

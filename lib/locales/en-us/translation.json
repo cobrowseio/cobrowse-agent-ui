@@ -1,11 +1,19 @@
 {
-  "Online": "Online",
-  "Last seen {{date, dateRelative}}": "Last seen {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Connected to </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} on {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Recorded",
+  "{{device}} Device": "{{device}} Device",
+  "<0>Connected to </0>{{deviceType}}": "<0>Connected to </0>{{deviceType}}",
   "Active": "Active",
   "Connect": "Connect",
-  "{{device}} Device": "{{device}} Device",
-  "{{browser}} on {{os}}": "{{browser}} on {{os}}"
+  "Devices": "Devices",
+  "Digit {{digit}}": "Digit {{digit}}",
+  "Last seen {{date, dateRelative}}": "Last seen {{date, dateRelative}}",
+  "Loading...": "Loading...",
+  "No devices": "No devices",
+  "No sessions": "No sessions",
+  "Online": "Online",
+  "Recorded": "Recorded",
+  "Sessions": "Sessions",
+  "Sorry, something went wrong.": "Sorry, something went wrong.",
+  "Support code": "Support code"
 }

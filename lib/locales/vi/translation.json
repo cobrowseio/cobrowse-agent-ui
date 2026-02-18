@@ -1,11 +1,19 @@
 {
-  "Online": "Trực tuyến",
-  "Last seen {{date, dateRelative}}": "Lần cuối xuất hiện {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Đã kết nối với </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} trên {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Đã ghi",
+  "{{device}} Device": "Thiết bị {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Đã kết nối với </0>{{deviceType}}",
   "Active": "Đang diễn ra",
   "Connect": "Kết nối",
-  "{{device}} Device": "Thiết bị {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} trên {{os}}"
+  "Devices": "Thiết bị",
+  "Digit {{digit}}": "Chữ số {{digit}}",
+  "Last seen {{date, dateRelative}}": "Lần cuối xuất hiện {{date, dateRelative}}",
+  "Loading...": "Đang tải...",
+  "No devices": "Không có thiết bị",
+  "No sessions": "Không có phiên",
+  "Online": "Trực tuyến",
+  "Recorded": "Đã ghi",
+  "Sessions": "Phiên",
+  "Sorry, something went wrong.": "Xin lỗi, đã xảy ra lỗi.",
+  "Support code": "Mã hỗ trợ"
 }

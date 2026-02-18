@@ -1,11 +1,19 @@
 {
-  "Online": "В мережі",
-  "Last seen {{date, dateRelative}}": "Останній раз був в мережі {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Підключено до </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} на {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Записано",
+  "{{device}} Device": "Пристрій {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Підключено до </0>{{deviceType}}",
   "Active": "Активний",
   "Connect": "Підключитися",
-  "{{device}} Device": "Пристрій {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} на {{os}}"
+  "Devices": "Пристрої",
+  "Digit {{digit}}": "Цифра {{digit}}",
+  "Last seen {{date, dateRelative}}": "Останній раз був в мережі {{date, dateRelative}}",
+  "Loading...": "Завантаження...",
+  "No devices": "Немає пристроїв",
+  "No sessions": "Немає сеансів",
+  "Online": "В мережі",
+  "Recorded": "Записано",
+  "Sessions": "Сеанси",
+  "Sorry, something went wrong.": "Вибачте, щось пішло не так.",
+  "Support code": "Код підтримки"
 }

@@ -1,11 +1,19 @@
 {
-  "Online": "ऑनलाइन",
-  "Last seen {{date, dateRelative}}": "आखिरी बार देखा गया {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>से जुड़ा </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{os}} पर {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "रिकॉर्ड किया गया",
+  "{{device}} Device": "{{device}} उपकरण",
+  "<0>Connected to </0>{{deviceType}}": "<0>से जुड़ा </0>{{deviceType}}",
   "Active": "सक्रिय",
   "Connect": "कनेक्ट करें",
-  "{{device}} Device": "{{device}} उपकरण",
-  "{{browser}} on {{os}}": "{{os}} पर {{browser}}"
+  "Devices": "उपकरण",
+  "Digit {{digit}}": "अंक {{digit}}",
+  "Last seen {{date, dateRelative}}": "आखिरी बार देखा गया {{date, dateRelative}}",
+  "Loading...": "लोड हो रहा है...",
+  "No devices": "कोई उपकरण नहीं",
+  "No sessions": "कोई सत्र नहीं",
+  "Online": "ऑनलाइन",
+  "Recorded": "रिकॉर्ड किया गया",
+  "Sessions": "सत्र",
+  "Sorry, something went wrong.": "क्षमा करें, कुछ गलत हो गया।",
+  "Support code": "सहायता कोड"
 }

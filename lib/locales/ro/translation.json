@@ -1,11 +1,19 @@
 {
-  "Online": "Online",
-  "Last seen {{date, dateRelative}}": "Văzut ultima dată {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Conectat la </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} pe {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Înregistrat",
+  "{{device}} Device": "Dispozitiv {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Conectat la </0>{{deviceType}}",
   "Active": "Activ",
   "Connect": "Conectează",
-  "{{device}} Device": "Dispozitiv {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} pe {{os}}"
+  "Devices": "Dispozitive",
+  "Digit {{digit}}": "Cifra {{digit}}",
+  "Last seen {{date, dateRelative}}": "Văzut ultima dată {{date, dateRelative}}",
+  "Loading...": "Se încarcă...",
+  "No devices": "Niciun dispozitiv",
+  "No sessions": "Nicio sesiune",
+  "Online": "Online",
+  "Recorded": "Înregistrat",
+  "Sessions": "Sesiuni",
+  "Sorry, something went wrong.": "Ne pare rău, ceva nu a funcționat corect.",
+  "Support code": "Cod de asistență"
 }

@@ -1,11 +1,19 @@
 {
-  "Online": "온라인",
-  "Last seen {{date, dateRelative}}": "마지막 온라인 {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>연결됨: </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{os}}의 {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "기록됨",
+  "{{device}} Device": "{{device}} 기기",
+  "<0>Connected to </0>{{deviceType}}": "<0>연결됨: </0>{{deviceType}}",
   "Active": "세션 진행 중",
   "Connect": "연결",
-  "{{device}} Device": "{{device}} 기기",
-  "{{browser}} on {{os}}": "{{os}}의 {{browser}}"
+  "Devices": "기기",
+  "Digit {{digit}}": "숫자 {{digit}}",
+  "Last seen {{date, dateRelative}}": "마지막 온라인 {{date, dateRelative}}",
+  "Loading...": "로딩 중...",
+  "No devices": "기기 없음",
+  "No sessions": "세션 없음",
+  "Online": "온라인",
+  "Recorded": "기록됨",
+  "Sessions": "세션",
+  "Sorry, something went wrong.": "죄송합니다. 문제가 발생했습니다.",
+  "Support code": "지원 코드"
 }

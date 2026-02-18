@@ -1,11 +1,19 @@
 {
-  "Online": "Na spletu",
-  "Last seen {{date, dateRelative}}": "Nazadnje viden {{date, dateRelative}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Povezan z </0>{{deviceType}}",
+  "{{browser}} on {{os}}": "{{browser}} na {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
-  "Recorded": "Posneto",
+  "{{device}} Device": "Naprava {{device}}",
+  "<0>Connected to </0>{{deviceType}}": "<0>Povezan z </0>{{deviceType}}",
   "Active": "Aktivno",
   "Connect": "Poveži se",
-  "{{device}} Device": "Naprava {{device}}",
-  "{{browser}} on {{os}}": "{{browser}} na {{os}}"
+  "Devices": "Naprave",
+  "Digit {{digit}}": "Števka {{digit}}",
+  "Last seen {{date, dateRelative}}": "Nazadnje viden {{date, dateRelative}}",
+  "Loading...": "Nalaganje...",
+  "No devices": "Ni naprav",
+  "No sessions": "Ni sej",
+  "Online": "Na spletu",
+  "Recorded": "Posneto",
+  "Sessions": "Seje",
+  "Sorry, something went wrong.": "Oprostite, prišlo je do napake.",
+  "Support code": "Koda za podporo"
 }
