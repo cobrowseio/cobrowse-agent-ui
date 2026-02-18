@@ -142,7 +142,7 @@ const CodeEntry = ({ ref, className, inputClassName, focusOnRender = false, onCo
     }
 
     const { clipboardData } = event
-    const pastedData = clipboardData.getData('Text')
+    const pastedData = clipboardData.getData('Text').trim()
 
     // Exit early if the pasted data contains anything other than just digits
     if (!/^[0-9]+$/.test(pastedData)) {
