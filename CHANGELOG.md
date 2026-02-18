@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.4.0...v1.4.1) (2026-02-18)
+
+
+### Bug Fixes
+
+* trim whitespace from pasted 6 digit code ([#40](https://github.com/cobrowseio/cobrowse-agent-ui/issues/40)) ([3ed8f79](https://github.com/cobrowseio/cobrowse-agent-ui/commit/3ed8f79598479aa2803a3dbe5444102349b387a7))
+
 ## [1.4.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.3.1...v1.4.0) (2026-02-17)
 
 
