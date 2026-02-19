@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} على {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "جهاز {{device}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>متصل بـ </0>{{deviceType}}",
   "Active": "نشط",
   "Connect": "اتصال",
   "Devices": "الأجهزة",

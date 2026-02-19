@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} pe {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "Dispozitiv {{device}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Conectat la </0>{{deviceType}}",
   "Active": "Activ",
   "Connect": "Conectează",
   "Devices": "Dispozitive",

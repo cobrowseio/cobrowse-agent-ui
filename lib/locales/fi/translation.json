@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} käyttöjärjestelmässä {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}}-laite",
-  "<0>Connected to </0>{{deviceType}}": "<0>Yhdistetty laitteeseen </0>{{deviceType}}",
   "Active": "Aktiivinen",
   "Connect": "Yhdistä",
   "Devices": "Laitteet",

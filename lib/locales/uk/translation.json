@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} на {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "Пристрій {{device}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Підключено до </0>{{deviceType}}",
   "Active": "Активний",
   "Connect": "Підключитися",
   "Devices": "Пристрої",

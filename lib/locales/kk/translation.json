@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{os}} жүйесіндегі {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}} құрылғысы",
-  "<0>Connected to </0>{{deviceType}}": "<0>Қосылған: </0>{{deviceType}}",
   "Active": "Белсенді",
   "Connect": "Қосылу",
   "Devices": "Құрылғылар",

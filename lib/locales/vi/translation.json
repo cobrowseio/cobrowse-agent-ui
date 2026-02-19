@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} trên {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "Thiết bị {{device}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Đã kết nối với </0>{{deviceType}}",
   "Active": "Đang diễn ra",
   "Connect": "Kết nối",
   "Devices": "Thiết bị",

@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{os}}上の{{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}}デバイス",
-  "<0>Connected to </0>{{deviceType}}": "<0>接続先：</0>{{deviceType}}",
   "Active": "セッション中",
   "Connect": "接続",
   "Devices": "デバイス",

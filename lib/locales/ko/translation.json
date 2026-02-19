@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{os}}의 {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}} 기기",
-  "<0>Connected to </0>{{deviceType}}": "<0>연결됨: </0>{{deviceType}}",
   "Active": "세션 진행 중",
   "Connect": "연결",
   "Devices": "기기",
