@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{os}} पर {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}} उपकरण",
-  "<0>Connected to </0>{{deviceType}}": "<0>से जुड़ा </0>{{deviceType}}",
   "Active": "सक्रिय",
   "Connect": "कनेक्ट करें",
   "Devices": "उपकरण",

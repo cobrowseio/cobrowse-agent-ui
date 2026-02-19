@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} på {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}}-enhet",
-  "<0>Connected to </0>{{deviceType}}": "<0>Ansluten till </0>{{deviceType}}",
   "Active": "Aktiv",
   "Connect": "Anslut",
   "Devices": "Enheter",

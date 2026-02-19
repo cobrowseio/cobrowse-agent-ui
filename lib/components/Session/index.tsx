@@ -4,7 +4,6 @@ import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
 import i18n from '@/i18n'
-import { Trans } from 'react-i18next'
 import styles from './Session.module.css'
 
 const DEFAULT_TAG = 'div' as const
@@ -45,10 +44,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
     >
       <span className={styles.details}>
         <span>
-          <Trans i18n={i18n}>
-            <span className='device-prefix'>Connected to </span>
-            {{ deviceType: deviceType(session.device) }}
-          </Trans>
+          {deviceType(session.device)}
         </span>
         <span className={styles.subdetails}>
           <span className={styles.activated}>

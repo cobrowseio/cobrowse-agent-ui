@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} operatsioonisüsteemil {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}} seade",
-  "<0>Connected to </0>{{deviceType}}": "<0>Ühendatud </0>{{deviceType}}",
   "Active": "Aktiivne",
   "Connect": "Ühenda",
   "Devices": "Seadmed",

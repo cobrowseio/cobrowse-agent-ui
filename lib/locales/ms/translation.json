@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} pada {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "Peranti {{device}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Disambungkan ke </0>{{deviceType}}",
   "Active": "Aktif",
   "Connect": "Sambung",
   "Devices": "Peranti",

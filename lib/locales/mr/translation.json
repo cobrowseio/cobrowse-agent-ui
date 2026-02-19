@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{os}} वर {{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}} डिव्हाइस",
-  "<0>Connected to </0>{{deviceType}}": "<0>जोडलेले आहे </0>{{deviceType}}",
   "Active": "सक्रिय",
   "Connect": "जोडा",
   "Devices": "डिव्हाइसेस",

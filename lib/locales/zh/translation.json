@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{os}}上的{{browser}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}}设备",
-  "<0>Connected to </0>{{deviceType}}": "<0>已连接到</0>{{deviceType}}",
   "Active": "共享中",
   "Connect": "连接",
   "Devices": "设备",

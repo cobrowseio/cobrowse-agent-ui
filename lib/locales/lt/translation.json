@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} sistemoje {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}} įrenginys",
-  "<0>Connected to </0>{{deviceType}}": "<0>Prisijungta prie </0>{{deviceType}}",
   "Active": "Aktyvus",
   "Connect": "Prisijungti",
   "Devices": "Įrenginiai",

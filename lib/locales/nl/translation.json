@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} op {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "{{device}}-apparaat",
-  "<0>Connected to </0>{{deviceType}}": "<0>Verbonden met </0>{{deviceType}}",
   "Active": "Actief",
   "Connect": "Verbinden",
   "Devices": "Apparaten",

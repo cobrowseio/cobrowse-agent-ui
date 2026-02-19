@@ -2,7 +2,6 @@
   "{{browser}} on {{os}}": "{{browser}} na {{os}}",
   "{{date, dateRelative}}": "{{date, dateRelative}}",
   "{{device}} Device": "Zařízení {{device}}",
-  "<0>Connected to </0>{{deviceType}}": "<0>Připojeno k </0>{{deviceType}}",
   "Active": "Aktivní",
   "Connect": "Připojit",
   "Devices": "Zařízení",
