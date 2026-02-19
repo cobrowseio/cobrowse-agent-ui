@@ -4,7 +4,6 @@ import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
 import i18n from '@/i18n'
-import { Trans } from 'react-i18next'
 import styles from './Session.module.css'
 
 const DEFAULT_TAG = 'div' as const
