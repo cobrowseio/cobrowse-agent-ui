@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.4.1...v1.4.2) (2026-02-19)
+
+
+### Bug Fixes
+
+* remove "Connected to" prefix ([#42](https://github.com/cobrowseio/cobrowse-agent-ui/issues/42)) ([65ba169](https://github.com/cobrowseio/cobrowse-agent-ui/commit/65ba1693b0732c17ee89f2747ed07fcb08d71e51))
+
 ### [1.4.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.4.0...v1.4.1) (2026-02-18)
 
 
