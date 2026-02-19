@@ -45,10 +45,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
     >
       <span className={styles.details}>
         <span>
-          <Trans i18n={i18n}>
-            <span className='device-prefix'>Connected to </span>
-            {{ deviceType: deviceType(session.device) }}
-          </Trans>
+          {deviceType(session.device)}
         </span>
         <span className={styles.subdetails}>
           <span className={styles.activated}>
