@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.4.2...v1.5.0) (2026-02-20)
+
+
+### Features
+
+* add a Frame component ([#43](https://github.com/cobrowseio/cobrowse-agent-ui/issues/43)) ([a5f37fe](https://github.com/cobrowseio/cobrowse-agent-ui/commit/a5f37fef75686f150477d565b4550e3a6b0f0d21))
+* add integrations CodeEntry component ([#44](https://github.com/cobrowseio/cobrowse-agent-ui/issues/44)) ([562985f](https://github.com/cobrowseio/cobrowse-agent-ui/commit/562985f84d32c30291ea6fffd742eded6dbf2628))
+
 ### [1.4.2](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.4.1...v1.4.2) (2026-02-19)
 
 
