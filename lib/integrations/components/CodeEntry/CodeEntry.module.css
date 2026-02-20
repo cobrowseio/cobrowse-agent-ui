@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.supportLabel {
+  display: none;
+}
+
+@media screen and (min-width: 300px) {
+  .supportLabel {
+      display: inline;
+  }
+}
