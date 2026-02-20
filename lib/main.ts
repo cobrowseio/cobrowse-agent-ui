@@ -7,6 +7,7 @@ import SmartConnectButtonComponent from '@/components/SmartConnectButton'
 import UserIconComponent from '@/components/UserIcon'
 import RefreshButtonComponent from '@/components/RefreshButton'
 import LoaderComponent from '@/components/Loader'
+import FrameComponent from '@/components/Frame'
 import i18nInstance from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -16,6 +17,7 @@ export type { SessionData, SessionProps } from '@/components/Session'
 export type { SmartConnectButtonProps } from '@/components/SmartConnectButton'
 export type { RefreshButtonProps } from '@/components/RefreshButton'
 export type { LoaderProps } from '@/components/Loader'
+export type { FrameProps } from '@/components/Frame'
 
 export const CodeEntry = CodeEntryComponent
 export const ExternalLink = ExternalLinkComponent
@@ -26,4 +28,5 @@ export const SmartConnectButton = SmartConnectButtonComponent
 export const UserIcon = UserIconComponent
 export const RefreshButton = RefreshButtonComponent
 export const Loader = LoaderComponent
+export const Frame = FrameComponent
 export const i18n = i18nInstance
