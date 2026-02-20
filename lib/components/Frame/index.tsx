@@ -72,8 +72,9 @@ const Frame = ({
       }
 
       context.on('session.loaded', (session: Session) => {
-        sessionActivated = false
+        sessionActivated = session.isActive()
         sessionEnded = false
+
         onSessionLoadedRef.current?.(session)
       })
 
