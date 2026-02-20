@@ -2,33 +2,6 @@ import { useEffect, useRef, type ComponentPropsWithoutRef } from 'react'
 import type CobrowseAPI from 'cobrowse-agent-sdk'
 import type { RemoteContext, Session } from 'cobrowse-agent-sdk'
 
-const DEFAULT_ERROR_MESSAGE = 'Unknown error'
-
-const getErrorMessage = (error: unknown): string => {
-  // Simple error string
-  if (typeof error === 'string') {
-    return error
-  }
-
-  // Built-in Error instance
-  if (error instanceof Error && error.message.length > 0) {
-    return error.message
-  }
-
-  // Frontend's PostMessageV2 error format (`{ id: string, message: string }`)
-  if (
-    typeof error === 'object' &&
-    error !== null &&
-    'message' in error &&
-    typeof error.message === 'string' &&
-    error.message.length > 0
-  ) {
-    return error.message
-  }
-
-  return DEFAULT_ERROR_MESSAGE
-}
-
 type IframeProps = Omit<ComponentPropsWithoutRef<'iframe'>, 'frameBorder' | 'onError' | 'src'>
 
 export interface FrameProps extends IframeProps {
@@ -38,7 +11,7 @@ export interface FrameProps extends IframeProps {
   onSessionUpdated?: (session: Session) => void
   onSessionActivated?: (session: Session) => void
   onSessionEnded?: (session: Session) => void
-  onError?: (message: string) => void
+  onError?: (error: unknown) => void
 }
 
 const Frame = ({
@@ -85,7 +58,7 @@ const Frame = ({
         context = await cobrowse.attachContext(iframeRef.current)
       } catch (error) {
         if (!cancelled) {
-          onErrorRef.current?.(getErrorMessage(error))
+          onErrorRef.current?.(error)
         }
 
         return
@@ -119,7 +92,7 @@ const Frame = ({
       })
 
       context.on('error', (error: unknown) => {
-        onErrorRef.current?.(getErrorMessage(error))
+        onErrorRef.current?.(error)
       })
     }
 
