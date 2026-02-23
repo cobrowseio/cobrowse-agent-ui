@@ -8,6 +8,7 @@ import UserIconComponent from '@/components/UserIcon'
 import RefreshButtonComponent from '@/components/RefreshButton'
 import LoaderComponent from '@/components/Loader'
 import FrameComponent from '@/components/Frame'
+import ConnectDeviceComponent from '@/components/ConnectDevice'
 import i18nInstance from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -18,6 +19,7 @@ export type { SmartConnectButtonProps } from '@/components/SmartConnectButton'
 export type { RefreshButtonProps } from '@/components/RefreshButton'
 export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
+export type { ConnectDeviceProps } from '@/components/ConnectDevice'
 
 export const CodeEntry = CodeEntryComponent
 export const ExternalLink = ExternalLinkComponent
@@ -29,4 +31,5 @@ export const UserIcon = UserIconComponent
 export const RefreshButton = RefreshButtonComponent
 export const Loader = LoaderComponent
 export const Frame = FrameComponent
+export const ConnectDevice = ConnectDeviceComponent
 export const i18n = i18nInstance
