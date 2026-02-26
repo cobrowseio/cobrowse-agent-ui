@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import LoaderIcon from '@/icons/loader.svg?react'
 import styles from './Loader.module.css'
 
 export interface LoaderProps {
@@ -12,7 +11,7 @@ const Loader = ({ children }: LoaderProps) => {
 
   return (
     <div role='status' aria-label={t('Loading...')} className={styles.root}>
-      {children ?? <LoaderIcon className={styles.icon} />}
+      {children ?? <div className={styles.spinner} />}
     </div>
   )
 }
