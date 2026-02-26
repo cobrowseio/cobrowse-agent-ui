@@ -9,6 +9,7 @@ import RefreshButtonComponent from '@/components/RefreshButton'
 import LoaderComponent from '@/components/Loader'
 import FrameComponent from '@/components/Frame'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
+import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
 import i18nInstance from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -20,6 +21,7 @@ export type { RefreshButtonProps } from '@/components/RefreshButton'
 export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
+export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
 
 export const CodeEntry = CodeEntryComponent
 export const ExternalLink = ExternalLinkComponent
@@ -32,4 +34,6 @@ export const RefreshButton = RefreshButtonComponent
 export const Loader = LoaderComponent
 export const Frame = FrameComponent
 export const ConnectDevice = ConnectDeviceComponent
+export const CobrowseProvider = CobrowseProviderComponent
+export const useCobrowse = useCobrowseHook
 export const i18n = i18nInstance

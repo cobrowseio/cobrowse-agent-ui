@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import type CobrowseAPI from 'cobrowse-agent-sdk'
 import type { Session } from 'cobrowse-agent-sdk'
 import { useTranslation } from 'react-i18next'
 import styles from './ConnectDevice.module.css'
@@ -9,7 +8,6 @@ import useConnectDevice, { MAX_PUSH_ATTEMPTS, PUSH_RETRY_MS } from './useConnect
 export { MAX_PUSH_ATTEMPTS, PUSH_RETRY_MS }
 
 export interface ConnectDeviceProps {
-  cobrowse: CobrowseAPI,
   deviceId: string,
   onConnectAttempt?: (attempt: number) => void
   onConnected?: (session: Session) => void
@@ -24,7 +22,6 @@ export interface ConnectDeviceProps {
 }
 
 const ConnectDevice = ({
-  cobrowse,
   deviceId,
   onConnectAttempt,
   onConnected,
@@ -39,7 +36,6 @@ const ConnectDevice = ({
 }: ConnectDeviceProps) => {
   const { t } = useTranslation()
   const { cancel } = useConnectDevice({
-    cobrowse,
     deviceId,
     onConnectAttempt,
     onConnected,

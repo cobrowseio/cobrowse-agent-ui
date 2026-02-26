@@ -1,11 +1,10 @@
 import { useEffect, useRef, type ComponentPropsWithoutRef } from 'react'
-import type CobrowseAPI from 'cobrowse-agent-sdk'
 import type { RemoteContext, Session } from 'cobrowse-agent-sdk'
+import { useCobrowse } from '@/components/CobrowseProvider'
 
 type IframeProps = Omit<ComponentPropsWithoutRef<'iframe'>, 'frameBorder' | 'onError' | 'src'>
 
 export interface FrameProps extends IframeProps {
-  cobrowse: CobrowseAPI
   src: string
   onSessionLoaded?: (session: Session) => void
   onSessionUpdated?: (session: Session) => void
@@ -15,7 +14,6 @@ export interface FrameProps extends IframeProps {
 }
 
 const Frame = ({
-  cobrowse,
   src,
   onSessionLoaded,
   onSessionUpdated,
@@ -28,6 +26,7 @@ const Frame = ({
   style,
   ...props
 }: FrameProps) => {
+  const cobrowse = useCobrowse()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const onSessionLoadedRef = useRef(onSessionLoaded)
   const onSessionUpdatedRef = useRef(onSessionUpdated)

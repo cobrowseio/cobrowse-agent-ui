@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useRef } from 'react'
-import type CobrowseAPI from 'cobrowse-agent-sdk'
 import type { Device, Session } from 'cobrowse-agent-sdk'
 import useStableCallback from '@/hooks/useStableCallback'
+import { useCobrowse } from '@/components/CobrowseProvider'
 
 export const MAX_PUSH_ATTEMPTS = 5
 export const PUSH_RETRY_MS = 4000
 
 export interface UseConnectDeviceOptions {
-  cobrowse: CobrowseAPI
   deviceId: string
   onConnectAttempt?: (attempt: number) => void
   onConnected?: (session: Session) => void
@@ -19,7 +18,6 @@ export interface UseConnectDeviceOptions {
 }
 
 const useConnectDevice = ({
-  cobrowse,
   deviceId,
   onConnectAttempt,
   onConnected,
@@ -29,6 +27,7 @@ const useConnectDevice = ({
   maxPushAttempts = MAX_PUSH_ATTEMPTS,
   pushRetryMs = PUSH_RETRY_MS
 }: UseConnectDeviceOptions) => {
+  const cobrowse = useCobrowse()
   const deviceRef = useRef<Device>(null)
   const sessionRef = useRef<Session>(null)
   const sessionConnectedRef = useRef(false)
