@@ -90,7 +90,7 @@ const useConnectDevice = ({
     }
 
     try {
-      await deviceRef.current.notify({ session: sessionRef.current, attempt }, { signal: abortController.signal })
+      await deviceRef.current.notify({ session: sessionRef.current, attempt }, undefined, { signal: abortController.signal })
     } catch (error) {
       triggerPushError(error)
     }
@@ -110,7 +110,7 @@ const useConnectDevice = ({
       sessionEndedRef.current = false
 
       const [region, device] = await Promise.all([
-        cobrowse.regions.closest({ signal }),
+        cobrowse.regions.closest(undefined, { signal }),
         cobrowse.devices.get(deviceId, undefined, { signal })
       ])
 
