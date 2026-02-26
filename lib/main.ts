@@ -6,6 +6,7 @@ import SessionComponent from '@/components/Session'
 import SmartConnectButtonComponent from '@/components/SmartConnectButton'
 import UserIconComponent from '@/components/UserIcon'
 import RefreshButtonComponent from '@/components/RefreshButton'
+import CancelButtonComponent from '@/components/CancelButton'
 import LoaderComponent from '@/components/Loader'
 import FrameComponent from '@/components/Frame'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
@@ -18,6 +19,7 @@ export type { DeviceData, DeviceProps } from '@/components/Device'
 export type { SessionData, SessionProps } from '@/components/Session'
 export type { SmartConnectButtonProps } from '@/components/SmartConnectButton'
 export type { RefreshButtonProps } from '@/components/RefreshButton'
+export type { CancelButtonProps } from '@/components/CancelButton'
 export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
@@ -31,6 +33,7 @@ export const Session = SessionComponent
 export const SmartConnectButton = SmartConnectButtonComponent
 export const UserIcon = UserIconComponent
 export const RefreshButton = RefreshButtonComponent
+export const CancelButton = CancelButtonComponent
 export const Loader = LoaderComponent
 export const Frame = FrameComponent
 export const ConnectDevice = ConnectDeviceComponent

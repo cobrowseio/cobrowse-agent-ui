@@ -1,13 +1,15 @@
-.cancelButton {
-  appearance: none;
-  height: 40px;
-  border: none;
-  border-radius: 62px;
-  background-color: #b91c1c;
-  color: #ffffff;
-  padding: 4px 20px;
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: #0e0c26;
+  color: white;
 }
 
-.cancelButton:hover {
-  background-color: #dc2626;
+.statusMessage {
+  font-size: 1.2rem;
 }
