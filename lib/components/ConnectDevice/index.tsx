@@ -4,10 +4,26 @@ import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import BaseLoader from '@/components/Loader'
 import CancelButton, { type CancelButtonProps } from '@/components/CancelButton'
-import useConnectDevice, { MAX_PUSH_ATTEMPTS, PUSH_RETRY_MS } from './useConnectDevice'
+import useConnectDevice, {
+  ERROR_DEVICE_NOT_FOUND,
+  ERROR_PUSH_ATTEMPT_LIMIT_REACHED,
+  ERROR_PUSH_ERROR,
+  ERROR_SESSION_ERROR,
+  ERROR_SESSION_NOT_FOUND,
+  MAX_PUSH_ATTEMPTS,
+  PUSH_RETRY_MS
+} from './useConnectDevice'
 import styles from './ConnectDevice.module.css'
 
-export { MAX_PUSH_ATTEMPTS, PUSH_RETRY_MS }
+export {
+  ERROR_DEVICE_NOT_FOUND,
+  ERROR_PUSH_ATTEMPT_LIMIT_REACHED,
+  ERROR_PUSH_ERROR,
+  ERROR_SESSION_ERROR,
+  ERROR_SESSION_NOT_FOUND,
+  MAX_PUSH_ATTEMPTS,
+  PUSH_RETRY_MS
+}
 
 export interface ConnectDeviceStatusMessageProps {
   attempt: number

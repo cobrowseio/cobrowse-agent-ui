@@ -5,6 +5,11 @@ import { useCobrowse } from '@/components/CobrowseProvider'
 
 export const MAX_PUSH_ATTEMPTS = 5
 export const PUSH_RETRY_MS = 4000
+export const ERROR_PUSH_ERROR = 'push_error'
+export const ERROR_PUSH_ATTEMPT_LIMIT_REACHED = 'push_attempt_limit_reached'
+export const ERROR_DEVICE_NOT_FOUND = 'device_not_found'
+export const ERROR_SESSION_NOT_FOUND = 'session_not_found'
+export const ERROR_SESSION_ERROR = 'session_error'
 
 export interface UseConnectDeviceOptions {
   deviceId: string
@@ -61,7 +66,7 @@ const useConnectDevice = ({
 
   const triggerPushError = useCallback((error: unknown) => {
     if (error instanceof Error) {
-      onErrorCallback({ id: 'push_error', message: error.message })
+      onErrorCallback({ id: ERROR_PUSH_ERROR, message: error.message })
     } else {
       onErrorCallback(error)
     }
@@ -71,19 +76,19 @@ const useConnectDevice = ({
     onConnectAttemptCallback(attempt)
 
     if (attempt >= maxPushAttempts) {
-      triggerPushError({ id: 'push_attempt_limit_reached', message: 'Push attempt limit reached.' })
+      triggerPushError({ id: ERROR_PUSH_ATTEMPT_LIMIT_REACHED, message: 'Push attempt limit reached.' })
 
       return
     }
 
     if (!deviceRef.current) {
-      triggerPushError({ id: 'device_not_found', message: 'Device not found.' })
+      triggerPushError({ id: ERROR_DEVICE_NOT_FOUND, message: 'Device not found.' })
 
       return
     }
 
     if (!sessionRef.current) {
-      triggerPushError({ id: 'session_not_found', message: 'Session not found.' })
+      triggerPushError({ id: ERROR_SESSION_NOT_FOUND, message: 'Session not found.' })
 
       return
     }
@@ -129,9 +134,9 @@ const useConnectDevice = ({
       await session.subscribe()
     } catch (error) {
       if (error instanceof Error) {
-        onErrorCallback({ id: 'session_error', message: error.message })
+        onErrorCallback({ id: ERROR_SESSION_ERROR, message: error.message })
       } else {
-        onErrorCallback({ id: 'session_error', message: 'The session could not be created.' })
+        onErrorCallback({ id: ERROR_SESSION_ERROR, message: 'The session could not be created.' })
       }
     }
   }, [cobrowse, deviceId, handleSessionEnded, handleSessionUpdated, onErrorCallback])
