@@ -398,3 +398,7 @@ main {
   color: #0f172a;
   transform: rotate(45deg);
 }
+
+.connect-device-demo {
+  height: 200px;
+}
