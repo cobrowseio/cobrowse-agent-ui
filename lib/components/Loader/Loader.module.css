@@ -1,17 +1,31 @@
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .root {
   display: flex;
   justify-content: center;
 }
 
-.icon {
-  width: 50px;
-  height: 50px;
-  animation: spin 2000ms linear infinite;
-  color: #040d3c;
+.spinner {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  animation: spin 4s infinite;
+}
+
+.spinner::before,
+.spinner::after {
+  content: '';
+  grid-area: 1 / 1;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+.spinner::after {
+  border: 4px solid;
+  border-color: #0e0c26 #0e0c26 #d7dae9 #d7dae9;
+  animation-direction: reverse;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(1turn);
+  }
 }

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   CodeEntry,
+  ConnectDevice,
+  CobrowseProvider,
   Device,
   type DeviceData,
   PlatformIcon,
@@ -12,6 +14,7 @@ import {
 } from '../lib/main'
 import { Tabs } from '../lib/integrations'
 import type { ReactNode } from 'react'
+import type CobrowseAPI from 'cobrowse-agent-sdk'
 import type { DeviceInfo } from 'cobrowse-agent-sdk'
 
 interface SampleDeviceInfo {
@@ -111,6 +114,50 @@ const users = [
   { id: 'u5', name: 'A B C D', colour: '#e0f7e9' }
 ]
 
+const createMockCobrowse = (scenario: 'success' | 'timeout') => {
+  const createMockSession = () => {
+    const handlers = new Map<string, Array<(mock: unknown) => void>>()
+    let state = 'pending'
+    let subscribeTimer: ReturnType<typeof setTimeout> | undefined
+
+    const session = {
+      get state () { return state },
+      on (event: string, handler: (mock: unknown) => void) {
+        const list = handlers.get(event) ?? []
+        list.push(handler)
+        handlers.set(event, list)
+        return session
+      },
+      subscribe () {
+        if (scenario === 'success') {
+          subscribeTimer = setTimeout(() => {
+            state = 'active'
+            handlers.get('updated')?.forEach(fn => fn(session))
+          }, 11000)
+        }
+        return Promise.resolve()
+      },
+      end () {
+        clearTimeout(subscribeTimer)
+        state = 'ended'
+        handlers.get('ended')?.forEach(fn => fn(session))
+        return Promise.resolve()
+      }
+    }
+
+    return session
+  }
+
+  return {
+    regions: { closest: () => Promise.resolve({ id: 'mock-region' }) },
+    devices: { get: () => Promise.resolve({ custom_data: {}, notify: () => Promise.resolve() }) },
+    sessions: { create: () => Promise.resolve(createMockSession()) }
+  } as unknown as CobrowseAPI
+}
+
+const MOCK_COBROWSE_SUCCESS = createMockCobrowse('success')
+const MOCK_COBROWSE_TIMEOUT = createMockCobrowse('timeout')
+
 const Section = ({ title, subtitle, children }: { title: string, subtitle?: string, children: ReactNode }) => (
   <section className='demo-section'>
     <h2>{title}</h2>
@@ -148,6 +195,10 @@ export default function KitchenSink () {
   const [recordingInfo, setRecordingInfo] = useState('')
   const [language, setLanguage] = useState(i18n.language || 'en-us')
   const [direction, setDirection] = useState('ltr')
+  const [connectLog, setConnectLog] = useState<string[]>([])
+  const [connectSuccessKey, setConnectSuccessKey] = useState(0)
+  const [connectSuccessConnected, setConnectSuccessConnected] = useState(false)
+  const [connectTimeoutKey, setConnectTimeoutKey] = useState(0)
   const [tabsDevices, setTabsDevices] = useState<DeviceData[] | null>(deviceSamples.map(asDevice))
   const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(sessionSamples.map(asSession))
 
@@ -194,6 +245,11 @@ export default function KitchenSink () {
 
   const toggleDirection = useCallback(() => {
     setDirection((prev) => (prev === 'ltr' ? 'rtl' : 'ltr'))
+  }, [])
+
+  const handleConnectEvent = useCallback((label: string) => {
+    const timestamp = new Date().toLocaleTimeString()
+    setConnectLog(prev => [...prev, `${timestamp} • ${label}`])
   }, [])
 
   const handleTabsRefresh = useCallback(() => {
@@ -350,6 +406,86 @@ export default function KitchenSink () {
             </div>
           ))}
         </div>
+      </Section>
+
+      <Section
+        title='ConnectDevice'
+        subtitle='Composable connection flow with status messages, loader, and cancel button.'
+      >
+        <div className='panel'>
+          <h3>Success flow</h3>
+          {connectSuccessConnected
+            ? <div className='code-hint'>Session connected successfully.</div>
+            : connectSuccessKey > 0
+              ? (
+                <CobrowseProvider cobrowse={MOCK_COBROWSE_SUCCESS}>
+                  <ConnectDevice
+                    key={connectSuccessKey}
+                    className='connect-device-demo'
+                    deviceId='demo-1'
+                    maxPushAttempts={5}
+                    pushRetryMs={3000}
+                    onConnectAttempt={(attempt) => handleConnectEvent(`[success] Attempt ${attempt}`)}
+                    onConnected={() => {
+                      handleConnectEvent('[success] Connected')
+                      setConnectSuccessConnected(true)
+                    }}
+                    onCancelled={() => {
+                      handleConnectEvent('[success] Cancelled')
+                      setConnectSuccessKey(0)
+                    }}
+                    onEnded={() => handleConnectEvent('[success] Ended')}
+                    onError={(err) => handleConnectEvent(`[success] Error: ${JSON.stringify(err)}`)}
+                  >
+                    {(attempt, cancel) => (
+                      <>
+                        <ConnectDevice.Loader attempt={attempt} maxPushAttempts={5} />
+                        <ConnectDevice.StatusMessage attempt={attempt} maxPushAttempts={5} />
+                        <ConnectDevice.CancelButton onClick={cancel} />
+                      </>
+                    )}
+                  </ConnectDevice>
+                </CobrowseProvider>
+              )
+              : <button type='button' onClick={() => setConnectSuccessKey(k => k + 1)}>Start</button>}
+        </div>
+        <div className='panel'>
+          <h3>Timeout flow</h3>
+          {connectTimeoutKey > 0
+            ? (
+              <CobrowseProvider cobrowse={MOCK_COBROWSE_TIMEOUT}>
+                <ConnectDevice
+                  key={connectTimeoutKey}
+                  className='connect-device-demo'
+                  deviceId='demo-2'
+                  maxPushAttempts={3}
+                  pushRetryMs={2000}
+                  onConnectAttempt={(attempt) => handleConnectEvent(`[timeout] Attempt ${attempt}`)}
+                  onConnected={() => handleConnectEvent('[timeout] Connected')}
+                  onCancelled={() => {
+                    handleConnectEvent('[timeout] Cancelled')
+                    setConnectTimeoutKey(0)
+                  }}
+                  onEnded={() => handleConnectEvent('[timeout] Ended')}
+                  onError={(err) => handleConnectEvent(`[timeout] Error: ${JSON.stringify(err)}`)}
+                >
+                  {(attempt, cancel) => (
+                    <>
+                      <ConnectDevice.Loader attempt={attempt} maxPushAttempts={3} />
+                      <ConnectDevice.StatusMessage attempt={attempt} maxPushAttempts={3} />
+                      <ConnectDevice.CancelButton onClick={cancel} />
+                    </>
+                  )}
+                </ConnectDevice>
+              </CobrowseProvider>
+            )
+            : <button type='button' onClick={() => setConnectTimeoutKey(k => k + 1)}>Start</button>}
+        </div>
+        {connectLog.length > 0 && (
+          <div className='log'>
+            {connectLog.slice(-8).map((entry, i) => <div key={i}>{entry}</div>)}
+          </div>
+        )}
       </Section>
 
       <Section

@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: #0e0c26;
+  color: white;
+}
+
+.statusMessage {
+  font-size: 1.2rem;
+}
