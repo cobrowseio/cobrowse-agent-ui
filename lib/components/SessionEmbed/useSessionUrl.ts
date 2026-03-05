@@ -4,7 +4,6 @@ import type { SessionEmbedProps } from './types'
 
 interface UseSessionUrlProps {
   id: string
-  token?: string
   endAction?: SessionEmbedProps['endAction']
   popout?: SessionEmbedProps['popout']
   agentTools?: SessionEmbedProps['agentTools']
@@ -15,7 +14,6 @@ interface UseSessionUrlProps {
 
 export const useSessionUrl = ({
   id,
-  token,
   endAction,
   popout,
   agentTools,
@@ -27,13 +25,13 @@ export const useSessionUrl = ({
 
   return useMemo(() => {
     const paramEntries = Object.entries({
-      token: token ?? cobrowse.token,
       end_action: endAction,
       popout,
       agent_tools: agentTools,
       device_controls: deviceControls,
       session_details: sessionDetails,
-      messages
+      messages,
+      token_source: 'postMessage'
     }).flatMap(([name, value]) => value === undefined ? [] : [[name, value]])
 
     const query = new URLSearchParams(paramEntries)
@@ -41,9 +39,7 @@ export const useSessionUrl = ({
     return `${cobrowse.api}/session/${encodeURIComponent(id)}?${query.toString()}`
   }, [
     cobrowse.api,
-    cobrowse.token,
     id,
-    token,
     endAction,
     popout,
     agentTools,

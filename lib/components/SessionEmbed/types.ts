@@ -20,7 +20,6 @@ export type SessionEmbedOverlay = ReactElement<SessionEmbedOverlayProps>
 
 export interface SessionEmbedProps extends SessionEmbedFrameProps {
   id: string
-  token?: string
   endAction?: 'dashboard' | 'none' | 'code'
   popout?: 'none'
   agentTools?: 'none'

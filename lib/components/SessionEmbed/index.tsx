@@ -32,7 +32,6 @@ type SessionEmbedComponent = typeof SessionEmbedBase & {
 
 const SessionEmbedBase = ({
   id,
-  token,
   endAction,
   popout,
   agentTools,
@@ -69,7 +68,6 @@ const SessionEmbedBase = ({
 
   const url = useSessionUrl({
     id,
-    token,
     endAction,
     popout,
     agentTools,
