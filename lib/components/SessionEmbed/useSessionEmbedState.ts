@@ -15,12 +15,7 @@ const useSessionEmbedState = ({
   onActivated,
   onEnded
 }: UseSessionEmbedStateProps) => {
-  const [frameLoaded, setFrameLoaded] = useState(false)
   const [sessionState, setSessionState] = useState<Session['state'] | null>(null)
-
-  const handleFrameLoad = () => {
-    setFrameLoaded(true)
-  }
 
   const handleSessionLoaded = (session: Session) => {
     setSessionState(session.state)
@@ -43,9 +38,7 @@ const useSessionEmbedState = ({
   }
 
   return {
-    frameLoaded,
     sessionState,
-    handleFrameLoad,
     handleSessionLoaded,
     handleSessionUpdated,
     handleSessionActivated,
