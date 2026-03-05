@@ -1,12 +1,10 @@
 import { useMemo } from 'react'
 import { useCobrowse } from '@/components/CobrowseProvider'
-import type { FilterValue, SessionEmbedProps } from './types'
+import type { SessionEmbedProps } from './types'
 
 interface UseSessionUrlProps {
   id: string
   token?: string
-  filters?: Record<string, FilterValue>
-  navigation?: SessionEmbedProps['navigation']
   endAction?: SessionEmbedProps['endAction']
   popout?: SessionEmbedProps['popout']
   agentTools?: SessionEmbedProps['agentTools']
@@ -18,8 +16,6 @@ interface UseSessionUrlProps {
 export const useSessionUrl = ({
   id,
   token,
-  filters,
-  navigation,
   endAction,
   popout,
   agentTools,
@@ -32,7 +28,6 @@ export const useSessionUrl = ({
   return useMemo(() => {
     const paramEntries = Object.entries({
       token: token ?? cobrowse.token,
-      navigation,
       end_action: endAction,
       popout,
       agent_tools: agentTools,
@@ -41,26 +36,19 @@ export const useSessionUrl = ({
       messages
     }).flatMap(([name, value]) => value === undefined ? [] : [[name, value]])
 
-    const filterEntries = Object.entries(filters ?? {})
-      .flatMap(([name, value]) =>
-        name.length > 0 ? [[`filter_${name}`, String(value)]] : []
-      )
-
-    const query = new URLSearchParams([...paramEntries, ...filterEntries])
+    const query = new URLSearchParams(paramEntries)
 
     return `${cobrowse.api}/session/${encodeURIComponent(id)}?${query.toString()}`
   }, [
-    agentTools,
     cobrowse.api,
     cobrowse.token,
-    deviceControls,
-    endAction,
-    filters,
     id,
-    messages,
-    navigation,
+    token,
+    endAction,
     popout,
+    agentTools,
+    deviceControls,
     sessionDetails,
-    token
+    messages
   ])
 }
