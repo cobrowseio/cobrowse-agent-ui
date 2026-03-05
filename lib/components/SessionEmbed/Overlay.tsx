@@ -1,26 +1,23 @@
-import { useEffect } from 'react'
 import { useOverlayContext } from './OverlayContext'
-import styles from './SessionEmbed.module.css'
+import styles from './Overlay.module.css'
 import type { SessionEmbedOverlayProps } from './types'
 
 const Overlay = ({ state, children }: SessionEmbedOverlayProps) => {
-  const context = useOverlayContext()
+  const { session } = useOverlayContext()
 
-  useEffect(() => {
-    context.registerOverlayState(state)
+  const shouldRender = state === 'loading'
+    ? session === null
+    : session?.state === state
 
-    return () => {
-      context.unregisterOverlayState(state)
-    }
-  }, [context, state])
-
-  if (context.activeOverlayState !== state) {
+  if (!shouldRender) {
     return null
   }
 
   return (
-    <div className={styles.statusScreen}>
-      {children}
+    <div className={styles.root}>
+      <div className={styles.content}>
+        {children}
+      </div>
     </div>
   )
 }

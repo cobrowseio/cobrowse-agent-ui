@@ -1,30 +1,12 @@
-import { useState } from 'react'
 import Frame from '@/components/Frame'
-import Loader from '@/components/Loader'
-import clsx from 'clsx'
 import Overlay from './Overlay'
-import OverlayContext, { useOverlayRegistry } from './OverlayContext'
-import type { SessionEmbedOverlayState, SessionEmbedProps, SessionState } from './types'
+import OverlayContext from './OverlayContext'
+import type { SessionEmbedProps } from './types'
 import useSessionEmbedState from './useSessionEmbedState'
 import { useSessionUrl } from './useSessionUrl'
 import styles from './SessionEmbed.module.css'
 
-export type {
-  SessionEmbedOverlay,
-  SessionEmbedOverlayProps,
-  SessionEmbedOverlayState,
-  SessionEmbedProps
-} from './types'
-
-const getOverlayState = (frameLoaded: boolean, sessionState: SessionState | null): SessionEmbedOverlayState | null => {
-  if (!frameLoaded || !sessionState) {
-    return 'loading'
-  }
-
-  return sessionState === 'active'
-    ? null
-    : sessionState
-}
+export type { SessionEmbedOverlay, SessionEmbedOverlayProps, SessionEmbedOverlayState, SessionEmbedProps } from './types'
 
 type SessionEmbedComponent = typeof SessionEmbedBase & {
   Overlay: typeof Overlay
@@ -47,14 +29,8 @@ const SessionEmbedBase = ({
   children,
   ...props
 }: SessionEmbedProps) => {
-  const [frameLoaded, setFrameLoaded] = useState(false)
-
-  const handleFrameLoad = () => {
-    setFrameLoaded(true)
-  }
-
   const {
-    sessionState,
+    session,
     handleSessionLoaded,
     handleSessionUpdated,
     handleSessionActivated,
@@ -76,21 +52,12 @@ const SessionEmbedBase = ({
     messages
   })
 
-  const activeOverlayState = getOverlayState(frameLoaded, sessionState)
-  const {
-    overlayContextValue,
-    hasActiveCustomOverlay
-  } = useOverlayRegistry({ activeOverlayState })
-
-  const hideFrame = !frameLoaded || (activeOverlayState !== 'loading' && hasActiveCustomOverlay)
-
   return (
-    <OverlayContext.Provider value={overlayContextValue}>
+    <OverlayContext.Provider value={{ session }}>
       <div className={styles.root}>
         <Frame
           src={url}
-          className={clsx(className, hideFrame && styles.frameHidden)}
-          onLoad={handleFrameLoad}
+          className={className}
           onSessionLoaded={handleSessionLoaded}
           onSessionUpdated={handleSessionUpdated}
           onSessionActivated={handleSessionActivated}
@@ -98,13 +65,6 @@ const SessionEmbedBase = ({
           onError={onError}
           {...props}
         />
-        {activeOverlayState === 'loading' && !hasActiveCustomOverlay && (
-          <div className={styles.statusScreen}>
-            <div className={styles.defaultLoading}>
-              <Loader />
-            </div>
-          </div>
-        )}
         {children}
       </div>
     </OverlayContext.Provider>

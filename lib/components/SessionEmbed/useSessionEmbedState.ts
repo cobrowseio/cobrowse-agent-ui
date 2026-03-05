@@ -15,30 +15,38 @@ const useSessionEmbedState = ({
   onActivated,
   onEnded
 }: UseSessionEmbedStateProps) => {
+  // The Agent SDK mutates the `session` object so we track `session.state`
+  // separately to trigger re-renders that will toggle overlays
+  const [session, setSession] = useState<Session | null>(null)
   const [sessionState, setSessionState] = useState<Session['state'] | null>(null)
 
+  const handleSessionChange = (session: Session, callback?: (session: Session) => void) => {
+    if (sessionState !== session.state) {
+      setSession(session)
+      setSessionState(session.state)
+    }
+
+    callback?.(session)
+  }
+
   const handleSessionLoaded = (session: Session) => {
-    setSessionState(session.state)
-    onLoaded?.(session)
+    handleSessionChange(session, onLoaded)
   }
 
   const handleSessionUpdated = (session: Session) => {
-    setSessionState(session.state)
-    onUpdated?.(session)
+    handleSessionChange(session, onUpdated)
   }
 
   const handleSessionActivated = (session: Session) => {
-    setSessionState(session.state)
-    onActivated?.(session)
+    handleSessionChange(session, onActivated)
   }
 
   const handleSessionEnded = (session: Session) => {
-    setSessionState(session.state)
-    onEnded?.(session)
+    handleSessionChange(session, onEnded)
   }
 
   return {
-    sessionState,
+    session,
     handleSessionLoaded,
     handleSessionUpdated,
     handleSessionActivated,

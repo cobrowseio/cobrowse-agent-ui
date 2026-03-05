@@ -2,14 +2,12 @@ import type { ReactElement, ReactNode } from 'react'
 import type { Session } from 'cobrowse-agent-sdk'
 import type { FrameProps } from '@/components/Frame'
 
-export type SessionState = Session['state']
-
 type SessionEmbedFrameProps = Omit<
   FrameProps,
   'src' | 'onLoad' | 'onEnded' | 'onError' | 'onSessionLoaded' | 'onSessionUpdated' | 'onSessionActivated' | 'onSessionEnded'
 >
 
-export type SessionEmbedOverlayState = 'loading' | Exclude<SessionState, 'active'>
+export type SessionEmbedOverlayState = 'loading' | Session['state']
 
 export interface SessionEmbedOverlayProps {
   state: SessionEmbedOverlayState
