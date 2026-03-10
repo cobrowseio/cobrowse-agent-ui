@@ -10,7 +10,7 @@ import CancelButtonComponent from '@/components/CancelButton'
 import BlockingErrorComponent from '@/components/BlockingError'
 import LoaderComponent from '@/components/Loader'
 import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
-import SessionEmbedComponent from '@/components/SessionEmbed'
+import SessionEmbedComponent, { useOverlayContext as useOverlayContextHook } from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
 import i18nInstance from '@/i18n'
@@ -46,4 +46,5 @@ export const ConnectDevice = ConnectDeviceComponent
 export const CobrowseProvider = CobrowseProviderComponent
 export const useCobrowse = useCobrowseHook
 export const useRemoteContext = useRemoteContextHook
+export const useOverlayContext = useOverlayContextHook
 export const i18n = i18nInstance

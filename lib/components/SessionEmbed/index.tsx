@@ -1,6 +1,6 @@
 import Frame from '@/components/Frame'
 import Overlay from './Overlay'
-import OverlayContext from './OverlayContext'
+import OverlayContext, { useOverlayContext } from './OverlayContext'
 import type { SessionEmbedProps } from './types'
 import useSessionEmbedState from './useSessionEmbedState'
 import { useSessionUrl } from './useSessionUrl'
@@ -76,4 +76,5 @@ const SessionEmbed: SessionEmbedComponent = Object.assign(SessionEmbedBase, {
   Overlay
 })
 
+export { useOverlayContext }
 export default SessionEmbed

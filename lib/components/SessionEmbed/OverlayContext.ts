@@ -1,7 +1,7 @@
 import { createContext, use } from 'react'
 import type { Session } from 'cobrowse-agent-sdk'
 
-interface OverlayContextValue {
+export interface OverlayContextValue {
   session: Session | null
 }
 
@@ -11,7 +11,7 @@ export const useOverlayContext = () => {
   const overlayContext = use(OverlayContext)
 
   if (overlayContext === undefined) {
-    throw new Error('SessionEmbed.Overlay must be used within SessionEmbed.')
+    throw new Error('useOverlayContext must be used within SessionEmbed.')
   }
 
   return overlayContext
