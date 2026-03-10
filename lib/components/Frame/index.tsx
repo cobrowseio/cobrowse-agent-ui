@@ -1,11 +1,13 @@
-import { useEffect, useRef, type ComponentPropsWithoutRef } from 'react'
+import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import type { RemoteContext, Session } from 'cobrowse-agent-sdk'
 import { useCobrowse } from '@/components/CobrowseProvider'
+import RemoteContextProvider, { useRemoteContext } from './RemoteContext'
 
 type IframeProps = Omit<ComponentPropsWithoutRef<'iframe'>, 'frameBorder' | 'onError' | 'src'>
 
 export interface FrameProps extends IframeProps {
   src: string
+  children?: ReactNode
   onSessionLoaded?: (session: Session) => void
   onSessionUpdated?: (session: Session) => void
   onSessionActivated?: (session: Session) => void
@@ -24,10 +26,12 @@ const Frame = ({
   width = '100%',
   height = '100%',
   style,
+  children,
   ...props
 }: FrameProps) => {
   const cobrowse = useCobrowse()
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const [remoteContext, setRemoteContext] = useState<RemoteContext | null>(null)
   const onSessionLoadedRef = useRef(onSessionLoaded)
   const onSessionUpdatedRef = useRef(onSessionUpdated)
   const onSessionActivatedRef = useRef(onSessionActivated)
@@ -70,6 +74,8 @@ const Frame = ({
         return
       }
 
+      setRemoteContext(context)
+
       context.on('session.loaded', (session: Session) => {
         sessionActivated = session.isActive()
         sessionEnded = false
@@ -102,6 +108,7 @@ const Frame = ({
       cancelled = true
       sessionActivated = false
       sessionEnded = false
+      setRemoteContext(null)
 
       if (context) {
         context.destroy()
@@ -111,16 +118,20 @@ const Frame = ({
   }, [cobrowse])
 
   return (
-    <iframe
-      ref={iframeRef}
-      title={title}
-      width={width}
-      height={height}
-      src={src}
-      style={{ border: 0, ...style }}
-      {...props}
-    />
+    <RemoteContextProvider.Provider value={remoteContext}>
+      <iframe
+        ref={iframeRef}
+        title={title}
+        width={width}
+        height={height}
+        src={src}
+        style={{ border: 0, ...style }}
+        {...props}
+      />
+      {children}
+    </RemoteContextProvider.Provider>
   )
 }
 
+export { useRemoteContext }
 export default Frame

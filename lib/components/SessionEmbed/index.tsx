@@ -64,8 +64,9 @@ const SessionEmbedBase = ({
           onSessionEnded={handleSessionEnded}
           onError={onError}
           {...props}
-        />
-        {children}
+        >
+          {children}
+        </Frame>
       </div>
     </OverlayContext.Provider>
   )

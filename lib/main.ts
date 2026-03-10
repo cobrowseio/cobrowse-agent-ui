@@ -9,7 +9,7 @@ import RefreshButtonComponent from '@/components/RefreshButton'
 import CancelButtonComponent from '@/components/CancelButton'
 import BlockingErrorComponent from '@/components/BlockingError'
 import LoaderComponent from '@/components/Loader'
-import FrameComponent from '@/components/Frame'
+import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
 import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
@@ -45,4 +45,5 @@ export const SessionEmbed = SessionEmbedComponent
 export const ConnectDevice = ConnectDeviceComponent
 export const CobrowseProvider = CobrowseProviderComponent
 export const useCobrowse = useCobrowseHook
+export const useRemoteContext = useRemoteContextHook
 export const i18n = i18nInstance
