@@ -1,8 +1,6 @@
 import Frame from '@/components/Frame'
 import Overlay from './Overlay'
-import OverlayContext, { useOverlayContext } from './OverlayContext'
 import type { SessionEmbedProps } from './types'
-import useSessionEmbedState from './useSessionEmbedState'
 import { useSessionUrl } from './useSessionUrl'
 import styles from './SessionEmbed.module.css'
 
@@ -29,19 +27,6 @@ const SessionEmbedBase = ({
   children,
   ...props
 }: SessionEmbedProps) => {
-  const {
-    session,
-    handleSessionLoaded,
-    handleSessionUpdated,
-    handleSessionActivated,
-    handleSessionEnded
-  } = useSessionEmbedState({
-    onLoaded,
-    onUpdated,
-    onActivated,
-    onEnded
-  })
-
   const url = useSessionUrl({
     id,
     endAction,
@@ -53,28 +38,24 @@ const SessionEmbedBase = ({
   })
 
   return (
-    <OverlayContext.Provider value={{ session }}>
-      <div className={styles.root}>
-        <Frame
-          src={url}
-          className={className}
-          onSessionLoaded={handleSessionLoaded}
-          onSessionUpdated={handleSessionUpdated}
-          onSessionActivated={handleSessionActivated}
-          onSessionEnded={handleSessionEnded}
-          onError={onError}
-          {...props}
-        >
-          {children}
-        </Frame>
-      </div>
-    </OverlayContext.Provider>
+    <div className={styles.root}>
+      <Frame
+        src={url}
+        className={className}
+        onSessionLoaded={onLoaded}
+        onSessionUpdated={onUpdated}
+        onSessionActivated={onActivated}
+        onSessionEnded={onEnded}
+        onError={onError}
+        {...props}
+      >
+        {children}
+      </Frame>
+    </div>
   )
 }
 
 const SessionEmbed: SessionEmbedComponent = Object.assign(SessionEmbedBase, {
   Overlay
 })
-
-export { useOverlayContext }
 export default SessionEmbed
