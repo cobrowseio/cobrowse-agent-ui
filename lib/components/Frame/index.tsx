@@ -32,7 +32,7 @@ const Frame = ({
   const cobrowse = useCobrowse()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [remoteContext, setRemoteContext] = useState<RemoteContext | null>(null)
-  const [currentSessionState, setCurrentSessionState] = useState<{ session: Session | null, eventCount: number }>({ session: null, eventCount: 0 })
+  const [currentSessionState, setCurrentSessionState] = useState<{ session: Session | null }>({ session: null })
   const onSessionLoadedRef = useRef(onSessionLoaded)
   const onSessionUpdatedRef = useRef(onSessionUpdated)
   const onSessionActivatedRef = useRef(onSessionActivated)
@@ -54,10 +54,7 @@ const Frame = ({
     let sessionEnded = false
 
     const updateCurrentSession = (session: Session | null) => {
-      setCurrentSessionState((current) => ({
-        session,
-        eventCount: current.eventCount + 1
-      }))
+      setCurrentSessionState(() => ({ session }))
     }
 
     const attachContext = async () => {
