@@ -10,6 +10,8 @@ const RemoteContext = createContext<RemoteContextValue | undefined>(undefined)
 
 export const useRemoteContextValue = () => use(RemoteContext)
 
-export const useRemoteContext = () => useRemoteContextValue()?.remoteContext ?? null
+export const useRemoteContext = () => (
+  useRemoteContextValue()?.remoteContext ?? null
+)
 
 export default RemoteContext

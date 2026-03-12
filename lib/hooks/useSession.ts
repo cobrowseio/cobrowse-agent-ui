@@ -6,14 +6,6 @@ export interface UseSessionProps {
   session?: Session | null
 }
 
-const hasSessionProperty = (target: Session, property: PropertyKey): property is keyof Session => property in target
-
-const createReactiveSession = (session: Session): Session => (
-  new Proxy(session, {
-    get: (target, property) => hasSessionProperty(target, property) ? target[property] : undefined
-  })
-)
-
 const useSession = (props?: UseSessionProps) => {
   const remoteContextValue = useRemoteContextValue()
   const [, rerender] = useReducer((count: number) => count + 1, 0)
@@ -38,9 +30,7 @@ const useSession = (props?: UseSessionProps) => {
     }
   }, [explicitSession])
 
-  const reactiveSession = session ? createReactiveSession(session) : null
-
-  return reactiveSession
+  return session
 }
 
 export default useSession
