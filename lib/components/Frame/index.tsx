@@ -32,6 +32,7 @@ const Frame = ({
   const cobrowse = useCobrowse()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [remoteContext, setRemoteContext] = useState<RemoteContext | null>(null)
+  const [currentSessionState, setCurrentSessionState] = useState<{ session: Session | null, eventCount: number }>({ session: null, eventCount: 0 })
   const onSessionLoadedRef = useRef(onSessionLoaded)
   const onSessionUpdatedRef = useRef(onSessionUpdated)
   const onSessionActivatedRef = useRef(onSessionActivated)
@@ -51,6 +52,13 @@ const Frame = ({
     let context: RemoteContext | null = null
     let sessionActivated = false
     let sessionEnded = false
+
+    const updateCurrentSession = (session: Session | null) => {
+      setCurrentSessionState((current) => ({
+        session,
+        eventCount: current.eventCount + 1
+      }))
+    }
 
     const attachContext = async () => {
       if (!iframeRef.current) {
@@ -75,8 +83,10 @@ const Frame = ({
       }
 
       setRemoteContext(context)
+      updateCurrentSession(null)
 
       context.on('session.loaded', (session: Session) => {
+        updateCurrentSession(session)
         sessionActivated = session.isActive()
         sessionEnded = false
 
@@ -84,6 +94,7 @@ const Frame = ({
       })
 
       context.on('session.updated', (session: Session) => {
+        updateCurrentSession(session)
         onSessionUpdatedRef.current?.(session)
 
         if (session.isActive() && !sessionActivated) {
@@ -109,6 +120,7 @@ const Frame = ({
       sessionActivated = false
       sessionEnded = false
       setRemoteContext(null)
+      updateCurrentSession(null)
 
       if (context) {
         context.destroy()
@@ -118,7 +130,10 @@ const Frame = ({
   }, [cobrowse])
 
   return (
-    <RemoteContextProvider.Provider value={remoteContext}>
+    <RemoteContextProvider.Provider value={{
+      remoteContext,
+      currentSession: currentSessionState.session
+    }}>
       <iframe
         ref={iframeRef}
         title={title}

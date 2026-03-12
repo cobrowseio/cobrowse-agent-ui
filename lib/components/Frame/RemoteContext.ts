@@ -1,16 +1,15 @@
 import { createContext, use } from 'react'
-import type { RemoteContext as CobrowseRemoteContext } from 'cobrowse-agent-sdk'
+import type { RemoteContext as CobrowseRemoteContext, Session as CobrowseSession } from 'cobrowse-agent-sdk'
 
-const RemoteContext = createContext<CobrowseRemoteContext | null | undefined>(undefined)
-
-export const useRemoteContext = () => {
-  const remoteContext = use(RemoteContext)
-
-  if (remoteContext === undefined) {
-    throw new Error('useRemoteContext must be used within Frame or SessionEmbed.')
-  }
-
-  return remoteContext
+interface RemoteContextValue {
+  remoteContext: CobrowseRemoteContext | null
+  currentSession: CobrowseSession | null
 }
+
+const RemoteContext = createContext<RemoteContextValue | undefined>(undefined)
+
+export const useRemoteContextValue = () => use(RemoteContext)
+
+export const useRemoteContext = () => useRemoteContextValue()?.remoteContext ?? null
 
 export default RemoteContext

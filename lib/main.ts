@@ -13,6 +13,7 @@ import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/comp
 import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
+import useSessionHook from '@/hooks/useSession'
 import i18nInstance from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -46,4 +47,5 @@ export const ConnectDevice = ConnectDeviceComponent
 export const CobrowseProvider = CobrowseProviderComponent
 export const useCobrowse = useCobrowseHook
 export const useRemoteContext = useRemoteContextHook
+export const useSession = useSessionHook
 export const i18n = i18nInstance
