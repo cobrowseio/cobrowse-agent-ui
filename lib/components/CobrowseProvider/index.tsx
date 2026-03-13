@@ -12,8 +12,10 @@ export const CobrowseProvider = ({ cobrowse, children }: CobrowseProviderProps) 
   <CobrowseContext.Provider value={cobrowse}>{children}</CobrowseContext.Provider>
 )
 
+export const useCobrowseValue = () => use(CobrowseContext)
+
 export const useCobrowse = () => {
-  const cobrowse = use(CobrowseContext)
+  const cobrowse = useCobrowseValue()
 
   if (!cobrowse) {
     throw new Error('CobrowseProvider is required to use this component.')

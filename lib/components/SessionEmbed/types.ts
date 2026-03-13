@@ -4,7 +4,7 @@ import type { FrameProps } from '@/components/Frame'
 
 type SessionEmbedFrameProps = Omit<
   FrameProps,
-  'src' | 'onLoad' | 'onEnded' | 'onError' | 'onSessionLoaded' | 'onSessionUpdated' | 'onSessionActivated' | 'onSessionEnded'
+  'src' | 'onLoad' | 'onEnded' | 'onError'
 >
 
 export type SessionEmbedOverlayState = 'loading' | Session['state']
@@ -24,10 +24,10 @@ export interface SessionEmbedProps extends SessionEmbedFrameProps {
   deviceControls?: 'none'
   sessionDetails?: 'none'
   messages?: 'none'
-  onLoaded?: FrameProps['onSessionLoaded']
-  onUpdated?: FrameProps['onSessionUpdated']
-  onActivated?: FrameProps['onSessionActivated']
-  onEnded?: FrameProps['onSessionEnded']
+  onLoaded?: (session: Session) => void
+  onUpdated?: (session: Session) => void
+  onActivated?: (session: Session) => void
+  onEnded?: (session: Session) => void
   onError?: FrameProps['onError']
   children?: ReactNode
 }

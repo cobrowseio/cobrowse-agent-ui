@@ -1,36 +1,74 @@
-import { useEffect, useReducer } from 'react'
-import type { Session } from 'cobrowse-agent-sdk'
-import { useRemoteContextValue } from '@/components/Frame/RemoteContext'
+import { useEffect, useState } from 'react'
+import { RemoteContext, type Session } from 'cobrowse-agent-sdk'
 
-export interface UseSessionProps {
-  session?: Session | null
+const isRemoteContext = (source: RemoteContext | Session): source is RemoteContext => (
+  source instanceof RemoteContext
+)
+
+const hasSessionProperty = (target: Session, property: PropertyKey): property is keyof Session => property in target
+
+const createReactiveSession = (session: Session | null) => {
+  if (!session) {
+    return null
+  }
+
+  return new Proxy(session, {
+    get: (target, property) => hasSessionProperty(target, property) ? target[property] : undefined
+  })
 }
 
-const useSession = (props?: UseSessionProps) => {
-  const remoteContextValue = useRemoteContextValue()
-  const [, rerender] = useReducer((count: number) => count + 1, 0)
-  const explicitSession = props?.session
-  const session = explicitSession ?? remoteContextValue?.currentSession ?? null
+interface SessionState {
+  session: Session | null
+}
+
+const useSession = (source: RemoteContext | Session | null) => {
+  const remoteContext = source && isRemoteContext(source) ? source : null
+  const sessionSource = source && !isRemoteContext(source) ? source : null
+  const [sessionState, setSessionState] = useState<SessionState>(() => ({
+    session: sessionSource
+  }))
 
   useEffect(() => {
-    if (!explicitSession) {
+    if (!remoteContext) {
+      return
+    }
+
+    const handleSessionChange = (session: Session) => {
+      setSessionState({ session })
+    }
+
+    remoteContext.on('session.loaded', handleSessionChange)
+    remoteContext.on('session.updated', handleSessionChange)
+
+    return () => {
+      remoteContext.off('session.loaded', handleSessionChange)
+      remoteContext.off('session.updated', handleSessionChange)
+
+      setSessionState({ session: null })
+    }
+  }, [remoteContext])
+
+  useEffect(() => {
+    if (!sessionSource) {
       return
     }
 
     const handleSessionChange = () => {
-      rerender()
+      setSessionState({ session: sessionSource })
     }
 
-    explicitSession.on('updated', handleSessionChange)
-    explicitSession.on('ended', handleSessionChange)
+    sessionSource.on('updated', handleSessionChange)
+    sessionSource.on('ended', handleSessionChange)
 
     return () => {
-      explicitSession.off('updated', handleSessionChange)
-      explicitSession.off('ended', handleSessionChange)
-    }
-  }, [explicitSession])
+      sessionSource.off('updated', handleSessionChange)
+      sessionSource.off('ended', handleSessionChange)
 
-  return session
+      setSessionState({ session: null })
+    }
+  }, [sessionSource])
+
+  return createReactiveSession(sessionState.session ?? sessionSource)
 }
 
 export default useSession
