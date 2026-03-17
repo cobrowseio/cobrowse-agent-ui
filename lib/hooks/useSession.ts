@@ -34,7 +34,7 @@ const useSession = (source: RemoteContext | Session | null) => {
     }
 
     const handleSessionChange = (session: Session) => {
-      setSessionState({ session })
+      setSessionState({ session: createReactiveSession(session) })
     }
 
     remoteContext.on('session.loaded', handleSessionChange)
