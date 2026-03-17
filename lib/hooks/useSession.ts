@@ -17,16 +17,10 @@ const createReactiveSession = (session: Session | null) => {
   })
 }
 
-interface SessionState {
-  session: Session | null
-}
-
 const useSession = (source: RemoteContext | Session | null) => {
   const remoteContext = source && isRemoteContext(source) ? source : null
   const sessionSource = source && !isRemoteContext(source) ? source : null
-  const [sessionState, setSessionState] = useState<SessionState>(() => ({
-    session: sessionSource
-  }))
+  const [sessionState, setSessionState] = useState<Session | null>(sessionSource)
 
   useEffect(() => {
     if (!remoteContext) {
@@ -34,7 +28,7 @@ const useSession = (source: RemoteContext | Session | null) => {
     }
 
     const handleSessionChange = (session: Session) => {
-      setSessionState({ session: createReactiveSession(session) })
+      setSessionState(createReactiveSession(session))
     }
 
     remoteContext.on('session.loaded', handleSessionChange)
@@ -44,7 +38,7 @@ const useSession = (source: RemoteContext | Session | null) => {
       remoteContext.off('session.loaded', handleSessionChange)
       remoteContext.off('session.updated', handleSessionChange)
 
-      setSessionState({ session: null })
+      setSessionState(null)
     }
   }, [remoteContext])
 
@@ -54,7 +48,7 @@ const useSession = (source: RemoteContext | Session | null) => {
     }
 
     const handleSessionChange = () => {
-      setSessionState({ session: sessionSource })
+      setSessionState(createReactiveSession(sessionSource))
     }
 
     sessionSource.on('updated', handleSessionChange)
@@ -64,11 +58,11 @@ const useSession = (source: RemoteContext | Session | null) => {
       sessionSource.off('updated', handleSessionChange)
       sessionSource.off('ended', handleSessionChange)
 
-      setSessionState({ session: null })
+      setSessionState(null)
     }
   }, [sessionSource])
 
-  return createReactiveSession(sessionState.session ?? sessionSource)
+  return sessionState ?? sessionSource
 }
 
 export default useSession
