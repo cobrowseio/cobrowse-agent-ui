@@ -24,15 +24,7 @@ export function useRemoteContext(target?: HTMLIFrameElement | null, onError?: (e
     let attachedContext: CobrowseRemoteContext | null = null
 
     const attachContext = async () => {
-      try {
-        attachedContext = await cobrowse.attachContext(target)
-      } catch (error) {
-        if (!cancelled) {
-          onErrorCallback(error)
-        }
-
-        return
-      }
+      attachedContext = await cobrowse.attachContext(target)
 
       if (cancelled) {
         attachedContext.destroy()
