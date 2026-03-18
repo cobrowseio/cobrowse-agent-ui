@@ -22,7 +22,7 @@ const Frame = ({
 }: FrameProps) => {
   const [iframe, setIframe] = useState<HTMLIFrameElement | null>(null)
   const onErrorCallback = useStableCallback(onError)
-  const remoteContext = useRemoteContext(iframe, onError)
+  const remoteContext = useRemoteContext(iframe)
 
   const handleIframeRef = useCallback((element: HTMLIFrameElement | null) => {
     setIframe(element)

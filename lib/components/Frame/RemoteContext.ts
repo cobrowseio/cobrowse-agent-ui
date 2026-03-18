@@ -1,14 +1,12 @@
 import { createContext, use, useEffect, useState } from 'react'
 import type { RemoteContext as CobrowseRemoteContext } from 'cobrowse-agent-sdk'
 import { useCobrowseValue } from '@/components/CobrowseProvider'
-import useStableCallback from '@/hooks/useStableCallback'
 
 const RemoteContext = createContext<CobrowseRemoteContext | null>(null)
 
-export function useRemoteContext(target?: HTMLIFrameElement | null, onError?: (error: unknown) => void): CobrowseRemoteContext | null {
+export function useRemoteContext(target?: HTMLIFrameElement | null): CobrowseRemoteContext | null {
   const providedRemoteContext = use(RemoteContext)
   const cobrowse = useCobrowseValue()
-  const onErrorCallback = useStableCallback(onError)
   const [remoteContext, setRemoteContext] = useState<CobrowseRemoteContext | null>(null)
 
   useEffect(() => {
@@ -47,7 +45,7 @@ export function useRemoteContext(target?: HTMLIFrameElement | null, onError?: (e
         attachedContext = null
       }
     }
-  }, [cobrowse, onErrorCallback, target])
+  }, [cobrowse, target])
 
   if (target === undefined) {
     return providedRemoteContext
