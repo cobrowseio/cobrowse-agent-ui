@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo Session</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .toolbar {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 8px 16px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toolbar-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+    .content {
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card h3 {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #334155;
+    }
+    .metric-row {
+      display: flex;
+      gap: 12px;
+    }
+    .metric {
+      flex: 1;
+      background: #f1f5f9;
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+    .metric-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .metric-label {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <span class="toolbar-dot"></span>
+    <span>Demo Device &mdash; Connected</span>
+  </div>
+  <div class="content">
+    <div class="card">
+      <h3>Account</h3>
+      <p>Jane Doe &bull; jane@example.com</p>
+    </div>
+    <div class="metric-row">
+      <div class="metric">
+        <div class="metric-value">3</div>
+        <div class="metric-label">Sessions</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">12m</div>
+        <div class="metric-label">Avg Duration</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">98%</div>
+        <div class="metric-label">Satisfaction</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Recent Activity</h3>
+      <p>Navigated to Settings &rarr; Account &rarr; Billing. Viewed invoice #4821.</p>
+    </div>
+  </div>
+</body>
+</html>
