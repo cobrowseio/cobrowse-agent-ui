@@ -41,8 +41,8 @@
     "ua-parser-js": "^1.0.33"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "cobrowse-agent-sdk": "^2.16.0"
+    "cobrowse-agent-sdk": "^2.16.1",
+    "react": "^19.0.0"
   },
   "browserslist": [
     ">0.2%",
@@ -55,7 +55,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/ua-parser-js": "^0.7.39",
     "@vitejs/plugin-react": "^5.1.1",
-    "cobrowse-agent-sdk": "^2.16.0",
+    "cobrowse-agent-sdk": "^2.16.1",
     "eslint": "^9.39.1",
     "eslint-config-love": "^136.0.0",
     "eslint-plugin-react": "^7.37.5",
