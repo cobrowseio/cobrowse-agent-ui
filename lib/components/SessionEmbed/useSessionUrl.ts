@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useCobrowse } from '@/components/CobrowseProvider'
 import type { SessionEmbedProps } from './types'
+import { useTranslation } from '@/i18n'
 
 interface UseSessionUrlProps {
   id: string
@@ -22,6 +23,7 @@ export const useSessionUrl = ({
   messages
 }: UseSessionUrlProps) => {
   const cobrowse = useCobrowse()
+  const { i18n: { language } } = useTranslation()
 
   return useMemo(() => {
     const paramEntries = Object.entries({
@@ -31,7 +33,8 @@ export const useSessionUrl = ({
       device_controls: deviceControls,
       session_details: sessionDetails,
       messages,
-      token_source: 'postMessage'
+      token_source: 'postMessage',
+      lng: language
     }).flatMap(([name, value]) => value === undefined ? [] : [[name, value]])
 
     const query = new URLSearchParams(paramEntries)
@@ -45,6 +48,7 @@ export const useSessionUrl = ({
     agentTools,
     deviceControls,
     sessionDetails,
-    messages
+    messages,
+    language
   ])
 }
