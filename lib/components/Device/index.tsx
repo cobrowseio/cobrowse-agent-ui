@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import type { Device as FullDevice } from 'cobrowse-agent-sdk'
-import deviceType, { type DeviceInfo } from '@/deviceType'
+import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import PlatformIcon from '@/components/PlatformIcon'
 import { useTranslation } from '@/i18n'
@@ -30,7 +30,7 @@ const LastSeen = ({ device }: { device: DeviceData }) => {
 }
 
 const Device = <T extends DeviceData = DeviceData>({ style, className, device, children }: DeviceProps<T>) => {
-  const { t } = useTranslation()
+  const deviceType = useDeviceType(device.device)
 
   return (
     <div
@@ -49,7 +49,7 @@ const Device = <T extends DeviceData = DeviceData>({ style, className, device, c
         />
       </div>
       <div className={styles.details}>
-        {deviceType(t, device.device)}
+        {deviceType}
         <LastSeen device={device} />
       </div>
       {children}

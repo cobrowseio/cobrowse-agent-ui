@@ -1,6 +1,6 @@
 import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react'
 import type { Session as FullSession } from 'cobrowse-agent-sdk'
-import deviceType, { type DeviceInfo } from '@/deviceType'
+import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
 import { useTranslation } from '@/i18n'
@@ -34,6 +34,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
   ...props
 }: SessionProps<TSession, TElement>) => {
   const { t } = useTranslation()
+  const deviceType = useDeviceType(session.device)
   const isClickable = typeof onClick === 'function'
   const Tag = as ?? isClickable ? 'button' : DEFAULT_TAG
 
@@ -45,7 +46,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
     >
       <span className={styles.details}>
         <span>
-          {deviceType(t, session.device)}
+          {deviceType}
         </span>
         <span className={styles.subdetails}>
           <span className={styles.activated}>
