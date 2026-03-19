@@ -14,7 +14,7 @@ import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
 import useSessionHook from '@/hooks/useSession'
-import i18nInstance from '@/i18n'
+import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
 export type { ExternalLinkProps } from '@/components/ExternalLink'
@@ -48,4 +48,5 @@ export const CobrowseProvider = CobrowseProviderComponent
 export const useCobrowse = useCobrowseHook
 export const useRemoteContext = useRemoteContextHook
 export const useSession = useSessionHook
+export const bindI18n = bindI18nHelper
 export const i18n = i18nInstance
