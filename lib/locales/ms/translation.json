@@ -4,7 +4,10 @@
   "{{device}} Device": "Peranti {{device}}",
   "<0>Support </0>Code": "Kod<0> sokongan</0>",
   "Active": "Aktif",
+  "Cancel": "Batal",
   "Connect": "Sambung",
+  "Contacting device": "Menghubungi peranti",
+  "Device not responding": "Peranti tidak bertindak balas",
   "Devices": "Peranti",
   "Digit {{digit}}": "Digit {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Masukkan kod sokongan atau sambung ke peranti daripada senarai di bawah.",
@@ -14,7 +17,9 @@
   "No sessions": "Tiada sesi",
   "Online": "Dalam talian",
   "Recorded": "Direkodkan",
+  "Retrying connection": "Mencuba semula sambungan",
   "Sessions": "Sesi",
   "Sorry, something went wrong.": "Maaf, sesuatu telah berlaku.",
-  "Support code": "Kod sokongan"
+  "Support code": "Kod sokongan",
+  "Trying once more": "Mencuba sekali lagi"
 }

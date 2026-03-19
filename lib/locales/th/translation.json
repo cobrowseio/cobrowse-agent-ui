@@ -4,7 +4,10 @@
   "{{device}} Device": "อุปกรณ์ {{device}}",
   "<0>Support </0>Code": "รหัส<0>สนับสนุน</0>",
   "Active": "กำลังดำเนินการ",
+  "Cancel": "ยกเลิก",
   "Connect": "เชื่อมต่อ",
+  "Contacting device": "กำลังติดต่ออุปกรณ์",
+  "Device not responding": "อุปกรณ์ไม่ตอบสนอง",
   "Devices": "อุปกรณ์",
   "Digit {{digit}}": "หลัก {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "กรอกรหัสสนับสนุน หรือเชื่อมต่อกับอุปกรณ์จากรายการด้านล่าง",
@@ -14,7 +17,9 @@
   "No sessions": "ไม่มีเซสชัน",
   "Online": "ออนไลน์",
   "Recorded": "บันทึกแล้ว",
+  "Retrying connection": "กำลังลองเชื่อมต่อใหม่",
   "Sessions": "เซสชัน",
   "Sorry, something went wrong.": "ขออภัย เกิดข้อผิดพลาดบางอย่าง",
-  "Support code": "รหัสสนับสนุน"
+  "Support code": "รหัสสนับสนุน",
+  "Trying once more": "กำลังลองอีกครั้ง"
 }

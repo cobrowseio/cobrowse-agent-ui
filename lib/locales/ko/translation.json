@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}} 기기",
   "<0>Support </0>Code": "<0>지원 </0>코드",
   "Active": "세션 진행 중",
+  "Cancel": "취소",
   "Connect": "연결",
+  "Contacting device": "기기에 연결 중",
+  "Device not responding": "기기가 응답하지 않습니다",
   "Devices": "기기",
   "Digit {{digit}}": "숫자 {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "지원 코드를 입력하거나 아래 목록에서 기기에 연결하십시오.",
@@ -14,7 +17,9 @@
   "No sessions": "세션 없음",
   "Online": "온라인",
   "Recorded": "기록됨",
+  "Retrying connection": "연결 재시도 중",
   "Sessions": "세션",
   "Sorry, something went wrong.": "죄송합니다. 문제가 발생했습니다.",
-  "Support code": "지원 코드"
+  "Support code": "지원 코드",
+  "Trying once more": "한 번 더 시도 중"
 }

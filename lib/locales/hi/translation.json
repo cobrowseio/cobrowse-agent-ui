@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}} उपकरण",
   "<0>Support </0>Code": "<0>सहायता </0>कोड",
   "Active": "सक्रिय",
+  "Cancel": "रद्द करें",
   "Connect": "कनेक्ट करें",
+  "Contacting device": "उपकरण से संपर्क किया जा रहा है",
+  "Device not responding": "उपकरण प्रतिक्रिया नहीं दे रहा",
   "Devices": "उपकरण",
   "Digit {{digit}}": "अंक {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "एक सहायता कोड दर्ज करें, या नीचे दी गई सूची से किसी उपकरण से कनेक्ट करें।",
@@ -14,7 +17,9 @@
   "No sessions": "कोई सत्र नहीं",
   "Online": "ऑनलाइन",
   "Recorded": "रिकॉर्ड किया गया",
+  "Retrying connection": "कनेक्शन पुनः प्रयास हो रहा है",
   "Sessions": "सत्र",
   "Sorry, something went wrong.": "क्षमा करें, कुछ गलत हो गया।",
-  "Support code": "सहायता कोड"
+  "Support code": "सहायता कोड",
+  "Trying once more": "एक बार और प्रयास किया जा रहा है"
 }

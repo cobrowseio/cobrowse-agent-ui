@@ -4,7 +4,10 @@
   "{{device}} Device": "Dispositivo {{device}}",
   "<0>Support </0>Code": "Código<0> de soporte</0>",
   "Active": "Activa",
+  "Cancel": "Cancelar",
   "Connect": "Conectar",
+  "Contacting device": "Contactando con el dispositivo",
+  "Device not responding": "El dispositivo no responde",
   "Devices": "Dispositivos",
   "Digit {{digit}}": "Dígito {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Introduzca un código de soporte o conéctese a un dispositivo de la lista a continuación.",
@@ -14,7 +17,9 @@
   "No sessions": "Sin sesiones",
   "Online": "En línea",
   "Recorded": "Grabada",
+  "Retrying connection": "Reintentando conexión",
   "Sessions": "Sesiones",
   "Sorry, something went wrong.": "Lo sentimos, algo salió mal.",
-  "Support code": "Código de soporte"
+  "Support code": "Código de soporte",
+  "Trying once more": "Intentando una vez más"
 }
