@@ -10,8 +10,8 @@ import {
   type ChangeEvent,
   type KeyboardEvent
 } from 'react'
-import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
+import { useTranslation } from '@/i18n'
 import styles from './CodeEntry.module.css'
 
 export interface CodeEntryHandle {

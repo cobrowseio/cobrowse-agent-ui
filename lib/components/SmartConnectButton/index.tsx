@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
-import i18n from '@/i18n'
 import clsx from 'clsx'
 import styles from './SmartConnectButton.module.css'
 import type { DeviceData } from '@/components/Device'
+import { useTranslation } from '@/i18n'
 
 export interface SmartConnectButtonProps<T extends DeviceData = DeviceData> extends Omit<ComponentPropsWithoutRef<'button'>, 'onClick'> {
   device: T
@@ -11,6 +11,8 @@ export interface SmartConnectButtonProps<T extends DeviceData = DeviceData> exte
 }
 
 const SmartConnectButton = <T extends DeviceData = DeviceData>({ device, onClick: onClickCallback, className, children, ...props }: SmartConnectButtonProps<T>) => {
+  const { t } = useTranslation()
+
   const handleClick = () => {
     if (device.connectable) onClickCallback?.(device)
   }
@@ -30,7 +32,7 @@ const SmartConnectButton = <T extends DeviceData = DeviceData>({ device, onClick
       onClick={handleClick}
       {...props}
     >
-      {children ?? i18n.t('Connect')}
+      {children ?? t('Connect')}
     </button>
   )
 }

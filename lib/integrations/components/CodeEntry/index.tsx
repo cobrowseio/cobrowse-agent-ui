@@ -1,6 +1,6 @@
 import BaseCodeEntry, { type CodeEntryProps as BaseCodeEntryProps } from '@/components/CodeEntry'
-import { Trans, useTranslation } from 'react-i18next'
 import clsx from 'clsx'
+import { Trans, useTranslation } from '@/i18n'
 import styles from './CodeEntry.module.css'
 
 export interface CodeEntryProps extends BaseCodeEntryProps {

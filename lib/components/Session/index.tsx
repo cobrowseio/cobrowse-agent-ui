@@ -3,7 +3,7 @@ import type { Session as FullSession } from 'cobrowse-agent-sdk'
 import deviceType, { type DeviceInfo } from '@/deviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
-import i18n from '@/i18n'
+import { useTranslation } from '@/i18n'
 import styles from './Session.module.css'
 
 const DEFAULT_TAG = 'div' as const
@@ -33,6 +33,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
   children,
   ...props
 }: SessionProps<TSession, TElement>) => {
+  const { t } = useTranslation()
   const isClickable = typeof onClick === 'function'
   const Tag = as ?? isClickable ? 'button' : DEFAULT_TAG
 
@@ -44,18 +45,18 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
     >
       <span className={styles.details}>
         <span>
-          {deviceType(session.device)}
+          {deviceType(t, session.device)}
         </span>
         <span className={styles.subdetails}>
           <span className={styles.activated}>
-            {i18n.t('{{date, dateRelative}}', {
+            {t('{{date, dateRelative}}', {
               date: new Date(session.activated)
             })}
           </span>
           {session.state === 'ended' && session.recorded
             ? (
               <span className={styles.recorded}>
-                {i18n.t('Recorded')}
+                {t('Recorded')}
               </span>
               )
             : null}
@@ -70,7 +71,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
           />
           )
         : (
-          <span className={styles.active}>{i18n.t('Active')}</span>
+          <span className={styles.active}>{t('Active')}</span>
           )}
       {children}
     </Tag>

@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from 'react'
 import type { Session } from 'cobrowse-agent-sdk'
-import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import BaseLoader from '@/components/Loader'
 import CancelButton, { type CancelButtonProps } from '@/components/CancelButton'
+import { useTranslation } from '@/i18n'
 import useConnectDevice, {
   ERROR_DEVICE_NOT_FOUND,
   ERROR_PUSH_ATTEMPT_LIMIT_REACHED,

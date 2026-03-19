@@ -7,12 +7,12 @@ import {
   TabPanels as HeadlessTabPanels,
   TabPanel as HeadlessTabPanel
 } from '@headlessui/react'
-import { useTranslation } from 'react-i18next'
 import DevicesPanel, { type DevicesPanelProps } from './DevicesPanel'
 import SessionsPanel, { type SessionsPanelProps } from './SessionsPanel'
 import type { DeviceData } from '@/components/Device'
 import type { SessionData } from '@/components/Session'
 import RefreshButton, { type RefreshButtonProps } from '@/components/RefreshButton'
+import { useTranslation } from '@/i18n'
 import styles from './Tabs.module.css'
 
 interface TabsPanelProps<TDevice extends DeviceData, TSession extends SessionData>
