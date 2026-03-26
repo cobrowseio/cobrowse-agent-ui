@@ -20,7 +20,7 @@ const createReactiveSession = (session: Session | null) => {
 const useSession = (source: RemoteContext | Session | null) => {
   const remoteContext = source && isRemoteContext(source) ? source : null
   const sessionSource = source && !isRemoteContext(source) ? source : null
-  const [sessionState, setSessionState] = useState<Session | null>(sessionSource)
+  const [sessionState, setSessionState] = useState(sessionSource)
 
   useEffect(() => {
     if (!remoteContext) {
