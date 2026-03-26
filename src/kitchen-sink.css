@@ -402,3 +402,81 @@ main {
 .connect-device-demo {
   height: 200px;
 }
+
+.session-embed-demo {
+  height: 300px;
+  border: 1px solid #e1e4ec;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.session-embed-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  font-weight: 600;
+  color: #293047;
+}
+
+.session-embed-overlay-active {
+  background: none;
+  backdrop-filter: none;
+  pointer-events: none;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 8px;
+}
+
+.session-embed-overlay .overlay-badge {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #059669;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.session-embed-overlay-toolbar {
+  background: none;
+  backdrop-filter: none;
+  pointer-events: none;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.session-embed-overlay-toolbar > * {
+  pointer-events: auto;
+}
+
+.end-session-button {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  transition: background 120ms ease;
+}
+
+.end-session-button:hover {
+  background: #b91c1c;
+}
+
+.session-embed-overlay .overlay-icon {
+  font-size: 2rem;
+}
+
+.session-embed-overlay .overlay-label {
+  font-size: 0.95rem;
+  color: #616b83;
+}

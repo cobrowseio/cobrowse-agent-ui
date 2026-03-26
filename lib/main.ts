@@ -9,9 +9,11 @@ import RefreshButtonComponent from '@/components/RefreshButton'
 import CancelButtonComponent from '@/components/CancelButton'
 import BlockingErrorComponent from '@/components/BlockingError'
 import LoaderComponent from '@/components/Loader'
-import FrameComponent from '@/components/Frame'
+import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
+import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
+import useSessionHook from '@/hooks/useSession'
 import i18nInstance from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -24,6 +26,7 @@ export type { CancelButtonProps } from '@/components/CancelButton'
 export type { BlockingErrorProps } from '@/components/BlockingError'
 export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
+export type { SessionEmbedProps } from '@/components/SessionEmbed'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
 export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
 
@@ -39,7 +42,10 @@ export const CancelButton = CancelButtonComponent
 export const BlockingError = BlockingErrorComponent
 export const Loader = LoaderComponent
 export const Frame = FrameComponent
+export const SessionEmbed = SessionEmbedComponent
 export const ConnectDevice = ConnectDeviceComponent
 export const CobrowseProvider = CobrowseProviderComponent
 export const useCobrowse = useCobrowseHook
+export const useRemoteContext = useRemoteContextHook
+export const useSession = useSessionHook
 export const i18n = i18nInstance

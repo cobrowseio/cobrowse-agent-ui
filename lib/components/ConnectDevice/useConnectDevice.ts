@@ -11,6 +11,14 @@ export const ERROR_DEVICE_NOT_FOUND = 'device_not_found'
 export const ERROR_SESSION_NOT_FOUND = 'session_not_found'
 export const ERROR_SESSION_ERROR = 'session_error'
 
+const isAbortError = (error: unknown): boolean => {
+  if (!(error instanceof Error)) {
+    return false
+  }
+
+  return error.name === 'AbortError'
+}
+
 export interface UseConnectDeviceOptions {
   deviceId: string
   onConnectAttempt?: (attempt: number) => void
@@ -65,6 +73,10 @@ const useConnectDevice = ({
   }, [onEndedCallback])
 
   const triggerPushError = useCallback((error: unknown) => {
+    if (isAbortError(error)) {
+      return
+    }
+
     if (error instanceof Error) {
       onErrorCallback({ id: ERROR_PUSH_ERROR, message: error.message })
     } else {
@@ -133,6 +145,10 @@ const useConnectDevice = ({
 
       await session.subscribe()
     } catch (error) {
+      if (isAbortError(error)) {
+        return
+      }
+
       if (error instanceof Error) {
         onErrorCallback({ id: ERROR_SESSION_ERROR, message: error.message })
       } else {

@@ -7,9 +7,11 @@ import {
   type DeviceData,
   PlatformIcon,
   Session,
+  SessionEmbed,
   type SessionData,
   SmartConnectButton,
   UserIcon,
+  useRemoteContext,
   i18n
 } from '../lib/main'
 import { Tabs } from '../lib/integrations'
@@ -114,6 +116,71 @@ const users = [
   { id: 'u5', name: 'A B C D', colour: '#e0f7e9' }
 ]
 
+type MockEventHandler = (...args: unknown[]) => void
+
+const createMockRemoteContext = () => {
+  const handlers = new Map<string, Set<MockEventHandler>>()
+  let timers: ReturnType<typeof setTimeout>[] = []
+
+  const mockSession = {
+    id: 'demo-session',
+    state: 'pending' as string,
+    isActive () { return this.state === 'active' },
+    isEnded () { return this.state === 'ended' },
+    on () { return mockSession },
+    off () { return mockSession }
+  }
+
+  const emit = (event: string, ...args: unknown[]) => {
+    handlers.get(event)?.forEach(fn => fn(...args))
+  }
+
+  const ctx = {
+    get state () { return mockSession.state === 'pending' ? undefined : mockSession.state },
+    on (event: string, handler: MockEventHandler) {
+      const set = handlers.get(event) ?? new Set()
+      set.add(handler)
+      handlers.set(event, set)
+      return ctx
+    },
+    off (event: string, handler: MockEventHandler) {
+      handlers.get(event)?.delete(handler)
+      return ctx
+    },
+    endSession () {
+      timers.forEach(clearTimeout)
+      timers = []
+      mockSession.state = 'ended'
+      emit('session.updated', mockSession)
+      emit('updated', ctx)
+      emit('ended', ctx)
+      return Promise.resolve(true)
+    },
+    destroy () {
+      timers.forEach(clearTimeout)
+      timers = []
+      handlers.clear()
+    }
+  }
+
+  timers.push(setTimeout(() => {
+    mockSession.state = 'active'
+    emit('session.loaded', mockSession)
+    emit('session.updated', mockSession)
+    emit('updated', ctx)
+  }, 2000))
+
+  return ctx
+}
+
+const createSessionEmbedMock = () => ({
+  api: '',
+  attachContext: () => Promise.resolve(createMockRemoteContext()),
+  regions: { closest: () => Promise.resolve({ id: 'mock-region' }) },
+  devices: { get: () => Promise.resolve({ custom_data: {}, notify: () => Promise.resolve() }) },
+  sessions: { create: () => Promise.resolve({}) }
+} as unknown as CobrowseAPI)
+
 const createMockCobrowse = (scenario: 'success' | 'timeout') => {
   const createMockSession = () => {
     const handlers = new Map<string, Array<(mock: unknown) => void>>()
@@ -188,6 +255,62 @@ const asSession = (sample: typeof sessionSamples[number]): SessionData => ({
     device: sample.device.device
   }
 })
+
+const EndSessionButton = () => {
+  const ctx = useRemoteContext()
+  return (
+    <button type='button' className='end-session-button' onClick={() => ctx?.endSession()}>
+      End session
+    </button>
+  )
+}
+
+const SessionEmbedSection = () => {
+  const [overlaysKey, setOverlaysKey] = useState(0)
+  const overlaysMock = useMemo(() => createSessionEmbedMock(), [overlaysKey]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <Section
+      title='SessionEmbed'
+      subtitle='Embeds a session iframe with overlay states. The demo auto-transitions: loading → active, then use the button to end.'
+    >
+      <div className='panel'>
+        <h3>Overlays</h3>
+        <div className='session-embed-demo'>
+          <CobrowseProvider cobrowse={overlaysMock}>
+            <SessionEmbed id='demo-session.html'>
+              <SessionEmbed.Overlay state='loading'>
+                <div className='session-embed-overlay'>
+                  <span className='overlay-icon'>&#9203;</span>
+                  <span className='overlay-label'>Connecting to session&hellip;</span>
+                </div>
+              </SessionEmbed.Overlay>
+              <SessionEmbed.Overlay state='active'>
+                <div className='session-embed-overlay session-embed-overlay-active'>
+                  <span className='overlay-badge'>&#9989; Session active</span>
+                </div>
+              </SessionEmbed.Overlay>
+              <SessionEmbed.Overlay state='active'>
+                <div className='session-embed-overlay session-embed-overlay-toolbar'>
+                  <EndSessionButton />
+                </div>
+              </SessionEmbed.Overlay>
+              <SessionEmbed.Overlay state='ended'>
+                <div className='session-embed-overlay'>
+                  <span className='overlay-icon'>&#9724;</span>
+                  <span className='overlay-label'>Session ended</span>
+                </div>
+              </SessionEmbed.Overlay>
+            </SessionEmbed>
+          </CobrowseProvider>
+        </div>
+        <div className='button-row'>
+          <button type='button' onClick={() => setOverlaysKey(k => k + 1)}>Restart</button>
+        </div>
+      </div>
+    </Section>
+  )
+}
 
 export default function KitchenSink () {
   const [codeStatus, setCodeStatus] = useState('Enter 654321 to simulate a successful validation.')
@@ -487,6 +610,8 @@ export default function KitchenSink () {
           </div>
         )}
       </Section>
+
+      <SessionEmbedSection />
 
       <Section
         title='Tabs'

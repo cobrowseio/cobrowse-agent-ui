@@ -1,0 +1,11 @@
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.content {
+  display: contents;
+  pointer-events: auto;
+}

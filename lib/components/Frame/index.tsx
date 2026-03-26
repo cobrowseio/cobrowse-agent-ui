@@ -1,126 +1,64 @@
-import { useEffect, useRef, type ComponentPropsWithoutRef } from 'react'
-import type { RemoteContext, Session } from 'cobrowse-agent-sdk'
-import { useCobrowse } from '@/components/CobrowseProvider'
+import { useCallback, useEffect, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react'
+import RemoteContextProvider, { useRemoteContext } from './RemoteContext'
+import useStableCallback from '@/hooks/useStableCallback'
 
 type IframeProps = Omit<ComponentPropsWithoutRef<'iframe'>, 'frameBorder' | 'onError' | 'src'>
 
 export interface FrameProps extends IframeProps {
   src: string
-  onSessionLoaded?: (session: Session) => void
-  onSessionUpdated?: (session: Session) => void
-  onSessionActivated?: (session: Session) => void
-  onSessionEnded?: (session: Session) => void
+  children?: ReactNode
   onError?: (error: unknown) => void
 }
 
 const Frame = ({
   src,
-  onSessionLoaded,
-  onSessionUpdated,
-  onSessionActivated,
-  onSessionEnded,
   onError,
   title = 'Frame',
   width = '100%',
   height = '100%',
   style,
+  children,
   ...props
 }: FrameProps) => {
-  const cobrowse = useCobrowse()
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-  const onSessionLoadedRef = useRef(onSessionLoaded)
-  const onSessionUpdatedRef = useRef(onSessionUpdated)
-  const onSessionActivatedRef = useRef(onSessionActivated)
-  const onSessionEndedRef = useRef(onSessionEnded)
-  const onErrorRef = useRef(onError)
+  const [iframe, setIframe] = useState<HTMLIFrameElement | null>(null)
+  const onErrorCallback = useStableCallback(onError)
+  const remoteContext = useRemoteContext(iframe)
+
+  const handleIframeRef = useCallback((element: HTMLIFrameElement | null) => {
+    setIframe(element)
+  }, [])
 
   useEffect(() => {
-    onSessionLoadedRef.current = onSessionLoaded
-    onSessionUpdatedRef.current = onSessionUpdated
-    onSessionActivatedRef.current = onSessionActivated
-    onSessionEndedRef.current = onSessionEnded
-    onErrorRef.current = onError
-  }, [onSessionLoaded, onSessionUpdated, onSessionActivated, onSessionEnded, onError])
-
-  useEffect(() => {
-    let cancelled = false
-    let context: RemoteContext | null = null
-    let sessionActivated = false
-    let sessionEnded = false
-
-    const attachContext = async () => {
-      if (!iframeRef.current) {
-        return
-      }
-
-      try {
-        context = await cobrowse.attachContext(iframeRef.current)
-      } catch (error) {
-        if (!cancelled) {
-          onErrorRef.current?.(error)
-        }
-
-        return
-      }
-
-      if (cancelled) {
-        context.destroy()
-        context = null
-
-        return
-      }
-
-      context.on('session.loaded', (session: Session) => {
-        sessionActivated = session.isActive()
-        sessionEnded = false
-
-        onSessionLoadedRef.current?.(session)
-      })
-
-      context.on('session.updated', (session: Session) => {
-        onSessionUpdatedRef.current?.(session)
-
-        if (session.isActive() && !sessionActivated) {
-          sessionActivated = true
-          onSessionActivatedRef.current?.(session)
-        }
-
-        if (session.isEnded() && !sessionEnded) {
-          sessionEnded = true
-          onSessionEndedRef.current?.(session)
-        }
-      })
-
-      context.on('error', (error: unknown) => {
-        onErrorRef.current?.(error)
-      })
+    if (!remoteContext) {
+      return
     }
 
-    void attachContext()
+    const handleError = (error: unknown) => {
+      onErrorCallback(error)
+    }
+
+    remoteContext.on('error', handleError)
 
     return () => {
-      cancelled = true
-      sessionActivated = false
-      sessionEnded = false
-
-      if (context) {
-        context.destroy()
-        context = null
-      }
+      remoteContext.off('error', handleError)
     }
-  }, [cobrowse])
+  }, [remoteContext, onErrorCallback])
 
   return (
-    <iframe
-      ref={iframeRef}
-      title={title}
-      width={width}
-      height={height}
-      src={src}
-      style={{ border: 0, ...style }}
-      {...props}
-    />
+    <RemoteContextProvider.Provider value={remoteContext}>
+      <iframe
+        ref={handleIframeRef}
+        title={title}
+        width={width}
+        height={height}
+        src={src}
+        style={{ border: 0, ...style }}
+        {...props}
+      />
+      {children}
+    </RemoteContextProvider.Provider>
   )
 }
 
+export { useRemoteContext }
 export default Frame

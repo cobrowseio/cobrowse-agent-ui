@@ -123,10 +123,10 @@ const ConnectDeviceBase = ({
   )
 }
 
-const ConnectDevice = Object.assign(ConnectDeviceBase, {
+const ConnectDevice: ConnectDeviceComponent = Object.assign(ConnectDeviceBase, {
   StatusMessage,
   Loader,
   CancelButton
-}) as ConnectDeviceComponent
+})
 
 export default ConnectDevice
