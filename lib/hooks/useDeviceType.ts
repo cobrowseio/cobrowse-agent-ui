@@ -1,5 +1,4 @@
 import type { DeviceInfo as FullDeviceInfo } from 'cobrowse-agent-sdk'
-import type { TFunction } from 'i18next'
 import parser from 'ua-parser-js'
 import { useTranslation } from '@/i18n'
 
@@ -12,7 +11,9 @@ const PLATFORM_LABELS: Record<Exclude<DeviceInfo['platform'], 'web'>, string> = 
   macos: 'macOS'
 }
 
-const deviceType = (t: TFunction, { platform, device }: DeviceInfo) => {
+const useDeviceType = ({ device, platform }: DeviceInfo) => {
+  const { t } = useTranslation()
+
   if (platform === 'web') {
     const ua = parser(device)
 
@@ -23,12 +24,6 @@ const deviceType = (t: TFunction, { platform, device }: DeviceInfo) => {
   }
 
   return t('{{device}} Device', { device: PLATFORM_LABELS[platform] })
-}
-
-const useDeviceType = (deviceInfo: DeviceInfo) => {
-  const { t } = useTranslation()
-
-  return deviceType(t, deviceInfo)
 }
 
 export default useDeviceType
