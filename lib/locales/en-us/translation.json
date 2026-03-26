@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}} Device",
   "<0>Support </0>Code": "<0>Support </0>Code",
   "Active": "Active",
+  "Cancel": "Cancel",
   "Connect": "Connect",
+  "Contacting device": "Contacting device",
+  "Device not responding": "Device not responding",
   "Devices": "Devices",
   "Digit {{digit}}": "Digit {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Enter a support code, or connect to a device from the list below.",
@@ -14,7 +17,9 @@
   "No sessions": "No sessions",
   "Online": "Online",
   "Recorded": "Recorded",
+  "Retrying connection": "Retrying connection",
   "Sessions": "Sessions",
   "Sorry, something went wrong.": "Sorry, something went wrong.",
-  "Support code": "Support code"
+  "Support code": "Support code",
+  "Trying once more": "Trying once more"
 }

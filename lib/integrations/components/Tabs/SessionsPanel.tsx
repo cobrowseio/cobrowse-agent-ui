@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import Session, { type SessionData } from '@/components/Session'
 import Loader from '@/components/Loader'
+import { useTranslation } from '@/i18n'
 import type { BasePanelProps } from './BasePanel'
 
 export interface SessionsPanelProps<T extends SessionData = SessionData> extends BasePanelProps {

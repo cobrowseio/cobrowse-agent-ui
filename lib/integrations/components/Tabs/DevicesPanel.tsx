@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next'
 import Device, { type DeviceData } from '@/components/Device'
 import SmartConnectButton from '@/components/SmartConnectButton'
 import Loader from '@/components/Loader'
+import { useTranslation } from '@/i18n'
 import type { BasePanelProps } from './BasePanel'
 
 export interface DevicesPanelProps<T extends DeviceData = DeviceData> extends BasePanelProps {

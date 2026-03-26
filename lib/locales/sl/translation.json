@@ -4,7 +4,10 @@
   "{{device}} Device": "Naprava {{device}}",
   "<0>Support </0>Code": "Koda<0> za podporo</0>",
   "Active": "Aktivno",
+  "Cancel": "Prekliči",
   "Connect": "Poveži se",
+  "Contacting device": "Vzpostavljanje stika z napravo",
+  "Device not responding": "Naprava se ne odziva",
   "Devices": "Naprave",
   "Digit {{digit}}": "Števka {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Vnesite kodo za podporo ali se povežite z napravo s spodnjega seznama.",
@@ -14,7 +17,9 @@
   "No sessions": "Ni sej",
   "Online": "Na spletu",
   "Recorded": "Posneto",
+  "Retrying connection": "Ponoven poskus vzpostavitve povezave",
   "Sessions": "Seje",
   "Sorry, something went wrong.": "Oprostite, prišlo je do napake.",
-  "Support code": "Koda za podporo"
+  "Support code": "Koda za podporo",
+  "Trying once more": "Poskušam še enkrat"
 }

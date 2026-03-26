@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}} құрылғысы",
   "<0>Support </0>Code": "<0>Қолдау </0>коды",
   "Active": "Белсенді",
+  "Cancel": "Бас тарту",
   "Connect": "Қосылу",
+  "Contacting device": "Құрылғыға қосылуда",
+  "Device not responding": "Құрылғы жауап бермейді",
   "Devices": "Құрылғылар",
   "Digit {{digit}}": "Сан {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Қолдау кодын енгізіңіз немесе төмендегі тізімнен құрылғыға қосылыңыз.",
@@ -14,7 +17,9 @@
   "No sessions": "Сеанстар жоқ",
   "Online": "Желіде",
   "Recorded": "Жазылған",
+  "Retrying connection": "Қосылу қайта әрекеттенуде",
   "Sessions": "Сеанстар",
   "Sorry, something went wrong.": "Кешіріңіз, бірдеңе дұрыс болмады.",
-  "Support code": "Қолдау коды"
+  "Support code": "Қолдау коды",
+  "Trying once more": "Тағы бір рет әрекеттенуде"
 }

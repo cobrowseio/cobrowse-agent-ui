@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}}-enhet",
   "<0>Support </0>Code": "<0>Support</0>kod",
   "Active": "Aktiv",
+  "Cancel": "Avbryt",
   "Connect": "Anslut",
+  "Contacting device": "Kontaktar enhet",
+  "Device not responding": "Enheten svarar inte",
   "Devices": "Enheter",
   "Digit {{digit}}": "Siffra {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Ange en supportkod eller anslut till en enhet från listan nedan.",
@@ -14,7 +17,9 @@
   "No sessions": "Inga sessioner",
   "Online": "Online",
   "Recorded": "Inspelad",
+  "Retrying connection": "Försöker ansluta igen",
   "Sessions": "Sessioner",
   "Sorry, something went wrong.": "Tyvärr, något gick fel.",
-  "Support code": "Supportkod"
+  "Support code": "Supportkod",
+  "Trying once more": "Försöker en sista gång"
 }

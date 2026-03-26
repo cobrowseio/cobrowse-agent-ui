@@ -4,7 +4,10 @@
   "{{device}} Device": "Zariadenie {{device}}",
   "<0>Support </0>Code": "Kód<0> podpory</0>",
   "Active": "Aktívne",
+  "Cancel": "Zrušiť",
   "Connect": "Pripojiť",
+  "Contacting device": "Kontaktovanie zariadenia",
+  "Device not responding": "Zariadenie neodpovedá",
   "Devices": "Zariadenia",
   "Digit {{digit}}": "Číslica {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Zadajte kód podpory alebo sa pripojte k zariadeniu zo zoznamu nižšie.",
@@ -14,7 +17,9 @@
   "No sessions": "Žiadne relácie",
   "Online": "Online",
   "Recorded": "Zaznamenané",
+  "Retrying connection": "Opakovanie pokusu o pripojenie",
   "Sessions": "Relácie",
   "Sorry, something went wrong.": "Ospravedlňujeme sa, niečo sa pokazilo.",
-  "Support code": "Kód podpory"
+  "Support code": "Kód podpory",
+  "Trying once more": "Posledný pokus"
 }

@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}} įrenginys",
   "<0>Support </0>Code": "<0>Palaikymo </0>kodas",
   "Active": "Aktyvus",
+  "Cancel": "Atšaukti",
   "Connect": "Prisijungti",
+  "Contacting device": "Jungiamasi prie įrenginio",
+  "Device not responding": "Įrenginys nereaguoja",
   "Devices": "Įrenginiai",
   "Digit {{digit}}": "Skaitmuo {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Įveskite palaikymo kodą arba prisijunkite prie įrenginio iš toliau pateikto sąrašo.",
@@ -14,7 +17,9 @@
   "No sessions": "Nėra seansų",
   "Online": "Prisijungęs",
   "Recorded": "Įrašyta",
+  "Retrying connection": "Bandoma prisijungti iš naujo",
   "Sessions": "Seansai",
   "Sorry, something went wrong.": "Atsiprašome, įvyko klaida.",
-  "Support code": "Palaikymo kodas"
+  "Support code": "Palaikymo kodas",
+  "Trying once more": "Bandoma dar kartą"
 }

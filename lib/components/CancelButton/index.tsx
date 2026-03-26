@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react'
-import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import PhoneIcon from '@/icons/phone.svg?react'
+import { useTranslation } from '@/i18n'
 import styles from './CancelButton.module.css'
 
 export interface CancelButtonProps extends ComponentPropsWithoutRef<'button'> {}

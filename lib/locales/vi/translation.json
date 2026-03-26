@@ -4,7 +4,10 @@
   "{{device}} Device": "Thiết bị {{device}}",
   "<0>Support </0>Code": "Mã<0> hỗ trợ</0>",
   "Active": "Đang diễn ra",
+  "Cancel": "Hủy",
   "Connect": "Kết nối",
+  "Contacting device": "Đang liên hệ thiết bị",
+  "Device not responding": "Thiết bị không phản hồi",
   "Devices": "Thiết bị",
   "Digit {{digit}}": "Chữ số {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Nhập mã hỗ trợ hoặc kết nối với thiết bị từ danh sách bên dưới.",
@@ -14,7 +17,9 @@
   "No sessions": "Không có phiên",
   "Online": "Trực tuyến",
   "Recorded": "Đã ghi",
+  "Retrying connection": "Đang thử kết nối lại",
   "Sessions": "Phiên",
   "Sorry, something went wrong.": "Xin lỗi, đã xảy ra lỗi.",
-  "Support code": "Mã hỗ trợ"
+  "Support code": "Mã hỗ trợ",
+  "Trying once more": "Đang thử thêm một lần nữa"
 }

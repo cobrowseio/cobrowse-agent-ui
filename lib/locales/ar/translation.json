@@ -4,7 +4,10 @@
   "{{device}} Device": "جهاز {{device}}",
   "<0>Support </0>Code": "رمز<0> الدعم</0>",
   "Active": "نشط",
+  "Cancel": "إلغاء",
   "Connect": "اتصال",
+  "Contacting device": "جارٍ الاتصال بالجهاز",
+  "Device not responding": "الجهاز لا يستجيب",
   "Devices": "الأجهزة",
   "Digit {{digit}}": "الرقم {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "أدخل رمز الدعم، أو اتصل بجهاز من القائمة أدناه.",
@@ -14,7 +17,9 @@
   "No sessions": "لا توجد جلسات",
   "Online": "متصل",
   "Recorded": "مسجل",
+  "Retrying connection": "إعادة محاولة الاتصال",
   "Sessions": "الجلسات",
   "Sorry, something went wrong.": "عذرًا، حدث خطأ ما.",
-  "Support code": "رمز الدعم"
+  "Support code": "رمز الدعم",
+  "Trying once more": "جارٍ المحاولة مرة أخرى"
 }

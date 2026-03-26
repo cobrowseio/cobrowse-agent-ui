@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}}-apparaat",
   "<0>Support </0>Code": "<0>Ondersteunings</0>code",
   "Active": "Actief",
+  "Cancel": "Annuleren",
   "Connect": "Verbinden",
+  "Contacting device": "Contact opnemen met apparaat",
+  "Device not responding": "Apparaat reageert niet",
   "Devices": "Apparaten",
   "Digit {{digit}}": "Cijfer {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Voer een ondersteuningscode in of maak verbinding met een apparaat uit de onderstaande lijst.",
@@ -14,7 +17,9 @@
   "No sessions": "Geen sessies",
   "Online": "Online",
   "Recorded": "Opgenomen",
+  "Retrying connection": "Verbinding wordt opnieuw geprobeerd",
   "Sessions": "Sessies",
   "Sorry, something went wrong.": "Sorry, er is iets misgegaan.",
-  "Support code": "Ondersteuningscode"
+  "Support code": "Ondersteuningscode",
+  "Trying once more": "Nog een laatste poging"
 }

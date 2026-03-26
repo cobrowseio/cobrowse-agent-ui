@@ -4,7 +4,10 @@
   "{{device}} Device": "Устройство {{device}}",
   "<0>Support </0>Code": "Код<0> поддержки</0>",
   "Active": "Активно",
+  "Cancel": "Отмена",
   "Connect": "Подключиться",
+  "Contacting device": "Подключение к устройству",
+  "Device not responding": "Устройство не отвечает",
   "Devices": "Устройства",
   "Digit {{digit}}": "Цифра {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Введите код поддержки или подключитесь к устройству из списка ниже.",
@@ -14,7 +17,9 @@
   "No sessions": "Нет сеансов",
   "Online": "В сети",
   "Recorded": "Записано",
+  "Retrying connection": "Повторная попытка подключения",
   "Sessions": "Сеансы",
   "Sorry, something went wrong.": "Извините, произошла ошибка.",
-  "Support code": "Код поддержки"
+  "Support code": "Код поддержки",
+  "Trying once more": "Последняя попытка"
 }

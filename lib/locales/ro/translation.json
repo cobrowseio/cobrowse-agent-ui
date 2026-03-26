@@ -4,7 +4,10 @@
   "{{device}} Device": "Dispozitiv {{device}}",
   "<0>Support </0>Code": "Cod<0> de asistență</0>",
   "Active": "Activ",
+  "Cancel": "Anulați",
   "Connect": "Conectează",
+  "Contacting device": "Se contactează dispozitivul",
+  "Device not responding": "Dispozitivul nu răspunde",
   "Devices": "Dispozitive",
   "Digit {{digit}}": "Cifra {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Introduceți un cod de asistență sau conectați-vă la un dispozitiv din lista de mai jos.",
@@ -14,7 +17,9 @@
   "No sessions": "Nicio sesiune",
   "Online": "Online",
   "Recorded": "Înregistrat",
+  "Retrying connection": "Se reîncearcă conexiunea",
   "Sessions": "Sesiuni",
   "Sorry, something went wrong.": "Ne pare rău, ceva nu a funcționat corect.",
-  "Support code": "Cod de asistență"
+  "Support code": "Cod de asistență",
+  "Trying once more": "Se încearcă încă o dată"
 }

@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}}-laite",
   "<0>Support </0>Code": "<0>Tuki</0>koodi",
   "Active": "Aktiivinen",
+  "Cancel": "Peruuta",
   "Connect": "Yhdistä",
+  "Contacting device": "Otetaan yhteyttä laitteeseen",
+  "Device not responding": "Laite ei vastaa",
   "Devices": "Laitteet",
   "Digit {{digit}}": "Numero {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Syötä tukikoodi tai yhdistä laitteeseen alla olevasta luettelosta.",
@@ -14,7 +17,9 @@
   "No sessions": "Ei istuntoja",
   "Online": "Paikalla",
   "Recorded": "Tallennettu",
+  "Retrying connection": "Yritetään yhteyttä uudelleen",
   "Sessions": "Istunnot",
   "Sorry, something went wrong.": "Pahoittelemme, jokin meni vikaan.",
-  "Support code": "Tukikoodi"
+  "Support code": "Tukikoodi",
+  "Trying once more": "Yritetään vielä kerran"
 }

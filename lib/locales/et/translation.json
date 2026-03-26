@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}} seade",
   "<0>Support </0>Code": "<0>Tugi</0>kood",
   "Active": "Aktiivne",
+  "Cancel": "Tühista",
   "Connect": "Ühenda",
+  "Contacting device": "Seadmega ühenduse loomine",
+  "Device not responding": "Seade ei vasta",
   "Devices": "Seadmed",
   "Digit {{digit}}": "Number {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Sisestage tugikood või ühenduge allolevast loendist seadmega.",
@@ -14,7 +17,9 @@
   "No sessions": "Seansse pole",
   "Online": "Võrgus",
   "Recorded": "Salvestatud",
+  "Retrying connection": "Ühenduse uuesti proovimine",
   "Sessions": "Seansid",
   "Sorry, something went wrong.": "Vabandust, midagi läks valesti.",
-  "Support code": "Tugikood"
+  "Support code": "Tugikood",
+  "Trying once more": "Proovitakse veel kord"
 }

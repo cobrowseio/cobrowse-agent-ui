@@ -11,15 +11,13 @@ achieve this from an app that's also using `i18next` to handle localization.
 // i18n.js
 
 import i18n from 'i18next';
-import { i18n as i18nAgentUI } from 'cobrowse-agent-ui';
+import { bindI18n } from 'cobrowse-agent-ui';
 
 i18n.init({
   // ...
 });
 
-i18n.on('languageChanged', (language) => {
-  i18nAgentUI.changeLanguage(language);
-});
+bindI18n(i18n);
 
 export default i18n;
 ```
@@ -28,12 +26,12 @@ export default i18n;
 
 To add a new locale follow these steps:
 
-- Add a new entry to the `locales` array inside `i18next-parser.config.js`.
+- Add a new entry to the `locales` array inside `i18next.config.ts`.
 - Run the `npm run i18n` command to generate a new locale file.
-- Import the new locale JSON file inside `lib/i18n.js` and add it to the `resources` object (in the i18n instance
+- Import the new locale JSON file inside `lib/i18n/instance.ts` and add it to the `resources` object (in the i18n instance
   configuration) keyed by the locale key.
-- Import the relevant `date-fns` locale inside `lib/i18n.js`.
-- Add a new entry to the `SUPPORTED_LOCALES` constant inside `lib/i18n.js`.
+- Import the relevant `date-fns` locale inside `lib/i18n/instance.ts`.
+- Add a new entry to `dateLocales` inside `lib/i18n/instance.ts`.
 
 **Note:** ensure the locale code matches the ones provided by the
 [date-fns library](https://github.com/date-fns/date-fns/tree/main/src/locale) as these are used to localize dates as well.

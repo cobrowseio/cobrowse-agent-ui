@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}}-enhed",
   "<0>Support </0>Code": "<0>Support</0>kode",
   "Active": "Aktiv",
+  "Cancel": "Annuller",
   "Connect": "Forbind",
+  "Contacting device": "Kontakter enhed",
+  "Device not responding": "Enheden svarer ikke",
   "Devices": "Enheder",
   "Digit {{digit}}": "Ciffer {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Indtast en supportkode, eller opret forbindelse til en enhed fra listen nedenfor.",
@@ -14,7 +17,9 @@
   "No sessions": "Ingen sessioner",
   "Online": "Online",
   "Recorded": "Optaget",
+  "Retrying connection": "Forsøger at oprette forbindelse igen",
   "Sessions": "Sessioner",
   "Sorry, something went wrong.": "Beklager, noget gik galt.",
-  "Support code": "Supportkode"
+  "Support code": "Supportkode",
+  "Trying once more": "Forsøger en sidste gang"
 }

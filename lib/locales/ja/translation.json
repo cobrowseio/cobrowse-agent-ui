@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}}デバイス",
   "<0>Support </0>Code": "<0>サポート</0>コード",
   "Active": "セッション中",
+  "Cancel": "キャンセル",
   "Connect": "接続",
+  "Contacting device": "デバイスに接続中",
+  "Device not responding": "デバイスが応答しません",
   "Devices": "デバイス",
   "Digit {{digit}}": "数字 {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "サポートコードを入力するか、以下のリストからデバイスに接続してください。",
@@ -14,7 +17,9 @@
   "No sessions": "セッションなし",
   "Online": "オンライン",
   "Recorded": "記録済み",
+  "Retrying connection": "接続を再試行中",
   "Sessions": "セッション",
   "Sorry, something went wrong.": "申し訳ございません。エラーが発生しました。",
-  "Support code": "サポートコード"
+  "Support code": "サポートコード",
+  "Trying once more": "もう一度試行中"
 }

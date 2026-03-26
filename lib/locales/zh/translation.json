@@ -4,7 +4,10 @@
   "{{device}} Device": "{{device}}设备",
   "<0>Support </0>Code": "<0>支持</0>代码",
   "Active": "共享中",
+  "Cancel": "取消",
   "Connect": "连接",
+  "Contacting device": "正在联系设备",
+  "Device not responding": "设备未响应",
   "Devices": "设备",
   "Digit {{digit}}": "数字 {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "输入支持代码，或从下方列表中连接到设备。",
@@ -14,7 +17,9 @@
   "No sessions": "无会话",
   "Online": "在线",
   "Recorded": "已记录",
+  "Retrying connection": "正在重试连接",
   "Sessions": "会话",
   "Sorry, something went wrong.": "抱歉，出现了问题。",
-  "Support code": "支持代码"
+  "Support code": "支持代码",
+  "Trying once more": "再尝试一次"
 }
