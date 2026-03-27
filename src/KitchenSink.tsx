@@ -107,7 +107,67 @@ const sessionSamples: SampleSession[] = [
   }
 ]
 
-const platformList: DeviceInfo['platform'][] = ['web', 'ios', 'macos', 'android', 'windows']
+const platformSamples: Array<{ label: string, device: SampleDeviceInfo }> = [
+  {
+    label: 'Safari',
+    device: deviceSamples[2].device
+  },
+  {
+    label: 'Chrome',
+    device: {
+      platform: 'web',
+      device:
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'
+    }
+  },
+  {
+    label: 'Edge',
+    device: {
+      platform: 'web',
+      device:
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0'
+    }
+  },
+  {
+    label: 'Firefox',
+    device: {
+      platform: 'web',
+      device:
+        'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0'
+    }
+  },
+  {
+    label: 'Opera',
+    device: {
+      platform: 'web',
+      device:
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/116.0.0.0'
+    }
+  },
+  {
+    label: 'Samsung Internet',
+    device: {
+      platform: 'web',
+      device:
+        'Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/25.0 Chrome/121.0.0.0 Mobile Safari/537.36'
+    }
+  },
+  {
+    label: 'iOS',
+    device: deviceSamples[0].device
+  },
+  {
+    label: 'Android',
+    device: deviceSamples[1].device
+  },
+  {
+    label: 'Windows',
+    device: {
+      platform: 'windows',
+      device: 'Windows desktop'
+    }
+  }
+]
 const users = [
   { id: 'u1', name: 'Alex Johnson', colour: '#d3e4ff' },
   { id: 'u2', name: 'Priya Patel', colour: '#ffe5b4' },
@@ -428,13 +488,13 @@ export default function KitchenSink () {
 
       <Section
         title='PlatformIcon'
-        subtitle='Icons adjust automatically based on the platform prop.'
+        subtitle='Icons adjust automatically based on the shared device info object.'
       >
         <div className='platform-grid'>
-          {platformList.map((platform) => (
-            <div key={platform} className='platform-card'>
-              <span>{platform}</span>
-              <PlatformIcon platform={platform} />
+          {platformSamples.map(({ label, device }) => (
+            <div key={label} className='platform-card'>
+              <span>{label}</span>
+              <PlatformIcon device={device} />
             </div>
           ))}
         </div>

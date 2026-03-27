@@ -7,7 +7,7 @@
 }
 
 .online .deviceStatus {
-  outline: 2px solid #c7ea30;
+  outline: 1px solid #c7ea30;
 }
 
 .lastSeen {
@@ -16,10 +16,10 @@
 }
 
 .deviceStatus {
-  height: 36px;
-  width: 36px;
+  height: 32px;
+  width: 32px;
   padding: 4px;
-  outline: 2px solid rgba(4, 13, 60, 0.25);
+  outline: 1px solid rgba(4, 13, 60, 0.25);
   border-radius: 100%;
   box-sizing: border-box;
   display: flex;
@@ -36,6 +36,7 @@
   align-items: center;
   justify-content: center;
   color: inherit;
+  padding: 2px;
 }
 
 .details {

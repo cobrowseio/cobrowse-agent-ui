@@ -44,7 +44,7 @@ const Device = <T extends DeviceData = DeviceData>({ style, className, device, c
     >
       <div className={styles.deviceStatus}>
         <PlatformIcon
-          platform={device.device.platform}
+          device={device.device}
           className={styles.platformIcon}
         />
       </div>
