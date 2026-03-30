@@ -3,6 +3,7 @@ import type { Session as FullSession } from 'cobrowse-agent-sdk'
 import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
+import PlatformIcon from '@/components/PlatformIcon'
 import { useTranslation } from '@/i18n'
 import styles from './Session.module.css'
 
@@ -45,15 +46,26 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
       {...props}
     >
       <span className={styles.details}>
-        <span>
+        <span className={styles.deviceType}>
+          <PlatformIcon device={session.device} />
           {deviceType}
         </span>
         <span className={styles.subdetails}>
-          <span className={styles.activated}>
-            {t('{{date, dateRelative}}', {
-              date: new Date(session.activated)
-            })}
-          </span>
+          {session.state === 'ended'
+            ? (
+              <span className={styles.activated}>
+                {t('{{date, dateRelative}}', {
+                  date: new Date(session.activated)
+                })}
+              </span>
+            )
+            : (
+              <span className={styles.active}>
+                <span className={styles.activeIndicator}></span>
+                {t('Active')}
+              </span>
+            )
+          }
           {session.state === 'ended' && session.recorded
             ? (
               <span className={styles.recorded}>
@@ -72,7 +84,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
           />
           )
         : (
-          <span className={styles.active}>{t('Active')}</span>
+          <span className={styles.active}>{t('Join Session')}</span>
           )}
       {children}
     </Tag>
