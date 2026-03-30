@@ -1,11 +1,11 @@
 .root {
-  appearance: none;
   height: 40px;
-  border: none;
   border-radius: 62px;
   background-color: #b91c1c;
   color: #ffffff;
   padding: 4px 20px;
+  cursor: pointer;
+  opacity: 1;
 }
 
 .root:hover {

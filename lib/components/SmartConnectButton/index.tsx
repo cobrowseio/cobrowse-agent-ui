@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import clsx from 'clsx'
+import Button from '@/components/Button'
 import styles from './SmartConnectButton.module.css'
 import type { DeviceData } from '@/components/Device'
 import { useTranslation } from '@/i18n'
@@ -20,12 +21,10 @@ const SmartConnectButton = <T extends DeviceData = DeviceData>({ device, onClick
   const isDisabled = !device.connectable
 
   return (
-    <button
+    <Button
       type='button'
       disabled={isDisabled}
       className={clsx(
-        styles.root,
-        device.online && styles.online,
         device.connectable && styles.connectable,
         className
       )}
@@ -33,7 +32,7 @@ const SmartConnectButton = <T extends DeviceData = DeviceData>({ device, onClick
       {...props}
     >
       {children ?? t('Connect')}
-    </button>
+    </Button>
   )
 }
 
