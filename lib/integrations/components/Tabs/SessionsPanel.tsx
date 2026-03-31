@@ -6,9 +6,10 @@ import type { BasePanelProps } from './BasePanel'
 export interface SessionsPanelProps<T extends SessionData = SessionData> extends BasePanelProps {
   sessions: T[] | null
   onSessionClick?: (session: T) => void
+  joinSessionButtonClassName?: string
 }
 
-const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessionClick, loader }: SessionsPanelProps<T>) => {
+const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessionClick, joinSessionButtonClassName, loader }: SessionsPanelProps<T>) => {
   const { t } = useTranslation()
 
   if (sessions === null) {
@@ -24,7 +25,7 @@ const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessio
   return (
     <>
       {sessions.map((session, index) => (
-        <Session key={index} session={session} onClick={onSessionClick} />
+        <Session key={index} session={session} onClick={onSessionClick} joinSessionButtonClassName={joinSessionButtonClassName} />
       ))}
     </>
   )
