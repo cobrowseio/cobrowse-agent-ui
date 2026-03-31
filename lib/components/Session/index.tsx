@@ -4,6 +4,7 @@ import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
 import PlatformIcon from '@/components/PlatformIcon'
+import Button from '@/components/Button'
 import { useTranslation } from '@/i18n'
 import styles from './Session.module.css'
 
@@ -84,7 +85,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
           />
           )
         : (
-          <span className={styles.active}>{t('Join Session')}</span>
+          <Button as='span'>{t('Join Session')}</Button>
           )}
       {children}
     </Tag>
