@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Сан {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Қолдау кодын енгізіңіз немесе төмендегі тізімнен құрылғыға қосылыңыз.",
   "Last seen {{date, dateRelative}}": "Соңғы рет көрінген {{date, dateRelative}}",
+  "Just now": "Дәл қазір",
   "Loading...": "Жүктелуде...",
   "No devices": "Құрылғылар жоқ",
   "No sessions": "Сеанстар жоқ",

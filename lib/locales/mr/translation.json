@@ -12,6 +12,7 @@
   "Digit {{digit}}": "अंक {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "सहाय्यता कोड प्रविष्ट करा किंवा खालील सूचीमधून डिव्हाइसशी जोडा.",
   "Last seen {{date, dateRelative}}": "शेवटचे पाहिले {{date, dateRelative}}",
+  "Just now": "आत्ताच",
   "Loading...": "लोड होत आहे...",
   "No devices": "कोणतेही डिव्हाइस नाहीत",
   "No sessions": "कोणतेही सत्र नाहीत",

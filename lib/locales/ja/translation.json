@@ -12,6 +12,7 @@
   "Digit {{digit}}": "数字 {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "サポートコードを入力するか、以下のリストからデバイスに接続してください。",
   "Last seen {{date, dateRelative}}": "最後のオンライン {{date, dateRelative}}",
+  "Just now": "たった今",
   "Loading...": "読み込み中...",
   "No devices": "デバイスなし",
   "No sessions": "セッションなし",

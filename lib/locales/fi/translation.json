@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Numero {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Syötä tukikoodi tai yhdistä laitteeseen alla olevasta luettelosta.",
   "Last seen {{date, dateRelative}}": "Nähty viimeksi {{date, dateRelative}}",
+  "Just now": "Juuri nyt",
   "Loading...": "Ladataan...",
   "No devices": "Ei laitteita",
   "No sessions": "Ei istuntoja",

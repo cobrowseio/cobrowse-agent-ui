@@ -12,6 +12,7 @@
   "Digit {{digit}}": "หลัก {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "กรอกรหัสสนับสนุน หรือเชื่อมต่อกับอุปกรณ์จากรายการด้านล่าง",
   "Last seen {{date, dateRelative}}": "เห็นครั้งล่าสุด {{date, dateRelative}}",
+  "Just now": "เมื่อสักครู่นี้",
   "Loading...": "กำลังโหลด...",
   "No devices": "ไม่มีอุปกรณ์",
   "No sessions": "ไม่มีเซสชัน",

@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Števka {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Vnesite kodo za podporo ali se povežite z napravo s spodnjega seznama.",
   "Last seen {{date, dateRelative}}": "Nazadnje viden {{date, dateRelative}}",
+  "Just now": "Pravkar",
   "Loading...": "Nalaganje...",
   "No devices": "Ni naprav",
   "No sessions": "Ni sej",

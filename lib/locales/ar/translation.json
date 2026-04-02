@@ -12,6 +12,7 @@
   "Digit {{digit}}": "الرقم {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "أدخل رمز الدعم، أو اتصل بجهاز من القائمة أدناه.",
   "Last seen {{date, dateRelative}}": "آخر ظهور {{date, dateRelative}}",
+  "Just now": "الآن",
   "Loading...": "جارٍ التحميل...",
   "No devices": "لا توجد أجهزة",
   "No sessions": "لا توجد جلسات",

@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Cyfra {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Wprowadź kod wsparcia lub połącz się z urządzeniem z poniższej listy.",
   "Last seen {{date, dateRelative}}": "Ostatnio widziany {{date, dateRelative}}",
+  "Just now": "Przed chwilą",
   "Loading...": "Ładowanie...",
   "No devices": "Brak urządzeń",
   "No sessions": "Brak sesji",

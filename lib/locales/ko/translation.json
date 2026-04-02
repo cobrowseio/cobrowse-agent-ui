@@ -12,6 +12,7 @@
   "Digit {{digit}}": "숫자 {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "지원 코드를 입력하거나 아래 목록에서 기기에 연결하십시오.",
   "Last seen {{date, dateRelative}}": "마지막 온라인 {{date, dateRelative}}",
+  "Just now": "방금 전",
   "Loading...": "로딩 중...",
   "No devices": "기기 없음",
   "No sessions": "세션 없음",

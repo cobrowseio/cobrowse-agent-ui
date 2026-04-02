@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Siffra {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Ange en supportkod eller anslut till en enhet från listan nedan.",
   "Last seen {{date, dateRelative}}": "Senast sedd {{date, dateRelative}}",
+  "Just now": "Just nu",
   "Loading...": "Laddar...",
   "No devices": "Inga enheter",
   "No sessions": "Inga sessioner",

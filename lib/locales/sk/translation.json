@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Číslica {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Zadajte kód podpory alebo sa pripojte k zariadeniu zo zoznamu nižšie.",
   "Last seen {{date, dateRelative}}": "Naposledy videný {{date, dateRelative}}",
+  "Just now": "Práve teraz",
   "Loading...": "Načítava sa...",
   "No devices": "Žiadne zariadenia",
   "No sessions": "Žiadne relácie",

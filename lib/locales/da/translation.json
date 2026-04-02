@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Ciffer {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Indtast en supportkode, eller opret forbindelse til en enhed fra listen nedenfor.",
   "Last seen {{date, dateRelative}}": "Sidst set {{date, dateRelative}}",
+  "Just now": "Lige nu",
   "Loading...": "Indlæser...",
   "No devices": "Ingen enheder",
   "No sessions": "Ingen sessioner",

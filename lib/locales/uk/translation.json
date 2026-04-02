@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Цифра {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Введіть код підтримки або підключіться до пристрою зі списку нижче.",
   "Last seen {{date, dateRelative}}": "Останній раз був в мережі {{date, dateRelative}}",
+  "Just now": "Щойно",
   "Loading...": "Завантаження...",
   "No devices": "Немає пристроїв",
   "No sessions": "Немає сеансів",

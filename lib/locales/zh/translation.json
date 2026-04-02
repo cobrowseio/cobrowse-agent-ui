@@ -12,6 +12,7 @@
   "Digit {{digit}}": "数字 {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "输入支持代码，或从下方列表中连接到设备。",
   "Last seen {{date, dateRelative}}": "最后在线时间 {{date, dateRelative}}",
+  "Just now": "刚刚",
   "Loading...": "加载中...",
   "No devices": "无设备",
   "No sessions": "无会话",

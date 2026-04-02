@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Number {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Sisestage tugikood või ühenduge allolevast loendist seadmega.",
   "Last seen {{date, dateRelative}}": "Viimati nähtud {{date, dateRelative}}",
+  "Just now": "Just praegu",
   "Loading...": "Laadimine...",
   "No devices": "Seadmeid pole",
   "No sessions": "Seansse pole",

@@ -75,6 +75,10 @@ const i18n = createInstance({
     escapeValue: false,
     format: (value: unknown, format?: string, lng?: string) => {
       if (format === 'dateRelative' && value instanceof Date) {
+        if (Math.abs(Date.now() - value.getTime()) < 60_000) {
+          return i18n.t('Just now', { lng })
+        }
+
         const { [lng ?? englishUS]: locale } = dateLocales
         return formatDistanceToNow(value, { addSuffix: true, locale })
       }

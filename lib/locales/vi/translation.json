@@ -12,6 +12,7 @@
   "Digit {{digit}}": "Chữ số {{digit}}",
   "Enter a support code, or connect to a device from the list below.": "Nhập mã hỗ trợ hoặc kết nối với thiết bị từ danh sách bên dưới.",
   "Last seen {{date, dateRelative}}": "Lần cuối xuất hiện {{date, dateRelative}}",
+  "Just now": "Vừa xong",
   "Loading...": "Đang tải...",
   "No devices": "Không có thiết bị",
   "No sessions": "Không có phiên",
