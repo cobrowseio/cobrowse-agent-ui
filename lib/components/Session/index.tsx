@@ -4,7 +4,6 @@ import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
 import PlatformIcon from '@/components/PlatformIcon'
-import Button from '@/components/Button'
 import { useTranslation } from '@/i18n'
 import styles from './Session.module.css'
 
@@ -69,26 +68,16 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
               </span>
             )
           }
-          {session.state === 'ended' && session.recorded
-            ? (
-              <span className={styles.recorded}>
-                {t('Recorded')}
-              </span>
-              )
-            : null}
         </span>
       </span>
       {session.state === 'ended'
-        ? (
+        && (
           <Stopwatch
             className={styles.duration}
             start={new Date(session.activated)}
             end={session.ended ? new Date(session.ended) : undefined}
           />
-          )
-        : (
-          <Button as='span' className={joinSessionButtonClassName}>{t('Join Session')}</Button>
-          )}
+        )}
       {children}
     </Tag>
   )
