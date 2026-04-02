@@ -4,6 +4,7 @@ import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
 import PlatformIcon from '@/components/PlatformIcon'
+import ClockIcon from '@/icons/clock.svg?react'
 import { useTranslation } from '@/i18n'
 import styles from './Session.module.css'
 
@@ -59,6 +60,13 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
                 {t('{{date, dateRelative}}', {
                   date: new Date(session.activated)
                 })}
+                <span className={styles.duration}>
+                  <ClockIcon />
+                  <Stopwatch
+                    start={new Date(session.activated)}
+                    end={session.ended ? new Date(session.ended) : undefined}
+                  />
+                </span>
               </span>
             )
             : (
@@ -70,14 +78,6 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
           }
         </span>
       </span>
-      {session.state === 'ended'
-        && (
-          <Stopwatch
-            className={styles.duration}
-            start={new Date(session.activated)}
-            end={session.ended ? new Date(session.ended) : undefined}
-          />
-        )}
       {children}
     </Tag>
   )

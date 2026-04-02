@@ -17,7 +17,7 @@ import styles from './Tabs.module.css'
 
 interface TabsPanelProps<TDevice extends DeviceData, TSession extends SessionData>
   extends Pick<DevicesPanelProps<TDevice>, 'devices' | 'onConnectClick' | 'smartConnectButtonClassName' | 'loader'>,
-    Pick<SessionsPanelProps<TSession>, 'sessions' | 'onSessionClick' | 'joinSessionButtonClassName' | 'loader'> {}
+    Pick<SessionsPanelProps<TSession>, 'sessions' | 'onSessionClick' | 'sessionButtonClassName' | 'loader'> {}
 
 export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData>
   extends TabsPanelProps<TDevice, TSession> {
@@ -40,7 +40,7 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
   onSessionClick,
   onRefreshClick,
   smartConnectButtonClassName,
-  joinSessionButtonClassName,
+  sessionButtonClassName,
   loader,
   refresh,
   className,
@@ -96,7 +96,7 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
           <DevicesPanel devices={devices} onConnectClick={onConnectClick} smartConnectButtonClassName={smartConnectButtonClassName} loader={loader} />
         </HeadlessTabPanel>
         <HeadlessTabPanel>
-          <SessionsPanel sessions={sessions} onSessionClick={onSessionClick} joinSessionButtonClassName={joinSessionButtonClassName} loader={loader} />
+          <SessionsPanel sessions={sessions} onSessionClick={onSessionClick} sessionButtonClassName={sessionButtonClassName} loader={loader} />
         </HeadlessTabPanel>
       </HeadlessTabPanels>
     </HeadlessTabGroup>

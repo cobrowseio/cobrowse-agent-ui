@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { differenceInMilliseconds, intervalToDuration, format } from 'date-fns'
 import type { CSSProperties } from 'react'
 
@@ -16,7 +15,7 @@ const Stopwatch = ({ start: startProp, end: endProp, style, className }: Stopwat
   const duration = intervalToDuration({ start, end })
 
   return (
-    <span style={style} className={clsx('Stopwatch', className)}>
+    <span style={style} className={className}>
       {duration.hours && duration.hours > 0 ? <span>{duration.hours}<span>:</span></span> : null}
       <span>{format(new Date(ms), 'mm:ss')}</span>
     </span>

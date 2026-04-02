@@ -1,0 +1,10 @@
+.recorded {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.recordedIcon {
+  height: 14px;
+  width: 14px;
+}
