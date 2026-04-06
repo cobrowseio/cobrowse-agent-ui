@@ -49,7 +49,7 @@ const Device = <T extends DeviceData = DeviceData>({ style, className, device, c
         />
       </div>
       <div className={styles.details}>
-        {deviceType}
+        <div className={styles.deviceType}>{deviceType}</div>
         <LastSeen device={device} />
       </div>
       {children}

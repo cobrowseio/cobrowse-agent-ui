@@ -10,9 +10,12 @@
   outline: 1px solid #c7ea30;
 }
 
+.deviceType {
+  color: #0E0C26;
+}
+
 .lastSeen {
-  font-size: 0.85rem;
-  color: #777;
+  color: #6F6D82;
 }
 
 .deviceStatus {
@@ -42,7 +45,8 @@
 .details {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
   color: inherit;
+  font-size: 14px;
 }
