@@ -24,7 +24,7 @@
 }
 
 .tab {
-  composes: focusRing from '../../../styles/focus.module.css';
+  composes: focusRing from '@/styles/focus.module.css';
   position: relative;
   margin-bottom: -1px;
   padding: 10px;

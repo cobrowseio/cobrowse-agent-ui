@@ -1,5 +1,5 @@
 .root {
-  composes: focusRing from '../../styles/focus.module.css';
+  composes: focusRing from '@/styles/focus.module.css';
   appearance: none;
   border: none;
   display: inline-block;
