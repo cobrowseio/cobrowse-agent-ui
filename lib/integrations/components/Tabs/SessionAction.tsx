@@ -26,7 +26,7 @@ const SessionAction = ({ session, className, onClick }: SessionActionProps) => {
         </span>
       )}
       {isExpired && t('Expired')}
-      {isActive && t('Join Session')}
+      {isActive && t('Join session')}
     </Button>
   )
 }
