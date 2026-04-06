@@ -1,4 +1,5 @@
 .root {
+  composes: focusRing from '../../styles/focus.module.css';
   height: 40px;
   border-radius: 62px;
   background-color: #b91c1c;

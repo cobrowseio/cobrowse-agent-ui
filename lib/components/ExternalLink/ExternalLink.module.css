@@ -1,4 +1,5 @@
 .root {
+  composes: focusRing from '../../styles/focus.module.css';
   position: absolute;
   right: 10px;
   display: flex;

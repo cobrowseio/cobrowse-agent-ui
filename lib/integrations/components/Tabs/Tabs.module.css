@@ -2,7 +2,6 @@
   --tab-text-color: #6f7780;
   --tab-active-color: #040d3c;
   --tab-border-color: #d7dce2;
-  --tab-focus-outline-color: #040d3c;
 
   width: 100%;
   display: flex;
@@ -25,6 +24,7 @@
 }
 
 .tab {
+  composes: focusRing from '../../../styles/focus.module.css';
   position: relative;
   margin-bottom: -1px;
   padding: 10px;
@@ -40,11 +40,6 @@
 
 .tabHover {
   color: var(--tab-active-color);
-}
-
-.tab:focus-visible {
-  outline: 2px solid var(--tab-focus-outline-color);
-  outline-offset: 2px;
 }
 
 .tabActive {
