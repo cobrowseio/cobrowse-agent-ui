@@ -59,6 +59,19 @@
   width: 100%;
 }
 
+.panelItem {
+  position: relative;
+}
+
+.panelItem + .panelItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 6px;
+  right: 6px;
+  border-top: 1px solid #E1E1E4;
+}
+
 .refresh {
   margin-inline-start: auto;
 }
