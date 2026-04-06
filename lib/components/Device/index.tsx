@@ -21,7 +21,12 @@ const LastSeen = ({ device }: { device: DeviceData }) => {
   return (
     <div className={styles.lastSeen}>
       {device.online
-        ? t('Online')
+        ? (
+          <span className={styles.onlineStatus}>
+            <span className={styles.onlineIndicator}></span>
+            {t('Online')}
+          </span>
+        )
         : t('Last seen {{date, dateRelative}}', {
           date: new Date(device.last_active)
         })}

@@ -6,16 +6,26 @@
   gap: 12px;
 }
 
-.online .deviceStatus {
-  outline: 1px solid #c7ea30;
-}
-
 .deviceType {
   color: #0E0C26;
 }
 
 .lastSeen {
   color: #6F6D82;
+}
+
+.onlineStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.onlineIndicator {
+  background: #22C55E;
+  height: 12px;
+  width: 12px;
+  border: 2px solid #BBF7D0;
+  border-radius: 9999px;
 }
 
 .deviceStatus {
