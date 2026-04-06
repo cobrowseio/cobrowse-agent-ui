@@ -1,5 +1,4 @@
 .connectable {
-  composes: focusRing from '@/styles/focus.module.css';
   background: #040d3c;
   color: #ffffff;
   cursor: pointer;
