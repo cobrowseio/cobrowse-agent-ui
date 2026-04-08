@@ -1,4 +1,5 @@
 import CodeEntryComponent from '@/components/CodeEntry'
+import ButtonComponent from '@/components/Button'
 import ExternalLinkComponent from '@/components/ExternalLink'
 import PlatformIconComponent from '@/components/PlatformIcon'
 import DeviceComponent from '@/components/Device'
@@ -17,6 +18,7 @@ import useSessionHook from '@/hooks/useSession'
 import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
+export type { ButtonProps } from '@/components/Button'
 export type { ExternalLinkProps } from '@/components/ExternalLink'
 export type { DeviceData, DeviceProps } from '@/components/Device'
 export type { SessionData, SessionProps } from '@/components/Session'
@@ -31,6 +33,7 @@ export type { ConnectDeviceProps } from '@/components/ConnectDevice'
 export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
 
 export const CodeEntry = CodeEntryComponent
+export const Button = ButtonComponent
 export const ExternalLink = ExternalLinkComponent
 export const PlatformIcon = PlatformIconComponent
 export const Device = DeviceComponent

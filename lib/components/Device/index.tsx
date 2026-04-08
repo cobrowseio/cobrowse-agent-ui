@@ -21,7 +21,12 @@ const LastSeen = ({ device }: { device: DeviceData }) => {
   return (
     <div className={styles.lastSeen}>
       {device.online
-        ? t('Online')
+        ? (
+          <span className={styles.onlineStatus}>
+            <span className={styles.onlineIndicator}></span>
+            {t('Online')}
+          </span>
+        )
         : t('Last seen {{date, dateRelative}}', {
           date: new Date(device.last_active)
         })}
@@ -44,12 +49,12 @@ const Device = <T extends DeviceData = DeviceData>({ style, className, device, c
     >
       <div className={styles.deviceStatus}>
         <PlatformIcon
-          platform={device.device.platform}
+          device={device.device}
           className={styles.platformIcon}
         />
       </div>
       <div className={styles.details}>
-        {deviceType}
+        <div className={styles.deviceType}>{deviceType}</div>
         <LastSeen device={device} />
       </div>
       {children}

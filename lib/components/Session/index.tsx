@@ -3,6 +3,8 @@ import type { Session as FullSession } from 'cobrowse-agent-sdk'
 import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
 import clsx from 'clsx'
 import Stopwatch from '@/components/Stopwatch'
+import PlatformIcon from '@/components/PlatformIcon'
+import ClockIcon from '@/icons/clock.svg?react'
 import { useTranslation } from '@/i18n'
 import styles from './Session.module.css'
 
@@ -10,11 +12,12 @@ const DEFAULT_TAG = 'div' as const
 
 type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
 
-export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended'> & { device: DeviceInfo }
+export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended' | 'getRecording' | 'recording'> & { device: DeviceInfo }
 
 interface BaseSessionProps<TSession extends SessionData = SessionData> {
   session: TSession
   className?: string
+  joinSessionButtonClassName?: string
   children?: ReactNode
 }
 
@@ -30,6 +33,7 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
   session,
   onClick,
   className,
+  joinSessionButtonClassName,
   children,
   ...props
 }: SessionProps<TSession, TElement>) => {
@@ -45,35 +49,35 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
       {...props}
     >
       <span className={styles.details}>
-        <span>
+        <span className={styles.deviceType}>
+          <PlatformIcon device={session.device} />
           {deviceType}
         </span>
         <span className={styles.subdetails}>
-          <span className={styles.activated}>
-            {t('{{date, dateRelative}}', {
-              date: new Date(session.activated)
-            })}
-          </span>
-          {session.state === 'ended' && session.recorded
+          {session.state === 'ended'
             ? (
-              <span className={styles.recorded}>
-                {t('Recorded')}
+              <span className={styles.activated}>
+                {t('{{date, dateRelative}}', {
+                  date: new Date(session.activated)
+                })}
+                <span className={styles.duration}>
+                  <ClockIcon />
+                  <Stopwatch
+                    start={new Date(session.activated)}
+                    end={session.ended ? new Date(session.ended) : undefined}
+                  />
+                </span>
               </span>
-              )
-            : null}
+            )
+            : (
+              <span className={styles.active}>
+                <span className={styles.activeIndicator}></span>
+                {t('Active')}
+              </span>
+            )
+          }
         </span>
       </span>
-      {session.state === 'ended'
-        ? (
-          <Stopwatch
-            className={styles.duration}
-            start={new Date(session.activated)}
-            end={session.ended ? new Date(session.ended) : undefined}
-          />
-          )
-        : (
-          <span className={styles.active}>{t('Active')}</span>
-          )}
       {children}
     </Tag>
   )

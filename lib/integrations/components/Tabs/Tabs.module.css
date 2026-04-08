@@ -2,7 +2,6 @@
   --tab-text-color: #6f7780;
   --tab-active-color: #040d3c;
   --tab-border-color: #d7dce2;
-  --tab-focus-outline-color: #040d3c;
 
   width: 100%;
   display: flex;
@@ -25,6 +24,7 @@
 }
 
 .tab {
+  composes: focusRing from '@/styles/focus.module.css';
   position: relative;
   margin-bottom: -1px;
   padding: 10px;
@@ -42,11 +42,6 @@
   color: var(--tab-active-color);
 }
 
-.tab:focus-visible {
-  outline: 2px solid var(--tab-focus-outline-color);
-  outline-offset: 2px;
-}
-
 .tabActive {
   color: var(--tab-active-color);
   border-bottom: 2px solid var(--tab-active-color);
@@ -57,6 +52,19 @@
   flex: 1 1;
   min-height: 0;
   width: 100%;
+}
+
+.panelItem {
+  position: relative;
+}
+
+.panelItem + .panelItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 6px;
+  right: 6px;
+  border-top: 1px solid #E1E1E4;
 }
 
 .refresh {

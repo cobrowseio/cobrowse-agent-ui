@@ -22,6 +22,7 @@
 }
 
 .input {
+  composes: focusRing from '@/styles/focus.module.css';
   font-size: 1rem;
   width: 1.6rem;
   height: 2rem;
@@ -46,10 +47,8 @@
   margin: 0;
 }
 
-.input:focus {
+.input:focus-visible {
   border-color: #040d3c;
-  box-shadow: 0 0 0 3px rgba(4, 13, 60, 0.16);
-  outline: none;
 }
 
 @keyframes shake {

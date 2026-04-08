@@ -6,20 +6,33 @@
   gap: 12px;
 }
 
-.online .deviceStatus {
-  outline: 2px solid #c7ea30;
+.deviceType {
+  color: #0E0C26;
 }
 
 .lastSeen {
-  font-size: 0.85rem;
-  color: #777;
+  color: #6F6D82;
+}
+
+.onlineStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.onlineIndicator {
+  background: #22C55E;
+  height: 12px;
+  width: 12px;
+  border: 2px solid #BBF7D0;
+  border-radius: 9999px;
 }
 
 .deviceStatus {
-  height: 36px;
-  width: 36px;
+  height: 32px;
+  width: 32px;
   padding: 4px;
-  outline: 2px solid rgba(4, 13, 60, 0.25);
+  outline: 1px solid rgba(4, 13, 60, 0.25);
   border-radius: 100%;
   box-sizing: border-box;
   display: flex;
@@ -36,12 +49,14 @@
   align-items: center;
   justify-content: center;
   color: inherit;
+  padding: 2px;
 }
 
 .details {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
   color: inherit;
+  font-size: 14px;
 }

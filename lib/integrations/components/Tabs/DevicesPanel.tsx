@@ -3,6 +3,7 @@ import SmartConnectButton from '@/components/SmartConnectButton'
 import Loader from '@/components/Loader'
 import { useTranslation } from '@/i18n'
 import type { BasePanelProps } from './BasePanel'
+import styles from './Tabs.module.css'
 
 export interface DevicesPanelProps<T extends DeviceData = DeviceData> extends BasePanelProps {
   devices: T[] | null
@@ -26,7 +27,7 @@ const DevicesPanel = <T extends DeviceData = DeviceData>({ devices, onConnectCli
   return (
     <>
       {devices.map((device) => (
-        <Device key={device.id} device={device}>
+        <Device key={device.id} device={device} className={styles.panelItem}>
           <SmartConnectButton
             device={device}
             className={smartConnectButtonClassName}

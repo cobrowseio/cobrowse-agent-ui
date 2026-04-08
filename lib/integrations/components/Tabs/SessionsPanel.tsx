@@ -2,13 +2,16 @@ import Session, { type SessionData } from '@/components/Session'
 import Loader from '@/components/Loader'
 import { useTranslation } from '@/i18n'
 import type { BasePanelProps } from './BasePanel'
+import SessionAction from './SessionAction'
+import styles from './Tabs.module.css'
 
 export interface SessionsPanelProps<T extends SessionData = SessionData> extends BasePanelProps {
   sessions: T[] | null
   onSessionClick?: (session: T) => void
+  sessionButtonClassName?: string
 }
 
-const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessionClick, loader }: SessionsPanelProps<T>) => {
+const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessionClick, sessionButtonClassName, loader }: SessionsPanelProps<T>) => {
   const { t } = useTranslation()
 
   if (sessions === null) {
@@ -24,7 +27,9 @@ const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessio
   return (
     <>
       {sessions.map((session, index) => (
-        <Session key={index} session={session} onClick={onSessionClick} />
+        <Session key={index} session={session} className={styles.panelItem}>
+          <SessionAction session={session} onClick={() => onSessionClick?.(session)} className={sessionButtonClassName} />
+        </Session>
       ))}
     </>
   )
