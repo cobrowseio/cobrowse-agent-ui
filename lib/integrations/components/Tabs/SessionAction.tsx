@@ -14,18 +14,20 @@ const SessionAction = ({ session, className, onClick }: SessionActionProps) => {
   const { t } = useTranslation()
 
   const isRecorded = session.state === 'ended' && session.recorded
-  const isExpired = session.state === 'ended' && !session.recorded
   const isActive = session.state === 'active'
 
+  if (!isRecorded && !isActive) {
+    return null
+  }
+
   return (
-    <Button onClick={onClick} className={className} disabled={isExpired}>
+    <Button onClick={onClick} className={className}>
       {isRecorded && (
         <span className={styles.recorded}>
           <PlayIcon className={styles.recordedIcon} />
           {t('Recording')}
         </span>
       )}
-      {isExpired && t('Expired')}
       {isActive && t('Join session')}
     </Button>
   )

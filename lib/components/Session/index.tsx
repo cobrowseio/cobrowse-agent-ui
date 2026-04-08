@@ -12,7 +12,7 @@ const DEFAULT_TAG = 'div' as const
 
 type PropsOf<T extends ElementType> = ComponentPropsWithoutRef<T>
 
-export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended'> & { device: DeviceInfo }
+export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activated' | 'ended' | 'getRecording' | 'recording'> & { device: DeviceInfo }
 
 interface BaseSessionProps<TSession extends SessionData = SessionData> {
   session: TSession
