@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.5.0...v1.6.0) (2026-04-27)
+
+
+### Features
+
+* add ConnectDevice component ([#45](https://github.com/cobrowseio/cobrowse-agent-ui/issues/45)) ([7a61493](https://github.com/cobrowseio/cobrowse-agent-ui/commit/7a614937a32fe07e4f1dfdbc568b2260ef2f0694))
+* add optional heading to BlockingError ([#56](https://github.com/cobrowseio/cobrowse-agent-ui/issues/56)) ([fbde186](https://github.com/cobrowseio/cobrowse-agent-ui/commit/fbde186c390702140578d7f7fb1495c8e614721f))
+* add SessionEmbed component ([#48](https://github.com/cobrowseio/cobrowse-agent-ui/issues/48)) ([ace0ec0](https://github.com/cobrowseio/cobrowse-agent-ui/commit/ace0ec0151a0601c3268cee347addeb51199a89d))
+* move BlockingError to main entrypoint ([#46](https://github.com/cobrowseio/cobrowse-agent-ui/issues/46)) ([924df79](https://github.com/cobrowseio/cobrowse-agent-ui/commit/924df7993bbdf557cf7ea1babd3f6f06af974165))
+* streamline i18n ([#49](https://github.com/cobrowseio/cobrowse-agent-ui/issues/49)) ([339a273](https://github.com/cobrowseio/cobrowse-agent-ui/commit/339a27374946b61540fa875f643683891016a627))
+* update devices and sessions list designs ([#52](https://github.com/cobrowseio/cobrowse-agent-ui/issues/52)) ([2a68ce0](https://github.com/cobrowseio/cobrowse-agent-ui/commit/2a68ce0d4bbe17d7c299c5eef9affd27180759b3))
+
 ## [1.5.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.4.2...v1.5.0) (2026-02-20)
 
 
