@@ -313,7 +313,9 @@ const asSession = (sample: typeof sessionSamples[number]): SessionData => ({
   device: {
     platform: sample.device.platform,
     device: sample.device.device
-  }
+  },
+  getRecording: () => Promise.reject(new Error('Not implemented in demo')),
+  recording: () => Promise.reject(new Error('Not implemented in demo'))
 })
 
 const EndSessionButton = () => {
