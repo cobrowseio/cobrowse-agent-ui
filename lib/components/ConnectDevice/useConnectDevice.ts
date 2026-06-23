@@ -106,7 +106,7 @@ const useConnectDevice = ({
     }
 
     try {
-      await deviceRef.current.notify({ session: sessionRef.current, attempt }, undefined, { signal: abortController.signal })
+      await deviceRef.current.notify({ session: sessionRef.current, attempt }, { request: { signal: abortController.signal } })
     } catch (error) {
       triggerPushError(error)
     }
@@ -117,7 +117,7 @@ const useConnectDevice = ({
   }, [maxPushAttempts, onConnectAttemptCallback, pushRetryMs, triggerPushError])
 
   const createSession = useCallback(async (abortController: AbortController) => {
-    const { signal } = abortController
+    const request = { signal: abortController.signal }
 
     try {
       deviceRef.current = null
@@ -126,8 +126,8 @@ const useConnectDevice = ({
       sessionEndedRef.current = false
 
       const [region, device] = await Promise.all([
-        cobrowse.regions.closest(undefined, { signal }),
-        cobrowse.devices.get(deviceId, undefined, { signal })
+        cobrowse.regions.closest({ request }),
+        cobrowse.devices.get(deviceId, { request })
       ])
 
       deviceRef.current = device
@@ -136,7 +136,7 @@ const useConnectDevice = ({
         custom_data: device.custom_data,
         region: region.id,
         agent: 'me'
-      }, undefined, { signal })
+      }, { request })
 
       sessionRef.current = session
 

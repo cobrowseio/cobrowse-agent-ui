@@ -310,6 +310,8 @@ const asSession = (sample: typeof sessionSamples[number]): SessionData => ({
   recorded: sample.recorded,
   activated: new Date(sample.activated),
   ended: sample.ended ? new Date(sample.ended) : null,
+  recording: sample.recorded ? { expires: null, deleted: null } : null,
+  getRecording: () => Promise.reject(new Error('Recording playback is not available in the demo')),
   device: {
     platform: sample.device.platform,
     device: sample.device.device

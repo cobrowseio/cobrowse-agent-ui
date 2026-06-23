@@ -17,7 +17,6 @@ export type SessionData = Pick<FullSession, 'id' | 'state' | 'recorded' | 'activ
 interface BaseSessionProps<TSession extends SessionData = SessionData> {
   session: TSession
   className?: string
-  joinSessionButtonClassName?: string
   children?: ReactNode
 }
 
@@ -33,7 +32,6 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
   session,
   onClick,
   className,
-  joinSessionButtonClassName,
   children,
   ...props
 }: SessionProps<TSession, TElement>) => {
@@ -58,12 +56,13 @@ const Session = <TSession extends SessionData = SessionData, TElement extends El
             ? (
               <span className={styles.activated}>
                 {t('{{date, dateRelative}}', {
-                  date: new Date(session.activated)
+                  date: session.activated
                 })}
                 <span className={styles.duration}>
                   <ClockIcon />
                   <Stopwatch
-                    start={new Date(session.activated)}
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime value can be undefined despite the type. Fixed on full agent-sdk TS migration
+                    start={session.activated ? new Date(session.activated) : new Date()}
                     end={session.ended ? new Date(session.ended) : undefined}
                   />
                 </span>
