@@ -13,6 +13,7 @@ import LoaderComponent from '@/components/Loader'
 import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
 import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
+import SessionRatingComponent from '@/components/SessionRating'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
 import useSessionHook from '@/hooks/useSession'
 import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
@@ -30,6 +31,7 @@ export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
 export type { SessionEmbedProps } from '@/components/SessionEmbed'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
+export type { SessionRatingProps, SessionRatingResult } from '@/components/SessionRating'
 export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
 
 export const CodeEntry = CodeEntryComponent
@@ -47,6 +49,7 @@ export const Loader = LoaderComponent
 export const Frame = FrameComponent
 export const SessionEmbed = SessionEmbedComponent
 export const ConnectDevice = ConnectDeviceComponent
+export const SessionRating = SessionRatingComponent
 export const CobrowseProvider = CobrowseProviderComponent
 export const useCobrowse = useCobrowseHook
 export const useRemoteContext = useRemoteContextHook

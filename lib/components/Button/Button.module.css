@@ -12,6 +12,7 @@
   line-height: inherit;
   transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease, opacity 0.12s ease;
   outline: none;
+  cursor: pointer;
 }
 
 .root:disabled {

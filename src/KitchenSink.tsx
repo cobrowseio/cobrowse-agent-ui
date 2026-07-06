@@ -9,6 +9,7 @@ import {
   Session,
   SessionEmbed,
   type SessionData,
+  SessionRating,
   SmartConnectButton,
   UserIcon,
   useRemoteContext,
@@ -386,6 +387,8 @@ export default function KitchenSink () {
   const [connectTimeoutKey, setConnectTimeoutKey] = useState(0)
   const [tabsDevices, setTabsDevices] = useState<DeviceData[] | null>(deviceSamples.map(asDevice))
   const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(sessionSamples.map(asSession))
+  const [ratingLog, setRatingLog] = useState('')
+  const [ratingKey, setRatingKey] = useState(0)
 
   const languages = useMemo(() => {
     const resources = i18n.options?.resources ?? {}
@@ -671,6 +674,23 @@ export default function KitchenSink () {
             {connectLog.slice(-8).map((entry, i) => <div key={i}>{entry}</div>)}
           </div>
         )}
+      </Section>
+
+      <Section
+        title='SessionRating'
+        subtitle='Star rating with optional low-score feedback. 4–5 stars auto-completes; 1–3 reveals reasons and a free-text field.'
+      >
+        <div className='panel'>
+          <SessionRating
+            key={ratingKey}
+            onComplete={(result) => setRatingLog(JSON.stringify(result))}
+            showThankYou
+          />
+        </div>
+        {ratingLog ? <div className='log'>{ratingLog}</div> : null}
+        <div className='button-row'>
+          <button type='button' onClick={() => { setRatingLog(''); setRatingKey(k => k + 1) }}>Reset</button>
+        </div>
       </Section>
 
       <SessionEmbedSection />
