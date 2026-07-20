@@ -75,16 +75,6 @@
   fill: #6556f0;
 }
 
-.feedbackGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.feedbackGroupExpanded {
-  gap: 24px;
-}
-
 .feedback {
   display: grid;
   gap: 24px;
@@ -130,7 +120,7 @@
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
 
-.issues {
+.comment {
   composes: focusRing from '@/styles/focus.module.css';
   box-sizing: border-box;
   width: 100%;
@@ -146,17 +136,17 @@
   outline: none;
 }
 
-.issues::placeholder {
+.comment::placeholder {
   color: #72749e;
 }
 
-.continue {
+.submit {
   align-self: center;
   background: #6556f0;
   color: #ffffff;
 }
 
-.continue:hover {
+.submit:hover {
   background: #5438ca;
 }
 

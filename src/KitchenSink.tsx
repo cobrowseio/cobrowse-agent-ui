@@ -6,6 +6,7 @@ import {
   Device,
   type DeviceData,
   PlatformIcon,
+  Rating,
   Session,
   SessionEmbed,
   type SessionData,
@@ -389,6 +390,8 @@ export default function KitchenSink () {
   const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(sessionSamples.map(asSession))
   const [ratingLog, setRatingLog] = useState('')
   const [ratingKey, setRatingKey] = useState(0)
+  const [composedRatingLog, setComposedRatingLog] = useState('')
+  const [composedRatingKey, setComposedRatingKey] = useState(0)
 
   const languages = useMemo(() => {
     const resources = i18n.options?.resources ?? {}
@@ -678,7 +681,7 @@ export default function KitchenSink () {
 
       <Section
         title='SessionRating'
-        subtitle='Star rating with optional low-score feedback. 4–5 stars auto-completes; 1–3 reveals reasons and a free-text field.'
+        subtitle='Pre-composed rating. Star rating with optional low-score feedback: 4–5 stars auto-completes; 1–3 reveals reasons and a free-text field.'
       >
         <div className='panel'>
           <SessionRating
@@ -690,6 +693,33 @@ export default function KitchenSink () {
         {ratingLog ? <div className='log'>{ratingLog}</div> : null}
         <div className='button-row'>
           <button type='button' onClick={() => { setRatingLog(''); setRatingKey(k => k + 1) }}>Reset</button>
+        </div>
+      </Section>
+
+      <Section
+        title='Rating (composable)'
+        subtitle='The same building blocks composed by hand: Rating.Stars, Rating.Feedback, Rating.Submit and Rating.ThankYou. Here a custom prompt and a shorter reason list.'
+      >
+        <div className='panel'>
+          <Rating
+            key={composedRatingKey}
+            onComplete={(result) => setComposedRatingLog(JSON.stringify(result))}
+          >
+            <Rating.Stars label='How did we do?' />
+            <Rating.Feedback
+              reasons={[
+                { value: 'too_slow', label: 'It was too slow' },
+                { value: 'confusing', label: 'It was confusing' }
+              ]}
+              placeholder='Tell us more (optional)'
+            />
+            <Rating.Submit>Send feedback</Rating.Submit>
+            <Rating.ThankYou>Thanks — we appreciate it!</Rating.ThankYou>
+          </Rating>
+        </div>
+        {composedRatingLog ? <div className='log'>{composedRatingLog}</div> : null}
+        <div className='button-row'>
+          <button type='button' onClick={() => { setComposedRatingLog(''); setComposedRatingKey(k => k + 1) }}>Reset</button>
         </div>
       </Section>
 
