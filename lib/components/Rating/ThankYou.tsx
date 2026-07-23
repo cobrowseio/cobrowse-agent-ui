@@ -10,13 +10,13 @@ export interface RatingThankYouProps {
 }
 
 const ThankYou = ({ children, className }: RatingThankYouProps) => {
-  const { complete } = useRatingContext()
+  const { complete, rating } = useRatingContext()
   const { t } = useTranslation()
 
-  if (!complete) return null
+  if (!complete || rating === null) return null
 
   return (
-    <div className={clsx(styles.thankYou, className)}>
+    <div role='status' className={clsx(styles.thankYou, className)}>
       {children ?? t('Thank you for your feedback.')}
     </div>
   )

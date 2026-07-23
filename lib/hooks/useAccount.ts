@@ -9,21 +9,27 @@ const isAbortError = (error: unknown): boolean => (
 const useAccount = () => {
   const cobrowse = useCobrowse()
   const [account, setAccount] = useState<Account | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
     const abortController = new AbortController()
 
     const runEffect = async () => {
       setAccount(null)
+      setError(null)
+      setLoading(true)
 
       try {
         const accounts = await cobrowse.accounts.list({ request: { signal: abortController.signal } })
 
         setAccount(accounts.length > 0 ? accounts[0] : null)
+        setLoading(false)
       } catch (error) {
-        if (!isAbortError(error)) {
-          throw error
-        }
+        if (isAbortError(error)) return
+
+        setError(error instanceof Error ? error : new Error(String(error)))
+        setLoading(false)
       }
     }
 
@@ -43,7 +49,9 @@ const useAccount = () => {
 
   return {
     hasFeature,
-    account
+    account,
+    loading,
+    error
   }
 }
 

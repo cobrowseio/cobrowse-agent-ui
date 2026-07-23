@@ -9,7 +9,7 @@ export interface RatingContextValue {
   comment: string
   complete: boolean
   feedbackThreshold: number
-  setRating: (score: RatingValue) => void
+  setRating: (score: RatingValue, commit?: boolean) => void
   toggleReason: (value: string) => void
   setComment: (value: string) => void
   submit: () => void

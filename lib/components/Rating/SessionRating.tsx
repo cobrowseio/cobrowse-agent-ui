@@ -1,4 +1,4 @@
-import Rating from './index'
+import Rating from './'
 import type { RatingResult } from './context'
 
 export type SessionRatingResult = RatingResult

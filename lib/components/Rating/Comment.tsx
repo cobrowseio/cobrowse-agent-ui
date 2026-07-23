@@ -12,10 +12,13 @@ const Comment = ({ placeholder, className }: RatingCommentProps) => {
   const { comment, setComment } = useRatingContext()
   const { t } = useTranslation()
 
+  const label = placeholder ?? t('Please describe any issues you experienced')
+
   return (
     <textarea
       className={clsx(styles.comment, className)}
-      placeholder={placeholder ?? t('Please describe any issues you experienced')}
+      aria-label={label}
+      placeholder={label}
       value={comment}
       onChange={(event) => { setComment(event.target.value) }}
     />

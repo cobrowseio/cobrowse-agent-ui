@@ -22,7 +22,6 @@
 
 .stars {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: center;
 }
 
@@ -31,16 +30,21 @@
 }
 
 .star {
-  composes: focusRing from '@/styles/focus.module.css';
-  appearance: none;
-  border: none;
-  background: none;
   padding: 0 6px;
   line-height: 0;
   color: #9ca2be;
   cursor: pointer;
   border-radius: 4px;
   transition: color 0.2s ease;
+}
+
+.starInput {
+  composes: visuallyHidden from '@/styles/visuallyHidden.module.css';
+}
+
+.star:has(.starInput:focus-visible) {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring-width, 3px) var(--focus-ring-color, rgba(4, 13, 60, 0.16));
 }
 
 .star svg {
@@ -58,21 +62,21 @@
 }
 
 .star:hover,
-.star:hover ~ .star {
-  color: #6556f0;
+.star:has(~ .star:hover) {
+  color: var(--accent-color, #6556f0);
 }
 
 .star:hover svg path,
-.star:hover ~ .star svg path {
-  fill: #6556f0;
+.star:has(~ .star:hover) svg path {
+  fill: var(--accent-color, #6556f0);
 }
 
 .starActive {
-  color: #6556f0;
+  color: var(--accent-color, #6556f0);
 }
 
 .starActive svg path {
-  fill: #6556f0;
+  fill: var(--accent-color, #6556f0);
 }
 
 .feedback {
@@ -115,8 +119,8 @@
 }
 
 .checkbox:checked {
-  border-color: #6556f0;
-  background-color: #6556f0;
+  border-color: var(--accent-color, #6556f0);
+  background-color: var(--accent-color, #6556f0);
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
 
@@ -142,12 +146,12 @@
 
 .submit {
   align-self: center;
-  background: #6556f0;
+  background: var(--accent-color, #6556f0);
   color: #ffffff;
 }
 
 .submit:hover {
-  background: #5438ca;
+  background: var(--accent-color-hover, #5438ca);
 }
 
 .thankYou {

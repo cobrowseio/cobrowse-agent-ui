@@ -48,10 +48,16 @@ const RatingBase = ({ onComplete, feedbackThreshold = DEFAULT_FEEDBACK_THRESHOLD
     onComplete(rating === null ? undefined : { rating, feedback: [...feedback, comment].filter(Boolean) })
   }
 
-  const setRating = (score: RatingValue) => {
+  const setRating = (score: RatingValue, commit = true) => {
     setRatingState(score)
 
-    if (score > feedbackThreshold) finish(score, feedback, comment)
+    // Reset feedback values so that they are not submitted if the agent changes its initial low rating to 4/5 stars
+    if (score > feedbackThreshold) {
+      setFeedback([])
+      setComment('')
+
+      if (commit) finish(score, [], '')
+    }
   }
 
   const toggleReason = (value: string) => {
