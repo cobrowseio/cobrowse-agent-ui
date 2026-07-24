@@ -1,9 +1,9 @@
 .root {
   align-self: center;
-  background: var(--accent-color, #6556f0);
+  background: #040d3c;
   color: #ffffff;
 }
 
-.root:hover {
-  background: var(--accent-color-hover, #5438ca);
+.root:active {
+  transform: translateY(1px);
 }

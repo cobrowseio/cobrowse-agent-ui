@@ -10,7 +10,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #ababb3;
+  color: #040d3c;
 }
 
 .stars {
@@ -56,18 +56,18 @@
 
 .star:hover,
 .star:has(~ .star:hover) {
-  color: var(--accent-color, #6556f0);
+  color: #040d3c;
 }
 
 .star:hover svg path,
 .star:has(~ .star:hover) svg path {
-  fill: var(--accent-color, #6556f0);
+  fill: #040d3c;
 }
 
 .starActive {
-  color: var(--accent-color, #6556f0);
+  color: #040d3c;
 }
 
 .starActive svg path {
-  fill: var(--accent-color, #6556f0);
+  fill: #040d3c;
 }
