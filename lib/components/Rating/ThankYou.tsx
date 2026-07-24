@@ -5,11 +5,11 @@ import { useRatingContext } from './context'
 import styles from './ThankYou.module.css'
 
 export interface RatingThankYouProps {
-  children?: ReactNode
   className?: string
+  children?: ReactNode
 }
 
-const ThankYou = ({ children, className }: RatingThankYouProps) => {
+const ThankYou = ({ className, children }: RatingThankYouProps) => {
   const { complete, rating } = useRatingContext()
   const { t } = useTranslation()
 

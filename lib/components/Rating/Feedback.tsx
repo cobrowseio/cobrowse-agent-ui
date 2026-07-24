@@ -14,11 +14,11 @@ export interface RatingReasonOption {
 export interface RatingFeedbackProps {
   reasons?: RatingReasonOption[]
   placeholder?: string
-  children?: ReactNode
   className?: string
+  children?: ReactNode
 }
 
-const Feedback = ({ reasons, placeholder, children, className }: RatingFeedbackProps) => {
+const Feedback = ({ reasons, placeholder, className, children }: RatingFeedbackProps) => {
   const { rating, complete, feedbackThreshold } = useRatingContext()
   const { t } = useTranslation()
 

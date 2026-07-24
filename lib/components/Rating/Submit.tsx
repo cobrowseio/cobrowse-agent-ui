@@ -6,11 +6,11 @@ import { useRatingContext } from './context'
 import styles from './Submit.module.css'
 
 export interface RatingSubmitProps {
-  children?: ReactNode
   className?: string
+  children?: ReactNode
 }
 
-const Submit = ({ children, className }: RatingSubmitProps) => {
+const Submit = ({ className, children }: RatingSubmitProps) => {
   const { submit, complete } = useRatingContext()
   const { t } = useTranslation()
 
