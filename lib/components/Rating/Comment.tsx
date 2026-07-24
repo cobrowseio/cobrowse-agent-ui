@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useTranslation } from '@/i18n'
 import { useRatingContext } from './context'
-import styles from './Rating.module.css'
+import styles from './Comment.module.css'
 
 export interface RatingCommentProps {
   placeholder?: string
@@ -16,7 +16,7 @@ const Comment = ({ placeholder, className }: RatingCommentProps) => {
 
   return (
     <textarea
-      className={clsx(styles.comment, className)}
+      className={clsx(styles.root, className)}
       aria-label={label}
       placeholder={label}
       value={comment}

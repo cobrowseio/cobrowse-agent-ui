@@ -4,7 +4,7 @@ import type { RatingValue } from 'cobrowse-agent-sdk'
 import StarIcon from '@/icons/star.svg?react'
 import { useTranslation } from '@/i18n'
 import { useRatingContext } from './context'
-import styles from './Rating.module.css'
+import styles from './Stars.module.css'
 
 const SCORES: RatingValue[] = [1, 2, 3, 4, 5]
 
@@ -27,7 +27,7 @@ const Stars = ({ label, count = 5, className }: RatingStarsProps) => {
   const scores = SCORES.filter(score => score <= count)
 
   return (
-    <div className={clsx(styles.ratingGroup, className)}>
+    <div className={clsx(styles.root, className)}>
       {prompt && <p id={promptId} className={styles.prompt}>{prompt}</p>}
       <div
         className={styles.stars}

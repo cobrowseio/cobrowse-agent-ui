@@ -4,7 +4,7 @@ import { useTranslation } from '@/i18n'
 import { useRatingContext } from './context'
 import Reason from './Reason'
 import Comment from './Comment'
-import styles from './Rating.module.css'
+import styles from './Feedback.module.css'
 
 export interface RatingReasonOption {
   value: string
@@ -32,7 +32,7 @@ const Feedback = ({ reasons, placeholder, children, className }: RatingFeedbackP
   ]
 
   return (
-    <div className={clsx(styles.feedback, className)}>
+    <div className={clsx(styles.root, className)}>
       {children ?? (
         <>
           <div className={styles.reasons}>

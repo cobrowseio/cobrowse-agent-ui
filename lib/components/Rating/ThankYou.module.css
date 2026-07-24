@@ -1,0 +1,4 @@
+.root {
+  text-align: center;
+  color: var(--text-color-base, #0e0c26);
+}

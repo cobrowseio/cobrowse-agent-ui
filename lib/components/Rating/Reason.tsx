@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import clsx from 'clsx'
 import { useRatingContext } from './context'
-import styles from './Rating.module.css'
+import styles from './Reason.module.css'
 
 export interface RatingReasonProps {
   value: string
@@ -13,7 +13,7 @@ const Reason = ({ value, label, className }: RatingReasonProps) => {
   const { feedback, toggleReason } = useRatingContext()
 
   return (
-    <label className={clsx(styles.reason, className)}>
+    <label className={clsx(styles.root, className)}>
       <input
         type='checkbox'
         value={value}

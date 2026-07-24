@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import Button from '@/components/Button'
 import { useTranslation } from '@/i18n'
 import { useRatingContext } from './context'
-import styles from './Rating.module.css'
+import styles from './Submit.module.css'
 
 export interface RatingSubmitProps {
   children?: ReactNode
@@ -17,7 +17,7 @@ const Submit = ({ children, className }: RatingSubmitProps) => {
   if (complete) return null
 
   return (
-    <Button className={clsx(styles.submit, className)} onClick={submit}>
+    <Button className={clsx(styles.root, className)} onClick={submit}>
       {children ?? t('Continue')}
     </Button>
   )
