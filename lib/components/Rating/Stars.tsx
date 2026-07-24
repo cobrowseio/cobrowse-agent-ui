@@ -26,7 +26,7 @@ const Stars = ({ label, count = 5, className }: RatingStarsProps) => {
   }
 
   const prompt = label === undefined ? t('Rate your experience') : label
-  const scores = SCORES.filter(score => score <= count)
+  const scores = SCORES.filter((score) => score <= count)
 
   return (
     <div className={clsx(styles.root, className)}>
