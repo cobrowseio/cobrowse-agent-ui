@@ -23,12 +23,15 @@ const useAccount = () => {
       try {
         const accounts = await cobrowse.accounts.list({ request: { signal: abortController.signal } })
 
+        // JWTs are scoped to a single account.
+        // TODO: expand this to support inferring the active account
+        // from the license key stored in localStorage (frontend app)
         setAccount(accounts.length > 0 ? accounts[0] : null)
-        setLoading(false)
       } catch (error) {
         if (isAbortError(error)) return
 
         setError(error instanceof Error ? error : new Error(String(error)))
+      } finally {
         setLoading(false)
       }
     }
@@ -42,7 +45,9 @@ const useAccount = () => {
 
   const hasFeature = useCallback((feature: AccountFeature) => {
     // Features are enabled by default and won't be included in the server response
-    if (typeof account?.features[feature] === 'undefined') return true
+    if (typeof account?.features[feature] === 'undefined') {
+      return true
+    }
 
     return account.features[feature]
   }, [account])

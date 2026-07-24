@@ -22,7 +22,9 @@ const Feedback = ({ reasons, placeholder, className, children }: RatingFeedbackP
   const { rating, complete, feedbackThreshold } = useRatingContext()
   const { t } = useTranslation()
 
-  if (complete || rating === null || rating > feedbackThreshold) return null
+  if (complete || rating === null || rating > feedbackThreshold) {
+    return null
+  }
 
   const defaultReasons: RatingReasonOption[] = [
     { value: 'hard_to_start_session', label: t('It was too hard to start the session with the user') },

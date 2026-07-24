@@ -21,7 +21,9 @@ const Stars = ({ label, count = 5, className }: RatingStarsProps) => {
   const groupName = useId()
   const pointer = useRef(false)
 
-  if (complete) return null
+  if (complete) {
+    return null
+  }
 
   const prompt = label === undefined ? t('Rate your experience') : label
   const scores = SCORES.filter(score => score <= count)

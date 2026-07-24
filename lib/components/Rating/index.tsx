@@ -56,7 +56,9 @@ const RatingBase = ({ onComplete, feedbackThreshold = DEFAULT_FEEDBACK_THRESHOLD
       setFeedback([])
       setComment('')
 
-      if (commit) finish(score, [], '')
+      if (commit) {
+        finish(score, [], '')
+      }
     }
   }
 

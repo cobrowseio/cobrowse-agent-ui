@@ -13,7 +13,9 @@ const ThankYou = ({ className, children }: RatingThankYouProps) => {
   const { complete, rating } = useRatingContext()
   const { t } = useTranslation()
 
-  if (!complete || rating === null) return null
+  if (!complete || rating === null) {
+    return null
+  }
 
   return (
     <div role='status' className={clsx(styles.root, className)}>

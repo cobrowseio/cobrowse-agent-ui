@@ -14,7 +14,9 @@ const Submit = ({ className, children }: RatingSubmitProps) => {
   const { submit, complete } = useRatingContext()
   const { t } = useTranslation()
 
-  if (complete) return null
+  if (complete) {
+    return null
+  }
 
   return (
     <Button className={clsx(styles.root, className)} onClick={submit}>
