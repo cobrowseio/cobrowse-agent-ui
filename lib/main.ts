@@ -13,8 +13,13 @@ import LoaderComponent from '@/components/Loader'
 import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
 import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
-import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
+import CobrowseProviderComponent, {
+  useCobrowse as useCobrowseHook,
+  usePolicy as usePolicyHook
+} from '@/components/CobrowseProvider'
+import PolicyGateComponent from '@/components/PolicyGate'
 import useSessionHook from '@/hooks/useSession'
+import useHasPermissionHook from '@/hooks/useHasPermission'
 import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -30,7 +35,9 @@ export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
 export type { SessionEmbedProps } from '@/components/SessionEmbed'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
-export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
+export type { CobrowseProviderProps, PolicyState } from '@/components/CobrowseProvider'
+export type { PolicyGateProps } from '@/components/PolicyGate'
+export type { PermissionMatch } from '@/hooks/useHasPermission'
 
 export const CodeEntry = CodeEntryComponent
 export const Button = ButtonComponent
@@ -48,8 +55,11 @@ export const Frame = FrameComponent
 export const SessionEmbed = SessionEmbedComponent
 export const ConnectDevice = ConnectDeviceComponent
 export const CobrowseProvider = CobrowseProviderComponent
+export const PolicyGate = PolicyGateComponent
 export const useCobrowse = useCobrowseHook
+export const usePolicy = usePolicyHook
 export const useRemoteContext = useRemoteContextHook
 export const useSession = useSessionHook
+export const useHasPermission = useHasPermissionHook
 export const bindI18n = bindI18nHelper
 export const i18n = i18nInstance
