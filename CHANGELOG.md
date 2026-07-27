@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0-rc.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.6.0...v1.7.0-rc.0) (2026-07-27)
+
+
+### Features
+
+* add ratings components ([#64](https://github.com/cobrowseio/cobrowse-agent-ui/issues/64)) ([f61f628](https://github.com/cobrowseio/cobrowse-agent-ui/commit/f61f62822b8db9cc334279a85aa4ae6ebb967bf1))
+
+
+### Bug Fixes
+
+* improve CodeEntry keys behaviour ([#61](https://github.com/cobrowseio/cobrowse-agent-ui/issues/61)) ([61d06e6](https://github.com/cobrowseio/cobrowse-agent-ui/commit/61d06e6a18e0b38298c4d13b2f7a3262f59c27c8))
+* update agent-sdk dependency to v3 RC ([#63](https://github.com/cobrowseio/cobrowse-agent-ui/issues/63)) ([485b8f5](https://github.com/cobrowseio/cobrowse-agent-ui/commit/485b8f592ab173cc6d3dfb07f1453dab9d083ade))
+
 ## [1.6.0](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.5.0...v1.6.0) (2026-04-27)
 
 
