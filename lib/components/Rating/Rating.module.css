@@ -1,0 +1,6 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--text-color-base, #0e0c26);
+}

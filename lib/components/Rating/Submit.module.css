@@ -1,0 +1,9 @@
+.root {
+  align-self: center;
+  background: #040d3c;
+  color: #ffffff;
+}
+
+.root:active {
+  transform: translateY(1px);
+}

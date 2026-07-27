@@ -24,7 +24,6 @@ export function useRemoteContext(target?: HTMLIFrameElement | null): CobrowseRem
     const attachContext = async () => {
       const context = await cobrowse.attachContext(target)
 
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime value can be null despite the type. Fixed on full agent-sdk TS migration
       if (!context) {
         setRemoteContext(null)
 

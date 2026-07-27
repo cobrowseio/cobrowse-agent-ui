@@ -1,0 +1,73 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.prompt {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #040d3c;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+}
+
+.visuallyHidden {
+  composes: visuallyHidden from '@/styles/visuallyHidden.module.css';
+}
+
+.star {
+  padding: 0 6px;
+  line-height: 0;
+  color: #9ca2be;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.starInput {
+  composes: visuallyHidden from '@/styles/visuallyHidden.module.css';
+}
+
+.star:has(.starInput:focus-visible) {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring-width, 3px) var(--focus-ring-color, rgba(4, 13, 60, 0.16));
+}
+
+.star svg {
+  width: 30px;
+  height: 30px;
+}
+
+.star svg path {
+  fill: none;
+  transition: fill 0.2s ease;
+}
+
+.star svg :global(.rating-star-outline) {
+  fill: currentColor;
+}
+
+.star:hover,
+.star:has(~ .star:hover) {
+  color: #040d3c;
+}
+
+.star:hover svg path,
+.star:has(~ .star:hover) svg path {
+  fill: #040d3c;
+}
+
+.starActive {
+  color: #040d3c;
+}
+
+.starActive svg path {
+  fill: #040d3c;
+}
