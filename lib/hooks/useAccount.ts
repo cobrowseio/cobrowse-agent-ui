@@ -6,6 +6,14 @@ const isAbortError = (error: unknown): boolean => (
   error instanceof Error && error.name === 'AbortError'
 )
 
+/**
+ * Provides access to the current account and its enabled features.
+ *
+ * Currently, the first available account is treated as the active account.
+ *
+ * @experimental
+ * WARNING: This hook's API, behaviour, and name may change without notice.
+ */
 const useAccount = () => {
   const cobrowse = useCobrowse()
   const [account, setAccount] = useState<Account | null>(null)
