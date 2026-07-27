@@ -23,4 +23,11 @@ jobs:
 
       - run: npm ci
 
-      - run: npm publish
+      - name: Publish
+        run: |
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
+            PRERELEASE="${GITHUB_REF_NAME#*-}"
+            npm publish --tag "${PRERELEASE%%.*}"
+          else
+            npm publish
+          fi
