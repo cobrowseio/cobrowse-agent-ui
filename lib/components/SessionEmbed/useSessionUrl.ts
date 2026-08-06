@@ -5,6 +5,7 @@ import { useTranslation } from '@/i18n'
 
 interface UseSessionUrlProps {
   id: string
+  token?: SessionEmbedProps['token']
   endAction?: SessionEmbedProps['endAction']
   popout?: SessionEmbedProps['popout']
   agentTools?: SessionEmbedProps['agentTools']
@@ -15,6 +16,7 @@ interface UseSessionUrlProps {
 
 export const useSessionUrl = ({
   id,
+  token,
   endAction,
   popout,
   agentTools,
@@ -33,8 +35,8 @@ export const useSessionUrl = ({
       device_controls: deviceControls,
       session_details: sessionDetails,
       messages,
-      token_source: 'postMessage',
-      lng: language
+      lng: language,
+      ...(token ? { token } : { token_source: 'postMessage' })
     }).flatMap(([name, value]) => value === undefined ? [] : [[name, value]])
 
     const query = new URLSearchParams(paramEntries)
@@ -43,6 +45,7 @@ export const useSessionUrl = ({
   }, [
     cobrowse.api,
     id,
+    token,
     endAction,
     popout,
     agentTools,

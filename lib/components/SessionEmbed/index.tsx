@@ -66,6 +66,7 @@ const SessionEventObserver = ({ onLoaded, onUpdated, onActivated, onEnded }: Pic
 
 const SessionEmbedBase = ({
   id,
+  token,
   endAction,
   popout,
   agentTools,
@@ -83,6 +84,7 @@ const SessionEmbedBase = ({
 }: SessionEmbedProps) => {
   const url = useSessionUrl({
     id,
+    token,
     endAction,
     popout,
     agentTools,
