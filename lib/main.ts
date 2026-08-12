@@ -11,6 +11,7 @@ import CancelButtonComponent from '@/components/CancelButton'
 import BlockingErrorComponent from '@/components/BlockingError'
 import LoaderComponent from '@/components/Loader'
 import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
+import HostRelayComponent from '@/components/HostRelay'
 import SessionEmbedComponent from '@/components/SessionEmbed'
 import ConnectDeviceComponent from '@/components/ConnectDevice'
 import RatingComponent, { useRatingContext as useRatingContextHook } from '@/components/Rating'
@@ -18,6 +19,7 @@ import SessionRatingComponent from '@/components/Rating/SessionRating'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
 import useSessionHook from '@/hooks/useSession'
 import useAccountHook from '@/hooks/useAccount'
+import useTrustedEmbeddingOriginsHook from '@/hooks/useTrustedEmbeddingOrigins'
 import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
@@ -31,6 +33,7 @@ export type { CancelButtonProps } from '@/components/CancelButton'
 export type { BlockingErrorProps } from '@/components/BlockingError'
 export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
+export type { HostRelayProps } from '@/components/HostRelay'
 export type { SessionEmbedProps } from '@/components/SessionEmbed'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
 export type {
@@ -61,6 +64,7 @@ export const CancelButton = CancelButtonComponent
 export const BlockingError = BlockingErrorComponent
 export const Loader = LoaderComponent
 export const Frame = FrameComponent
+export const HostRelay = HostRelayComponent
 export const SessionEmbed = SessionEmbedComponent
 export const ConnectDevice = ConnectDeviceComponent
 export const Rating = RatingComponent
@@ -71,5 +75,6 @@ export const useCobrowse = useCobrowseHook
 export const useRemoteContext = useRemoteContextHook
 export const useSession = useSessionHook
 export const useAccount = useAccountHook
+export const useTrustedEmbeddingOrigins = useTrustedEmbeddingOriginsHook
 export const bindI18n = bindI18nHelper
 export const i18n = i18nInstance
