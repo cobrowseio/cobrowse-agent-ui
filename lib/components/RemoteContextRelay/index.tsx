@@ -5,8 +5,8 @@ import useTrustedEmbeddingOrigins from '@/hooks/useTrustedEmbeddingOrigins'
 
 export interface RemoteContextRelayProps {
   /**
-   * When provided, relays this context. Otherwise, resolves it from the 
-   * RemoteContextProvider
+   * When provided, relays to the given context. Otherwise,
+   * it's resolved from the RemoteContextProvider.
    */
   remoteContext?: RemoteContext
   /**
