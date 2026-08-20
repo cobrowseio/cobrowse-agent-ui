@@ -19,8 +19,6 @@ export interface RemoteContextRelayProps {
   trustedOrigins?: RemoteContextRelayOptions['trustedOrigins']
   /** The window to relay to. Defaults to the opener or parent of the current window. */
   destination?: Window
-  /** Forward tokens injected by the relay destination down to the Cobrowse iframe. Defaults to true. */
-  relayToken?: boolean
 }
 
 /**
@@ -35,7 +33,7 @@ export interface RemoteContextRelayProps {
  * ```
  */
 const RemoteContextRelay = (props: RemoteContextRelayProps) => {
-  const { remoteContext: providedRemoteContext, trustedOrigins, destination, relayToken } = props
+  const { remoteContext: providedRemoteContext, trustedOrigins, destination } = props
   const resolvedRemoteContext = useRemoteContext()
   const remoteContext = providedRemoteContext ?? resolvedRemoteContext
   const { origins: accountOrigins, error } = useTrustedEmbeddingOrigins()
@@ -67,13 +65,12 @@ const RemoteContextRelay = (props: RemoteContextRelayProps) => {
 
     const relay = remoteContext.relay(resolvedDestination, {
       trustedOrigins: resolvedOrigins,
-      relayToken
     })
 
     return () => {
       relay.destroy()
     }
-  }, [remoteContext, destination, relayToken, resolvedOrigins])
+  }, [remoteContext, destination, resolvedOrigins])
 
   return null
 }
