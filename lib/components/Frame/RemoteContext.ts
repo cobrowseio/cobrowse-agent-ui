@@ -4,7 +4,7 @@ import { useCobrowseValue } from '@/components/CobrowseProvider'
 
 const RemoteContext = createContext<CobrowseRemoteContext | null>(null)
 
-export function useRemoteContext(target?: HTMLIFrameElement | null): CobrowseRemoteContext | null {
+export function useRemoteContext(target?: HTMLIFrameElement | Window | null): CobrowseRemoteContext | null {
   const providedRemoteContext = use(RemoteContext)
   const cobrowse = useCobrowseValue()
   const [remoteContext, setRemoteContext] = useState<CobrowseRemoteContext | null>(null)
