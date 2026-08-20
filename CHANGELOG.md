@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0-rc.3](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.7.0-rc.2...v1.7.0-rc.3) (2026-08-20)
+
+
+### Features
+
+* add a RemoteContextRelay component ([#72](https://github.com/cobrowseio/cobrowse-agent-ui/issues/72)) ([de44892](https://github.com/cobrowseio/cobrowse-agent-ui/commit/de448924da8d6045e4e52d7ac2c3838300064591))
+
 ## [1.7.0-rc.2](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.7.0-rc.1...v1.7.0-rc.2) (2026-08-11)
 
 ## [1.7.0-rc.1](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.7.0-rc.0...v1.7.0-rc.1) (2026-07-27)
