@@ -1,9 +1,14 @@
 import { useEffect } from 'react'
-import type { RemoteContextRelayOptions } from 'cobrowse-agent-sdk'
+import type { RemoteContext, RemoteContextRelayOptions } from 'cobrowse-agent-sdk'
 import { useRemoteContext } from '@/components/Frame'
 import useTrustedEmbeddingOrigins from '@/hooks/useTrustedEmbeddingOrigins'
 
-export interface HostRelayProps {
+export interface RemoteContextRelayProps {
+  /**
+   * When provided, relays this context. Otherwise, resolves it from the 
+   * RemoteContextProvider
+   */
+  remoteContext?: RemoteContext
   /**
    * Origins allowed to communicate with the attached context via the relay.
    * Nothing is relayed to or from any other origin. Defaults to the account's
@@ -13,8 +18,8 @@ export interface HostRelayProps {
    */
   trustedOrigins?: RemoteContextRelayOptions['trustedOrigins']
   /** The window to relay to. Defaults to the opener or parent of the current window. */
-  target?: Window
-  /** Forward tokens injected by the relay target down to the Cobrowse iframe. Defaults to true. */
+  destination?: Window
+  /** Forward tokens injected by the relay destination down to the Cobrowse iframe. Defaults to true. */
   relayToken?: boolean
 }
 
@@ -25,19 +30,21 @@ export interface HostRelayProps {
  *
  * ```tsx
  * <Frame src={sessionUrl}>
- *   <HostRelay trustedOrigins={['https://host.example.com']} />
+ *   <RemoteContextRelay trustedOrigins={['https://host.example.com']} />
  * </Frame>
  * ```
  */
-const HostRelay = ({ trustedOrigins, target, relayToken }: HostRelayProps) => {
-  const remoteContext = useRemoteContext()
+const RemoteContextRelay = (props: RemoteContextRelayProps) => {
+  const { remoteContext: providedRemoteContext, trustedOrigins, destination, relayToken } = props
+  const resolvedRemoteContext = useRemoteContext()
+  const remoteContext = providedRemoteContext ?? resolvedRemoteContext
   const { origins: accountOrigins, error } = useTrustedEmbeddingOrigins()
   const resolvedOrigins = trustedOrigins ?? accountOrigins
 
   useEffect(() => {
     if (error && !trustedOrigins) {
       // eslint-disable-next-line no-console -- without this the relay silently never starts; there is no UI to surface the misconfiguration
-      console.warn('HostRelay: failed to load the account trusted embedding domains, nothing will be relayed', error)
+      console.warn('RemoteContextRelay: failed to load the account trusted embedding domains, nothing will be relayed', error)
     }
   }, [error, trustedOrigins])
 
@@ -52,13 +59,13 @@ const HostRelay = ({ trustedOrigins, target, relayToken }: HostRelayProps) => {
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- window.opener is typed as any but is a Window or null at runtime
     const opener = window.opener as Window | null
-    const resolvedTarget = target ?? opener ?? window.parent
+    const resolvedDestination = destination ?? opener ?? window.parent
 
-    if (resolvedTarget === window) {
+    if (resolvedDestination === window) {
       return
     }
 
-    const relay = remoteContext.relay(resolvedTarget, {
+    const relay = remoteContext.relay(resolvedDestination, {
       trustedOrigins: resolvedOrigins,
       relayToken
     })
@@ -66,9 +73,9 @@ const HostRelay = ({ trustedOrigins, target, relayToken }: HostRelayProps) => {
     return () => {
       relay.destroy()
     }
-  }, [remoteContext, target, relayToken, resolvedOrigins])
+  }, [remoteContext, destination, relayToken, resolvedOrigins])
 
   return null
 }
 
-export default HostRelay
+export default RemoteContextRelay
