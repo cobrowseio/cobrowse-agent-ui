@@ -34,7 +34,7 @@ export type { CancelButtonProps } from '@/components/CancelButton'
 export type { BlockingErrorProps } from '@/components/BlockingError'
 export type { LoaderProps } from '@/components/Loader'
 export type { FrameProps } from '@/components/Frame'
-export type { RemoteContextRelayProps as HostRelayProps } from '@/components/RemoteContextRelay'
+export type { RemoteContextRelayProps } from '@/components/RemoteContextRelay'
 export type { SessionEmbedProps } from '@/components/SessionEmbed'
 export type { ConnectDeviceProps } from '@/components/ConnectDevice'
 export type {
