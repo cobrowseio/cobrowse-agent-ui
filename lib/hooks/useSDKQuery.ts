@@ -8,7 +8,7 @@ const isAbortError = (error: unknown): boolean => (
 export function useSDKQuery<Args extends unknown[], Result>(
   fn: (...args: Args) => Promise<Result>
 ) {
-  const [isPending, setIsPending] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const [data, setData] = useState<Result | null>(null)
 
@@ -17,7 +17,7 @@ export function useSDKQuery<Args extends unknown[], Result>(
   const refetch = useCallback(
     async (...args: Args): Promise<undefined> => {
       setError(null)
-      setIsPending(true)
+      setIsFetching(true)
 
       try {
         const result = await execute(...args)
@@ -31,7 +31,7 @@ export function useSDKQuery<Args extends unknown[], Result>(
             : new Error(String(err))
         )
       } finally {
-        setIsPending(false)
+        setIsFetching(false)
       }
     },
     [execute]
@@ -39,8 +39,8 @@ export function useSDKQuery<Args extends unknown[], Result>(
 
   return useMemo(() => ({
     data,
-    isPending,
+    isFetching,
     error,
     refetch
-  }), [data, isPending, error, refetch])
+  }), [data, isFetching, error, refetch])
 }
