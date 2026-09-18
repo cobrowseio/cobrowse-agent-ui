@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0-rc.4](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.7.0-rc.3...v1.7.0-rc.4) (2026-09-18)
+
+
+### Bug Fixes
+
+* allow styling panel items via a classname prop ([#77](https://github.com/cobrowseio/cobrowse-agent-ui/issues/77)) ([0be0063](https://github.com/cobrowseio/cobrowse-agent-ui/commit/0be0063dbcfbddbec12fd5825cb7ff99df3a7cd8))
+
 ## [1.7.0-rc.3](https://github.com/cobrowseio/cobrowse-agent-ui/compare/v1.7.0-rc.2...v1.7.0-rc.3) (2026-08-20)
 
 
