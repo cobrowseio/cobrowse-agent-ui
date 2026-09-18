@@ -2,6 +2,7 @@ import Device, { type DeviceData } from '@/components/Device'
 import SmartConnectButton from '@/components/SmartConnectButton'
 import Loader from '@/components/Loader'
 import { useTranslation } from '@/i18n'
+import clsx from 'clsx'
 import type { BasePanelProps } from './BasePanel'
 import styles from './Tabs.module.css'
 
@@ -11,7 +12,7 @@ export interface DevicesPanelProps<T extends DeviceData = DeviceData> extends Ba
   smartConnectButtonClassName?: string
 }
 
-const DevicesPanel = <T extends DeviceData = DeviceData>({ devices, onConnectClick, smartConnectButtonClassName, loader }: DevicesPanelProps<T>) => {
+const DevicesPanel = <T extends DeviceData = DeviceData>({ devices, onConnectClick, smartConnectButtonClassName, panelItemClassName, loader }: DevicesPanelProps<T>) => {
   const { t } = useTranslation()
 
   if (devices === null) {
@@ -27,7 +28,7 @@ const DevicesPanel = <T extends DeviceData = DeviceData>({ devices, onConnectCli
   return (
     <>
       {devices.map((device) => (
-        <Device key={device.id} device={device} className={styles.panelItem}>
+        <Device key={device.id} device={device} className={clsx(styles.panelItem, panelItemClassName)}>
           <SmartConnectButton
             device={device}
             className={smartConnectButtonClassName}
