@@ -16,8 +16,8 @@ import { useTranslation } from '@/i18n'
 import styles from './Tabs.module.css'
 
 interface TabsPanelProps<TDevice extends DeviceData, TSession extends SessionData>
-  extends Pick<DevicesPanelProps<TDevice>, 'devices' | 'onConnectClick' | 'smartConnectButtonClassName' | 'loader'>,
-    Pick<SessionsPanelProps<TSession>, 'sessions' | 'onSessionClick' | 'sessionButtonClassName' | 'loader'> {}
+  extends Pick<DevicesPanelProps<TDevice>, 'devices' | 'onConnectClick' | 'smartConnectButtonClassName' | 'loader' | 'panelItemClassName'>,
+    Pick<SessionsPanelProps<TSession>, 'sessions' | 'onSessionClick' | 'sessionButtonClassName' | 'loader' | 'panelItemClassName'> {}
 
 export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData>
   extends TabsPanelProps<TDevice, TSession> {
@@ -50,6 +50,7 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
   tabHoverClassName,
   tabActiveClassName,
   tabPanelsClassName,
+  panelItemClassName,
   refreshButtonClassName
 }: TabsProps<TDevice, TSession>) => {
   const { t } = useTranslation()
@@ -93,10 +94,10 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
       </div>
       <HeadlessTabPanels className={clsx(styles.tabPanels, tabPanelsClassName)}>
         <HeadlessTabPanel>
-          <DevicesPanel devices={devices} onConnectClick={onConnectClick} smartConnectButtonClassName={smartConnectButtonClassName} loader={loader} />
+          <DevicesPanel devices={devices} onConnectClick={onConnectClick} smartConnectButtonClassName={smartConnectButtonClassName} panelItemClassName={panelItemClassName} loader={loader} />
         </HeadlessTabPanel>
         <HeadlessTabPanel>
-          <SessionsPanel sessions={sessions} onSessionClick={onSessionClick} sessionButtonClassName={sessionButtonClassName} loader={loader} />
+          <SessionsPanel sessions={sessions} onSessionClick={onSessionClick} sessionButtonClassName={sessionButtonClassName} panelItemClassName={panelItemClassName} loader={loader} />
         </HeadlessTabPanel>
       </HeadlessTabPanels>
     </HeadlessTabGroup>
