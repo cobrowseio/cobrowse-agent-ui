@@ -22,6 +22,8 @@ import useSessionEventsHook from '@/hooks/useSessionEvents'
 import useAccountHook from '@/hooks/useAccount'
 import useTrustedEmbeddingOriginsHook from '@/hooks/useTrustedEmbeddingOrigins'
 import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
+export { useAccounts } from '@/hooks/useAccounts'
+export { useSDKMutation } from '@/hooks/useSDKMutation'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
 export type { ButtonProps } from '@/components/Button'
