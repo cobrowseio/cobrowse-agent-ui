@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ObservableEntity, useObservableEntity } from './useObservable'
+import { type ObservableEntity, useObservableEntity } from './useObservable'
 import { useQuery } from './useQuery'
 
 export function useResource<Args extends unknown[], Entity extends ObservableEntity>(

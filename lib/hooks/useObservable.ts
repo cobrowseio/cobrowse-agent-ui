@@ -1,7 +1,7 @@
-import type { RESTResource, RESTResourceEventMap } from 'cobrowse-agent-sdk'
-import { useEffect, useState } from 'react'
+import type { RESTResourceEventMap } from 'cobrowse-agent-sdk'
+import { useEffect, useMemo, useState } from 'react'
 
-export type ObservableEntity = {
+export interface ObservableEntity {
   on: <Event extends keyof RESTResourceEventMap>(
     event: Event,
     listener: (...args: RESTResourceEventMap[Event]) => void
@@ -13,20 +13,26 @@ export type ObservableEntity = {
   ) => unknown
 }
 
+type Method = (...args: unknown[]) => unknown
+
+function isMethod(value: unknown): value is Method {
+  return typeof value === 'function'
+}
+
 export function createEntityProxy<Entity extends object>(entity: Entity): Entity {
   const methodCache = new Map<
     PropertyKey,
     {
-      source: Function
-      bound: Function
+      source: Method
+      bound: Method
     }
   >()
 
   return new Proxy(entity, {
     get(target, property) {
-      const value = Reflect.get(target, property, target)
+      const value: unknown = Reflect.get(target, property, target)
 
-      if (typeof value !== 'function') {
+      if (!isMethod(value)) {
         return value
       }
 
@@ -49,18 +55,21 @@ export function createEntityProxy<Entity extends object>(entity: Entity): Entity
 }
 
 export function useObservableEntity<Entity extends ObservableEntity>(entity: Entity | null): Entity | null {
-  const [proxy, setProxy] = useState<Entity | null>(() => (entity ? createEntityProxy(entity) : null))
+  const baseProxy = useMemo(() => (entity ? createEntityProxy(entity) : null), [entity])
+
+  const [updated, setUpdated] = useState<{
+    entity: Entity
+    proxy: Entity
+  } | null>(null)
 
   useEffect(() => {
-    if (!entity) {
-      setProxy(null)
-      return
-    }
-
-    setProxy(createEntityProxy(entity))
+    if (!entity) return
 
     const handleUpdate = () => {
-      setProxy(createEntityProxy(entity))
+      setUpdated({
+        entity,
+        proxy: createEntityProxy(entity)
+      })
     }
 
     entity.on('updated', handleUpdate)
@@ -70,28 +79,35 @@ export function useObservableEntity<Entity extends ObservableEntity>(entity: Ent
     }
   }, [entity])
 
-  return proxy
+  if (!entity) return null
+
+  return updated?.entity === entity ? updated.proxy : baseProxy
 }
 
 export function useObservableEntities<Entity extends ObservableEntity>(
   entities: readonly Entity[] | null
 ): Entity[] | null {
-  const [proxies, setProxies] = useState<Entity[] | null>(null)
+  const baseProxies = useMemo(() => entities?.map(createEntityProxy) ?? null, [entities])
+
+  const [updated, setUpdated] = useState<{
+    entities: readonly Entity[]
+    proxies: Entity[]
+  } | null>(null)
 
   useEffect(() => {
-    if (!entities) {
-      setProxies(null)
-      return
-    }
+    if (!entities || !baseProxies) return
 
-    setProxies(entities.map(createEntityProxy))
-
-    const listeners = entities.map((entity) => {
+    const listeners = entities.map((entity, index) => {
       const listener = () => {
-        setProxies((current) => {
-          if (!current) return current
+        setUpdated((current) => {
+          const proxies = current?.entities === entities ? [...current.proxies] : [...baseProxies]
 
-          return entities.map((item, index) => (item === entity ? createEntityProxy(item) : current[index]))
+          proxies[index] = createEntityProxy(entity)
+
+          return {
+            entities,
+            proxies
+          }
         })
       }
 
@@ -105,7 +121,9 @@ export function useObservableEntities<Entity extends ObservableEntity>(
         entity.off('updated', listener)
       }
     }
-  }, [entities])
+  }, [entities, baseProxies])
 
-  return proxies
+  if (!entities) return null
+
+  return updated?.entities === entities ? updated.proxies : baseProxies
 }

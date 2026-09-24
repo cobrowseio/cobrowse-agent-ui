@@ -35,7 +35,7 @@ export function useQuery<Args extends unknown[], Result>(fn: (...args: Args) => 
       isFetching,
       error,
       refetch,
-      isError: error != null
+      isError: error !== null
     }),
     [data, isFetching, error, refetch]
   )

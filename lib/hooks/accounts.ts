@@ -1,7 +1,7 @@
 import { useCobrowse } from '@/components/CobrowseProvider'
 import { useCollection } from './useCollection'
 import { useMutation } from './useMutation'
-import { Account } from 'cobrowse-agent-sdk'
+import type { Account } from 'cobrowse-agent-sdk'
 
 export function useListAccounts() {
   const cobrowse = useCobrowse()

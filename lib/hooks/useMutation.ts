@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import useStableCallback from './useStableCallback'
-import { ObservableEntity, useObservableEntity } from './useObservable'
+import { type ObservableEntity, useObservableEntity } from './useObservable'
 
 export function useMutation<Args extends unknown[], Entity extends ObservableEntity>(
   fn: (...args: Args) => Promise<Entity>
@@ -62,6 +62,6 @@ export function useMutation<Args extends unknown[], Entity extends ObservableEnt
     mutateAsync,
     error,
     isPending,
-    isError: error != null
+    isError: error !== null
   }
 }
