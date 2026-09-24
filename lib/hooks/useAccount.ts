@@ -2,9 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useCobrowse } from '@/components/CobrowseProvider'
 import type { Account, AccountFeature } from 'cobrowse-agent-sdk'
 
-const isAbortError = (error: unknown): boolean => (
-  error instanceof Error && error.name === 'AbortError'
-)
+const isAbortError = (error: unknown): boolean => error instanceof Error && error.name === 'AbortError'
 
 /**
  * Provides access to the current account and its enabled features.
@@ -29,7 +27,9 @@ const useAccount = () => {
       setLoading(true)
 
       try {
-        const accounts = await cobrowse.accounts.list({ request: { signal: abortController.signal } })
+        const accounts = await cobrowse.accounts.list({
+          request: { signal: abortController.signal }
+        })
 
         // JWTs are scoped to a single account.
         // TODO: expand this to support inferring the active account
@@ -51,14 +51,17 @@ const useAccount = () => {
     }
   }, [cobrowse])
 
-  const hasFeature = useCallback((feature: AccountFeature) => {
-    // Features are enabled by default and won't be included in the server response
-    if (typeof account?.features[feature] === 'undefined') {
-      return true
-    }
+  const hasFeature = useCallback(
+    (feature: AccountFeature) => {
+      // Features are enabled by default and won't be included in the server response
+      if (typeof account?.features[feature] === 'undefined') {
+        return true
+      }
 
-    return account.features[feature]
-  }, [account])
+      return account.features[feature]
+    },
+    [account]
+  )
 
   return {
     hasFeature,

@@ -1,18 +1,20 @@
-import { useCallback, useState } from "react"
-import useStableCallback from "./useStableCallback"
+import { useCallback, useState } from 'react'
+import useStableCallback from './useStableCallback'
+import { ObservableEntity, useObservableEntity } from './useObservable'
 
-export function useSDKMutation<Args extends unknown[], Result>(
-  fn: (...args: Args) => Promise<Result>
+export function useMutation<Args extends unknown[], Entity extends ObservableEntity>(
+  fn: (...args: Args) => Promise<Entity>
 ) {
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState<Error | null>(null)
+  const [result, setResult] = useState<Entity | null>(null)
 
   const execute = useStableCallback(fn)
 
   // use `mutateAsync` when you want to handle the error state
   // inline to control application flow easier - ie close popup etc
   const mutateAsync = useCallback(
-    async (...args: Args): Promise<Result> => {
+    async (...args: Args): Promise<Entity> => {
       setError(null)
       setIsPending(true)
 
@@ -25,11 +27,13 @@ export function useSDKMutation<Args extends unknown[], Result>(
           throw new Error('SDK mutation callback is unavailable')
         }
 
-        return await promise
+        const result = await promise
+
+        setResult(result)
+
+        return result
       } catch (err) {
-        const error = err instanceof Error
-          ? err
-          : new Error(String(err))
+        const error = err instanceof Error ? err : new Error(String(err))
 
         setError(error)
 
@@ -50,10 +54,14 @@ export function useSDKMutation<Args extends unknown[], Result>(
     [mutateAsync]
   )
 
+  const data = useObservableEntity(result)
+
   return {
+    data,
     mutate,
     mutateAsync,
     error,
-    isPending
+    isPending,
+    isError: error != null
   }
 }
