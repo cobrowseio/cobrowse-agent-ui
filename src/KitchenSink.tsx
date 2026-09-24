@@ -12,6 +12,12 @@ import {
   type SessionData,
   SessionRating,
   SmartConnectButton,
+  Table,
+  ASCENDING,
+  DESCENDING,
+  TableSortValues,
+  type TableSort,
+  type TableSortButtonState,
   UserIcon,
   useRemoteContext,
   i18n
@@ -326,6 +332,143 @@ const EndSessionButton = () => {
     <button type='button' className='end-session-button' onClick={() => ctx?.endSession()}>
       End session
     </button>
+  )
+}
+
+const SortIndicator = ({ isSorted, direction }: TableSortButtonState) => {
+  if (!isSorted) return <span className='sort-indicator'>↕</span>
+
+  return <span className='sort-indicator sort-indicator-active'>{direction === DESCENDING ? '↓' : '↑'}</span>
+}
+
+function text (value: unknown): string {
+  if (typeof value === 'string') return value
+  if (typeof value === 'number' || typeof value === 'bigint' || typeof value === 'boolean') return value.toString()
+
+  return JSON.stringify(value)
+}
+
+function compare (a: unknown, b: unknown): number {
+  if (a === b) return 0
+  if (a === undefined || a === null) return -1
+  if (b === undefined || b === null) return 1
+  if (typeof a === 'number' && typeof b === 'number') return a - b
+  if (a instanceof Date && b instanceof Date) return a.getTime() - b.getTime()
+
+  return text(a).localeCompare(text(b))
+}
+
+function readColumn (row: unknown, key: string): unknown {
+  // rows are plain objects, and a column with no matching property sorts as undefined
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- an unconstrained TRow cannot be indexed by an arbitrary string
+  return (row as Record<string, unknown>)[key]
+}
+
+/**
+ * Rows in the order a sort asks for, comparing numbers, dates and strings each
+ * on their own terms.
+ *
+ * A Table doesn't sort what it is given - rows ordered by the server, which is
+ * the only way to rank or page over more rows than are on screen, would be
+ * reordered by a table that insisted on sorting. Use this where the rows are
+ * all in hand and sorting them in the browser is the whole job:
+ *
+ * ```tsx
+ * const [sort, setSort] = useState<TableSort>({ key: 'name', direction: ASCENDING })
+ * const sorted = useMemo(() => sortRows(devices, sort), [devices, sort])
+ *
+ * <Table sort={sort} onSortChange={setSort}>…</Table>
+ * ```
+ *
+ * @param rows The rows to order. They are copied rather than sorted in place.
+ * @param sort The column to order by, and which way. Rows are returned as they came when there is none.
+ * @param sortValues For columns that don't sort by `row[key]`, e.g. one showing a relative time that should sort by its timestamp.
+ */
+export function sortRows<TRow> (rows: TRow[], sort?: TableSort, sortValues?: TableSortValues<TRow>): TRow[] {
+  if (!sort) return rows
+
+  const { key } = sort
+  const sortValue = sortValues?.[key] ?? ((row: TRow) => readColumn(row, key))
+  const direction = sort.direction === DESCENDING ? -1 : 1
+
+  return [...rows].sort((a, b) => compare(sortValue(a), sortValue(b)) * direction)
+}
+
+const TableSection = () => {
+  const [rows, setRows] = useState(deviceSamples)
+  const [sort, setSort] = useState<TableSort>({ key: 'name', direction: ASCENDING })
+
+  // last_active is a timestamp on the sample but is shown as a relative string,
+  // so the column says what it sorts by rather than sorting the rendered text
+  const sortValues = useMemo(() => ({
+    status: (device: SampleDevice) => device.online,
+    last_active: (device: SampleDevice) => device.last_active
+  }), [])
+
+  // the table reports the sort, ordering the rows for it is this component's job
+  const sorted = useMemo(() => sortRows(rows, sort, sortValues), [rows, sort, sortValues])
+
+  return (
+    <Section
+      title='Table'
+      subtitle='Sortable table with no styling passed: the appearance comes from the component, and the caller holds the sort state, ordering the rows with sortRows.'
+    >
+      <div className='panel'>
+        <Table sort={sort} onSortChange={setSort}>
+          <Table.Head>
+            <Table.Row>
+              <Table.HeadCell column='name'>
+                <Table.SortButton>
+                  {(state) => <>Device<SortIndicator {...state} /></>}
+                </Table.SortButton>
+              </Table.HeadCell>
+              <Table.HeadCell column='location'>
+                <Table.SortButton>
+                  {(state) => <>Location<SortIndicator {...state} /></>}
+                </Table.SortButton>
+              </Table.HeadCell>
+              <Table.HeadCell column='status'>
+                <Table.SortButton firstDirection={DESCENDING}>
+                  {(state) => <>Status<SortIndicator {...state} /></>}
+                </Table.SortButton>
+              </Table.HeadCell>
+              {/* a column with no sort button, and so no `column` to name */}
+              <Table.HeadCell>Platform</Table.HeadCell>
+              <Table.HeadCell column='last_active' className='numeric-column'>
+                <Table.SortButton firstDirection={DESCENDING} className='numeric-sort-button'>
+                  {(state) => <>Last active<SortIndicator {...state} /></>}
+                </Table.SortButton>
+              </Table.HeadCell>
+            </Table.Row>
+          </Table.Head>
+
+          <Table.Body>
+            {sorted.length === 0
+              ? <Table.Empty colSpan={5}>No devices to show</Table.Empty>
+              : sorted.map((device) => (
+                <Table.Row key={device.id}>
+                  <Table.Cell column='name'>{device.name}</Table.Cell>
+                  <Table.Cell column='location'>{device.location}</Table.Cell>
+                  <Table.Cell column='status'>
+                    {device.online ? 'Online' : 'Offline'}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <PlatformIcon device={device.device} />
+                  </Table.Cell>
+                  <Table.Cell column='last_active' className='numeric-column'>
+                    {new Date(device.last_active).toLocaleTimeString()}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+          </Table.Body>
+        </Table>
+      </div>
+      <div className='button-row'>
+        <button type='button' onClick={() => setRows(rows.length > 0 ? [] : deviceSamples)}>
+          {rows.length > 0 ? 'Show empty state' : 'Restore rows'}
+        </button>
+      </div>
+    </Section>
   )
 }
 
@@ -722,6 +865,8 @@ export default function KitchenSink () {
           <button type='button' onClick={() => { setComposedRatingLog(''); setComposedRatingKey(k => k + 1) }}>Reset</button>
         </div>
       </Section>
+
+      <TableSection />
 
       <SessionEmbedSection />
 

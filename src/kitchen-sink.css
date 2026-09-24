@@ -480,3 +480,20 @@ main {
   font-size: 0.95rem;
   color: #616b83;
 }
+
+.sort-indicator {
+  color: #a0a6b5;
+  font-size: 0.8rem;
+}
+
+.sort-indicator-active {
+  color: #0E0C26;
+}
+
+.numeric-column {
+  text-align: end;
+}
+
+.numeric-sort-button {
+  justify-content: flex-end;
+}

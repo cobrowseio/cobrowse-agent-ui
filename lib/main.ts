@@ -17,6 +17,7 @@ import ConnectDeviceComponent from '@/components/ConnectDevice'
 import RatingComponent, { useRatingContext as useRatingContextHook } from '@/components/Rating'
 import SessionRatingComponent from '@/components/Rating/SessionRating'
 import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
+import TableComponent from '@/components/Table'
 import useSessionHook from '@/hooks/useSession'
 import useSessionEventsHook from '@/hooks/useSessionEvents'
 import useAccountHook from '@/hooks/useAccount'
@@ -51,6 +52,21 @@ export type {
 } from '@/components/Rating'
 export type { SessionRatingProps, SessionRatingResult } from '@/components/Rating/SessionRating'
 export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
+export type {
+  TableProps,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeadCellProps,
+  TableCellProps,
+  TableSortButtonProps,
+  TableSortButtonState,
+  TableEmptyProps,
+  TableSort,
+  TableSortValues,
+  SortDirection
+} from '@/components/Table'
+export { ASCENDING, DESCENDING } from '@/components/Table'
 export type { SessionEventHandlers } from '@/hooks/useSessionEvents'
 
 export const CodeEntry = CodeEntryComponent
@@ -73,6 +89,7 @@ export const Rating = RatingComponent
 export const SessionRating = SessionRatingComponent
 export const useRatingContext = useRatingContextHook
 export const CobrowseProvider = CobrowseProviderComponent
+export const Table = TableComponent
 export const useCobrowse = useCobrowseHook
 export const useRemoteContext = useRemoteContextHook
 export const useSession = useSessionHook
