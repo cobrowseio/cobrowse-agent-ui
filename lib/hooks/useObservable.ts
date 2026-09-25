@@ -38,12 +38,17 @@ export function createEntityProxy<Entity extends object>(entity: Entity): Entity
 
       const cached = methodCache.get(property)
 
+      // reuse the previously bound function while the underlying method
+      // reference is the same
       if (cached?.source === value) {
         return cached.bound
       }
 
+      // we need to bind methods to the original entity rather than the
+      // proxy to preserve the `this` context
       const bound = value.bind(target)
 
+      // cache the bound method to preserve stable function identity
       methodCache.set(property, {
         source: value,
         bound
