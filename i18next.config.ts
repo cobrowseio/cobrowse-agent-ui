@@ -1,7 +1,7 @@
-import { defineConfig } from 'i18next-cli';
+import { defineConfig } from "i18next-cli";
 
 export default defineConfig({
-  "locales": [
+  locales: [
     "en-us",
     "ar",
     "cs",
@@ -30,26 +30,19 @@ export default defineConfig({
     "th",
     "uk",
     "vi",
-    "zh"
+    "zh",
   ],
-  "extract": {
-    "input": "lib/**/*.{js,jsx,ts,tsx}",
-    "output": "lib/locales/{{language}}/{{namespace}}.json",
-    "defaultNS": "translation",
-    "keySeparator": false,
-    "nsSeparator": false,
-    "functions": [
-      "t",
-      "*.t"
-    ],
-    "transComponents": [
-      "Trans"
-    ]
+  extract: {
+    input: "lib/**/*.{js,jsx,ts,tsx}",
+    output: "lib/locales/{{language}}/{{namespace}}.json",
+    defaultNS: "translation",
+    keySeparator: false,
+    nsSeparator: false,
+    functions: ["t", "*.t"],
+    transComponents: ["Trans"],
   },
-  "types": {
-    "input": [
-      "locales/{{language}}/{{namespace}}.json"
-    ],
-    "output": "lib/types/i18next.d.ts"
-  }
+  types: {
+    input: ["locales/{{language}}/{{namespace}}.json"],
+    output: "lib/types/i18next.d.ts",
+  },
 });

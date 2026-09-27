@@ -1,16 +1,16 @@
-import { useEffect, useRef } from 'react'
-import type { RemoteContext, Session } from 'cobrowse-agent-sdk'
-import useStableCallback from '@/hooks/useStableCallback'
+import { useEffect, useRef } from "react";
+import type { RemoteContext, Session } from "cobrowse-agent-sdk";
+import useStableCallback from "@/hooks/useStableCallback";
 
 export interface SessionEventHandlers {
   /** Called when a session is loaded into the context. */
-  onLoaded?: (session: Session) => void
+  onLoaded?: (session: Session) => void;
   /** Called for every session update. */
-  onUpdated?: (session: Session) => void
+  onUpdated?: (session: Session) => void;
   /** Called once per session, when it becomes active. */
-  onActivated?: (session: Session) => void
+  onActivated?: (session: Session) => void;
   /** Called once per session, when it ends. */
-  onEnded?: (session: Session) => void
+  onEnded?: (session: Session) => void;
 }
 
 /**
@@ -21,53 +21,53 @@ export interface SessionEventHandlers {
  */
 const useSessionEvents = (
   remoteContext: RemoteContext | null,
-  { onLoaded, onUpdated, onActivated, onEnded }: SessionEventHandlers
+  { onLoaded, onUpdated, onActivated, onEnded }: SessionEventHandlers,
 ) => {
-  const onLoadedCallback = useStableCallback(onLoaded)
-  const onUpdatedCallback = useStableCallback(onUpdated)
-  const onActivatedCallback = useStableCallback(onActivated)
-  const onEndedCallback = useStableCallback(onEnded)
-  const sessionActivatedRef = useRef(false)
-  const sessionEndedRef = useRef(false)
+  const onLoadedCallback = useStableCallback(onLoaded);
+  const onUpdatedCallback = useStableCallback(onUpdated);
+  const onActivatedCallback = useStableCallback(onActivated);
+  const onEndedCallback = useStableCallback(onEnded);
+  const sessionActivatedRef = useRef(false);
+  const sessionEndedRef = useRef(false);
 
   useEffect(() => {
     if (!remoteContext) {
-      sessionActivatedRef.current = false
-      sessionEndedRef.current = false
+      sessionActivatedRef.current = false;
+      sessionEndedRef.current = false;
 
-      return
+      return;
     }
 
     const handleSessionLoaded = (session: Session) => {
-      sessionActivatedRef.current = session.isActive()
-      sessionEndedRef.current = false
-      onLoadedCallback(session)
-    }
+      sessionActivatedRef.current = session.isActive();
+      sessionEndedRef.current = false;
+      onLoadedCallback(session);
+    };
 
     const handleSessionUpdated = (session: Session) => {
-      onUpdatedCallback(session)
+      onUpdatedCallback(session);
 
       if (session.isActive() && !sessionActivatedRef.current) {
-        sessionActivatedRef.current = true
-        onActivatedCallback(session)
+        sessionActivatedRef.current = true;
+        onActivatedCallback(session);
       }
 
       if (session.isEnded() && !sessionEndedRef.current) {
-        sessionEndedRef.current = true
-        onEndedCallback(session)
+        sessionEndedRef.current = true;
+        onEndedCallback(session);
       }
-    }
+    };
 
-    remoteContext.on('session.loaded', handleSessionLoaded)
-    remoteContext.on('session.updated', handleSessionUpdated)
+    remoteContext.on("session.loaded", handleSessionLoaded);
+    remoteContext.on("session.updated", handleSessionUpdated);
 
     return () => {
-      remoteContext.off('session.loaded', handleSessionLoaded)
-      remoteContext.off('session.updated', handleSessionUpdated)
-      sessionActivatedRef.current = false
-      sessionEndedRef.current = false
-    }
-  }, [onActivatedCallback, onEndedCallback, onLoadedCallback, onUpdatedCallback, remoteContext])
-}
+      remoteContext.off("session.loaded", handleSessionLoaded);
+      remoteContext.off("session.updated", handleSessionUpdated);
+      sessionActivatedRef.current = false;
+      sessionEndedRef.current = false;
+    };
+  }, [onActivatedCallback, onEndedCallback, onLoadedCallback, onUpdatedCallback, remoteContext]);
+};
 
-export default useSessionEvents
+export default useSessionEvents;

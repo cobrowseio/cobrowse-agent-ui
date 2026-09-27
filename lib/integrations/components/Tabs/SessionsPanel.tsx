@@ -1,39 +1,51 @@
-import Session, { type SessionData } from '@/components/Session'
-import Loader from '@/components/Loader'
-import { useTranslation } from '@/i18n'
-import clsx from 'clsx'
-import type { BasePanelProps } from './BasePanel'
-import SessionAction from './SessionAction'
-import styles from './Tabs.module.css'
+import Session, { type SessionData } from "@/components/Session";
+import Loader from "@/components/Loader";
+import { useTranslation } from "@/i18n";
+import clsx from "clsx";
+import type { BasePanelProps } from "./BasePanel";
+import SessionAction from "./SessionAction";
+import styles from "./Tabs.module.css";
 
 export interface SessionsPanelProps<T extends SessionData = SessionData> extends BasePanelProps {
-  sessions: T[] | null
-  onSessionClick?: (session: T) => void
-  sessionButtonClassName?: string
+  sessions: T[] | null;
+  onSessionClick?: (session: T) => void;
+  sessionButtonClassName?: string;
 }
 
-const SessionsPanel = <T extends SessionData = SessionData>({ sessions, onSessionClick, sessionButtonClassName, panelItemClassName, loader }: SessionsPanelProps<T>) => {
-  const { t } = useTranslation()
+const SessionsPanel = <T extends SessionData = SessionData>({
+  sessions,
+  onSessionClick,
+  sessionButtonClassName,
+  panelItemClassName,
+  loader,
+}: SessionsPanelProps<T>) => {
+  const { t } = useTranslation();
 
   if (sessions === null) {
-    return (
-      <Loader>{loader}</Loader>
-    )
+    return <Loader>{loader}</Loader>;
   }
 
   if (sessions.length === 0) {
-    return <p>{t('No sessions')}</p>
+    return <p>{t("No sessions")}</p>;
   }
 
   return (
     <>
       {sessions.map((session, index) => (
-        <Session key={index} session={session} className={clsx(styles.panelItem, panelItemClassName)}>
-          <SessionAction session={session} onClick={() => onSessionClick?.(session)} className={sessionButtonClassName} />
+        <Session
+          key={index}
+          session={session}
+          className={clsx(styles.panelItem, panelItemClassName)}
+        >
+          <SessionAction
+            session={session}
+            onClick={() => onSessionClick?.(session)}
+            className={sessionButtonClassName}
+          />
         </Session>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default SessionsPanel
+export default SessionsPanel;

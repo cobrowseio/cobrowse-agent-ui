@@ -12,8 +12,8 @@ export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
-  check: {
-    fmt: false,
+  fmt: {
+    ignorePatterns: ["CHANGELOG.md"],
   },
   lint: {
     plugins: ["eslint", "typescript", "unicorn", "oxc", "react"],

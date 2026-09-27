@@ -2,11 +2,11 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
-  color: #0E0C26;
+  color: #0e0c26;
 }
 
 .head {
-  background: #F9FAFB;
+  background: #f9fafb;
 }
 
 .headCell {
@@ -14,17 +14,17 @@
   text-align: start;
   font-size: 12px;
   font-weight: 500;
-  color: #6F6D82;
+  color: #6f6d82;
   border-bottom: 1px solid rgba(4, 13, 60, 0.12);
 }
 
-.headCell[data-sorted='true'] {
+.headCell[data-sorted="true"] {
   font-weight: 700;
-  color: #0E0C26;
+  color: #0e0c26;
 }
 
 .sortButton {
-  composes: focusRing from '../../styles/focus.module.css';
+  composes: focusRing from "../../styles/focus.module.css";
   display: flex;
   align-items: center;
   gap: 6px;
@@ -53,5 +53,5 @@
 .emptyCell {
   padding: 40px 16px;
   text-align: center;
-  color: #6F6D82;
+  color: #6f6d82;
 }

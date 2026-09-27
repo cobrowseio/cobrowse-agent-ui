@@ -1,43 +1,45 @@
-import CodeEntryComponent from '@/components/CodeEntry'
-import ButtonComponent from '@/components/Button'
-import ExternalLinkComponent from '@/components/ExternalLink'
-import PlatformIconComponent from '@/components/PlatformIcon'
-import DeviceComponent from '@/components/Device'
-import SessionComponent from '@/components/Session'
-import SmartConnectButtonComponent from '@/components/SmartConnectButton'
-import UserIconComponent from '@/components/UserIcon'
-import RefreshButtonComponent from '@/components/RefreshButton'
-import CancelButtonComponent from '@/components/CancelButton'
-import BlockingErrorComponent from '@/components/BlockingError'
-import LoaderComponent from '@/components/Loader'
-import FrameComponent, { useRemoteContext as useRemoteContextHook } from '@/components/Frame'
-import RemoteContextRelayComponent from '@/components/RemoteContextRelay'
-import SessionEmbedComponent from '@/components/SessionEmbed'
-import ConnectDeviceComponent from '@/components/ConnectDevice'
-import RatingComponent, { useRatingContext as useRatingContextHook } from '@/components/Rating'
-import SessionRatingComponent from '@/components/Rating/SessionRating'
-import CobrowseProviderComponent, { useCobrowse as useCobrowseHook } from '@/components/CobrowseProvider'
-import TableComponent from '@/components/Table'
-import useSessionHook from '@/hooks/useSession'
-import useSessionEventsHook from '@/hooks/useSessionEvents'
-import useAccountHook from '@/hooks/useAccount'
-import useTrustedEmbeddingOriginsHook from '@/hooks/useTrustedEmbeddingOrigins'
-import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
+import CodeEntryComponent from "@/components/CodeEntry";
+import ButtonComponent from "@/components/Button";
+import ExternalLinkComponent from "@/components/ExternalLink";
+import PlatformIconComponent from "@/components/PlatformIcon";
+import DeviceComponent from "@/components/Device";
+import SessionComponent from "@/components/Session";
+import SmartConnectButtonComponent from "@/components/SmartConnectButton";
+import UserIconComponent from "@/components/UserIcon";
+import RefreshButtonComponent from "@/components/RefreshButton";
+import CancelButtonComponent from "@/components/CancelButton";
+import BlockingErrorComponent from "@/components/BlockingError";
+import LoaderComponent from "@/components/Loader";
+import FrameComponent, { useRemoteContext as useRemoteContextHook } from "@/components/Frame";
+import RemoteContextRelayComponent from "@/components/RemoteContextRelay";
+import SessionEmbedComponent from "@/components/SessionEmbed";
+import ConnectDeviceComponent from "@/components/ConnectDevice";
+import RatingComponent, { useRatingContext as useRatingContextHook } from "@/components/Rating";
+import SessionRatingComponent from "@/components/Rating/SessionRating";
+import CobrowseProviderComponent, {
+  useCobrowse as useCobrowseHook,
+} from "@/components/CobrowseProvider";
+import TableComponent from "@/components/Table";
+import useSessionHook from "@/hooks/useSession";
+import useSessionEventsHook from "@/hooks/useSessionEvents";
+import useAccountHook from "@/hooks/useAccount";
+import useTrustedEmbeddingOriginsHook from "@/hooks/useTrustedEmbeddingOrigins";
+import i18nInstance, { bindI18n as bindI18nHelper } from "@/i18n";
 
-export type { CodeEntryProps } from '@/components/CodeEntry'
-export type { ButtonProps } from '@/components/Button'
-export type { ExternalLinkProps } from '@/components/ExternalLink'
-export type { DeviceData, DeviceProps } from '@/components/Device'
-export type { SessionData, SessionProps } from '@/components/Session'
-export type { SmartConnectButtonProps } from '@/components/SmartConnectButton'
-export type { RefreshButtonProps } from '@/components/RefreshButton'
-export type { CancelButtonProps } from '@/components/CancelButton'
-export type { BlockingErrorProps } from '@/components/BlockingError'
-export type { LoaderProps } from '@/components/Loader'
-export type { FrameProps } from '@/components/Frame'
-export type { RemoteContextRelayProps } from '@/components/RemoteContextRelay'
-export type { SessionEmbedProps } from '@/components/SessionEmbed'
-export type { ConnectDeviceProps } from '@/components/ConnectDevice'
+export type { CodeEntryProps } from "@/components/CodeEntry";
+export type { ButtonProps } from "@/components/Button";
+export type { ExternalLinkProps } from "@/components/ExternalLink";
+export type { DeviceData, DeviceProps } from "@/components/Device";
+export type { SessionData, SessionProps } from "@/components/Session";
+export type { SmartConnectButtonProps } from "@/components/SmartConnectButton";
+export type { RefreshButtonProps } from "@/components/RefreshButton";
+export type { CancelButtonProps } from "@/components/CancelButton";
+export type { BlockingErrorProps } from "@/components/BlockingError";
+export type { LoaderProps } from "@/components/Loader";
+export type { FrameProps } from "@/components/Frame";
+export type { RemoteContextRelayProps } from "@/components/RemoteContextRelay";
+export type { SessionEmbedProps } from "@/components/SessionEmbed";
+export type { ConnectDeviceProps } from "@/components/ConnectDevice";
 export type {
   RatingProps,
   RatingResult,
@@ -48,10 +50,10 @@ export type {
   RatingReasonProps,
   RatingCommentProps,
   RatingSubmitProps,
-  RatingThankYouProps
-} from '@/components/Rating'
-export type { SessionRatingProps, SessionRatingResult } from '@/components/Rating/SessionRating'
-export type { CobrowseProviderProps } from '@/components/CobrowseProvider'
+  RatingThankYouProps,
+} from "@/components/Rating";
+export type { SessionRatingProps, SessionRatingResult } from "@/components/Rating/SessionRating";
+export type { CobrowseProviderProps } from "@/components/CobrowseProvider";
 export type {
   TableProps,
   TableHeadProps,
@@ -64,37 +66,37 @@ export type {
   TableEmptyProps,
   TableSort,
   TableSortValues,
-  SortDirection
-} from '@/components/Table'
-export { ASCENDING, DESCENDING } from '@/components/Table'
-export type { SessionEventHandlers } from '@/hooks/useSessionEvents'
+  SortDirection,
+} from "@/components/Table";
+export { ASCENDING, DESCENDING } from "@/components/Table";
+export type { SessionEventHandlers } from "@/hooks/useSessionEvents";
 
-export const CodeEntry = CodeEntryComponent
-export const Button = ButtonComponent
-export const ExternalLink = ExternalLinkComponent
-export const PlatformIcon = PlatformIconComponent
-export const Device = DeviceComponent
-export const Session = SessionComponent
-export const SmartConnectButton = SmartConnectButtonComponent
-export const UserIcon = UserIconComponent
-export const RefreshButton = RefreshButtonComponent
-export const CancelButton = CancelButtonComponent
-export const BlockingError = BlockingErrorComponent
-export const Loader = LoaderComponent
-export const Frame = FrameComponent
-export const RemoteContextRelay = RemoteContextRelayComponent
-export const SessionEmbed = SessionEmbedComponent
-export const ConnectDevice = ConnectDeviceComponent
-export const Rating = RatingComponent
-export const SessionRating = SessionRatingComponent
-export const useRatingContext = useRatingContextHook
-export const CobrowseProvider = CobrowseProviderComponent
-export const Table = TableComponent
-export const useCobrowse = useCobrowseHook
-export const useRemoteContext = useRemoteContextHook
-export const useSession = useSessionHook
-export const useSessionEvents = useSessionEventsHook
-export const useAccount = useAccountHook
-export const useTrustedEmbeddingOrigins = useTrustedEmbeddingOriginsHook
-export const bindI18n = bindI18nHelper
-export const i18n = i18nInstance
+export const CodeEntry = CodeEntryComponent;
+export const Button = ButtonComponent;
+export const ExternalLink = ExternalLinkComponent;
+export const PlatformIcon = PlatformIconComponent;
+export const Device = DeviceComponent;
+export const Session = SessionComponent;
+export const SmartConnectButton = SmartConnectButtonComponent;
+export const UserIcon = UserIconComponent;
+export const RefreshButton = RefreshButtonComponent;
+export const CancelButton = CancelButtonComponent;
+export const BlockingError = BlockingErrorComponent;
+export const Loader = LoaderComponent;
+export const Frame = FrameComponent;
+export const RemoteContextRelay = RemoteContextRelayComponent;
+export const SessionEmbed = SessionEmbedComponent;
+export const ConnectDevice = ConnectDeviceComponent;
+export const Rating = RatingComponent;
+export const SessionRating = SessionRatingComponent;
+export const useRatingContext = useRatingContextHook;
+export const CobrowseProvider = CobrowseProviderComponent;
+export const Table = TableComponent;
+export const useCobrowse = useCobrowseHook;
+export const useRemoteContext = useRemoteContextHook;
+export const useSession = useSessionHook;
+export const useSessionEvents = useSessionEventsHook;
+export const useAccount = useAccountHook;
+export const useTrustedEmbeddingOrigins = useTrustedEmbeddingOriginsHook;
+export const bindI18n = bindI18nHelper;
+export const i18n = i18nInstance;

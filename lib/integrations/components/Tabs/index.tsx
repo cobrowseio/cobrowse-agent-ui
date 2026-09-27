@@ -1,36 +1,45 @@
-import clsx from 'clsx'
-import type { ReactNode } from 'react'
+import clsx from "clsx";
+import type { ReactNode } from "react";
 import {
   Tab as HeadlessTab,
   TabGroup as HeadlessTabGroup,
   TabList as HeadlessTabList,
   TabPanels as HeadlessTabPanels,
-  TabPanel as HeadlessTabPanel
-} from '@headlessui/react'
-import DevicesPanel, { type DevicesPanelProps } from './DevicesPanel'
-import SessionsPanel, { type SessionsPanelProps } from './SessionsPanel'
-import type { DeviceData } from '@/components/Device'
-import type { SessionData } from '@/components/Session'
-import RefreshButton, { type RefreshButtonProps } from '@/components/RefreshButton'
-import { useTranslation } from '@/i18n'
-import styles from './Tabs.module.css'
+  TabPanel as HeadlessTabPanel,
+} from "@headlessui/react";
+import DevicesPanel, { type DevicesPanelProps } from "./DevicesPanel";
+import SessionsPanel, { type SessionsPanelProps } from "./SessionsPanel";
+import type { DeviceData } from "@/components/Device";
+import type { SessionData } from "@/components/Session";
+import RefreshButton, { type RefreshButtonProps } from "@/components/RefreshButton";
+import { useTranslation } from "@/i18n";
+import styles from "./Tabs.module.css";
 
 interface TabsPanelProps<TDevice extends DeviceData, TSession extends SessionData>
-  extends Pick<DevicesPanelProps<TDevice>, 'devices' | 'onConnectClick' | 'smartConnectButtonClassName' | 'loader' | 'panelItemClassName'>,
-    Pick<SessionsPanelProps<TSession>, 'sessions' | 'onSessionClick' | 'sessionButtonClassName' | 'loader' | 'panelItemClassName'> {}
+  extends
+    Pick<
+      DevicesPanelProps<TDevice>,
+      "devices" | "onConnectClick" | "smartConnectButtonClassName" | "loader" | "panelItemClassName"
+    >,
+    Pick<
+      SessionsPanelProps<TSession>,
+      "sessions" | "onSessionClick" | "sessionButtonClassName" | "loader" | "panelItemClassName"
+    > {}
 
-export interface TabsProps<TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData>
-  extends TabsPanelProps<TDevice, TSession> {
-  onRefreshClick?: RefreshButtonProps['onClick']
-  refresh?: ReactNode
-  className?: string
-  headerClassName?: string
-  tabListClassName?: string
-  tabClassName?: string
-  tabHoverClassName?: string
-  tabActiveClassName?: string
-  tabPanelsClassName?: string
-  refreshButtonClassName?: string
+export interface TabsProps<
+  TDevice extends DeviceData = DeviceData,
+  TSession extends SessionData = SessionData,
+> extends TabsPanelProps<TDevice, TSession> {
+  onRefreshClick?: RefreshButtonProps["onClick"];
+  refresh?: ReactNode;
+  className?: string;
+  headerClassName?: string;
+  tabListClassName?: string;
+  tabClassName?: string;
+  tabHoverClassName?: string;
+  tabActiveClassName?: string;
+  tabPanelsClassName?: string;
+  refreshButtonClassName?: string;
 }
 
 const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionData = SessionData>({
@@ -51,9 +60,9 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
   tabActiveClassName,
   tabPanelsClassName,
   panelItemClassName,
-  refreshButtonClassName
+  refreshButtonClassName,
 }: TabsProps<TDevice, TSession>) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <HeadlessTabGroup className={clsx(styles.root, className)}>
@@ -67,11 +76,11 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
                 hover && styles.tabHover,
                 hover && tabHoverClassName,
                 selected && styles.tabActive,
-                selected && tabActiveClassName
+                selected && tabActiveClassName,
               )
             }
           >
-            {t('Devices')}
+            {t("Devices")}
           </HeadlessTab>
           <HeadlessTab
             className={({ selected, hover }) =>
@@ -81,27 +90,44 @@ const Tabs = <TDevice extends DeviceData = DeviceData, TSession extends SessionD
                 hover && styles.tabHover,
                 hover && tabHoverClassName,
                 selected && styles.tabActive,
-                selected && tabActiveClassName
+                selected && tabActiveClassName,
               )
             }
           >
-            {t('Sessions')}
+            {t("Sessions")}
           </HeadlessTab>
         </HeadlessTabList>
         {onRefreshClick && (
-          <RefreshButton className={clsx(styles.refresh, refreshButtonClassName)} onClick={onRefreshClick}>{refresh}</RefreshButton>
+          <RefreshButton
+            className={clsx(styles.refresh, refreshButtonClassName)}
+            onClick={onRefreshClick}
+          >
+            {refresh}
+          </RefreshButton>
         )}
       </div>
       <HeadlessTabPanels className={clsx(styles.tabPanels, tabPanelsClassName)}>
         <HeadlessTabPanel>
-          <DevicesPanel devices={devices} onConnectClick={onConnectClick} smartConnectButtonClassName={smartConnectButtonClassName} panelItemClassName={panelItemClassName} loader={loader} />
+          <DevicesPanel
+            devices={devices}
+            onConnectClick={onConnectClick}
+            smartConnectButtonClassName={smartConnectButtonClassName}
+            panelItemClassName={panelItemClassName}
+            loader={loader}
+          />
         </HeadlessTabPanel>
         <HeadlessTabPanel>
-          <SessionsPanel sessions={sessions} onSessionClick={onSessionClick} sessionButtonClassName={sessionButtonClassName} panelItemClassName={panelItemClassName} loader={loader} />
+          <SessionsPanel
+            sessions={sessions}
+            onSessionClick={onSessionClick}
+            sessionButtonClassName={sessionButtonClassName}
+            panelItemClassName={panelItemClassName}
+            loader={loader}
+          />
         </HeadlessTabPanel>
       </HeadlessTabPanels>
     </HeadlessTabGroup>
-  )
-}
+  );
+};
 
-export default Tabs
+export default Tabs;

@@ -1,68 +1,69 @@
-import { useEffect, useState } from 'react'
-import { RemoteContext, type Session } from 'cobrowse-agent-sdk'
+import { useEffect, useState } from "react";
+import { RemoteContext, type Session } from "cobrowse-agent-sdk";
 
-const isRemoteContext = (source: RemoteContext | Session): source is RemoteContext => (
-  source instanceof RemoteContext
-)
+const isRemoteContext = (source: RemoteContext | Session): source is RemoteContext =>
+  source instanceof RemoteContext;
 
-const hasSessionProperty = (target: Session, property: PropertyKey): property is keyof Session => property in target
+const hasSessionProperty = (target: Session, property: PropertyKey): property is keyof Session =>
+  property in target;
 
 const createReactiveSession = (session: Session | null) => {
   if (!session) {
-    return null
+    return null;
   }
 
   return new Proxy(session, {
-    get: (target, property) => hasSessionProperty(target, property) ? target[property] : undefined
-  })
-}
+    get: (target, property) =>
+      hasSessionProperty(target, property) ? target[property] : undefined,
+  });
+};
 
 const useSession = (source: RemoteContext | Session | null) => {
-  const remoteContext = source && isRemoteContext(source) ? source : null
-  const sessionSource = source && !isRemoteContext(source) ? source : null
-  const [sessionState, setSessionState] = useState(sessionSource)
+  const remoteContext = source && isRemoteContext(source) ? source : null;
+  const sessionSource = source && !isRemoteContext(source) ? source : null;
+  const [sessionState, setSessionState] = useState(sessionSource);
 
   useEffect(() => {
     if (!remoteContext) {
-      return
+      return;
     }
 
     const handleSessionChange = (session: Session) => {
-      setSessionState(createReactiveSession(session))
-    }
+      setSessionState(createReactiveSession(session));
+    };
 
-    remoteContext.on('session.loaded', handleSessionChange)
-    remoteContext.on('session.updated', handleSessionChange)
+    remoteContext.on("session.loaded", handleSessionChange);
+    remoteContext.on("session.updated", handleSessionChange);
 
     return () => {
-      remoteContext.off('session.loaded', handleSessionChange)
-      remoteContext.off('session.updated', handleSessionChange)
+      remoteContext.off("session.loaded", handleSessionChange);
+      remoteContext.off("session.updated", handleSessionChange);
 
-      setSessionState(null)
-    }
-  }, [remoteContext])
+      setSessionState(null);
+    };
+  }, [remoteContext]);
 
   useEffect(() => {
     if (!sessionSource) {
-      return
+      return;
     }
 
     const handleSessionChange = () => {
-      setSessionState(createReactiveSession(sessionSource))
-    }
+      setSessionState(createReactiveSession(sessionSource));
+    };
 
-    sessionSource.on('updated', handleSessionChange)
-    sessionSource.on('ended', handleSessionChange)
+    sessionSource.on("updated", handleSessionChange);
+    sessionSource.on("ended", handleSessionChange);
 
     return () => {
-      sessionSource.off('updated', handleSessionChange)
-      sessionSource.off('ended', handleSessionChange)
+      sessionSource.off("updated", handleSessionChange);
+      sessionSource.off("ended", handleSessionChange);
 
-      setSessionState(null)
-    }
-  }, [sessionSource])
+      setSessionState(null);
+    };
+  }, [sessionSource]);
 
-  return sessionState ?? sessionSource
-}
+  return sessionState ?? sessionSource;
+};
 
-export default useSession
+export default useSession;

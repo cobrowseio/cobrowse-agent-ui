@@ -7,11 +7,11 @@
 }
 
 .deviceType {
-  color: #0E0C26;
+  color: #0e0c26;
 }
 
 .lastSeen {
-  color: #6F6D82;
+  color: #6f6d82;
 }
 
 .onlineStatus {
@@ -21,10 +21,10 @@
 }
 
 .onlineIndicator {
-  background: #22C55E;
+  background: #22c55e;
   height: 12px;
   width: 12px;
-  border: 2px solid #BBF7D0;
+  border: 2px solid #bbf7d0;
   border-radius: 9999px;
 }
 

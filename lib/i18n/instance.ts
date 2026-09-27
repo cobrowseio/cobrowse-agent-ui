@@ -1,42 +1,68 @@
-import { createInstance } from 'i18next'
-import type { i18n as I18nInstance } from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import { formatDistanceToNow } from 'date-fns'
-import type { Locale } from 'date-fns'
+import { createInstance } from "i18next";
+import type { i18n as I18nInstance } from "i18next";
+import { initReactI18next } from "react-i18next";
+import { formatDistanceToNow } from "date-fns";
+import type { Locale } from "date-fns";
 import {
-  enUS, ar, cs, da, de, es, et, fi, fr, hi, it, ja, ko, lt, ms, nl, pl, pt, ro, ru, sk, sl, sv, th, uk, vi, zhCN
-} from 'date-fns/locale'
-import localeEnUS from '../locales/en-us/translation.json'
-import localeAr from '../locales/ar/translation.json'
-import localeCs from '../locales/cs/translation.json'
-import localeDa from '../locales/da/translation.json'
-import localeDe from '../locales/de/translation.json'
-import localeEs from '../locales/es/translation.json'
-import localeEt from '../locales/et/translation.json'
-import localeFi from '../locales/fi/translation.json'
-import localeFr from '../locales/fr/translation.json'
-import localeHi from '../locales/hi/translation.json'
-import localeIt from '../locales/it/translation.json'
-import localeJa from '../locales/ja/translation.json'
-import localeKk from '../locales/kk/translation.json'
-import localeKo from '../locales/ko/translation.json'
-import localeLt from '../locales/lt/translation.json'
-import localeMr from '../locales/mr/translation.json'
-import localeMs from '../locales/ms/translation.json'
-import localeNl from '../locales/nl/translation.json'
-import localePl from '../locales/pl/translation.json'
-import localePt from '../locales/pt/translation.json'
-import localeRo from '../locales/ro/translation.json'
-import localeRu from '../locales/ru/translation.json'
-import localeSk from '../locales/sk/translation.json'
-import localeSl from '../locales/sl/translation.json'
-import localeSv from '../locales/sv/translation.json'
-import localeTh from '../locales/th/translation.json'
-import localeUk from '../locales/uk/translation.json'
-import localeVi from '../locales/vi/translation.json'
-import localeZh from '../locales/zh/translation.json'
+  enUS,
+  ar,
+  cs,
+  da,
+  de,
+  es,
+  et,
+  fi,
+  fr,
+  hi,
+  it,
+  ja,
+  ko,
+  lt,
+  ms,
+  nl,
+  pl,
+  pt,
+  ro,
+  ru,
+  sk,
+  sl,
+  sv,
+  th,
+  uk,
+  vi,
+  zhCN,
+} from "date-fns/locale";
+import localeEnUS from "../locales/en-us/translation.json";
+import localeAr from "../locales/ar/translation.json";
+import localeCs from "../locales/cs/translation.json";
+import localeDa from "../locales/da/translation.json";
+import localeDe from "../locales/de/translation.json";
+import localeEs from "../locales/es/translation.json";
+import localeEt from "../locales/et/translation.json";
+import localeFi from "../locales/fi/translation.json";
+import localeFr from "../locales/fr/translation.json";
+import localeHi from "../locales/hi/translation.json";
+import localeIt from "../locales/it/translation.json";
+import localeJa from "../locales/ja/translation.json";
+import localeKk from "../locales/kk/translation.json";
+import localeKo from "../locales/ko/translation.json";
+import localeLt from "../locales/lt/translation.json";
+import localeMr from "../locales/mr/translation.json";
+import localeMs from "../locales/ms/translation.json";
+import localeNl from "../locales/nl/translation.json";
+import localePl from "../locales/pl/translation.json";
+import localePt from "../locales/pt/translation.json";
+import localeRo from "../locales/ro/translation.json";
+import localeRu from "../locales/ru/translation.json";
+import localeSk from "../locales/sk/translation.json";
+import localeSl from "../locales/sl/translation.json";
+import localeSv from "../locales/sv/translation.json";
+import localeTh from "../locales/th/translation.json";
+import localeUk from "../locales/uk/translation.json";
+import localeVi from "../locales/vi/translation.json";
+import localeZh from "../locales/zh/translation.json";
 
-const englishUS = 'en-us'
+const englishUS = "en-us";
 
 const dateLocales: Record<string, Locale> = {
   [englishUS]: enUS,
@@ -65,8 +91,8 @@ const dateLocales: Record<string, Locale> = {
   th,
   uk,
   vi,
-  zh: zhCN
-}
+  zh: zhCN,
+};
 
 const i18n: I18nInstance = createInstance({
   fallbackLng: englishUS,
@@ -75,115 +101,113 @@ const i18n: I18nInstance = createInstance({
   interpolation: {
     escapeValue: false,
     format: (value: unknown, format?: string, lng?: string) => {
-      if (format === 'dateRelative' && value instanceof Date) {
+      if (format === "dateRelative" && value instanceof Date) {
         if (Math.abs(Date.now() - value.getTime()) < 60_000) {
-          return i18n.t('Just now', { lng })
+          return i18n.t("Just now", { lng });
         }
 
-        const { [lng ?? englishUS]: locale } = dateLocales
-        return formatDistanceToNow(value, { addSuffix: true, locale })
+        const { [lng ?? englishUS]: locale } = dateLocales;
+        return formatDistanceToNow(value, { addSuffix: true, locale });
       }
 
-      return String(value)
-    }
+      return String(value);
+    },
   },
   detection: {
     caches: [],
-    order: []
+    order: [],
   },
   resources: {
     [englishUS]: {
-      translation: localeEnUS
+      translation: localeEnUS,
     },
     ar: {
-      translation: localeAr
+      translation: localeAr,
     },
     cs: {
-      translation: localeCs
+      translation: localeCs,
     },
     da: {
-      translation: localeDa
+      translation: localeDa,
     },
     de: {
-      translation: localeDe
+      translation: localeDe,
     },
     es: {
-      translation: localeEs
+      translation: localeEs,
     },
     et: {
-      translation: localeEt
+      translation: localeEt,
     },
     fi: {
-      translation: localeFi
+      translation: localeFi,
     },
     fr: {
-      translation: localeFr
+      translation: localeFr,
     },
     hi: {
-      translation: localeHi
+      translation: localeHi,
     },
     it: {
-      translation: localeIt
+      translation: localeIt,
     },
     ja: {
-      translation: localeJa
+      translation: localeJa,
     },
     kk: {
-      translation: localeKk
+      translation: localeKk,
     },
     ko: {
-      translation: localeKo
+      translation: localeKo,
     },
     lt: {
-      translation: localeLt
+      translation: localeLt,
     },
     mr: {
-      translation: localeMr
+      translation: localeMr,
     },
     ms: {
-      translation: localeMs
+      translation: localeMs,
     },
     nl: {
-      translation: localeNl
+      translation: localeNl,
     },
     pl: {
-      translation: localePl
+      translation: localePl,
     },
     pt: {
-      translation: localePt
+      translation: localePt,
     },
     ro: {
-      translation: localeRo
+      translation: localeRo,
     },
     ru: {
-      translation: localeRu
+      translation: localeRu,
     },
     sk: {
-      translation: localeSk
+      translation: localeSk,
     },
     sl: {
-      translation: localeSl
+      translation: localeSl,
     },
     sv: {
-      translation: localeSv
+      translation: localeSv,
     },
     th: {
-      translation: localeTh
+      translation: localeTh,
     },
     uk: {
-      translation: localeUk
+      translation: localeUk,
     },
     vi: {
-      translation: localeVi
+      translation: localeVi,
     },
     zh: {
-      translation: localeZh
-    }
-  }
-})
+      translation: localeZh,
+    },
+  },
+});
 
-void i18n
-  .use(initReactI18next)
-  .init()
+void i18n.use(initReactI18next).init();
 
-export default i18n
+export default i18n;

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   CodeEntry,
   ConnectDevice,
@@ -20,348 +20,375 @@ import {
   type TableSortButtonState,
   UserIcon,
   useRemoteContext,
-  i18n
-} from '../lib/main'
-import { Tabs } from '../lib/integrations'
-import type { ReactNode } from 'react'
-import type CobrowseAPI from 'cobrowse-agent-sdk'
-import type { DeviceInfo } from 'cobrowse-agent-sdk'
+  i18n,
+} from "../lib/main";
+import { Tabs } from "../lib/integrations";
+import type { ReactNode } from "react";
+import type CobrowseAPI from "cobrowse-agent-sdk";
+import type { DeviceInfo } from "cobrowse-agent-sdk";
 
 interface SampleDeviceInfo {
-  platform: DeviceInfo['platform'],
-  device: string
+  platform: DeviceInfo["platform"];
+  device: string;
 }
 interface SampleDevice {
-  id: string
-  name: string
-  location: string
-  online: boolean
-  connectable: boolean
-  last_active: number
-  device: SampleDeviceInfo
+  id: string;
+  name: string;
+  location: string;
+  online: boolean;
+  connectable: boolean;
+  last_active: number;
+  device: SampleDeviceInfo;
 }
 interface SampleSession {
-  id: string
-  state: SessionData['state']
-  recorded: boolean
-  activated: number
-  ended?: number
-  device: SampleDeviceInfo
+  id: string;
+  state: SessionData["state"];
+  recorded: boolean;
+  activated: number;
+  ended?: number;
+  device: SampleDeviceInfo;
 }
 
 const deviceSamples: SampleDevice[] = [
   {
-    id: 'ios-1',
-    name: 'Avery’s iPad Pro',
-    location: 'San Francisco • Retail Floor',
+    id: "ios-1",
+    name: "Avery’s iPad Pro",
+    location: "San Francisco • Retail Floor",
     online: true,
     connectable: true,
     last_active: Date.now() - 2 * 60 * 1000,
     device: {
-      platform: 'ios',
+      platform: "ios",
       device:
-        'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
-    }
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    },
   },
   {
-    id: 'android-1',
-    name: 'Pixel 8 Field Tablet',
-    location: 'Berlin • Field Ops',
+    id: "android-1",
+    name: "Pixel 8 Field Tablet",
+    location: "Berlin • Field Ops",
     online: false,
     connectable: false,
     last_active: Date.now() - 6 * 60 * 60 * 1000,
     device: {
-      platform: 'android',
+      platform: "android",
       device:
-        'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0 Mobile Safari/537.36'
-    }
+        "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0 Mobile Safari/537.36",
+    },
   },
   {
-    id: 'web-1',
-    name: 'Desk PC - Support',
-    location: 'Remote • Browser session',
+    id: "web-1",
+    name: "Desk PC - Support",
+    location: "Remote • Browser session",
     online: true,
     connectable: false,
     last_active: Date.now() - 5 * 60 * 1000,
     device: {
-      platform: 'web',
+      platform: "web",
       device:
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15'
-    }
-  }
-]
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15",
+    },
+  },
+];
 
 const sessionSamples: SampleSession[] = [
   {
-    id: 'session-1',
-    state: 'active',
+    id: "session-1",
+    state: "active",
     recorded: false,
     activated: Date.now() - 8 * 60 * 1000,
     device: {
-      platform: 'ios',
-      device: deviceSamples[0].device.device
-    }
+      platform: "ios",
+      device: deviceSamples[0].device.device,
+    },
   },
   {
-    id: 'session-2',
-    state: 'ended',
+    id: "session-2",
+    state: "ended",
     recorded: true,
     activated: Date.now() - 45 * 60 * 1000,
     ended: Date.now() - 5 * 60 * 1000,
     device: {
-      platform: 'android',
-      device: deviceSamples[1].device.device
-    }
-  }
-]
+      platform: "android",
+      device: deviceSamples[1].device.device,
+    },
+  },
+];
 
-const platformSamples: Array<{ label: string, device: SampleDeviceInfo }> = [
+const platformSamples: Array<{ label: string; device: SampleDeviceInfo }> = [
   {
-    label: 'Safari',
-    device: deviceSamples[2].device
+    label: "Safari",
+    device: deviceSamples[2].device,
   },
   {
-    label: 'Chrome',
+    label: "Chrome",
     device: {
-      platform: 'web',
+      platform: "web",
       device:
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36'
-    }
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
+    },
   },
   {
-    label: 'Edge',
+    label: "Edge",
     device: {
-      platform: 'web',
+      platform: "web",
       device:
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0'
-    }
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+    },
   },
   {
-    label: 'Firefox',
+    label: "Firefox",
     device: {
-      platform: 'web',
+      platform: "web",
+      device: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0",
+    },
+  },
+  {
+    label: "Opera",
+    device: {
+      platform: "web",
       device:
-        'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0'
-    }
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/116.0.0.0",
+    },
   },
   {
-    label: 'Opera',
+    label: "Samsung Internet",
     device: {
-      platform: 'web',
+      platform: "web",
       device:
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/116.0.0.0'
-    }
+        "Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/25.0 Chrome/121.0.0.0 Mobile Safari/537.36",
+    },
   },
   {
-    label: 'Samsung Internet',
+    label: "iOS",
+    device: deviceSamples[0].device,
+  },
+  {
+    label: "Android",
+    device: deviceSamples[1].device,
+  },
+  {
+    label: "Windows",
     device: {
-      platform: 'web',
-      device:
-        'Mozilla/5.0 (Linux; Android 14; SAMSUNG SM-S928B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/25.0 Chrome/121.0.0.0 Mobile Safari/537.36'
-    }
+      platform: "windows",
+      device: "Windows desktop",
+    },
   },
-  {
-    label: 'iOS',
-    device: deviceSamples[0].device
-  },
-  {
-    label: 'Android',
-    device: deviceSamples[1].device
-  },
-  {
-    label: 'Windows',
-    device: {
-      platform: 'windows',
-      device: 'Windows desktop'
-    }
-  }
-]
+];
 const users = [
-  { id: 'u1', name: 'Alex Johnson', colour: '#d3e4ff' },
-  { id: 'u2', name: 'Priya Patel', colour: '#ffe5b4' },
-  { id: 'u3', name: '李秀英', colour: '#f0d9ff' },
-  { id: 'u4', name: 'Chris', picture: 'https://avatars.githubusercontent.com/u/1?v=4' },
-  { id: 'u5', name: 'A B C D', colour: '#e0f7e9' }
-]
+  { id: "u1", name: "Alex Johnson", colour: "#d3e4ff" },
+  { id: "u2", name: "Priya Patel", colour: "#ffe5b4" },
+  { id: "u3", name: "李秀英", colour: "#f0d9ff" },
+  { id: "u4", name: "Chris", picture: "https://avatars.githubusercontent.com/u/1?v=4" },
+  { id: "u5", name: "A B C D", colour: "#e0f7e9" },
+];
 
-type MockEventHandler = (...args: unknown[]) => void
+type MockEventHandler = (...args: unknown[]) => void;
 
 const createMockRemoteContext = () => {
-  const handlers = new Map<string, Set<MockEventHandler>>()
-  let timers: ReturnType<typeof setTimeout>[] = []
+  const handlers = new Map<string, Set<MockEventHandler>>();
+  let timers: ReturnType<typeof setTimeout>[] = [];
 
   const mockSession = {
-    id: 'demo-session',
-    state: 'pending' as string,
-    isActive () { return this.state === 'active' },
-    isEnded () { return this.state === 'ended' },
-    on () { return mockSession },
-    off () { return mockSession }
-  }
+    id: "demo-session",
+    state: "pending" as string,
+    isActive() {
+      return this.state === "active";
+    },
+    isEnded() {
+      return this.state === "ended";
+    },
+    on() {
+      return mockSession;
+    },
+    off() {
+      return mockSession;
+    },
+  };
 
   const emit = (event: string, ...args: unknown[]) => {
-    handlers.get(event)?.forEach(fn => fn(...args))
-  }
+    handlers.get(event)?.forEach((fn) => fn(...args));
+  };
 
   const ctx = {
-    get state () { return mockSession.state === 'pending' ? undefined : mockSession.state },
-    on (event: string, handler: MockEventHandler) {
-      const set = handlers.get(event) ?? new Set()
-      set.add(handler)
-      handlers.set(event, set)
-      return ctx
+    get state() {
+      return mockSession.state === "pending" ? undefined : mockSession.state;
     },
-    off (event: string, handler: MockEventHandler) {
-      handlers.get(event)?.delete(handler)
-      return ctx
+    on(event: string, handler: MockEventHandler) {
+      const set = handlers.get(event) ?? new Set();
+      set.add(handler);
+      handlers.set(event, set);
+      return ctx;
     },
-    endSession () {
-      timers.forEach(clearTimeout)
-      timers = []
-      mockSession.state = 'ended'
-      emit('session.updated', mockSession)
-      emit('updated', ctx)
-      emit('ended', ctx)
-      return Promise.resolve(true)
+    off(event: string, handler: MockEventHandler) {
+      handlers.get(event)?.delete(handler);
+      return ctx;
     },
-    destroy () {
-      timers.forEach(clearTimeout)
-      timers = []
-      handlers.clear()
-    }
-  }
+    endSession() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      mockSession.state = "ended";
+      emit("session.updated", mockSession);
+      emit("updated", ctx);
+      emit("ended", ctx);
+      return Promise.resolve(true);
+    },
+    destroy() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      handlers.clear();
+    },
+  };
 
-  timers.push(setTimeout(() => {
-    mockSession.state = 'active'
-    emit('session.loaded', mockSession)
-    emit('session.updated', mockSession)
-    emit('updated', ctx)
-  }, 2000))
+  timers.push(
+    setTimeout(() => {
+      mockSession.state = "active";
+      emit("session.loaded", mockSession);
+      emit("session.updated", mockSession);
+      emit("updated", ctx);
+    }, 2000),
+  );
 
-  return ctx
-}
+  return ctx;
+};
 
-const createSessionEmbedMock = () => ({
-  api: '',
-  attachContext: () => Promise.resolve(createMockRemoteContext()),
-  regions: { closest: () => Promise.resolve({ id: 'mock-region' }) },
-  devices: { get: () => Promise.resolve({ custom_data: {}, notify: () => Promise.resolve() }) },
-  sessions: { create: () => Promise.resolve({}) }
-} as unknown as CobrowseAPI)
+const createSessionEmbedMock = () =>
+  ({
+    api: "",
+    attachContext: () => Promise.resolve(createMockRemoteContext()),
+    regions: { closest: () => Promise.resolve({ id: "mock-region" }) },
+    devices: { get: () => Promise.resolve({ custom_data: {}, notify: () => Promise.resolve() }) },
+    sessions: { create: () => Promise.resolve({}) },
+  }) as unknown as CobrowseAPI;
 
-const createMockCobrowse = (scenario: 'success' | 'timeout') => {
+const createMockCobrowse = (scenario: "success" | "timeout") => {
   const createMockSession = () => {
-    const handlers = new Map<string, Array<(mock: unknown) => void>>()
-    let state = 'pending'
-    let subscribeTimer: ReturnType<typeof setTimeout> | undefined
+    const handlers = new Map<string, Array<(mock: unknown) => void>>();
+    let state = "pending";
+    let subscribeTimer: ReturnType<typeof setTimeout> | undefined;
 
     const session = {
-      get state () { return state },
-      on (event: string, handler: (mock: unknown) => void) {
-        const list = handlers.get(event) ?? []
-        list.push(handler)
-        handlers.set(event, list)
-        return session
+      get state() {
+        return state;
       },
-      subscribe () {
-        if (scenario === 'success') {
+      on(event: string, handler: (mock: unknown) => void) {
+        const list = handlers.get(event) ?? [];
+        list.push(handler);
+        handlers.set(event, list);
+        return session;
+      },
+      subscribe() {
+        if (scenario === "success") {
           subscribeTimer = setTimeout(() => {
-            state = 'active'
-            handlers.get('updated')?.forEach(fn => fn(session))
-          }, 11000)
+            state = "active";
+            handlers.get("updated")?.forEach((fn) => fn(session));
+          }, 11000);
         }
-        return Promise.resolve()
+        return Promise.resolve();
       },
-      end () {
-        clearTimeout(subscribeTimer)
-        state = 'ended'
-        handlers.get('ended')?.forEach(fn => fn(session))
-        return Promise.resolve()
-      }
-    }
+      end() {
+        clearTimeout(subscribeTimer);
+        state = "ended";
+        handlers.get("ended")?.forEach((fn) => fn(session));
+        return Promise.resolve();
+      },
+    };
 
-    return session
-  }
+    return session;
+  };
 
   return {
-    regions: { closest: () => Promise.resolve({ id: 'mock-region' }) },
+    regions: { closest: () => Promise.resolve({ id: "mock-region" }) },
     devices: { get: () => Promise.resolve({ custom_data: {}, notify: () => Promise.resolve() }) },
-    sessions: { create: () => Promise.resolve(createMockSession()) }
-  } as unknown as CobrowseAPI
-}
+    sessions: { create: () => Promise.resolve(createMockSession()) },
+  } as unknown as CobrowseAPI;
+};
 
-const MOCK_COBROWSE_SUCCESS = createMockCobrowse('success')
-const MOCK_COBROWSE_TIMEOUT = createMockCobrowse('timeout')
+const MOCK_COBROWSE_SUCCESS = createMockCobrowse("success");
+const MOCK_COBROWSE_TIMEOUT = createMockCobrowse("timeout");
 
-const Section = ({ title, subtitle, children }: { title: string, subtitle?: string, children: ReactNode }) => (
-  <section className='demo-section'>
+const Section = ({
+  title,
+  subtitle,
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+}) => (
+  <section className="demo-section">
     <h2>{title}</h2>
     {subtitle ? <p>{subtitle}</p> : null}
-    <div className='demo-grid'>{children}</div>
+    <div className="demo-grid">{children}</div>
   </section>
-)
+);
 
-const asDevice = (sample: typeof deviceSamples[number]): DeviceData => ({
+const asDevice = (sample: (typeof deviceSamples)[number]): DeviceData => ({
   id: sample.id,
   online: sample.online,
   connectable: sample.connectable,
   last_active: new Date(sample.last_active),
   device: {
     platform: sample.device.platform,
-    device: sample.device.device
-  }
-})
+    device: sample.device.device,
+  },
+});
 
-const asSession = (sample: typeof sessionSamples[number]): SessionData => ({
+const asSession = (sample: (typeof sessionSamples)[number]): SessionData => ({
   id: sample.id,
-  state: sample.state as SessionData['state'],
+  state: sample.state as SessionData["state"],
   recorded: sample.recorded,
   activated: new Date(sample.activated),
   ended: sample.ended ? new Date(sample.ended) : null,
   recording: sample.recorded ? { expires: null, deleted: null } : null,
-  getRecording: () => Promise.reject(new Error('Recording playback is not available in the demo')),
+  getRecording: () => Promise.reject(new Error("Recording playback is not available in the demo")),
   device: {
     platform: sample.device.platform,
-    device: sample.device.device
-  }
-})
+    device: sample.device.device,
+  },
+});
 
 const EndSessionButton = () => {
-  const ctx = useRemoteContext()
+  const ctx = useRemoteContext();
   return (
-    <button type='button' className='end-session-button' onClick={() => ctx?.endSession()}>
+    <button type="button" className="end-session-button" onClick={() => ctx?.endSession()}>
       End session
     </button>
-  )
-}
+  );
+};
 
 const SortIndicator = ({ isSorted, direction }: TableSortButtonState) => {
-  if (!isSorted) return <span className='sort-indicator'>↕</span>
+  if (!isSorted) return <span className="sort-indicator">↕</span>;
 
-  return <span className='sort-indicator sort-indicator-active'>{direction === DESCENDING ? '↓' : '↑'}</span>
+  return (
+    <span className="sort-indicator sort-indicator-active">
+      {direction === DESCENDING ? "↓" : "↑"}
+    </span>
+  );
+};
+
+function text(value: unknown): string {
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "bigint" || typeof value === "boolean")
+    return value.toString();
+
+  return JSON.stringify(value);
 }
 
-function text (value: unknown): string {
-  if (typeof value === 'string') return value
-  if (typeof value === 'number' || typeof value === 'bigint' || typeof value === 'boolean') return value.toString()
+function compare(a: unknown, b: unknown): number {
+  if (a === b) return 0;
+  if (a === undefined || a === null) return -1;
+  if (b === undefined || b === null) return 1;
+  if (typeof a === "number" && typeof b === "number") return a - b;
+  if (a instanceof Date && b instanceof Date) return a.getTime() - b.getTime();
 
-  return JSON.stringify(value)
+  return text(a).localeCompare(text(b));
 }
 
-function compare (a: unknown, b: unknown): number {
-  if (a === b) return 0
-  if (a === undefined || a === null) return -1
-  if (b === undefined || b === null) return 1
-  if (typeof a === 'number' && typeof b === 'number') return a - b
-  if (a instanceof Date && b instanceof Date) return a.getTime() - b.getTime()
-
-  return text(a).localeCompare(text(b))
-}
-
-function readColumn (row: unknown, key: string): unknown {
+function readColumn(row: unknown, key: string): unknown {
   // rows are plain objects, and a column with no matching property sorts as undefined
   // oxlint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- an unconstrained TRow cannot be indexed by an arbitrary string
-  return (row as Record<string, unknown>)[key]
+  return (row as Record<string, unknown>)[key];
 }
 
 /**
@@ -384,266 +411,301 @@ function readColumn (row: unknown, key: string): unknown {
  * @param sort The column to order by, and which way. Rows are returned as they came when there is none.
  * @param sortValues For columns that don't sort by `row[key]`, e.g. one showing a relative time that should sort by its timestamp.
  */
-export function sortRows<TRow> (rows: TRow[], sort?: TableSort, sortValues?: TableSortValues<TRow>): TRow[] {
-  if (!sort) return rows
+export function sortRows<TRow>(
+  rows: TRow[],
+  sort?: TableSort,
+  sortValues?: TableSortValues<TRow>,
+): TRow[] {
+  if (!sort) return rows;
 
-  const { key } = sort
-  const sortValue = sortValues?.[key] ?? ((row: TRow) => readColumn(row, key))
-  const direction = sort.direction === DESCENDING ? -1 : 1
+  const { key } = sort;
+  const sortValue = sortValues?.[key] ?? ((row: TRow) => readColumn(row, key));
+  const direction = sort.direction === DESCENDING ? -1 : 1;
 
-  return [...rows].sort((a, b) => compare(sortValue(a), sortValue(b)) * direction)
+  return [...rows].sort((a, b) => compare(sortValue(a), sortValue(b)) * direction);
 }
 
 const TableSection = () => {
-  const [rows, setRows] = useState(deviceSamples)
-  const [sort, setSort] = useState<TableSort>({ key: 'name', direction: ASCENDING })
+  const [rows, setRows] = useState(deviceSamples);
+  const [sort, setSort] = useState<TableSort>({ key: "name", direction: ASCENDING });
 
   // last_active is a timestamp on the sample but is shown as a relative string,
   // so the column says what it sorts by rather than sorting the rendered text
-  const sortValues = useMemo(() => ({
-    status: (device: SampleDevice) => device.online,
-    last_active: (device: SampleDevice) => device.last_active
-  }), [])
+  const sortValues = useMemo(
+    () => ({
+      status: (device: SampleDevice) => device.online,
+      last_active: (device: SampleDevice) => device.last_active,
+    }),
+    [],
+  );
 
   // the table reports the sort, ordering the rows for it is this component's job
-  const sorted = useMemo(() => sortRows(rows, sort, sortValues), [rows, sort, sortValues])
+  const sorted = useMemo(() => sortRows(rows, sort, sortValues), [rows, sort, sortValues]);
 
   return (
     <Section
-      title='Table'
-      subtitle='Sortable table with no styling passed: the appearance comes from the component, and the caller holds the sort state, ordering the rows with sortRows.'
+      title="Table"
+      subtitle="Sortable table with no styling passed: the appearance comes from the component, and the caller holds the sort state, ordering the rows with sortRows."
     >
-      <div className='panel'>
+      <div className="panel">
         <Table sort={sort} onSortChange={setSort}>
           <Table.Head>
             <Table.Row>
-              <Table.HeadCell column='name'>
+              <Table.HeadCell column="name">
                 <Table.SortButton>
-                  {(state) => <>Device<SortIndicator {...state} /></>}
+                  {(state) => (
+                    <>
+                      Device
+                      <SortIndicator {...state} />
+                    </>
+                  )}
                 </Table.SortButton>
               </Table.HeadCell>
-              <Table.HeadCell column='location'>
+              <Table.HeadCell column="location">
                 <Table.SortButton>
-                  {(state) => <>Location<SortIndicator {...state} /></>}
+                  {(state) => (
+                    <>
+                      Location
+                      <SortIndicator {...state} />
+                    </>
+                  )}
                 </Table.SortButton>
               </Table.HeadCell>
-              <Table.HeadCell column='status'>
+              <Table.HeadCell column="status">
                 <Table.SortButton firstDirection={DESCENDING}>
-                  {(state) => <>Status<SortIndicator {...state} /></>}
+                  {(state) => (
+                    <>
+                      Status
+                      <SortIndicator {...state} />
+                    </>
+                  )}
                 </Table.SortButton>
               </Table.HeadCell>
               {/* a column with no sort button, and so no `column` to name */}
               <Table.HeadCell>Platform</Table.HeadCell>
-              <Table.HeadCell column='last_active' className='numeric-column'>
-                <Table.SortButton firstDirection={DESCENDING} className='numeric-sort-button'>
-                  {(state) => <>Last active<SortIndicator {...state} /></>}
+              <Table.HeadCell column="last_active" className="numeric-column">
+                <Table.SortButton firstDirection={DESCENDING} className="numeric-sort-button">
+                  {(state) => (
+                    <>
+                      Last active
+                      <SortIndicator {...state} />
+                    </>
+                  )}
                 </Table.SortButton>
               </Table.HeadCell>
             </Table.Row>
           </Table.Head>
 
           <Table.Body>
-            {sorted.length === 0
-              ? <Table.Empty colSpan={5}>No devices to show</Table.Empty>
-              : sorted.map((device) => (
+            {sorted.length === 0 ? (
+              <Table.Empty colSpan={5}>No devices to show</Table.Empty>
+            ) : (
+              sorted.map((device) => (
                 <Table.Row key={device.id}>
-                  <Table.Cell column='name'>{device.name}</Table.Cell>
-                  <Table.Cell column='location'>{device.location}</Table.Cell>
-                  <Table.Cell column='status'>
-                    {device.online ? 'Online' : 'Offline'}
-                  </Table.Cell>
+                  <Table.Cell column="name">{device.name}</Table.Cell>
+                  <Table.Cell column="location">{device.location}</Table.Cell>
+                  <Table.Cell column="status">{device.online ? "Online" : "Offline"}</Table.Cell>
                   <Table.Cell>
                     <PlatformIcon device={device.device} />
                   </Table.Cell>
-                  <Table.Cell column='last_active' className='numeric-column'>
+                  <Table.Cell column="last_active" className="numeric-column">
                     {new Date(device.last_active).toLocaleTimeString()}
                   </Table.Cell>
                 </Table.Row>
-              ))}
+              ))
+            )}
           </Table.Body>
         </Table>
       </div>
-      <div className='button-row'>
-        <button type='button' onClick={() => setRows(rows.length > 0 ? [] : deviceSamples)}>
-          {rows.length > 0 ? 'Show empty state' : 'Restore rows'}
+      <div className="button-row">
+        <button type="button" onClick={() => setRows(rows.length > 0 ? [] : deviceSamples)}>
+          {rows.length > 0 ? "Show empty state" : "Restore rows"}
         </button>
       </div>
     </Section>
-  )
-}
+  );
+};
 
 const SessionEmbedSection = () => {
-  const [overlaysKey, setOverlaysKey] = useState(0)
-  const overlaysMock = useMemo(() => createSessionEmbedMock(), [overlaysKey]) // oxlint-disable-line react-hooks/exhaustive-deps
+  const [overlaysKey, setOverlaysKey] = useState(0);
+  const overlaysMock = useMemo(() => createSessionEmbedMock(), [overlaysKey]); // oxlint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Section
-      title='SessionEmbed'
-      subtitle='Embeds a session iframe with overlay states. The demo auto-transitions: loading → active, then use the button to end.'
+      title="SessionEmbed"
+      subtitle="Embeds a session iframe with overlay states. The demo auto-transitions: loading → active, then use the button to end."
     >
-      <div className='panel'>
+      <div className="panel">
         <h3>Overlays</h3>
-        <div className='session-embed-demo'>
+        <div className="session-embed-demo">
           <CobrowseProvider cobrowse={overlaysMock}>
-            <SessionEmbed id='demo-session.html'>
-              <SessionEmbed.Overlay state='loading'>
-                <div className='session-embed-overlay'>
-                  <span className='overlay-icon'>&#9203;</span>
-                  <span className='overlay-label'>Connecting to session&hellip;</span>
+            <SessionEmbed id="demo-session.html">
+              <SessionEmbed.Overlay state="loading">
+                <div className="session-embed-overlay">
+                  <span className="overlay-icon">&#9203;</span>
+                  <span className="overlay-label">Connecting to session&hellip;</span>
                 </div>
               </SessionEmbed.Overlay>
-              <SessionEmbed.Overlay state='active'>
-                <div className='session-embed-overlay session-embed-overlay-active'>
-                  <span className='overlay-badge'>&#9989; Session active</span>
+              <SessionEmbed.Overlay state="active">
+                <div className="session-embed-overlay session-embed-overlay-active">
+                  <span className="overlay-badge">&#9989; Session active</span>
                 </div>
               </SessionEmbed.Overlay>
-              <SessionEmbed.Overlay state='active'>
-                <div className='session-embed-overlay session-embed-overlay-toolbar'>
+              <SessionEmbed.Overlay state="active">
+                <div className="session-embed-overlay session-embed-overlay-toolbar">
                   <EndSessionButton />
                 </div>
               </SessionEmbed.Overlay>
-              <SessionEmbed.Overlay state='ended'>
-                <div className='session-embed-overlay'>
-                  <span className='overlay-icon'>&#9724;</span>
-                  <span className='overlay-label'>Session ended</span>
+              <SessionEmbed.Overlay state="ended">
+                <div className="session-embed-overlay">
+                  <span className="overlay-icon">&#9724;</span>
+                  <span className="overlay-label">Session ended</span>
                 </div>
               </SessionEmbed.Overlay>
             </SessionEmbed>
           </CobrowseProvider>
         </div>
-        <div className='button-row'>
-          <button type='button' onClick={() => setOverlaysKey(k => k + 1)}>Restart</button>
+        <div className="button-row">
+          <button type="button" onClick={() => setOverlaysKey((k) => k + 1)}>
+            Restart
+          </button>
         </div>
       </div>
     </Section>
-  )
-}
+  );
+};
 
-export default function KitchenSink () {
-  const [codeStatus, setCodeStatus] = useState('Enter 654321 to simulate a successful validation.')
-  const [lastConnection, setLastConnection] = useState('')
-  const [recordingInfo, setRecordingInfo] = useState('')
-  const [language, setLanguage] = useState(i18n.language || 'en-us')
-  const [direction, setDirection] = useState('ltr')
-  const [connectLog, setConnectLog] = useState<string[]>([])
-  const [connectSuccessKey, setConnectSuccessKey] = useState(0)
-  const [connectSuccessConnected, setConnectSuccessConnected] = useState(false)
-  const [connectTimeoutKey, setConnectTimeoutKey] = useState(0)
-  const [tabsDevices, setTabsDevices] = useState<DeviceData[] | null>(deviceSamples.map(asDevice))
-  const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(sessionSamples.map(asSession))
-  const [ratingLog, setRatingLog] = useState('')
-  const [ratingKey, setRatingKey] = useState(0)
-  const [composedRatingLog, setComposedRatingLog] = useState('')
-  const [composedRatingKey, setComposedRatingKey] = useState(0)
+export default function KitchenSink() {
+  const [codeStatus, setCodeStatus] = useState("Enter 654321 to simulate a successful validation.");
+  const [lastConnection, setLastConnection] = useState("");
+  const [recordingInfo, setRecordingInfo] = useState("");
+  const [language, setLanguage] = useState(i18n.language || "en-us");
+  const [direction, setDirection] = useState("ltr");
+  const [connectLog, setConnectLog] = useState<string[]>([]);
+  const [connectSuccessKey, setConnectSuccessKey] = useState(0);
+  const [connectSuccessConnected, setConnectSuccessConnected] = useState(false);
+  const [connectTimeoutKey, setConnectTimeoutKey] = useState(0);
+  const [tabsDevices, setTabsDevices] = useState<DeviceData[] | null>(deviceSamples.map(asDevice));
+  const [tabsSessions, setTabsSessions] = useState<SessionData[] | null>(
+    sessionSamples.map(asSession),
+  );
+  const [ratingLog, setRatingLog] = useState("");
+  const [ratingKey, setRatingKey] = useState(0);
+  const [composedRatingLog, setComposedRatingLog] = useState("");
+  const [composedRatingKey, setComposedRatingKey] = useState(0);
 
   const languages = useMemo(() => {
-    const resources = i18n.options?.resources ?? {}
-    return Object.keys(resources)
-  }, [])
+    const resources = i18n.options?.resources ?? {};
+    return Object.keys(resources);
+  }, []);
 
   useEffect(() => {
-    const handleLanguageChanged = (lng: string) => setLanguage(lng)
-    i18n.on('languageChanged', handleLanguageChanged)
-    return () => i18n.off('languageChanged', handleLanguageChanged)
-  }, [])
+    const handleLanguageChanged = (lng: string) => setLanguage(lng);
+    i18n.on("languageChanged", handleLanguageChanged);
+    return () => i18n.off("languageChanged", handleLanguageChanged);
+  }, []);
 
   useEffect(() => {
-    const previousDir = document.documentElement.getAttribute('dir') ?? 'ltr'
-    document.documentElement.setAttribute('dir', direction)
-    return () => document.documentElement.setAttribute('dir', previousDir)
-  }, [direction])
+    const previousDir = document.documentElement.getAttribute("dir") ?? "ltr";
+    document.documentElement.setAttribute("dir", direction);
+    return () => document.documentElement.setAttribute("dir", previousDir);
+  }, [direction]);
 
   const handleCode = useCallback(async (code: string) => {
-    setCodeStatus(`Checking ${code}...`)
-    await new Promise((resolve) => setTimeout(resolve, 700))
-    const success = code === '654321'
-    setCodeStatus(success ? 'Code accepted ✔︎' : 'Code rejected — try 654321 to see the success path.')
-    return success
-  }, [])
+    setCodeStatus(`Checking ${code}...`);
+    await new Promise((resolve) => setTimeout(resolve, 700));
+    const success = code === "654321";
+    setCodeStatus(
+      success ? "Code accepted ✔︎" : "Code rejected — try 654321 to see the success path.",
+    );
+    return success;
+  }, []);
 
   const handleConnect = useCallback((device: DeviceData) => {
-    const timestamp = new Date().toLocaleTimeString()
-    setLastConnection(`${timestamp} • Triggered connect(${device.device.platform})`)
-  }, [])
+    const timestamp = new Date().toLocaleTimeString();
+    setLastConnection(`${timestamp} • Triggered connect(${device.device.platform})`);
+  }, []);
 
   const handleRecording = useCallback((session: SessionData) => {
-    const timestamp = new Date().toLocaleTimeString()
-    setRecordingInfo(`${timestamp} • Open recording for session ${session.id}`)
-  }, [])
+    const timestamp = new Date().toLocaleTimeString();
+    setRecordingInfo(`${timestamp} • Open recording for session ${session.id}`);
+  }, []);
 
   const handleLanguageChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-    const next = event.target.value
-    void i18n.changeLanguage(next)
-    setLanguage(next)
-  }, [])
+    const next = event.target.value;
+    void i18n.changeLanguage(next);
+    setLanguage(next);
+  }, []);
 
   const toggleDirection = useCallback(() => {
-    setDirection((prev) => (prev === 'ltr' ? 'rtl' : 'ltr'))
-  }, [])
+    setDirection((prev) => (prev === "ltr" ? "rtl" : "ltr"));
+  }, []);
 
   const handleConnectEvent = useCallback((label: string) => {
-    const timestamp = new Date().toLocaleTimeString()
-    setConnectLog(prev => [...prev, `${timestamp} • ${label}`])
-  }, [])
+    const timestamp = new Date().toLocaleTimeString();
+    setConnectLog((prev) => [...prev, `${timestamp} • ${label}`]);
+  }, []);
 
   const handleTabsRefresh = useCallback(() => {
-    setTabsDevices(null)
-    setTabsSessions(null)
+    setTabsDevices(null);
+    setTabsSessions(null);
     setTimeout(() => {
-      setTabsDevices(deviceSamples.map(asDevice))
-      setTabsSessions(sessionSamples.map(asSession))
-    }, 1000)
-  }, [])
+      setTabsDevices(deviceSamples.map(asDevice));
+      setTabsSessions(sessionSamples.map(asSession));
+    }, 1000);
+  }, []);
 
   return (
     <>
-      <header className='page-header'>
+      <header className="page-header">
         <h1>Cobrowse Agent UI components</h1>
       </header>
 
-      <section className='demo-section'>
-        <div className='control-row'>
-          <div className='language-picker'>
+      <section className="demo-section">
+        <div className="control-row">
+          <div className="language-picker">
             <strong>Active language</strong>
             <select value={language} onChange={handleLanguageChange}>
               {languages.map((lng) => (
-                <option key={lng} value={lng}>{lng}</option>
+                <option key={lng} value={lng}>
+                  {lng}
+                </option>
               ))}
             </select>
           </div>
 
           <button
-            type='button'
-            className='rtl-toggle'
+            type="button"
+            className="rtl-toggle"
             onClick={toggleDirection}
-            aria-pressed={direction === 'rtl'}
+            aria-pressed={direction === "rtl"}
           >
-            <span className='rtl-toggle-dot' aria-hidden='true' />
-            {direction === 'rtl' ? 'RTL layout on' : 'RTL layout off'}
+            <span className="rtl-toggle-dot" aria-hidden="true" />
+            {direction === "rtl" ? "RTL layout on" : "RTL layout off"}
           </button>
         </div>
-        <p style={{ marginTop: '12px', color: '#616b83' }}>
+        <p style={{ marginTop: "12px", color: "#616b83" }}>
           Relative timestamps inside the components update to match the selected locale.
         </p>
       </section>
 
       <Section
-        title='CodeEntry'
-        subtitle='Validates 6‑digit inputs, handles paste, and shows the validation animation.'
+        title="CodeEntry"
+        subtitle="Validates 6‑digit inputs, handles paste, and shows the validation animation."
       >
-        <div className='panel code-entry-area'>
+        <div className="panel code-entry-area">
           <CodeEntry onCode={handleCode} />
-          <div className='code-hint'>{codeStatus}</div>
+          <div className="code-hint">{codeStatus}</div>
         </div>
       </Section>
 
       <Section
-        title='PlatformIcon'
-        subtitle='Icons adjust automatically based on the shared device info object.'
+        title="PlatformIcon"
+        subtitle="Icons adjust automatically based on the shared device info object."
       >
-        <div className='platform-grid'>
+        <div className="platform-grid">
           {platformSamples.map(({ label, device }) => (
-            <div key={label} className='platform-card'>
+            <div key={label} className="platform-card">
               <span>{label}</span>
               <PlatformIcon device={device} />
             </div>
@@ -652,90 +714,82 @@ export default function KitchenSink () {
       </Section>
 
       <Section
-        title='Device + SmartConnectButton'
-        subtitle='Devices highlight their online status and accept arbitrary children, such as SmartConnectButton.'
+        title="Device + SmartConnectButton"
+        subtitle="Devices highlight their online status and accept arbitrary children, such as SmartConnectButton."
       >
-        <div className='device-list'>
+        <div className="device-list">
           {deviceSamples.map((sample) => {
-            const device = asDevice(sample)
+            const device = asDevice(sample);
             return (
-              <div key={sample.id} className='device-card'>
+              <div key={sample.id} className="device-card">
                 <header>
                   <div>
-                    <h3 className='device-name'>{sample.name}</h3>
-                    <div className='device-location'>{sample.location}</div>
+                    <h3 className="device-name">{sample.name}</h3>
+                    <div className="device-location">{sample.location}</div>
                   </div>
-                  <span className='status-pill'>{sample.online ? 'Online' : 'Offline'}</span>
+                  <span className="status-pill">{sample.online ? "Online" : "Offline"}</span>
                 </header>
                 <Device device={device}>
-                  <SmartConnectButton
-                    device={device}
-                    onClick={handleConnect}
-                  >
-                    {device.connectable ? 'Connect' : 'Unavailable'}
+                  <SmartConnectButton device={device} onClick={handleConnect}>
+                    {device.connectable ? "Connect" : "Unavailable"}
                   </SmartConnectButton>
                 </Device>
               </div>
-            )
+            );
           })}
         </div>
-        {lastConnection ? <div className='log'>{lastConnection}</div> : null}
+        {lastConnection ? <div className="log">{lastConnection}</div> : null}
       </Section>
 
       <Section
-        title='Standalone SmartConnectButton states'
-        subtitle='Demonstrates disabled vs. connectable styling outside of Device.'
+        title="Standalone SmartConnectButton states"
+        subtitle="Demonstrates disabled vs. connectable styling outside of Device."
       >
-        <div className='button-row'>
+        <div className="button-row">
           {deviceSamples.map((sample) => {
-            const device = asDevice(sample)
+            const device = asDevice(sample);
             return (
               <SmartConnectButton
                 key={`standalone-${sample.id}`}
                 device={device}
                 onClick={handleConnect}
               >
-                {device.connectable ? `Connect ${device.device.platform}` : 'Not connectable'}
+                {device.connectable ? `Connect ${device.device.platform}` : "Not connectable"}
               </SmartConnectButton>
-            )
+            );
           })}
         </div>
       </Section>
 
       <Section
-        title='Session'
-        subtitle='Shows active vs. recorded/ended sessions with Stopwatch durations.'
+        title="Session"
+        subtitle="Shows active vs. recorded/ended sessions with Stopwatch durations."
       >
-        <div className='sessions'>
+        <div className="sessions">
           {sessionSamples.map((sample) => {
-            const session = asSession(sample)
+            const session = asSession(sample);
             return (
               <Session
                 key={sample.id}
-                as={sample.recorded ? 'button' : 'div'}
+                as={sample.recorded ? "button" : "div"}
                 session={session}
-                className='panel'
+                className="panel"
                 onClick={sample.recorded ? () => handleRecording(session) : undefined}
               />
-            )
+            );
           })}
         </div>
-        {recordingInfo ? <div className='log'>{recordingInfo}</div> : null}
+        {recordingInfo ? <div className="log">{recordingInfo}</div> : null}
       </Section>
 
-      <Section
-        title='UserIcon'
-        subtitle='Initials fallback, custom colours, and pictures.'
-      >
-        <div className='user-grid'>
+      <Section title="UserIcon" subtitle="Initials fallback, custom colours, and pictures.">
+        <div className="user-grid">
           {users.map((user) => (
-            <div key={user.id} className='user-card'>
+            <div key={user.id} className="user-card">
               <UserIcon user={user} />
-              <div className='user-label'>
-                <div className='user-name'>{user.name || 'Unnamed'}</div>
-                <div className='user-meta'>
-                  {user.picture ? 'Picture' : 'Initials'}
-                </div>
+              <div className="user-label">
+                <div className="user-name">{user.name || "Unnamed"}</div>
+                <div className="user-meta">{user.picture ? "Picture" : "Initials"}</div>
               </div>
             </div>
           ))}
@@ -743,126 +797,148 @@ export default function KitchenSink () {
       </Section>
 
       <Section
-        title='ConnectDevice'
-        subtitle='Composable connection flow with status messages, loader, and cancel button.'
+        title="ConnectDevice"
+        subtitle="Composable connection flow with status messages, loader, and cancel button."
       >
-        <div className='panel'>
+        <div className="panel">
           <h3>Success flow</h3>
-          {connectSuccessConnected
-            ? <div className='code-hint'>Session connected successfully.</div>
-            : connectSuccessKey > 0
-              ? (
-                <CobrowseProvider cobrowse={MOCK_COBROWSE_SUCCESS}>
-                  <ConnectDevice
-                    key={connectSuccessKey}
-                    className='connect-device-demo'
-                    deviceId='demo-1'
-                    maxPushAttempts={5}
-                    pushRetryMs={3000}
-                    onConnectAttempt={(attempt) => handleConnectEvent(`[success] Attempt ${attempt}`)}
-                    onConnected={() => {
-                      handleConnectEvent('[success] Connected')
-                      setConnectSuccessConnected(true)
-                    }}
-                    onCancelled={() => {
-                      handleConnectEvent('[success] Cancelled')
-                      setConnectSuccessKey(0)
-                    }}
-                    onEnded={() => handleConnectEvent('[success] Ended')}
-                    onError={(err) => handleConnectEvent(`[success] Error: ${JSON.stringify(err)}`)}
-                  >
-                    {(attempt, cancel) => (
-                      <>
-                        <ConnectDevice.Loader attempt={attempt} maxPushAttempts={5} />
-                        <ConnectDevice.StatusMessage attempt={attempt} maxPushAttempts={5} />
-                        <ConnectDevice.CancelButton onClick={cancel} />
-                      </>
-                    )}
-                  </ConnectDevice>
-                </CobrowseProvider>
-              )
-              : <button type='button' onClick={() => setConnectSuccessKey(k => k + 1)}>Start</button>}
+          {connectSuccessConnected ? (
+            <div className="code-hint">Session connected successfully.</div>
+          ) : connectSuccessKey > 0 ? (
+            <CobrowseProvider cobrowse={MOCK_COBROWSE_SUCCESS}>
+              <ConnectDevice
+                key={connectSuccessKey}
+                className="connect-device-demo"
+                deviceId="demo-1"
+                maxPushAttempts={5}
+                pushRetryMs={3000}
+                onConnectAttempt={(attempt) => handleConnectEvent(`[success] Attempt ${attempt}`)}
+                onConnected={() => {
+                  handleConnectEvent("[success] Connected");
+                  setConnectSuccessConnected(true);
+                }}
+                onCancelled={() => {
+                  handleConnectEvent("[success] Cancelled");
+                  setConnectSuccessKey(0);
+                }}
+                onEnded={() => handleConnectEvent("[success] Ended")}
+                onError={(err) => handleConnectEvent(`[success] Error: ${JSON.stringify(err)}`)}
+              >
+                {(attempt, cancel) => (
+                  <>
+                    <ConnectDevice.Loader attempt={attempt} maxPushAttempts={5} />
+                    <ConnectDevice.StatusMessage attempt={attempt} maxPushAttempts={5} />
+                    <ConnectDevice.CancelButton onClick={cancel} />
+                  </>
+                )}
+              </ConnectDevice>
+            </CobrowseProvider>
+          ) : (
+            <button type="button" onClick={() => setConnectSuccessKey((k) => k + 1)}>
+              Start
+            </button>
+          )}
         </div>
-        <div className='panel'>
+        <div className="panel">
           <h3>Timeout flow</h3>
-          {connectTimeoutKey > 0
-            ? (
-              <CobrowseProvider cobrowse={MOCK_COBROWSE_TIMEOUT}>
-                <ConnectDevice
-                  key={connectTimeoutKey}
-                  className='connect-device-demo'
-                  deviceId='demo-2'
-                  maxPushAttempts={3}
-                  pushRetryMs={2000}
-                  onConnectAttempt={(attempt) => handleConnectEvent(`[timeout] Attempt ${attempt}`)}
-                  onConnected={() => handleConnectEvent('[timeout] Connected')}
-                  onCancelled={() => {
-                    handleConnectEvent('[timeout] Cancelled')
-                    setConnectTimeoutKey(0)
-                  }}
-                  onEnded={() => handleConnectEvent('[timeout] Ended')}
-                  onError={(err) => handleConnectEvent(`[timeout] Error: ${JSON.stringify(err)}`)}
-                >
-                  {(attempt, cancel) => (
-                    <>
-                      <ConnectDevice.Loader attempt={attempt} maxPushAttempts={3} />
-                      <ConnectDevice.StatusMessage attempt={attempt} maxPushAttempts={3} />
-                      <ConnectDevice.CancelButton onClick={cancel} />
-                    </>
-                  )}
-                </ConnectDevice>
-              </CobrowseProvider>
-            )
-            : <button type='button' onClick={() => setConnectTimeoutKey(k => k + 1)}>Start</button>}
+          {connectTimeoutKey > 0 ? (
+            <CobrowseProvider cobrowse={MOCK_COBROWSE_TIMEOUT}>
+              <ConnectDevice
+                key={connectTimeoutKey}
+                className="connect-device-demo"
+                deviceId="demo-2"
+                maxPushAttempts={3}
+                pushRetryMs={2000}
+                onConnectAttempt={(attempt) => handleConnectEvent(`[timeout] Attempt ${attempt}`)}
+                onConnected={() => handleConnectEvent("[timeout] Connected")}
+                onCancelled={() => {
+                  handleConnectEvent("[timeout] Cancelled");
+                  setConnectTimeoutKey(0);
+                }}
+                onEnded={() => handleConnectEvent("[timeout] Ended")}
+                onError={(err) => handleConnectEvent(`[timeout] Error: ${JSON.stringify(err)}`)}
+              >
+                {(attempt, cancel) => (
+                  <>
+                    <ConnectDevice.Loader attempt={attempt} maxPushAttempts={3} />
+                    <ConnectDevice.StatusMessage attempt={attempt} maxPushAttempts={3} />
+                    <ConnectDevice.CancelButton onClick={cancel} />
+                  </>
+                )}
+              </ConnectDevice>
+            </CobrowseProvider>
+          ) : (
+            <button type="button" onClick={() => setConnectTimeoutKey((k) => k + 1)}>
+              Start
+            </button>
+          )}
         </div>
         {connectLog.length > 0 && (
-          <div className='log'>
-            {connectLog.slice(-8).map((entry, i) => <div key={i}>{entry}</div>)}
+          <div className="log">
+            {connectLog.slice(-8).map((entry, i) => (
+              <div key={i}>{entry}</div>
+            ))}
           </div>
         )}
       </Section>
 
       <Section
-        title='SessionRating'
-        subtitle='Pre-composed rating. Star rating with optional low-score feedback: 4–5 stars auto-completes; 1–3 reveals reasons and a free-text field.'
+        title="SessionRating"
+        subtitle="Pre-composed rating. Star rating with optional low-score feedback: 4–5 stars auto-completes; 1–3 reveals reasons and a free-text field."
       >
-        <div className='panel'>
+        <div className="panel">
           <SessionRating
             key={ratingKey}
             onComplete={(result) => setRatingLog(JSON.stringify(result))}
             showThankYou
           />
         </div>
-        {ratingLog ? <div className='log'>{ratingLog}</div> : null}
-        <div className='button-row'>
-          <button type='button' onClick={() => { setRatingLog(''); setRatingKey(k => k + 1) }}>Reset</button>
+        {ratingLog ? <div className="log">{ratingLog}</div> : null}
+        <div className="button-row">
+          <button
+            type="button"
+            onClick={() => {
+              setRatingLog("");
+              setRatingKey((k) => k + 1);
+            }}
+          >
+            Reset
+          </button>
         </div>
       </Section>
 
       <Section
-        title='Rating (composable)'
-        subtitle='The same building blocks composed by hand: Rating.Stars, Rating.Feedback, Rating.Submit and Rating.ThankYou. Here a custom prompt and a shorter reason list.'
+        title="Rating (composable)"
+        subtitle="The same building blocks composed by hand: Rating.Stars, Rating.Feedback, Rating.Submit and Rating.ThankYou. Here a custom prompt and a shorter reason list."
       >
-        <div className='panel'>
+        <div className="panel">
           <Rating
             key={composedRatingKey}
             onComplete={(result) => setComposedRatingLog(JSON.stringify(result))}
           >
-            <Rating.Stars label='How did we do?' />
+            <Rating.Stars label="How did we do?" />
             <Rating.Feedback
               reasons={[
-                { value: 'too_slow', label: 'It was too slow' },
-                { value: 'confusing', label: 'It was confusing' }
+                { value: "too_slow", label: "It was too slow" },
+                { value: "confusing", label: "It was confusing" },
               ]}
-              placeholder='Tell us more (optional)'
+              placeholder="Tell us more (optional)"
             />
             <Rating.Submit>Send feedback</Rating.Submit>
             <Rating.ThankYou>Thanks — we appreciate it!</Rating.ThankYou>
           </Rating>
         </div>
-        {composedRatingLog ? <div className='log'>{composedRatingLog}</div> : null}
-        <div className='button-row'>
-          <button type='button' onClick={() => { setComposedRatingLog(''); setComposedRatingKey(k => k + 1) }}>Reset</button>
+        {composedRatingLog ? <div className="log">{composedRatingLog}</div> : null}
+        <div className="button-row">
+          <button
+            type="button"
+            onClick={() => {
+              setComposedRatingLog("");
+              setComposedRatingKey((k) => k + 1);
+            }}
+          >
+            Reset
+          </button>
         </div>
       </Section>
 
@@ -871,10 +947,10 @@ export default function KitchenSink () {
       <SessionEmbedSection />
 
       <Section
-        title='Tabs'
-        subtitle='Tab navigation using Headless UI with Devices and Sessions panels. Supports custom styling via className props.'
+        title="Tabs"
+        subtitle="Tab navigation using Headless UI with Devices and Sessions panels. Supports custom styling via className props."
       >
-        <div className='panel'>
+        <div className="panel">
           <Tabs
             devices={tabsDevices}
             sessions={tabsSessions}
@@ -883,51 +959,51 @@ export default function KitchenSink () {
             onRefreshClick={handleTabsRefresh}
           />
         </div>
-        <div className='panel'>
+        <div className="panel">
           <Tabs
             devices={deviceSamples.map(asDevice)}
             sessions={sessionSamples.map(asSession)}
             onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
             onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
-            smartConnectButtonClassName='custom-connect-button'
+            smartConnectButtonClassName="custom-connect-button"
           />
         </div>
-        <div className='panel'>
+        <div className="panel">
           <Tabs
             devices={null}
             sessions={null}
-            loader={<div className='custom-loader'>Loading data...</div>}
+            loader={<div className="custom-loader">Loading data...</div>}
           />
         </div>
-        <div className='panel'>
+        <div className="panel">
           <Tabs
             devices={deviceSamples.map(asDevice)}
             sessions={sessionSamples.map(asSession)}
             onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
             onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
             onRefreshClick={handleTabsRefresh}
-            tabClassName='custom-tab'
-            tabHoverClassName='custom-tab-hover'
-            tabActiveClassName='custom-tab-active'
-            refreshButtonClassName='custom-refresh-button'
+            tabClassName="custom-tab"
+            tabHoverClassName="custom-tab-hover"
+            tabActiveClassName="custom-tab-active"
+            refreshButtonClassName="custom-refresh-button"
           />
         </div>
-        <div className='panel'>
+        <div className="panel">
           <Tabs
             devices={deviceSamples.map(asDevice)}
             sessions={sessionSamples.map(asSession)}
             onConnectClick={(device) => alert(`Connect to device "${device.id}"`)}
             onSessionClick={(session) => alert(`Session clicked "${session.id}"`)}
             onRefreshClick={handleTabsRefresh}
-            headerClassName='custom-header'
-            tabListClassName='custom-tab-list'
-            tabClassName='custom-tab-pill'
-            tabActiveClassName='custom-tab-pill-active'
-            refreshButtonClassName='custom-refresh-icon'
+            headerClassName="custom-header"
+            tabListClassName="custom-tab-list"
+            tabClassName="custom-tab-pill"
+            tabActiveClassName="custom-tab-pill-active"
+            refreshButtonClassName="custom-refresh-icon"
             refresh={<span>↻</span>}
           />
         </div>
       </Section>
     </>
-  )
+  );
 }

@@ -1,16 +1,14 @@
 {
   "name": "cobrowse-agent-ui",
   "version": "1.7.0-rc.4",
-  "type": "module",
-  "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
-    "preview": "vp preview",
-    "prepare": "vp config && vp run build",
-    "i18n": "i18next-cli extract",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "vp lint . && i18next-cli lint --quiet"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cobrowseio/cobrowse-agent-ui.git"
   },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "main": "./dist/cobrowse-agent-ui.js",
   "module": "./dist/cobrowse-agent-ui.js",
   "types": "./dist/cobrowse-agent-ui.d.ts",
@@ -25,13 +23,15 @@
     },
     "./style.css": "./dist/cobrowse-agent-ui.css"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cobrowseio/cobrowse-agent-ui.git"
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vp build",
+    "preview": "vp preview",
+    "prepare": "vp config && vp run build",
+    "i18n": "i18next-cli extract",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "vp lint . && i18next-cli lint --quiet"
   },
-  "files": [
-    "dist"
-  ],
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "clsx": "^2.1.1",
@@ -40,15 +40,6 @@
     "react-i18next": "^15.4.0",
     "ua-parser-js": "^1.0.33"
   },
-  "peerDependencies": {
-    "cobrowse-agent-sdk": "^3.0.0-rc.6",
-    "react": "^19.0.0"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
   "devDependencies": {
     "@microsoft/api-extractor": "^7.58.1",
     "@types/react": "^19.2.7",
@@ -65,9 +56,18 @@
     "vite-plugin-svgr": "^4.5.0",
     "vite-plus": "1.0.0-rc.0"
   },
+  "peerDependencies": {
+    "cobrowse-agent-sdk": "^3.0.0-rc.6",
+    "react": "^19.0.0"
+  },
   "overrides": {
     "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0-rc.0"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devEngines": {
     "packageManager": {
       "name": "npm",

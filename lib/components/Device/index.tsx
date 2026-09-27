@@ -1,41 +1,48 @@
-import type { CSSProperties, ReactNode } from 'react'
-import type { Device as FullDevice } from 'cobrowse-agent-sdk'
-import useDeviceType, { type DeviceInfo } from '@/hooks/useDeviceType'
-import clsx from 'clsx'
-import PlatformIcon from '@/components/PlatformIcon'
-import { useTranslation } from '@/i18n'
-import styles from './Device.module.css'
+import type { CSSProperties, ReactNode } from "react";
+import type { Device as FullDevice } from "cobrowse-agent-sdk";
+import useDeviceType, { type DeviceInfo } from "@/hooks/useDeviceType";
+import clsx from "clsx";
+import PlatformIcon from "@/components/PlatformIcon";
+import { useTranslation } from "@/i18n";
+import styles from "./Device.module.css";
 
-export type DeviceData = Pick<FullDevice, 'id' | 'online' | 'connectable' | 'last_active'> & { device: DeviceInfo }
+export type DeviceData = Pick<FullDevice, "id" | "online" | "connectable" | "last_active"> & {
+  device: DeviceInfo;
+};
 
 export interface DeviceProps<T extends DeviceData = DeviceData> {
-  style?: CSSProperties
-  className?: string
-  device: T
-  children?: ReactNode
+  style?: CSSProperties;
+  className?: string;
+  device: T;
+  children?: ReactNode;
 }
 
 const LastSeen = ({ device }: { device: DeviceData }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <div className={styles.lastSeen}>
-      {device.online
-        ? (
-          <span className={styles.onlineStatus}>
-            <span className={styles.onlineIndicator}></span>
-            {t('Online')}
-          </span>
-        )
-        : t('Last seen {{date, dateRelative}}', {
-          date: new Date(device.last_active)
-        })}
+      {device.online ? (
+        <span className={styles.onlineStatus}>
+          <span className={styles.onlineIndicator}></span>
+          {t("Online")}
+        </span>
+      ) : (
+        t("Last seen {{date, dateRelative}}", {
+          date: new Date(device.last_active),
+        })
+      )}
     </div>
-  )
-}
+  );
+};
 
-const Device = <T extends DeviceData = DeviceData>({ style, className, device, children }: DeviceProps<T>) => {
-  const deviceType = useDeviceType(device.device)
+const Device = <T extends DeviceData = DeviceData>({
+  style,
+  className,
+  device,
+  children,
+}: DeviceProps<T>) => {
+  const deviceType = useDeviceType(device.device);
 
   return (
     <div
@@ -44,14 +51,11 @@ const Device = <T extends DeviceData = DeviceData>({ style, className, device, c
         styles.root,
         device.online && styles.online,
         device.connectable && styles.connectable,
-        className
+        className,
       )}
     >
       <div className={styles.deviceStatus}>
-        <PlatformIcon
-          device={device.device}
-          className={styles.platformIcon}
-        />
+        <PlatformIcon device={device.device} className={styles.platformIcon} />
       </div>
       <div className={styles.details}>
         <div className={styles.deviceType}>{deviceType}</div>
@@ -59,7 +63,7 @@ const Device = <T extends DeviceData = DeviceData>({ style, className, device, c
       </div>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default Device
+export default Device;

@@ -1,12 +1,12 @@
-import Rating from './'
-import type { RatingResult } from './context'
+import Rating from "./";
+import type { RatingResult } from "./context";
 
-export type SessionRatingResult = RatingResult
+export type SessionRatingResult = RatingResult;
 
 export interface SessionRatingProps {
-  onComplete: (result?: SessionRatingResult) => void
-  showThankYou?: boolean
-  className?: string
+  onComplete: (result?: SessionRatingResult) => void;
+  showThankYou?: boolean;
+  className?: string;
 }
 
 const SessionRating = ({ onComplete, showThankYou = false, className }: SessionRatingProps) => (
@@ -16,6 +16,6 @@ const SessionRating = ({ onComplete, showThankYou = false, className }: SessionR
     <Rating.Submit />
     {showThankYou && <Rating.ThankYou />}
   </Rating>
-)
+);
 
-export default SessionRating
+export default SessionRating;

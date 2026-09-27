@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useCobrowse } from '@/components/CobrowseProvider'
+import { useEffect, useState } from "react";
+import { useCobrowse } from "@/components/CobrowseProvider";
 
-const isAbortError = (error: unknown): boolean => (
-  error instanceof Error && error.name === 'AbortError'
-)
+const isAbortError = (error: unknown): boolean =>
+  error instanceof Error && error.name === "AbortError";
 
 /**
  * Provides the account's trusted embedding domains.
@@ -11,50 +10,52 @@ const isAbortError = (error: unknown): boolean => (
  * be fetched, so the origins stay null.
  */
 const useTrustedEmbeddingOrigins = () => {
-  const cobrowse = useCobrowse()
-  const [origins, setOrigins] = useState<string[] | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<Error | null>(null)
+  const cobrowse = useCobrowse();
+  const [origins, setOrigins] = useState<string[] | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     // oxlint-disable-next-line react/set-state-in-effect -- clears the previous instance's result before refetching
-    setOrigins(null)
-    setError(null)
+    setOrigins(null);
+    setError(null);
 
     if (!cobrowse.token) {
-      return
+      return;
     }
 
-    const abortController = new AbortController()
+    const abortController = new AbortController();
 
     const runEffect = async () => {
-      setLoading(true)
+      setLoading(true);
 
       try {
-        const trusted = await cobrowse.origins.trusted({ request: { signal: abortController.signal } })
+        const trusted = await cobrowse.origins.trusted({
+          request: { signal: abortController.signal },
+        });
 
-        setOrigins(trusted.origins)
+        setOrigins(trusted.origins);
       } catch (error) {
-        if (isAbortError(error)) return
+        if (isAbortError(error)) return;
 
-        setError(error instanceof Error ? error : new Error(String(error)))
+        setError(error instanceof Error ? error : new Error(String(error)));
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    void runEffect()
+    void runEffect();
 
     return () => {
-      abortController.abort()
-    }
-  }, [cobrowse])
+      abortController.abort();
+    };
+  }, [cobrowse]);
 
   return {
     origins,
     loading,
-    error
-  }
-}
+    error,
+  };
+};
 
-export default useTrustedEmbeddingOrigins
+export default useTrustedEmbeddingOrigins;

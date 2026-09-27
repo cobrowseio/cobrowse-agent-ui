@@ -61,8 +61,8 @@ achieve this from an app that's also using `i18next` to handle localization.
 ```js
 // i18n.js
 
-import i18n from 'i18next';
-import { bindI18n } from 'cobrowse-agent-ui';
+import i18n from "i18next";
+import { bindI18n } from "cobrowse-agent-ui";
 
 i18n.init({
   // ...
