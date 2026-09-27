@@ -1,20 +1,27 @@
-import Frame, { useRemoteContext } from '@/components/Frame'
-import useSessionEvents from '@/hooks/useSessionEvents'
-import Overlay from './Overlay'
-import type { SessionEmbedProps } from './types'
-import { useSessionUrl } from './useSessionUrl'
-import styles from './SessionEmbed.module.css'
+import Frame, { useRemoteContext } from "@/components/Frame";
+import useSessionEvents from "@/hooks/useSessionEvents";
+import Overlay from "./Overlay";
+import type { SessionEmbedProps } from "./types";
+import { useSessionUrl } from "./useSessionUrl";
+import styles from "./SessionEmbed.module.css";
 
-export type { SessionEmbedOverlay, SessionEmbedOverlayProps, SessionEmbedOverlayState, SessionEmbedProps } from './types'
+export type {
+  SessionEmbedOverlay,
+  SessionEmbedOverlayProps,
+  SessionEmbedOverlayState,
+  SessionEmbedProps,
+} from "./types";
 
 type SessionEmbedComponent = typeof SessionEmbedBase & {
-  Overlay: typeof Overlay
-}
+  Overlay: typeof Overlay;
+};
 
-const SessionEventObserver = (handlers: Pick<SessionEmbedProps, 'onLoaded' | 'onUpdated' | 'onActivated' | 'onEnded'>) => {
- useSessionEvents(useRemoteContext(), handlers)
- return null
-}
+const SessionEventObserver = (
+  handlers: Pick<SessionEmbedProps, "onLoaded" | "onUpdated" | "onActivated" | "onEnded">,
+) => {
+  useSessionEvents(useRemoteContext(), handlers);
+  return null;
+};
 
 const SessionEmbedBase = ({
   id,
@@ -40,17 +47,12 @@ const SessionEmbedBase = ({
     agentTools,
     deviceControls,
     sessionDetails,
-    messages
-  })
+    messages,
+  });
 
   return (
     <div className={styles.root}>
-      <Frame
-        src={url}
-        className={className}
-        onError={onError}
-        {...props}
-      >
+      <Frame src={url} className={className} onError={onError} {...props}>
         <SessionEventObserver
           onLoaded={onLoaded}
           onUpdated={onUpdated}
@@ -60,10 +62,10 @@ const SessionEmbedBase = ({
         {children}
       </Frame>
     </div>
-  )
-}
+  );
+};
 
 const SessionEmbed: SessionEmbedComponent = Object.assign(SessionEmbedBase, {
-  Overlay
-})
-export default SessionEmbed
+  Overlay,
+});
+export default SessionEmbed;

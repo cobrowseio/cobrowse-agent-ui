@@ -1,18 +1,18 @@
-import clsx from 'clsx'
-import { useTranslation } from '@/i18n'
-import { useRatingContext } from './context'
-import styles from './Comment.module.css'
+import clsx from "clsx";
+import { useTranslation } from "@/i18n";
+import { useRatingContext } from "./context";
+import styles from "./Comment.module.css";
 
 export interface RatingCommentProps {
-  placeholder?: string
-  className?: string
+  placeholder?: string;
+  className?: string;
 }
 
 const Comment = ({ placeholder, className }: RatingCommentProps) => {
-  const { comment, setComment } = useRatingContext()
-  const { t } = useTranslation()
+  const { comment, setComment } = useRatingContext();
+  const { t } = useTranslation();
 
-  const label = placeholder ?? t('Please describe any issues you experienced')
+  const label = placeholder ?? t("Please describe any issues you experienced");
 
   return (
     <textarea
@@ -20,9 +20,11 @@ const Comment = ({ placeholder, className }: RatingCommentProps) => {
       aria-label={label}
       placeholder={label}
       value={comment}
-      onChange={(event) => { setComment(event.target.value) }}
+      onChange={(event) => {
+        setComment(event.target.value);
+      }}
     />
-  )
-}
+  );
+};
 
-export default Comment
+export default Comment;

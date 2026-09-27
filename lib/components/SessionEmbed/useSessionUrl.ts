@@ -1,16 +1,16 @@
-import { useMemo } from 'react'
-import { useCobrowse } from '@/components/CobrowseProvider'
-import type { SessionEmbedProps } from './types'
-import { useTranslation } from '@/i18n'
+import { useMemo } from "react";
+import { useCobrowse } from "@/components/CobrowseProvider";
+import type { SessionEmbedProps } from "./types";
+import { useTranslation } from "@/i18n";
 
 interface UseSessionUrlProps {
-  id: string
-  endAction?: SessionEmbedProps['endAction']
-  popout?: SessionEmbedProps['popout']
-  agentTools?: SessionEmbedProps['agentTools']
-  deviceControls?: SessionEmbedProps['deviceControls']
-  sessionDetails?: SessionEmbedProps['sessionDetails']
-  messages?: SessionEmbedProps['messages']
+  id: string;
+  endAction?: SessionEmbedProps["endAction"];
+  popout?: SessionEmbedProps["popout"];
+  agentTools?: SessionEmbedProps["agentTools"];
+  deviceControls?: SessionEmbedProps["deviceControls"];
+  sessionDetails?: SessionEmbedProps["sessionDetails"];
+  messages?: SessionEmbedProps["messages"];
 }
 
 export const useSessionUrl = ({
@@ -20,10 +20,12 @@ export const useSessionUrl = ({
   agentTools,
   deviceControls,
   sessionDetails,
-  messages
+  messages,
 }: UseSessionUrlProps) => {
-  const cobrowse = useCobrowse()
-  const { i18n: { language } } = useTranslation()
+  const cobrowse = useCobrowse();
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   return useMemo(() => {
     const paramEntries = Object.entries({
@@ -33,13 +35,13 @@ export const useSessionUrl = ({
       device_controls: deviceControls,
       session_details: sessionDetails,
       messages,
-      token_source: 'postMessage',
-      lng: language
-    }).flatMap(([name, value]) => value === undefined ? [] : [[name, value]])
+      token_source: "postMessage",
+      lng: language,
+    }).flatMap(([name, value]) => (value === undefined ? [] : [[name, value]]));
 
-    const query = new URLSearchParams(paramEntries)
+    const query = new URLSearchParams(paramEntries);
 
-    return `${cobrowse.api}/session/${encodeURIComponent(id)}?${query.toString()}`
+    return `${cobrowse.api}/session/${encodeURIComponent(id)}?${query.toString()}`;
   }, [
     cobrowse.api,
     id,
@@ -49,6 +51,6 @@ export const useSessionUrl = ({
     deviceControls,
     sessionDetails,
     messages,
-    language
-  ])
-}
+    language,
+  ]);
+};

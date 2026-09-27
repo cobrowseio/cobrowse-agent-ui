@@ -1,69 +1,71 @@
-import { createContext, use, useEffect, useState } from 'react'
-import type { RemoteContext as CobrowseRemoteContext } from 'cobrowse-agent-sdk'
-import { useCobrowseValue } from '@/components/CobrowseProvider'
+import { createContext, use, useEffect, useState } from "react";
+import type { RemoteContext as CobrowseRemoteContext } from "cobrowse-agent-sdk";
+import { useCobrowseValue } from "@/components/CobrowseProvider";
 
-const RemoteContext = createContext<CobrowseRemoteContext | null>(null)
+const RemoteContext = createContext<CobrowseRemoteContext | null>(null);
 
-export function useRemoteContext(target?: HTMLIFrameElement | Window | null): CobrowseRemoteContext | null {
-  const providedRemoteContext = use(RemoteContext)
-  const cobrowse = useCobrowseValue()
-  const [remoteContext, setRemoteContext] = useState<CobrowseRemoteContext | null>(null)
+export function useRemoteContext(
+  target?: HTMLIFrameElement | Window | null,
+): CobrowseRemoteContext | null {
+  const providedRemoteContext = use(RemoteContext);
+  const cobrowse = useCobrowseValue();
+  const [remoteContext, setRemoteContext] = useState<CobrowseRemoteContext | null>(null);
 
   useEffect(() => {
     if (target === undefined) {
-      return
+      return;
     }
 
     if (!target || !cobrowse) {
-      return
+      return;
     }
 
-    let cancelled = false
-    let attachedContext: CobrowseRemoteContext | null = null
+    let cancelled = false;
+    let attachedContext: CobrowseRemoteContext | null = null;
 
     const attachContext = async () => {
-      const context = await cobrowse.attachContext(target)
+      const context = await cobrowse.attachContext(target);
 
       if (!context) {
-        setRemoteContext(null)
+        setRemoteContext(null);
 
-        return
+        return;
       }
 
-      attachedContext = context
+      attachedContext = context;
 
       if (cancelled) {
-        attachedContext.destroy()
-        attachedContext = null
+        attachedContext.destroy();
+        attachedContext = null;
 
-        return
+        return;
       }
 
-      setRemoteContext(attachedContext)
-    }
+      setRemoteContext(attachedContext);
+    };
 
-    void attachContext()
+    void attachContext();
 
     return () => {
-      cancelled = true
-      setRemoteContext(null)
+      cancelled = true;
+      setRemoteContext(null);
 
       if (attachedContext) {
-        attachedContext.destroy()
-        attachedContext = null
+        attachedContext.destroy();
+        attachedContext = null;
       }
-    }
-  }, [cobrowse, target])
+    };
+  }, [cobrowse, target]);
 
   if (target === undefined) {
-    return providedRemoteContext
+    return providedRemoteContext;
   }
 
   if (!target || !cobrowse) {
-    return null
+    return null;
   }
 
-  return remoteContext
+  return remoteContext;
 }
 
-export default RemoteContext
+export default RemoteContext;

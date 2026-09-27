@@ -1,27 +1,27 @@
-import { createContext, use, type ReactNode } from 'react'
-import type CobrowseAPI from 'cobrowse-agent-sdk'
+import { createContext, use, type ReactNode } from "react";
+import type CobrowseAPI from "cobrowse-agent-sdk";
 
-const CobrowseContext = createContext<CobrowseAPI | null>(null)
+const CobrowseContext = createContext<CobrowseAPI | null>(null);
 
 export interface CobrowseProviderProps {
-  cobrowse: CobrowseAPI
-  children?: ReactNode
+  cobrowse: CobrowseAPI;
+  children?: ReactNode;
 }
 
 export const CobrowseProvider = ({ cobrowse, children }: CobrowseProviderProps) => (
   <CobrowseContext.Provider value={cobrowse}>{children}</CobrowseContext.Provider>
-)
+);
 
-export const useCobrowseValue = () => use(CobrowseContext)
+export const useCobrowseValue = () => use(CobrowseContext);
 
 export const useCobrowse = () => {
-  const cobrowse = useCobrowseValue()
+  const cobrowse = useCobrowseValue();
 
   if (!cobrowse) {
-    throw new Error('CobrowseProvider is required to use this component.')
+    throw new Error("CobrowseProvider is required to use this component.");
   }
 
-  return cobrowse
-}
+  return cobrowse;
+};
 
-export default CobrowseProvider
+export default CobrowseProvider;

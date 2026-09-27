@@ -1,5 +1,5 @@
 .root {
-  composes: focusRing from '@/styles/focus.module.css';
+  composes: focusRing from "@/styles/focus.module.css";
   appearance: none;
   border: none;
   background: none;
@@ -31,13 +31,13 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  color: #0E0C26;
+  color: #0e0c26;
 }
 
 .subdetails {
   display: flex;
   align-items: baseline;
-  color: #6F6D82;
+  color: #6f6d82;
   gap: 12px;
 }
 
@@ -57,10 +57,10 @@
 }
 
 .activeIndicator {
-  background: #22C55E;
+  background: #22c55e;
   height: 12px;
   width: 12px;
-  border: 2px solid #BBF7D0;
+  border: 2px solid #bbf7d0;
   border-radius: 9999px;
   flex: 1;
 }
@@ -73,7 +73,7 @@
 }
 
 .recorded:before {
-  content: '';
+  content: "";
   width: 8px;
   height: 8px;
   margin-inline-end: 4px;

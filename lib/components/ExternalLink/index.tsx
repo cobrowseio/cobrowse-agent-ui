@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react'
-import IconExternalLink from '@/icons/external-link.svg?react'
-import styles from './ExternalLink.module.css'
+import type { ReactNode } from "react";
+import IconExternalLink from "@/icons/external-link.svg?react";
+import styles from "./ExternalLink.module.css";
 
 export interface ExternalLinkProps {
-  href: string
-  children?: ReactNode
+  href: string;
+  children?: ReactNode;
 }
 
 const ExternalLink = ({ href, children }: ExternalLinkProps) => (
@@ -12,6 +12,6 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
     {children}
     <IconExternalLink />
   </a>
-)
+);
 
-export default ExternalLink
+export default ExternalLink;

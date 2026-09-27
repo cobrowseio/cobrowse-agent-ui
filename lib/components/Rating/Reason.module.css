@@ -6,7 +6,7 @@
 }
 
 .checkbox {
-  composes: focusRing from '@/styles/focus.module.css';
+  composes: focusRing from "@/styles/focus.module.css";
   appearance: none;
   width: 20px;
   height: 20px;
@@ -16,7 +16,9 @@
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .checkbox:hover {

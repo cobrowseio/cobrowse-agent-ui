@@ -1,14 +1,14 @@
-import { useEffect } from 'react'
-import type { RemoteContext, RemoteContextRelayOptions } from 'cobrowse-agent-sdk'
-import { useRemoteContext } from '@/components/Frame'
-import useTrustedEmbeddingOrigins from '@/hooks/useTrustedEmbeddingOrigins'
+import { useEffect } from "react";
+import type { RemoteContext, RemoteContextRelayOptions } from "cobrowse-agent-sdk";
+import { useRemoteContext } from "@/components/Frame";
+import useTrustedEmbeddingOrigins from "@/hooks/useTrustedEmbeddingOrigins";
 
 export interface RemoteContextRelayProps {
   /**
    * When provided, relays to the given context. Otherwise,
    * it's resolved from the RemoteContextProvider.
    */
-  remoteContext?: RemoteContext
+  remoteContext?: RemoteContext;
   /**
    * Origins allowed to communicate with the attached context via the relay.
    * Nothing is relayed to or from any other origin. Defaults to the account's
@@ -16,9 +16,9 @@ export interface RemoteContextRelayProps {
    * the CobrowseProvider instance to be authorized. Pass a reference-stable
    * array, a new identity recreates the relay.
    */
-  trustedOrigins?: RemoteContextRelayOptions['trustedOrigins']
+  trustedOrigins?: RemoteContextRelayOptions["trustedOrigins"];
   /** The window to relay to. Defaults to the opener or parent of the current window. */
-  destination?: Window
+  destination?: Window;
 }
 
 /**
@@ -33,46 +33,49 @@ export interface RemoteContextRelayProps {
  * ```
  */
 const RemoteContextRelay = (props: RemoteContextRelayProps) => {
-  const { remoteContext: providedRemoteContext, trustedOrigins, destination } = props
-  const resolvedRemoteContext = useRemoteContext()
-  const remoteContext = providedRemoteContext ?? resolvedRemoteContext
-  const { origins: accountOrigins, error } = useTrustedEmbeddingOrigins()
-  const resolvedOrigins = trustedOrigins ?? accountOrigins
+  const { remoteContext: providedRemoteContext, trustedOrigins, destination } = props;
+  const resolvedRemoteContext = useRemoteContext();
+  const remoteContext = providedRemoteContext ?? resolvedRemoteContext;
+  const { origins: accountOrigins, error } = useTrustedEmbeddingOrigins();
+  const resolvedOrigins = trustedOrigins ?? accountOrigins;
 
   useEffect(() => {
     if (error && !trustedOrigins) {
-      // eslint-disable-next-line no-console -- without this the relay silently never starts; there is no UI to surface the misconfiguration
-      console.warn('RemoteContextRelay: failed to load the account trusted embedding domains, nothing will be relayed', error)
+      // oxlint-disable-next-line no-console -- without this the relay silently never starts; there is no UI to surface the misconfiguration
+      console.warn(
+        "RemoteContextRelay: failed to load the account trusted embedding domains, nothing will be relayed",
+        error,
+      );
     }
-  }, [error, trustedOrigins])
+  }, [error, trustedOrigins]);
 
   useEffect(() => {
     if (!remoteContext) {
-      return
+      return;
     }
 
     if (!resolvedOrigins?.length) {
-      return
+      return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- window.opener is typed as any but is a Window or null at runtime
-    const opener = window.opener as Window | null
-    const resolvedDestination = destination ?? opener ?? window.parent
+    // oxlint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- window.opener is typed as any but is a Window or null at runtime
+    const opener = window.opener as Window | null;
+    const resolvedDestination = destination ?? opener ?? window.parent;
 
     if (resolvedDestination === window) {
-      return
+      return;
     }
 
     const relay = remoteContext.relay(resolvedDestination, {
       trustedOrigins: resolvedOrigins,
-    })
+    });
 
     return () => {
-      relay.destroy()
-    }
-  }, [remoteContext, destination, resolvedOrigins])
+      relay.destroy();
+    };
+  }, [remoteContext, destination, resolvedOrigins]);
 
-  return null
-}
+  return null;
+};
 
-export default RemoteContextRelay
+export default RemoteContextRelay;
