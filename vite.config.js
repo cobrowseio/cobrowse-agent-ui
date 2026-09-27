@@ -1,15 +1,28 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import dts from 'vite-plugin-dts'
-import svgr from 'vite-plugin-svgr'
-import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url'
-import pkg from './package.json'
+import { defineConfig, lazyPlugins } from "vite-plus";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
+import svgr from "vite-plugin-svgr";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
+import pkg from "./package.json";
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [
+  staged: {
+    "*": "vp check --fix",
+  },
+  check: {
+    fmt: false,
+  },
+  lint: {
+    plugins: ["eslint", "typescript", "unicorn", "oxc", "react"],
+    options: {
+      typeAware: true,
+      typeCheck: true,
+    },
+  },
+  plugins: lazyPlugins(() => [
     react(),
     svgr(),
     dts({
@@ -19,49 +32,46 @@ export default defineConfig({
       // the generated .d.ts resolves correctly in downstream projects.
       beforeWriteFile: (filePath, content) => {
         if (!content.includes("from 'node_modules/i18next'")) {
-          return
+          return;
         }
 
         return {
           filePath,
-          content: content.replace(
-            "from 'node_modules/i18next'",
-            "from 'i18next'"
-          )
-        }
-      }
-    })
-  ],
+          content: content.replace("from 'node_modules/i18next'", "from 'i18next'"),
+        };
+      },
+    }),
+  ]),
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'lib')
-    }
+      "@": resolve(__dirname, "lib"),
+    },
   },
   css: {
     modules: {
-      generateScopedName: '[name]__[local]__[hash:base64:5]'
-    }
+      generateScopedName: "[name]__[local]__[hash:base64:5]",
+    },
   },
   build: {
     lib: {
       entry: {
-        'cobrowse-agent-ui': resolve(__dirname, 'lib/main.ts'),
-        integrations: resolve(__dirname, 'lib/integrations/index.ts')
+        "cobrowse-agent-ui": resolve(__dirname, "lib/main.ts"),
+        integrations: resolve(__dirname, "lib/integrations/index.ts"),
       },
-      name: 'CobrowseAgentUI',
-      formats: ['es'],
+      name: "CobrowseAgentUI",
+      formats: ["es"],
       fileName: (format, entryName) =>
-        format === 'es' ? `${entryName}.js` : `${entryName}.${format}.js`
+        format === "es" ? `${entryName}.js` : `${entryName}.${format}.js`,
     },
     rollupOptions: {
       external: [
-        'react/jsx-runtime',
-        'date-fns/locale',
+        "react/jsx-runtime",
+        "date-fns/locale",
         ...Object.keys(pkg.dependencies),
-        ...Object.keys(pkg.peerDependencies)
-      ]
+        ...Object.keys(pkg.peerDependencies),
+      ],
     },
     sourcemap: true,
-    target: 'es2015'
-  }
-})
+    target: "es2015",
+  },
+});

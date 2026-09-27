@@ -1,4 +1,5 @@
 import { createInstance } from 'i18next'
+import type { i18n as I18nInstance } from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { formatDistanceToNow } from 'date-fns'
 import type { Locale } from 'date-fns'
@@ -67,7 +68,7 @@ const dateLocales: Record<string, Locale> = {
   zh: zhCN
 }
 
-const i18n = createInstance({
+const i18n: I18nInstance = createInstance({
   fallbackLng: englishUS,
   debug: import.meta.env.DEV,
   lowerCaseLng: true,

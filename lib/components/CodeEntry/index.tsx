@@ -126,6 +126,7 @@ const CodeEntry = ({ ref, className, inputClassName, labelClassName, focusOnRend
       return
     }
 
+    // oxlint-disable-next-line react/set-state-in-effect -- validation is driven by the code state, which several handlers update
     void tryComplete(code)
   }, [getCode, tryComplete])
 

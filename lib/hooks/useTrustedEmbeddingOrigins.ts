@@ -17,6 +17,7 @@ const useTrustedEmbeddingOrigins = () => {
   const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
+    // oxlint-disable-next-line react/set-state-in-effect -- clears the previous instance's result before refetching
     setOrigins(null)
     setError(null)
 
