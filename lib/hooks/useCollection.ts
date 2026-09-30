@@ -1,11 +1,18 @@
 import { useMemo } from 'react'
 import { type ObservableEntity, useObservableEntities } from './useObservable'
-import { useQuery } from './useQuery'
+import { type QueryOptions, useQuery } from './useQuery'
+import type { QueryShape, RequestOptions } from 'cobrowse-agent-sdk'
 
-export function useCollection<Args extends unknown[], Entity extends ObservableEntity>(
-  fn: (...args: Args) => Promise<Entity[]>
+export function useCollection<
+  Args extends unknown[],
+  TQuery extends QueryShape<TQuery>,
+  Entity extends ObservableEntity
+>(
+  fn: (...args: [...Args, options?: RequestOptions<TQuery>]) => Promise<Entity[]>,
+  options?: QueryOptions,
+  ...args: Args
 ) {
-  const query = useQuery(fn)
+  const query = useQuery(fn, options, ...args)
   const data = useObservableEntities(query.data)
 
   return useMemo(

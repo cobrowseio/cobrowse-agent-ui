@@ -1,8 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import useStableCallback from './useStableCallback'
 
-const isAbortError = (error: unknown): boolean => error instanceof Error && error.name === 'AbortError'
-
 export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => Promise<Result>) {
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState<Error | null>(null)
@@ -29,10 +27,6 @@ export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => 
 
         return result
       } catch (err) {
-        if (isAbortError(err)) {
-          throw err
-        }
-
         const error = err instanceof Error ? err : new Error(String(err))
 
         setError(error)
@@ -44,22 +38,14 @@ export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => 
     [stableFn]
   )
 
-  const execute = useCallback(
-    (...args: Args): void => {
-      void executeAsync(...args).catch(() => undefined)
-    },
-    [executeAsync]
-  )
-
   return useMemo(
     () => ({
       data,
       error,
       isPending,
       isError: error !== null,
-      executeAsync,
-      execute
+      executeAsync
     }),
-    [data, error, isPending, executeAsync, execute]
+    [data, error, isPending, executeAsync]
   )
 }

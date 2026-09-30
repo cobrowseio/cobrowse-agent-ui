@@ -59,36 +59,6 @@ export function createEntityProxy<Entity extends object>(entity: Entity): Entity
   })
 }
 
-export function useObservableEntity<Entity extends ObservableEntity>(entity: Entity | null): Entity | null {
-  const baseProxy = useMemo(() => (entity ? createEntityProxy(entity) : null), [entity])
-
-  const [updated, setUpdated] = useState<{
-    entity: Entity
-    proxy: Entity
-  } | null>(null)
-
-  useEffect(() => {
-    if (!entity) return
-
-    const handleUpdate = () => {
-      setUpdated({
-        entity,
-        proxy: createEntityProxy(entity)
-      })
-    }
-
-    entity.on('updated', handleUpdate)
-
-    return () => {
-      entity.off('updated', handleUpdate)
-    }
-  }, [entity])
-
-  if (!entity) return null
-
-  return updated?.entity === entity ? updated.proxy : baseProxy
-}
-
 export function useObservableEntities<Entity extends ObservableEntity>(
   entities: readonly Entity[] | null
 ): Entity[] | null {
@@ -131,4 +101,10 @@ export function useObservableEntities<Entity extends ObservableEntity>(
   if (!entities) return null
 
   return updated?.entities === entities ? updated.proxies : baseProxies
+}
+
+export function useObservableEntity<Entity extends ObservableEntity>(entity: Entity | null): Entity | null {
+  const entities = useMemo(() => (entity === null ? null : [entity]), [entity])
+
+  return useObservableEntities(entities)?.[0] ?? null
 }
