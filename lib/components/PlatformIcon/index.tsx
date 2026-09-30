@@ -23,7 +23,7 @@ const PLATFORM_ICONS: Record<Exclude<DeviceInfo['platform'], 'web'>, IconCompone
   windows: IconWindows
 }
 
-const BROWSER_ICONS: Record<string, IconComponent> = {
+const BROWSER_ICONS: Partial<Record<string, IconComponent>> = {
   chrome: IconBrowserChrome,
   edge: IconBrowserEdge,
   firefox: IconBrowserFirefox,
@@ -44,9 +44,11 @@ export interface PlatformIconProps extends SVGProps<SVGSVGElement> {
 }
 
 const PlatformIcon = ({ device, className, ...props }: PlatformIconProps) => {
-  const Icon = device.platform === 'web'
-    ? BROWSER_ICONS[getBrowserKey(device.device) ?? 'globe']
-    : PLATFORM_ICONS[device.platform]
+  const Icon = (
+    device.platform === 'web'
+      ? BROWSER_ICONS[getBrowserKey(device.device) ?? 'globe']
+      : PLATFORM_ICONS[device.platform]
+  ) ?? IconGlobe
 
   return (
     <Icon
