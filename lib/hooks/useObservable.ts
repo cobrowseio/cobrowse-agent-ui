@@ -2,6 +2,8 @@ import type { RESTResourceEventMap } from 'cobrowse-agent-sdk'
 import { useEffect, useMemo, useState } from 'react'
 
 export interface ObservableEntity {
+  // The SDK types id as a string, but a destroyed resource is updated with an empty payload and loses it
+  id?: string
   on: <Event extends keyof RESTResourceEventMap>(
     event: Event,
     listener: (...args: RESTResourceEventMap[Event]) => void
@@ -98,9 +100,15 @@ export function useObservableEntities<Entity extends ObservableEntity>(
     }
   }, [entities, baseProxies])
 
-  if (!entities) return null
+  return useMemo(() => {
+    if (!entities) return null
 
-  return updated?.entities === entities ? updated.proxies : baseProxies
+    const proxies = updated?.entities === entities ? updated.proxies : baseProxies
+
+    // A destroyed resource is updated with an empty payload, which leaves it without an id. Drop it so
+    // consumers don't see a dead entity, and so a single resource reads as null once destroyed.
+    return proxies?.filter((entity) => entity.id !== undefined) ?? null
+  }, [updated, entities, baseProxies])
 }
 
 export function useObservableEntity<Entity extends ObservableEntity>(entity: Entity | null): Entity | null {
