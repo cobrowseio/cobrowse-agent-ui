@@ -49,6 +49,9 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
       const controller = new AbortController()
       controllerRef.current = controller
 
+      // A newer refetch replaces the controller, so this tells us whether this request is still the active one.
+      const isCurrent = () => controllerRef.current === controller
+
       const requestOptions: RequestOptions<TQuery> = {
         ...options,
         request: {
@@ -62,13 +65,13 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
       } catch (err) {
         const error = err instanceof Error ? err : new Error(String(err))
 
-        // errors are handled through the state.
-        // Abort errors are intentionally swallowed here
-        if (!isAbortError(error)) {
+        // errors are handled through the state. Abort errors are intentionally swallowed, and a refetch that
+        // has since been superseded must not surface its error over the newer request's state.
+        if (isCurrent() && !isAbortError(error)) {
           setError(error)
         }
       } finally {
-        if (controllerRef.current === controller) {
+        if (isCurrent()) {
           controllerRef.current = null
         }
       }
@@ -80,11 +83,11 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
     controllerRef.current?.abort()
   }, [])
 
-  useEffect(() => cancel, [cancel])
-
   useEffect(() => {
     if (fetchOnMount) void refetch().catch()
-  }, [fetchOnMount, refetch])
+
+    return cancel
+  }, [fetchOnMount, refetch, cancel])
 
   return useMemo(
     () => ({

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 
 export interface AsyncStateOptions {
   /**
@@ -16,25 +16,32 @@ export function useAsync<Args extends unknown[], Result>(
   const [isPending, setIsPending] = useState(initialPending)
   const [error, setError] = useState<Error | null>(null)
   const [data, setData] = useState<Result | null>(null)
+  const callIdRef = useRef(0)
 
   const executeAsync = useCallback(
     async (...args: Args): Promise<Result> => {
+      // Only the most recent call may write state. A superseded call still resolves or rejects for its own
+      // caller, but its result, error and pending transitions are dropped so they can't clobber a newer call.
+      callIdRef.current += 1
+      const callId = callIdRef.current
+      const isCurrent = () => callId === callIdRef.current
+
       setError(null)
       setIsPending(true)
 
       try {
         const result = await fn(...args)
 
-        setData(result)
+        if (isCurrent()) setData(result)
 
         return result
       } catch (err) {
         const error = err instanceof Error ? err : new Error(String(err))
 
-        setError(error)
+        if (isCurrent()) setError(error)
         throw error
       } finally {
-        setIsPending(false)
+        if (isCurrent()) setIsPending(false)
       }
     },
     [fn]
