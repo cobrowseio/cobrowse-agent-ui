@@ -22,15 +22,29 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
   { fetchOnMount = true }: QueryOptions = {},
   ...args: Args
 ) {
-  const { data, isPending, isError, executeAsync } = useAsync(
-    async (options?: RequestOptions<TQuery>) => await fn(...args, options)
-  )
+  // Each arg is a dependency so a change (e.g. a resource id) produces a new callback and triggers a refetch.
+  // Call sites pass a fixed number of args, so the deps array length is stable across renders.
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- rest args can't be listed statically, the spread is intentional
+  const wrappedFn = useCallback(async (options?: RequestOptions<TQuery>) => await fn(...args, options), [fn, ...args])
+  const { data, isPending, executeAsync, reset } = useAsync(wrappedFn, { isPending: fetchOnMount })
+
   const controllerRef = useRef<AbortController | null>(null)
   const [error, setError] = useState<Error | null>(null)
+
+  // A new fn or args means a different resource, so drop the previous result rather than showing it under the
+  // new identity. A refetch with the same args keeps the current data to avoid UI flashes. This runs during render
+  // so there's no committed frame with stale data.
+  const [prevFn, setPrevFn] = useState(() => wrappedFn)
+  if (prevFn !== wrappedFn) {
+    setPrevFn(() => wrappedFn)
+    setError(null)
+    reset({ isPending: fetchOnMount })
+  }
 
   const refetch = useCallback(
     async (options?: QueryRequestOptions<TQuery>): Promise<void> => {
       controllerRef.current?.abort()
+      setError(null)
 
       const controller = new AbortController()
       controllerRef.current = controller
@@ -79,8 +93,8 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
       isPending,
       refetch,
       cancel,
-      isError
+      isError: error !== null
     }),
-    [data, error, refetch, isError, cancel, isPending]
+    [data, error, refetch, cancel, isPending]
   )
 }

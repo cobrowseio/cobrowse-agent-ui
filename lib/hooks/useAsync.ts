@@ -1,12 +1,21 @@
 import { useCallback, useMemo, useState } from 'react'
-import useStableCallback from './useStableCallback'
 
-export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => Promise<Result>) {
-  const [isPending, setIsPending] = useState(false)
+export interface AsyncStateOptions {
+  /**
+   * Pending state to apply, on mount or alongside a reset. Defaults to false.
+   * Set to true when a call is guaranteed to follow, so consumers never observe
+   * a "no data, not loading" frame before it starts.
+   */
+  isPending?: boolean
+}
+
+export function useAsync<Args extends unknown[], Result>(
+  fn: (...args: Args) => Promise<Result>,
+  { isPending: initialPending = false }: AsyncStateOptions = {}
+) {
+  const [isPending, setIsPending] = useState(initialPending)
   const [error, setError] = useState<Error | null>(null)
   const [data, setData] = useState<Result | null>(null)
-
-  const stableFn = useStableCallback(fn)
 
   const executeAsync = useCallback(
     async (...args: Args): Promise<Result> => {
@@ -14,14 +23,7 @@ export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => 
       setIsPending(true)
 
       try {
-        const promise = stableFn(...args)
-
-        // useStableCallback is typed to potentially return undefined.
-        if (!promise) {
-          throw new Error('Async callback is unavailable')
-        }
-
-        const result = await promise
+        const result = await fn(...args)
 
         setData(result)
 
@@ -35,8 +37,14 @@ export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => 
         setIsPending(false)
       }
     },
-    [stableFn]
+    [fn]
   )
+
+  const reset = useCallback(({ isPending = false }: AsyncStateOptions = {}) => {
+    setData(null)
+    setError(null)
+    setIsPending(isPending)
+  }, [])
 
   return useMemo(
     () => ({
@@ -44,8 +52,9 @@ export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => 
       error,
       isPending,
       isError: error !== null,
-      executeAsync
+      executeAsync,
+      reset
     }),
-    [data, error, isPending, executeAsync]
+    [data, error, isPending, executeAsync, reset]
   )
 }
