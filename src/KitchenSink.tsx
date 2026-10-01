@@ -360,7 +360,7 @@ function compare (a: unknown, b: unknown): number {
 
 function readColumn (row: unknown, key: string): unknown {
   // rows are plain objects, and a column with no matching property sorts as undefined
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- an unconstrained TRow cannot be indexed by an arbitrary string
+  // oxlint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- an unconstrained TRow cannot be indexed by an arbitrary string
   return (row as Record<string, unknown>)[key]
 }
 
@@ -474,7 +474,7 @@ const TableSection = () => {
 
 const SessionEmbedSection = () => {
   const [overlaysKey, setOverlaysKey] = useState(0)
-  const overlaysMock = useMemo(() => createSessionEmbedMock(), [overlaysKey]) // eslint-disable-line react-hooks/exhaustive-deps
+  const overlaysMock = useMemo(() => createSessionEmbedMock(), [overlaysKey]) // oxlint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Section

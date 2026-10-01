@@ -3,13 +3,13 @@
   "version": "1.7.0-rc.4",
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
-    "prepare": "npm run build",
+    "dev": "vp dev",
+    "build": "vp build",
+    "preview": "vp preview",
+    "prepare": "vp config && vp run build",
     "i18n": "i18next-cli extract",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && i18next-cli lint --quiet"
+    "lint": "vp lint . && i18next-cli lint --quiet"
   },
   "main": "./dist/cobrowse-agent-ui.js",
   "module": "./dist/cobrowse-agent-ui.js",
@@ -56,16 +56,23 @@
     "@types/ua-parser-js": "^0.7.39",
     "@vitejs/plugin-react": "^5.1.1",
     "cobrowse-agent-sdk": "^3.0.0-rc.6",
-    "eslint": "^9.39.1",
-    "eslint-config-love": "^136.0.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
     "i18next-cli": "^1.42.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "^5.9.3",
-    "vite": "^8.0.16",
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
     "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite-plugin-svgr": "^4.5.0",
+    "vite-plus": "1.0.0"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "^11.0.0",
+      "onFail": "download"
+    }
   }
 }

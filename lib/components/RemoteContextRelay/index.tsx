@@ -41,7 +41,7 @@ const RemoteContextRelay = (props: RemoteContextRelayProps) => {
 
   useEffect(() => {
     if (error && !trustedOrigins) {
-      // eslint-disable-next-line no-console -- without this the relay silently never starts; there is no UI to surface the misconfiguration
+      // oxlint-disable-next-line no-console -- without this the relay silently never starts; there is no UI to surface the misconfiguration
       console.warn('RemoteContextRelay: failed to load the account trusted embedding domains, nothing will be relayed', error)
     }
   }, [error, trustedOrigins])
@@ -55,7 +55,7 @@ const RemoteContextRelay = (props: RemoteContextRelayProps) => {
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- window.opener is typed as any but is a Window or null at runtime
+    // oxlint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- window.opener is typed as any but is a Window or null at runtime
     const opener = window.opener as Window | null
     const resolvedDestination = destination ?? opener ?? window.parent
 
