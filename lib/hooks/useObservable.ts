@@ -21,20 +21,39 @@ function isMethod(value: unknown): value is Method {
   return typeof value === 'function'
 }
 
+type MethodCache = Map<
+  PropertyKey,
+  {
+    source: Method
+    bound: Method
+  }
+>
+
+// Keyed by the underlying entity, so a new proxy created for an `updated`
+// event reuses the same bound methods and their identity stays stable across updates as well as renders.
+const methodCaches = new WeakMap<object, MethodCache>()
+
+function getMethodCache(entity: object): MethodCache {
+  let cache = methodCaches.get(entity)
+
+  if (!cache) {
+    cache = new Map()
+    methodCaches.set(entity, cache)
+  }
+
+  return cache
+}
+
 export function createEntityProxy<Entity extends object>(entity: Entity): Entity {
-  const methodCache = new Map<
-    PropertyKey,
-    {
-      source: Method
-      bound: Method
-    }
-  >()
+  const methodCache = getMethodCache(entity)
 
   return new Proxy(entity, {
     get(target, property) {
       const value: unknown = Reflect.get(target, property, target)
 
-      if (!isMethod(value)) {
+      // constructor is a class, not a method. Binding it would hide its statics and
+      // break `proxy.constructor === Entity`, so it's passed through untouched.
+      if (!isMethod(value) || property === 'constructor') {
         return value
       }
 
