@@ -41,7 +41,7 @@
     "ua-parser-js": "^1.0.33"
   },
   "peerDependencies": {
-    "cobrowse-agent-sdk": "^3.0.0-rc.6",
+    "cobrowse-agent-sdk": "^3.0.0-rc.15",
     "react": "^19.0.0"
   },
   "browserslist": [

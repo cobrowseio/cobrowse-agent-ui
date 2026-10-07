@@ -5,7 +5,7 @@ import { useCallback, useMemo } from 'react'
 export function useMutation<Args extends unknown[], Entity extends ObservableEntity>(
   fn: (...args: Args) => Promise<Entity>
 ) {
-  const { data: result, error, isPending, isError, executeAsync: mutateAsync } = useAsync(fn)
+  const { data: result, error, isPending, isSuccess, isError, executeAsync: mutateAsync } = useAsync(fn)
   const data = useObservableEntity(result)
 
   const mutate = useCallback(
@@ -20,10 +20,11 @@ export function useMutation<Args extends unknown[], Entity extends ObservableEnt
       data,
       error,
       isPending,
+      isSuccess,
       isError,
       mutate,
       mutateAsync
     }),
-    [data, error, isPending, isError, mutate, mutateAsync]
+    [data, error, isPending, isSuccess, isError, mutate, mutateAsync]
   )
 }

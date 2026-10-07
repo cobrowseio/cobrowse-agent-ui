@@ -1,19 +1,8 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 
-export interface AsyncStateOptions {
-  /**
-   * Pending state to apply, on mount or alongside a reset. Defaults to false.
-   * Set to true when a call is guaranteed to follow, so consumers never observe
-   * a "no data, not loading" frame before it starts.
-   */
-  isPending?: boolean
-}
-
-export function useAsync<Args extends unknown[], Result>(
-  fn: (...args: Args) => Promise<Result>,
-  { isPending: initialPending = false }: AsyncStateOptions = {}
-) {
-  const [isPending, setIsPending] = useState(initialPending)
+export function useAsync<Args extends unknown[], Result>(fn: (...args: Args) => Promise<Result>) {
+  const [isPending, setIsPending] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const [data, setData] = useState<Result | null>(null)
   const callIdRef = useRef(0)
@@ -32,7 +21,10 @@ export function useAsync<Args extends unknown[], Result>(
       try {
         const result = await fn(...args)
 
-        if (isCurrent()) setData(result)
+        if (isCurrent()) {
+          setData(result)
+          setIsSuccess(true)
+        }
 
         return result
       } catch (err) {
@@ -47,10 +39,11 @@ export function useAsync<Args extends unknown[], Result>(
     [fn]
   )
 
-  const reset = useCallback(({ isPending = false }: AsyncStateOptions = {}) => {
+  const reset = useCallback(() => {
     setData(null)
     setError(null)
-    setIsPending(isPending)
+    setIsPending(false)
+    setIsSuccess(false)
   }, [])
 
   return useMemo(
@@ -58,10 +51,12 @@ export function useAsync<Args extends unknown[], Result>(
       data,
       error,
       isPending,
+      // A later failure keeps this true, since the data from the earlier success is still held. Only a reset clears it.
+      isSuccess,
       isError: error !== null,
       executeAsync,
       reset
     }),
-    [data, error, isPending, executeAsync, reset]
+    [data, error, isPending, isSuccess, executeAsync, reset]
   )
 }

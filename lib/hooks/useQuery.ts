@@ -26,7 +26,7 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
   // Call sites pass a fixed number of args, so the deps array length is stable across renders.
   // eslint-disable-next-line react-hooks/exhaustive-deps -- rest args can't be listed statically, the spread is intentional
   const wrappedFn = useCallback(async (options?: RequestOptions<TQuery>) => await fn(...args, options), [fn, ...args])
-  const { data, isPending, executeAsync, reset } = useAsync(wrappedFn, { isPending: fetchOnMount })
+  const { data, isPending: isExecuting, isSuccess, isError: isAsyncError, executeAsync, reset } = useAsync(wrappedFn)
 
   const controllerRef = useRef<AbortController | null>(null)
   const [error, setError] = useState<Error | null>(null)
@@ -38,8 +38,13 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
   if (prevFn !== wrappedFn) {
     setPrevFn(() => wrappedFn)
     setError(null)
-    reset({ isPending: fetchOnMount })
+    reset()
   }
+
+  // With fetchOnMount a request is guaranteed to follow, so a query with no outcome yet is pending even before the
+  // effect starts it. This avoids a "no data, not loading" frame on mount and after a reset. The async error state
+  // (unlike the query's, it includes aborts) counts as an outcome so a failed or cancelled request settles.
+  const isPending = isExecuting || (fetchOnMount && !isSuccess && !isAsyncError)
 
   const refetch = useCallback(
     async (options?: QueryRequestOptions<TQuery>): Promise<void> => {
@@ -93,11 +98,18 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
     () => ({
       data,
       error,
+      /** A request is in flight, whether the first load or a refetch. */
       isPending,
+      /** A request has resolved since the query was mounted or its args changed. Stays true if a later refetch fails. */
+      isSuccess,
+      /** The first load is in flight and there's no data yet, e.g. to show a skeleton. */
+      isLoading: isPending && !isSuccess,
+      /** A refetch is in flight while previous data is shown, e.g. to show a subtle indicator. */
+      isRefetching: isPending && isSuccess,
       refetch,
       cancel,
       isError: error !== null
     }),
-    [data, error, refetch, cancel, isPending]
+    [data, error, refetch, cancel, isPending, isSuccess]
   )
 }
