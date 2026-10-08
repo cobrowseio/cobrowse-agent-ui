@@ -89,7 +89,7 @@ export function useQuery<Args extends unknown[], TQuery extends QueryShape<TQuer
   }, [])
 
   useEffect(() => {
-    if (fetchOnMount) void refetch().catch()
+    if (fetchOnMount) void refetch()
 
     return cancel
   }, [fetchOnMount, refetch, cancel])
