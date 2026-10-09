@@ -23,6 +23,7 @@ import useSessionEventsHook from '@/hooks/useSessionEvents'
 import useAccountHook from '@/hooks/useAccount'
 import useTrustedEmbeddingOriginsHook from '@/hooks/useTrustedEmbeddingOrigins'
 import i18nInstance, { bindI18n as bindI18nHelper } from '@/i18n'
+export { useMutation } from '@/hooks/useMutation'
 
 export type { CodeEntryProps } from '@/components/CodeEntry'
 export type { ButtonProps } from '@/components/Button'
@@ -68,6 +69,11 @@ export type {
 } from '@/components/Table'
 export { ASCENDING, DESCENDING } from '@/components/Table'
 export type { SessionEventHandlers } from '@/hooks/useSessionEvents'
+
+export { useCreateAccount } from '@/modules/accounts/useCreateAccount'
+export { useDestroyAccount } from '@/modules/accounts/useDestroyAccount'
+export { useListAccounts } from '@/modules/accounts/useListAccounts'
+export { useUpdateAccount } from '@/modules/accounts/useUpdateAccount'
 
 export const CodeEntry = CodeEntryComponent
 export const Button = ButtonComponent
